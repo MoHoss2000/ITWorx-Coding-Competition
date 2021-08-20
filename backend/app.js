@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config()
+
 
 var indexRouter = require('./routes/index');
 var adminRouter =require('./routes/admin');
@@ -15,11 +17,8 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const { login } = require('./controllers/user.controller');
-
 app.use('/', indexRouter);
 app.use('/admin', adminRouter);
-app.post('/login', login);
 
 var port = 3000;
 

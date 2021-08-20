@@ -7,8 +7,9 @@ var connectionConfig = {
     database: "itworx",
   };
 
-var connection = mysql.createConnection(connectionConfig);
-connection.connect(function(err) {
+var connection = mysql.createPool(connectionConfig);
+
+connection.getConnection(function(err) {
     if (err) {
       return console.error('error: ' + err.message);
     }  
