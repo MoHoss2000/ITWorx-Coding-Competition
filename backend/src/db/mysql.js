@@ -1,4 +1,4 @@
-const mysql = require('mysql')
+const mysql = require('mysql2')
 const Sequelize = require('sequelize')
 
 const sequelize = new Sequelize('itworx', 'itworx@itworx', 'Admin@2021', {
