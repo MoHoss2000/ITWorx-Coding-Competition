@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     const Admin = sequelize.define("Admin", {
      id: {
-        type: DataTypes.INTEGER ,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         unique: true,
         primaryKey: true,

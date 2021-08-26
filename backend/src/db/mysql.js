@@ -12,8 +12,6 @@ const sequelize = new Sequelize('itworx', 'itworx@itworx', 'Admin@2021', {
     },
     operatorsAliases: false
   });
-
-
 const db = mysql.createConnection({
     user: 'itworx@itworx',
     host: 'itworx.mysql.database.azure.com',
