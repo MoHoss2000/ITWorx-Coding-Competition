@@ -12,7 +12,7 @@ router.post("/register", (req, res) => {
     // we hash the password and then create an entry in the db with the hashed password
     bcrypt.hash(password, 10).then((hash)=>{
         Employee.create({
-            firt_name: first_name,
+            first_name: first_name,
             last_name: last_name,
             username: username,
             password: hash,

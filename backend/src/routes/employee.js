@@ -4,7 +4,7 @@ const { db, sequelize } = require('../db/mysql')
 const router = new express.Router()
 router.use(express.json())
 
-router.get('/employee/tasks/completed/:id', async (req, res) => {
+router.get('/tasks/completed/:id', async (req, res) => {
     const id = req.params.id
     // db.query('CALL viewCompletedTasks(?)', [id], (err, response) => {
     //     if(err)

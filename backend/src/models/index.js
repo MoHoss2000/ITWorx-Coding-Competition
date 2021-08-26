@@ -34,7 +34,6 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-
 // Associations
 db.Employee.belongsToMany(db.Practice, {through: 'EmployeePractice'})
 db.Practice.belongsToMany(db.Employee, {through: 'EmployeePractice'})
@@ -58,7 +57,20 @@ db.Activity.belongsTo(db.Cycle)
 db.Cycle.hasMany(db.Activity)
 
 
+// Mo7awla fashela ll ternary relationship
 
+// db.Employee.belongsToMany(db.Badge, { through: db.EmployeeBadge });
+// db.Badge.belongsToMany(db.Employee, { through: db.EmployeeBadge });
+// db.EmployeeBadge.belongsTo(db.Employee)
+// db.EmployeeBadge.belongsTo(db.Badge)
+// db.Employee.hasMany(db.EmployeeBadge)
+// db.Badge.hasMany(db.EmployeeBadge)
+
+// db.Cycle.belongsToMany(db.EmployeeBadge, { through: db.EmployeeBadgeCycle });
+// db.EmployeeBadge.belongsToMany(db.Cycle, { through: db.EmployeeBadgeCycle });
+// db.EmployeeBadgeCycle.belongsTo(db.Cycle);
+// db.EmployeeBadgeCycle.belongsTo(db.EmployeeBadge);
+// db.Cycle.hasMany(db.EmployeeBadgeCycle);
+// db.EmployeeBadge.hasMany(db.EmployeeBadgeCycle);
 
 module.exports = db;
- 

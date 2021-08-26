@@ -12,11 +12,15 @@ module.exports = (sequelize, DataTypes) => {
       end_date: {
         type: DataTypes.DATE,
       },
+      current:{
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+      }
     },
     {
       timestamps: false,
       freezeTableName: true,
     }
-    );
+  );
     return Cycle;
-  };
+};
