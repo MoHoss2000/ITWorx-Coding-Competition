@@ -1,38 +1,35 @@
 module.exports = (sequelize, DataTypes) => {
-    const Employee = sequelize.define("Employee", {
+    const Badge = sequelize.define("Badge", {
      id: {
         type: DataTypes.INTEGER ,
         autoIncrement: true,
         unique: true,
         primaryKey: true,
       },
-      first_name: {
-        type: DataTypes.STRING,
-        
-      },
-      last_name: {
-        type: DataTypes.STRING,
-        
-      },
-      username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      password: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      is_developer: {
+      description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      type: {
+        type: DataTypes.STRING,
+      },
+      points_needed: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
       },
+      enabled:{
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      }
     },
     {
-      timestamps: false,
-      freezeTableName: true,
-
+        timestamps: false,
+        freezeTableName: true
     }
     );
-    return Employee;
+    return Badge;
   };

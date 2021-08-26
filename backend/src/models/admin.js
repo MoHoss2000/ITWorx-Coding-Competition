@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Employee = sequelize.define("Employee", {
+    const Admin = sequelize.define("Admin", {
      id: {
         type: DataTypes.INTEGER ,
         autoIncrement: true,
@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       last_name: {
         type: DataTypes.STRING,
-        
+        allowNull: false,
       },
       username: {
         type: DataTypes.STRING,
@@ -23,16 +23,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      is_developer: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-      },
     },
     {
-      timestamps: false,
-      freezeTableName: true,
-
+        timestamps: false,
+        freezeTableName: true
     }
     );
-    return Employee;
+    return Admin;
   };

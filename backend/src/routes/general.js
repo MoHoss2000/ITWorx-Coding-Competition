@@ -28,7 +28,6 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-    console.log('tt')
     const { username, password } = req.body; 
     //Asyn: Wait till you find one employee in  db with this username
     const employee = await Employee.findOne({where :{ username: username}});
@@ -47,8 +46,7 @@ router.post("/login", async (req, res) => {
             }
          })
          res.json("Employee logged in successfully")
-    }
-        
+    }    
 })
 
 module.exports = router

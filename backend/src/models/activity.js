@@ -1,38 +1,40 @@
 module.exports = (sequelize, DataTypes) => {
-    const Employee = sequelize.define("Employee", {
+    const Activity = sequelize.define("Activity", {
      id: {
         type: DataTypes.INTEGER ,
         autoIncrement: true,
         unique: true,
         primaryKey: true,
       },
-      first_name: {
+      name: {
         type: DataTypes.STRING,
-        
+        allowNull: false
       },
-      last_name: {
-        type: DataTypes.STRING,
-        
-      },
-      username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      password: {
+      description: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      is_developer: {
+      type: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      enabled: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
       },
+      virtual_recognition: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+      points:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      }
     },
     {
-      timestamps: false,
-      freezeTableName: true,
-
+        timestamps: false,
+        freezeTableName: true
     }
     );
-    return Employee;
+    return Activity;
   };

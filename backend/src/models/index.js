@@ -34,4 +34,31 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+
+// Associations
+db.Employee.belongsToMany(db.Practice, {through: 'EmployeePractice'})
+db.Practice.belongsToMany(db.Employee, {through: 'EmployeePractice'})
+
+db.Employee.belongsToMany(db.Department, {through: 'EmployeeDepartment'})
+db.Department.belongsToMany(db.Employee, {through: 'EmployeeDepartment'})
+
+db.Badge.belongsToMany(db.Employee, {through: 'EmployeeBadge'})
+db.Employee.belongsToMany(db.Badge, {through: 'EmployeeBadge'})
+
+db.Employee.belongsToMany(db.Activity, {through: 'EmployeeActivity'})
+db.Activity.belongsToMany(db.Employee, {through: 'EmployeeActivity'})
+
+db.Cycle.belongsTo(db.Admin)
+db.Admin.hasMany(db.Cycle)
+
+db.Activity.belongsTo(db.Admin)
+db.Admin.hasMany(db.Activity)
+
+db.Activity.belongsTo(db.Cycle)
+db.Cycle.hasMany(db.Activity)
+
+
+
+
 module.exports = db;
+ 
