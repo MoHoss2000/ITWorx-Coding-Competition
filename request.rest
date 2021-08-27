@@ -1,0 +1,21 @@
+GET http://localhost:8080/employee/tasks/completed/2
+###
+POST http://localhost:8080/register
+Content-Type: application/json
+
+{ 
+	"username": "Mohamed@gmail.com",
+    "password": "MohamedAhmed",
+    "first_name": "Moo1",
+    "last_name": "Moo1",
+    "is_developer": true  
+}
+###
+
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+    "username": "Mohamed@gmail.com",
+    "password": "MohamedAhme"
+}

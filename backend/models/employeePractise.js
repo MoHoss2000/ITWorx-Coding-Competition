@@ -6,6 +6,13 @@ module.exports = (sequelize, DataTypes) => {
       end_date: {
         type: DataTypes.DATE,
       },
+      percentage:{
+        type: DataTypes.INTEGER,
+        validate: {
+          min: 0,
+          max: 100
+        }
+      } 
     },
     {
       timestamps: false,

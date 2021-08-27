@@ -1,7 +1,8 @@
 const express = require('express')
 const bcrypt = require("bcrypt");
-const { Employee } = require("../models/employee");
-const db = require('../db/mysql')
+const { Employee } = require("../models");
+const db = require('../db/mysql');
+const jwt = require('jsonwebtoken');
 
 const router = new express.Router()
 router.use(express.json())
@@ -9,6 +10,7 @@ router.use(express.json())
 router.post("/register", (req, res) => {
     // we take the input enetered by the user from the request
     const { first_name, last_name, username, password , is_developer} = req.body;
+    console.log(req.body)
     // we hash the password and then create an entry in the db with the hashed password
     bcrypt.hash(password, 10).then((hash)=>{
         Employee.create({
@@ -32,20 +34,22 @@ router.post("/login", async (req, res) => {
     //Asyn: Wait till you find one employee in  db with this username
     const employee = await Employee.findOne({where :{ username: username}});
     if(!employee){ //employee not found
-        res.status(400).json({error: "User Not Found"});
+        return res.status(400).json({error: "User Not Found"});
     }
     else{
-        const databasePassword = user.password; // Hashed Password in DB
-        bcrypt.compare(password, databasePassword). then((matched) =>{ 
+        const databasePassword = employee.password; // Hashed Password in DB
+        bcrypt.compare(password, databasePassword).then((matched) => { 
             if (!matched) {
-                res
+                return res
                 .status(400)
                 .json({ error: "Username or Password is incorrect" });
             } else {
                 //create token , JWT
+
+                res.json("Employee logged in successfully")
             }
          })
-         res.json("Employee logged in successfully")
+         
     }    
 })
 
