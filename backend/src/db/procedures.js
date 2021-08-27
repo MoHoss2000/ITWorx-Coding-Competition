@@ -10,6 +10,4 @@ FROM employeeActivity EA INNER JOIN activity A ON EA.ActivityId = A.id
                          INNER JOIN cycle C ON C.id = A.CycleId
 WHERE EA.EmployeeId = ${empID}`;
 
-
-
 module.exports = { viewCompletedTasks, viewEmployeeCycles }

@@ -27,7 +27,6 @@ router.get('/cycles/:id', async (req, res) => {
 })
 
 router.get('/profile/:id', async (req, res) => {
-    
 
 })
 

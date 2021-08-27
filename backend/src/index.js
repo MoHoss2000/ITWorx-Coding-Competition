@@ -20,12 +20,7 @@ db.sequelize.sync().then(() => {
     app.listen(8080, () => {
       console.log("Server running on port 8080");
     });
-    
 });
-
-
-
-
 
 // Used to insert dummy records in the database
 
