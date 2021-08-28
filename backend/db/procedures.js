@@ -35,6 +35,15 @@ practice P INNER JOIN employeePractice EP ON P.id = EP.PracticeId
              INNER JOIN employee E ON E.id = EP.EmployeeId
 WHERE E.id = ${empID}`;
 
+const viewPracticeRank = (cycleID) =>
+`SELECT P.name , SUM(a.points) AS TotalPoints FROM
+Cycle C INNER JOIN Activity A ON A.CycleId = C.id
+		INNER JOIN EmployeeActivity EA ON EA.ActivityId = A.id
+        INNER JOIN EmployeePractice EP ON EP.EmployeeId = EA.EmployeeId
+        INNER JOIN Practice P ON P.id = EP.PracticeId
+WHERE  EA.isComplete = true AND C.id = ${cycleID}
+GROUP BY P.name`;
+
 module.exports = {
     viewCompletedTasks,
     viewEmployeeCycles,
@@ -42,4 +51,5 @@ module.exports = {
     viewEmployeePersonalInfo,
     viewEmployeeDepartment,
     viewEmployeePractice,
+    viewPracticeRank,
 }
