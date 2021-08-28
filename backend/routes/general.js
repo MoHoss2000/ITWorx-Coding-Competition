@@ -122,9 +122,9 @@ router.post("/login", async (req, res) => {
         }  
 })
 
-app.get("/logout", authenticateToken, (req, res) => {
-      res.clearCookie('token');
-      return res.redirect('/login');
-  });
+// router.get("/logout", authenticateToken, (req, res) => {
+//       res.clearCookie('token');
+//       return res.redirect('/login');
+//   });
 
 module.exports = router

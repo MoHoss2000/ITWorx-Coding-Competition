@@ -72,5 +72,24 @@ router.post('/badge', /*checkAdmin,*/ (req, res) => {
     });
 })
 
+router.patch('/badge/:badgeID', /*checkAdmin,*/ async (req, res) => {
+    var badgeID = req.params.badgeID;
+    console.log(req.body);
+
+    try{
+        await Badge.update(
+            req.body, 
+            {
+                where: {
+                    id: badgeID
+                }
+            }
+        );
+
+        res.status(200).json({message: 'Badge info updated successfully'});
+    } catch(e) {
+        res.status(400).json({ error: err });
+    }
+});
 
 module.exports = router
