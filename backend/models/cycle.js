@@ -8,9 +8,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       start_date: {
         type: DataTypes.DATE,
+        allowNull: false,
       },
       end_date: {
         type: DataTypes.DATE,
+        allowNull: false,
       },
       current:{
         type: DataTypes.BOOLEAN,

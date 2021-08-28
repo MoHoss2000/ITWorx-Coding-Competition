@@ -68,6 +68,7 @@ router.post("/login", async (req, res) => {
         const admin = await Admin.findOne({where :{ username: username}});
             if(admin){ //admin found
                 const databasePassword = admin.password; // Hashed Password in DB
+
                 bcrypt.compare(password, databasePassword). then((matched) =>{ 
                     if (!matched) {
                         res.status(400).json({ error: "Username or Password is incorrect" });
