@@ -7,6 +7,7 @@ const router = new express.Router()
 router.use(express.json())
 
 const {createToken} = require ('../utils/tokens')
+const {authenticateToken} = require ('../utils/authenticate')
 
 //A library to allow us to parse cookies
 const cookieParser = require("cookie-parser");
@@ -120,5 +121,10 @@ router.post("/login", async (req, res) => {
             }
         }  
 })
+
+app.get("/logout", authenticateToken, (req, res) => {
+      res.clearCookie('token');
+      return res.redirect('/login');
+  });
 
 module.exports = router
