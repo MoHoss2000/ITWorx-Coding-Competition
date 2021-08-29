@@ -38,6 +38,9 @@ db.Sequelize = Sequelize;
 db.Employee.belongsToMany(db.Practice, {through: 'EmployeePractice'})
 db.Practice.belongsToMany(db.Employee, {through: 'EmployeePractice'})
 
+db.Employee.belongsToMany(db.Cycle, {through: 'EmployeeCycle'})
+db.Cycle.belongsToMany(db.Employee, {through: 'EmployeeCycle'})
+
 db.Employee.belongsToMany(db.Department, {through: 'EmployeeDepartment'})
 db.Department.belongsToMany(db.Employee, {through: 'EmployeeDepartment'})
 

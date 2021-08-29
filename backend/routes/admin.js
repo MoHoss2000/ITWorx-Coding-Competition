@@ -2,6 +2,7 @@ const express = require('express')
 const { db, sequelize } = require('../db/mysql')
 const { Cycle, Badge } = require('../models/index')
 const authenticateToken = require('../utils/authenticate')
+const proc = require('../db/procedures')
 
 const router = express.Router()
 router.use(express.json())
@@ -105,5 +106,14 @@ router.get('/cycles', authenticateToken, async (req, res) => {
 
 })
 
+router.get('/cycle/participants/:cycleID', authenticateToken, async (req, res) => {
+    const cycleID = req.params.cycleID
+    try{
+        const result = await proc.viewEmployeesInCycle(cycleID)
+        res.json(result)
+    }catch(e){
+        console.log(e)
+    }
+})
 
 module.exports = router
