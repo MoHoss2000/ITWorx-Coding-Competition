@@ -1,6 +1,7 @@
 const express = require('express')
 const { db, sequelize } = require('../db/mysql')
 const { Cycle, Badge } = require('../models/index')
+const authenticateToken = require('../utils/authenticate')
 
 const router = express.Router()
 router.use(express.json())
@@ -91,5 +92,7 @@ router.patch('/badge/:badgeID', /*checkAdmin,*/ async (req, res) => {
         res.status(400).json({ error: err });
     }
 });
+
+
 
 module.exports = router
