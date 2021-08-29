@@ -1,6 +1,3 @@
-const { Employee, Activity, Cycle } = require('../models/index')
-
-
 const viewCompletedTasks = (empID) =>
 `SELECT A.* 
 FROM employee E INNER JOIN employeeActivity EA ON E.id = EA.EmployeeId 
@@ -12,6 +9,7 @@ const viewEmployeeCycles = (empID) =>
 FROM employeeActivity EA INNER JOIN activity A ON EA.ActivityId = A.id
                          INNER JOIN cycle C ON C.id = A.CycleId
 WHERE EA.EmployeeId = ${empID}`;
+
 
 const viewEmployeeBadges = (empID) => 
 `SELECT  EB.date_acquired, B.*
@@ -34,7 +32,7 @@ WHERE E.id = ${empID}`;
 const viewEmployeePractice = (empID) =>
 `SELECT P.name FROM
 practice P INNER JOIN employeePractice EP ON P.id = EP.PracticeId
-           INNER JOIN employee E ON E.id = EP.EmployeeId
+             INNER JOIN employee E ON E.id = EP.EmployeeId
 WHERE E.id = ${empID}`;
 
 const viewPracticeRank = (cycleID) =>
@@ -45,6 +43,7 @@ Cycle C INNER JOIN Activity A ON A.CycleId = C.id
         INNER JOIN Practice P ON P.id = EP.PracticeId
 WHERE  EA.isComplete = true AND C.id = ${cycleID}
 GROUP BY P.name`;
+
 
 const viewCycleDetailsForEmployee = async (empID, cycleID) => 
 await Employee.findAll({
@@ -63,7 +62,6 @@ const viewEmployeesInCycle = async (cycleId) =>
     })
 
 
-
 module.exports = {
     viewCompletedTasks,
     viewEmployeeCycles,
@@ -73,5 +71,5 @@ module.exports = {
     viewEmployeePractice,
     viewPracticeRank,
     viewCycleDetailsForEmployee,
-    viewEmployeesInCycle,
+    viewEmployeesInCycle
 }
