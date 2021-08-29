@@ -61,6 +61,11 @@ const viewEmployeesInCycle = async (cycleId) =>
         include: { model: Cycle, where: { id: cycleId }, required: true }
     })
 
+const viewCycleActivities = async (cycleId) =>
+    await Cycle.findOne({
+        where: { id: cycleId },
+        include: {Activity},
+    })
 
 module.exports = {
     viewCompletedTasks,
@@ -71,5 +76,6 @@ module.exports = {
     viewEmployeePractice,
     viewPracticeRank,
     viewCycleDetailsForEmployee,
-    viewEmployeesInCycle
+    viewEmployeesInCycle,
+    viewCycleActivities
 }
