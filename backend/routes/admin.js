@@ -7,28 +7,7 @@ const proc = require('../db/procedures')
 const router = express.Router()
 router.use(express.json())
 
-const {authenticateToken} = require ('../utils/authenticate')
-
-function checkAdmin(req,res, next) {
-    try {
-        const token = req.headers.authorization.split(" ")[1];
-        // console.log(token);
-        const decoded = jwt.verify(token, process.env.JWT_KEY);
-        console.log(decoded);
-        if(decoded.user_type == 'admin'){
-            req.userData = decoded;
-            next();
-        } else {
-            return res.status(401).json({
-                message: 'Auth failed'
-            });
-        }
-    } catch (error) {
-        return res.status(401).json({
-            message: 'Auth failed'
-        });
-    }
-} 
+//const {authenticateToken} = require ('../utils/authenticate')
 
 // create new cycle
 router.post('/cycle', /*checkAdmin,*/ (req, res) => {
@@ -86,6 +65,7 @@ router.get('/badge/view', authenticateToken, async (req, res) => {
     }
 
 });
+
 router.get('/cycles/view', authenticateToken, async (req, res) => {
     try{
         const result = await Cycle.findAll()
