@@ -5,6 +5,8 @@ const { Cycle, Badge } = require('../models/index')
 const router = express.Router()
 router.use(express.json())
 
+const {authenticateToken} = require ('../utils/authenticate')
+
 function checkAdmin(req,res, next) {
     try {
         const token = req.headers.authorization.split(" ")[1];
@@ -72,5 +74,24 @@ router.post('/badge', /*checkAdmin,*/ (req, res) => {
     });
 })
 
+router.get('/badge/view', authenticateToken, async (req, res) => {
+    try{
+        const result = await Badge.findAll().then(()=>{
+        res.send(result)  
+        })
+    }catch (error) {
+        res.status(400).json({ error: err });
+    }
 
+});
+router.get('/cycles/view', authenticateToken, async (req, res) => {
+    try{
+        const result = await Cycle.findAll().then(()=>{
+        res.send(result)  
+        })
+    }catch (error) {
+        res.status(400).json({ error: err });
+    }
+
+});
 module.exports = router
