@@ -8,7 +8,6 @@ const {createToken} = require ('../utils/tokens')
 const authenticateToken = require('../utils/authenticate')
 //A library to allow us to parse cookies
 const cookieParser = require("cookie-parser");
-const { match } = require('assert');
 router.use(cookieParser())
 
 router.post("/register", async (req, res) => {
@@ -126,17 +125,17 @@ router.post("/login", async (req, res) => {
 })
 
 router.patch('/changepassword', authenticateToken, async (req, res) => {
-    const id = req.id
-    const userType = req.userType
+    
+    //const { id, userType } = req.userData
+    const { id, userType } = req.userData = req
     const { oldPassword, newPassword } = req.body
-    console.log(id, userType, oldPassword, newPassword)
     let User
     if(userType === 'employee')
         User = Employee
     else
         User = Admin
    try{
-        const user = await User.findOne({where :{ id }});
+        const user = await User.findOne({where: { id }});
         const hashedPassword = user.password
         const matched = await bcrypt.compare(oldPassword, hashedPassword)
         if(!matched) throw new Error('Wrong old password')

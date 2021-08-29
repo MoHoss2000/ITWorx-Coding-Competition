@@ -93,6 +93,17 @@ router.patch('/badge/:badgeID', /*checkAdmin,*/ async (req, res) => {
     }
 });
 
+router.get('/cycles', authenticateToken, async (req, res) => {
+    const adminID = req.id
+    try{
+        const cycles = await Cycle.findAll()
+        res.json({cycles})
+    }catch(e){
+        res.status(500).send(e)
+    }
+    
+
+})
 
 
 module.exports = router

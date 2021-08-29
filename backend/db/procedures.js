@@ -44,6 +44,14 @@ Cycle C INNER JOIN Activity A ON A.CycleId = C.id
 WHERE  EA.isComplete = true AND C.id = ${cycleID}
 GROUP BY P.name`;
 
+const viewCycleDetailsForEmployee = (empID, cycleID) => 
+`SELECT EA.* FROM
+activity A INNER JOIN employeeActivity EA ON A.id = EA.ActivityId
+           INNER JOIN cycle C ON C.id = A.CycleId
+WHERE C.id = ${cycleID} AND EA.EmployeeId = ${empID}`;
+
+
+
 module.exports = {
     viewCompletedTasks,
     viewEmployeeCycles,
@@ -52,4 +60,5 @@ module.exports = {
     viewEmployeeDepartment,
     viewEmployeePractice,
     viewPracticeRank,
+    viewCycleDetailsForEmployee,
 }
