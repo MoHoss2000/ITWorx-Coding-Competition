@@ -64,7 +64,7 @@ const viewEmployeesInCycle = async (cycleId) =>
 const viewCycleActivities = async (cycleId) =>
     await Cycle.findAll({
         where: { id: cycleId },
-        include: [Activity],
+        include: {Activity},
     })
 
 module.exports = {
