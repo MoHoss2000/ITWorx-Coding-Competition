@@ -43,9 +43,7 @@ router.get('/cycles/view/:cycleId', authenticateToken, async (req, res) => {
     const empID = req.id
     const cycleID = req.params.cycleId
     try{
-        console.log('here1')
         const result = (await sequelize.query(proc.viewCycleDetailsForEmployee(empID, cycleID)))[0]
-        console.log('here2')
         if(result.length === 0)
             res.status(404).send()
         res.json({ result })
