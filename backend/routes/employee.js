@@ -1,15 +1,15 @@
 const express = require('express')
 const { db, sequelize } = require('../db/mysql')
-const { Employee, Activity, EmployeeActivity } = require('../models/index')
+const { Employee, Activity, EmployeeActivity, Cycle } = require('../models/index')
 const proc = require('../db/procedures')
 const authenticateToken = require('../utils/authenticate')
 
 const router = new express.Router()
 router.use(express.json())
 
-router.get('/tasks/completed/:id', async (req, res) => {
+router.get('/tasks/completed', authenticateToken, async (req, res) => {
     try{
-        const result = await sequelize.query(proc.viewCompletedTasks(req.params.id))
+        const result = await sequelize.query(proc.viewCompletedTasks(req.id))
         res.send(result)
     }
     catch(e){
@@ -39,8 +39,18 @@ router.get('/profile', authenticateToken, async (req, res) => {
     }
 })
 
-router.get('/achievments/:userid/:cycleid', async (req, res) => {
-    
+router.get('/cycles/view/:cycleId', authenticateToken, async (req, res) => {
+    const empID = req.id
+    const cycleID = req.params.cycleId
+    try{
+        const result = await proc.viewCycleDetailsForEmployee(empID, cycleID)
+        if(result.length === 0)
+            res.status(404).send()
+        res.json({ result })
+    }catch(e){
+        console.log(e)
+        res.status(500).send()
+    }
 })
 
 module.exports = router

@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       points_needed: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       enabled:{
@@ -31,5 +31,6 @@ module.exports = (sequelize, DataTypes) => {
         freezeTableName: true
     }
     );
+
     return Badge;
   };

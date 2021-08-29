@@ -1,6 +1,8 @@
 const express = require('express')
 const { db, sequelize } = require('../db/mysql')
 const { Cycle, Badge } = require('../models/index')
+const authenticateToken = require('../utils/authenticate')
+const proc = require('../db/procedures')
 
 const router = express.Router()
 router.use(express.json())
@@ -76,9 +78,9 @@ router.post('/badge', /*checkAdmin,*/ (req, res) => {
 
 router.get('/badge/view', authenticateToken, async (req, res) => {
     try{
-        const result = await Badge.findAll().then(()=>{
+        const result = await Badge.findAll()
         res.send(result)  
-        })
+        
     }catch (error) {
         res.status(400).json({ error: err });
     }
@@ -86,12 +88,42 @@ router.get('/badge/view', authenticateToken, async (req, res) => {
 });
 router.get('/cycles/view', authenticateToken, async (req, res) => {
     try{
-        const result = await Cycle.findAll().then(()=>{
+        const result = await Cycle.findAll()
         res.send(result)  
-        })
+        
     }catch (error) {
         res.status(400).json({ error: err });
     }
+router.patch('/badge/:badgeID', /*checkAdmin,*/ async (req, res) => {
+    var badgeID = req.params.badgeID;
+    console.log(req.body);
+
+    try{
+        await Badge.update(
+            req.body, 
+            {
+                where: {
+                    id: badgeID
+                }
+            }
+        );
+
+        res.status(200).json({message: 'Badge info updated successfully'});
+    } catch(e) {
+        res.status(400).json({ error: err });
+    }
+});
+
+
+router.get('/cycle/participants/:cycleID', authenticateToken, async (req, res) => {
+    const cycleID = req.params.cycleID
+    try{
+        const result = await proc.viewEmployeesInCycle(cycleID)
+        res.json(result)
+    }catch(e){
+        console.log(e)
+    }
+})
 
 });
 module.exports = router

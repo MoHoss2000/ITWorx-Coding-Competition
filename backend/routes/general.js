@@ -2,13 +2,10 @@ const express = require('express')
 const bcrypt = require("bcrypt");
 const { Employee, Admin } = require("../models");
 const db = require('../db/mysql')
-
 const router = new express.Router()
 router.use(express.json())
-
 const {createToken} = require ('../utils/tokens')
-const {authenticateToken} = require ('../utils/authenticate')
-
+const authenticateToken = require('../utils/authenticate')
 //A library to allow us to parse cookies
 const cookieParser = require("cookie-parser");
 router.use(cookieParser())
@@ -31,6 +28,8 @@ router.post("/register", async (req, res) => {
                           password: hash,
                           is_developer: is_developer
                 }). then(()=> {
+                    admin.type = 'admin'
+                    console.log(admin)
                     const token = createToken(admin);
                     //creating the cookie and saving it in the user's browser
                     res.cookie("token", token, {
@@ -58,7 +57,8 @@ router.post("/register", async (req, res) => {
                              username: username,
                              password: hash,
                              is_developer: is_developer
-                }). then(()=> { 
+                }). then(() => { 
+                    employee.type = 'employee'
                     const token = createToken(employee);
                     //creating the cookie and saving it in the user's browser
                     res.cookie("token", token, {
@@ -86,6 +86,7 @@ router.post("/login", async (req, res) => {
             if (!matched) {
                 res.status(400).json({ error: "Username or Password is incorrect" });
             } else {
+                employee.type = 'employee'
                 const token = createToken(employee);
                 //creating the cookie and saving it in the user's browser
                 res.cookie("token", token, {
@@ -105,6 +106,7 @@ router.post("/login", async (req, res) => {
                     if (!matched) {
                         res.status(400).json({ error: "Username or Password is incorrect" });
                     } else {
+                        admin.type = 'admin'
                         const token = createToken(admin);
                         //creating the cookie and saving it in the user's browser
                         res.cookie("token", token, {
@@ -121,9 +123,32 @@ router.post("/login", async (req, res) => {
         }  
 })
 
-app.get("/logout", authenticateToken, (req, res) => {
-      res.clearCookie('token');
-      return res.redirect('/login');
-  });
+router.patch('/changepassword', authenticateToken, async (req, res) => {
+    
+    //const { id, userType } = req.userData
+    const { id, userType } = req.userData = req
+    const { oldPassword, newPassword } = req.body
+    let User
+    if(userType === 'employee')
+        User = Employee
+    else
+        User = Admin
+   try{
+        const user = await User.findOne({where: { id }});
+        const hashedPassword = user.password
+        const matched = await bcrypt.compare(oldPassword, hashedPassword)
+        if(!matched) throw new Error('Wrong old password')
+        const newHashedPassword = await bcrypt.hash(newPassword, 10)
+        await User.update({password: newHashedPassword}, { where: { id } })
+        res.json({message: 'Password changed successfylly!'})
+   }catch(e){
+       res.status(400).send(e)
+   }
+})
+
+// router.get("/logout", authenticateToken, (req, res) => {
+//       res.clearCookie('token');
+//       return res.redirect('/login');
+//   });
 
 module.exports = router
