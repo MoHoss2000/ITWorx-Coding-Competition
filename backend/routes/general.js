@@ -127,8 +127,8 @@ router.post("/login", async (req, res) => {
 
 router.patch('/changepassword', authenticateToken, async (req, res) => {
     
-    //const { id, userType } = req.userData
-    const { id, userType } = req.userData = req
+    const { id, userType } = req.userData
+
     const { oldPassword, newPassword } = req.body
     let User
     if(userType === 'employee')

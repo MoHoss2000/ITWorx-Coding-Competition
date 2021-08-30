@@ -54,7 +54,7 @@ await Employee.findAll({
     include:{
         model: Activity,
         required: true,
-        include: {model: Cycle, required: true, where: {id: cycleID }}
+        include: {model: Cycle, required: true, where: {id: cycleID}}
     },
 })
 
@@ -68,5 +68,5 @@ exports.viewEmployeesInCycle = async (cycleId) =>
 exports.viewCycleActivities = async (cycleId) =>
     await Cycle.findAll({
         where: { id: cycleId },
-        include: {Activity},
-    })
+        include: { Activity },
+})
