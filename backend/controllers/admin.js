@@ -1,25 +1,9 @@
 const path = require('path')
 const excel = require('exceljs');
-const nodemailer = require("nodemailer");
 const {Employee, Admin} = require('../models')
 const proc = require('../db/procedures')
 
-exports.resetPassword = async (req, res) => {
-    const {email} = req.body
-    let User
-    //check if a user with this email exists 
-    const admin = await Admin.findOne({ username: email })
-    if (admin)
-        User = admin
-    else {
-        const employee = await Employee.findOne({ username: email }) 
-        if (employee)
-            User = employee
-        else
-            return res.status(200).json({message: 'No user with this email exists'});        
-    }
-    const token = jwt.sign ({ id: User.id}, Process.env.Reset_Password, {expiresIn: '15m'})
-}
+
 exports.viewParticipants = async (req, res) => {
     const cycleID = req.params.cycleID
     try{

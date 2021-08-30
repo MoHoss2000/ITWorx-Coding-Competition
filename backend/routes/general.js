@@ -6,7 +6,9 @@ const router = new express.Router()
 router.use(express.json())
 const {createToken} = require ('../utils/tokens')
 const authenticateToken = require('../utils/authenticate')
-//A library to allow us to parse cookies
+const {resetPassword, changePassword} = require('../controllers/general')
+
+
 const cookieParser = require("cookie-parser");
 router.use(cookieParser())
 
@@ -159,9 +161,23 @@ router.get('/cycle/activities/:cycleID', authenticateToken, async (req, res) => 
         }
 });
 
+router.get('/resetPassword', (req, res) =>{
+    //Form to enter email
+});
+
+router.post('/resetPassword', resetPassword );
+
+router.get('/changePassword/:token', (req, res) =>{
+    //Form to enter new Password 
+});
+
+router.post('/changePassword/:token', changePassword);
+
+
 // router.get("/logout", authenticateToken, (req, res) => {
 //       res.clearCookie('token');
 //       return res.redirect('/login');
 //   });
+
 
 module.exports = router

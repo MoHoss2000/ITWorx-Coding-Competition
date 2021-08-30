@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-exports.sendEmail = (email, subject, text) => {
+exports.sendEmail = (email, subject, html) => {
     let mailTransporter = nodemailer.createTransport({
         service: 'Hotmail',
         auth: {
@@ -9,12 +9,11 @@ exports.sendEmail = (email, subject, text) => {
         }
     });
     
-
     let mailDetails = {
         from: process.env.Email,
         to: email,
         subject,
-        text
+        html
     };
     
     mailTransporter.sendMail(mailDetails, function(err, data) {
