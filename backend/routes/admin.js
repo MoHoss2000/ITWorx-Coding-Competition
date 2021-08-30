@@ -3,7 +3,7 @@ const { db, sequelize } = require('../db/mysql')
 const { Cycle, Badge } = require('../models/index')
 const authenticateToken = require('../utils/authenticate')
 const proc = require('../db/procedures')
-const {viewParticipants, exportToExcel} = require('../controllers/admin')
+const {viewParticipants, exportToExcel, disableCycle} = require('../controllers/admin')
 
 const router = express.Router()
 router.use(express.json())
@@ -97,10 +97,10 @@ router.patch('/badge/:badgeID', /*checkAdmin,*/ async (req, res) => {
     }
 });
 
-
 router.get('/cycle/participants/:cycleID', authenticateToken, viewParticipants)
 
 router.get('/participants/excelfile', authenticateToken, exportToExcel)
 
+router.patch('/cycle/disable/:cycleID', authenticateToken, disableCycle)
 
 module.exports = router

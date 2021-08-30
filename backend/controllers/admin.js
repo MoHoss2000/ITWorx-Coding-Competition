@@ -1,6 +1,6 @@
 const path = require('path')
 const excel = require('exceljs');
-const {Employee, Admin} = require('../models')
+const {Cycle} = require('../models')
 const proc = require('../db/procedures')
 const fs = require('fs');
 const https = require('https');
@@ -61,4 +61,14 @@ exports.exportToExcel = async(req, res) => {
             console.log('Download Completed'); 
         })
 })
+}
+exports.disableCycle = async (req, res) => {
+    cycleID = req.params.cycleID
+    try{
+    await Cycle.update({disabled: 1}, {where: {id: cycleID}});
+    res.status(200).json({message: 'Cycle disabled successfully'});
+
+    } catch(e) {
+        res.status(400).json({ error: err });
+    }
 }

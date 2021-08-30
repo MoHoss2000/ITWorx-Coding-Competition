@@ -70,3 +70,5 @@ exports.viewCycleActivities = async (cycleId) =>
         where: { id: cycleId },
         include: {Activity},
     })
+
+ 

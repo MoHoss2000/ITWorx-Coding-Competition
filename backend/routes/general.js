@@ -6,8 +6,7 @@ const router = new express.Router()
 router.use(express.json())
 const {createToken} = require ('../utils/tokens')
 const authenticateToken = require('../utils/authenticate')
-const {resetPassword, changePassword} = require('../controllers/general')
-
+const controllers = require ('../controllers/general')
 
 const cookieParser = require("cookie-parser");
 router.use(cookieParser())
@@ -125,28 +124,7 @@ router.post("/login", async (req, res) => {
         }  
 })
 
-router.patch('/changepassword', authenticateToken, async (req, res) => {
-    
-    //const { id, userType } = req.userData
-    const { id, userType } = req.userData = req
-    const { oldPassword, newPassword } = req.body
-    let User
-    if(userType === 'employee')
-        User = Employee
-    else
-        User = Admin
-   try{
-        const user = await User.findOne({where: { id }});
-        const hashedPassword = user.password
-        const matched = await bcrypt.compare(oldPassword, hashedPassword)
-        if(!matched) throw new Error('Wrong old password')
-        const newHashedPassword = await bcrypt.hash(newPassword, 10)
-        await User.update({password: newHashedPassword}, { where: { id } })
-        res.json({message: 'Password changed successfylly!'})
-   }catch(e){
-       res.status(400).send(e)
-   }
-})
+router.patch('/changepassword', authenticateToken, controllers.changePassword)
 
 router.get('/cycle/activities/:cycleID', authenticateToken, async (req, res) => {
     const cycleID = req.params.cycleID
@@ -165,13 +143,12 @@ router.get('/resetPassword', (req, res) =>{
     //Form to enter email
 });
 
-router.post('/resetPassword', resetPassword );
+router.post('/resetPassword', controllers.resetPassword );
 
-router.get('/changePassword/:token', (req, res) =>{
+router.get('/newPassword/:token', (req, res) =>{
     //Form to enter new Password 
 });
-
-router.post('/changePassword/:token', changePassword);
+router.post('/newPassword/:token', controllers.newPassword);
 
 
 // router.get("/logout", authenticateToken, (req, res) => {

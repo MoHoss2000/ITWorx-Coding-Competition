@@ -3,8 +3,34 @@ const {Employee, Admin} = require('../models')
 const {sendEmail} = require('../utils/email')
 const jwt = require("jsonwebtoken");
 
+exports.changePassword = async (req, res) =>{
+    const  id = req.id 
+    const userType = req.userType
+    const { oldPassword, newPassword } = req.body
+    let User
+    if(userType === 'employee')
+        User = Employee
+    else
+        User = Admin
+   try{
+        const user = await User.findOne({where: { id }});
+        const hashedPassword = user.password
+        const matched = await bcrypt.compare(oldPassword, hashedPassword)
+
+        if(!matched) return res.json({message: 'Old password is incorrect'})
+
+        const newHashedPassword = await bcrypt.hash(newPassword, 10)
+        await User.update({password: newHashedPassword}, { where: { id } })
+        res.json({message: 'Password changed successfylly!'})
+   }catch(e){
+       res.status(400).send(e)
+   }
+}
+
 exports.resetPassword = async (req, res) => {
+    console.log("hi")
     const {email} = req.body
+    console.log(email)
     let User
     let type
     //check if a user with this email exists 
@@ -34,7 +60,8 @@ exports.resetPassword = async (req, res) => {
     sendEmail(User.username, subject, body )   
     res.send("Sent")             
 }
-exports.changePassword = async (req,res) =>{
+
+exports.newPassword = async (req,res) =>{
     const token = req.params.token
     const newPassword = req.body.password
     let user
