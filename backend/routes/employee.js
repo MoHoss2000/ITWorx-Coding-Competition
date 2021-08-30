@@ -23,4 +23,5 @@ router.get('/cycles/view/:cycleId', authenticateToken, controllers.viewCycleDeta
 
 router.get('achievments/:userid/:cycleid', authenticateToken, controllers.viewAchievements)
 
+
 module.exports = router

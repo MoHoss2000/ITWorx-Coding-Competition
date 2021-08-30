@@ -1,4 +1,4 @@
-const { Employee, Cycle, EmployeeCycle, EmployeeBadge, Activity } = require('../models');
+const { Employee, Cycle, EmployeeCycle, EmployeeBadge, Activity, Badge, Department, Practice } = require('../models');
 
 exports.viewCompletedTasks = async (empID, cycleID) => 
     await Activity.findAll({
@@ -50,29 +50,42 @@ exports.viewEmployeeCycles = async (empID) =>
         }
     })
 
-exports.viewEmployeeBadges = (empID) => 
-`SELECT  EB.date_acquired, B.*
-FROM
-employee E INNER JOIN employeeBadge EB ON E.id = EB.employeeId 
-           INNER JOIN badge B ON B.id = EB.bageI
-WHERE E.id = ${empID}`;
+exports.viewemployeeBadges = async (empID) =>
+    await Badge.findAll({
+        include: {
+            model: Employee,
+            required: true,
+            where: {id: empID},
+            attributes: [],
+        }
+    })
 
-exports.viewEmployeePersonalInfo = (empID) =>
-`SELECT E.first_name, E.last_name, E.username, E.is_developer
-FROM employee E 
-WHERE E.id = ${empID}`;
+exports.viewEmployeePersonalInfo = async (empID) =>
+    await Employee.findOne({
+        where: {id: empID},
+        attributes: ['first_name', 'last_name', 'username', 'is_developer']
+    })
 
-exports.viewEmployeeDepartment = (empID) =>
-`SELECT D.name FROM
-department D INNER JOIN employeeDepartment ED ON D.id = ED.DepartmentId
-             INNER JOIN employee E ON E.id = ED.EmployeeId
-WHERE E.id = ${empID}`; 
+exports.viewEmployeeDepartments = (empID) =>
+    Department.findAll({
+        include: {
+            model: Employee,
+            where: {id: empID},
+            required: true,
+            attributes: []
+        }
+    })
 
-exports.viewEmployeePractice = (empID) =>
-`SELECT P.name FROM
-practice P INNER JOIN employeePractice EP ON P.id = EP.PracticeId
-             INNER JOIN employee E ON E.id = EP.EmployeeId
-WHERE E.id = ${empID}`;
+
+exports.viewEmployeePractice = async (empID) =>
+    Practice.findAll({
+        include: {
+            model: Employee,
+            required: true,
+            attributes: [],
+            where: {id: empID}
+        }
+    })
 
 exports.viewPracticeRank = (cycleID) =>
 `SELECT P.name , SUM(a.points) AS TotalPoints FROM
@@ -137,4 +150,3 @@ exports.viewEmployeeCycleBadges = async (empId, cycleId) => {
             where: {BadgeId: id }} 
     })
 }
-

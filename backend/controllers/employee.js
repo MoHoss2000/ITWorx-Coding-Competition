@@ -53,10 +53,11 @@ exports.viewEmployeeCycles = async (req, res) => {
 exports.viewEmployeeProfile = async (req, res) => {
     const id = req.id
     try{
-        const personalInfo = (await sequelize.query(proc.viewEmployeePersonalInfo(id)))[0]
-        const employeeDepartments = (await sequelize.query(proc.viewEmployeeDepartment(id)))[0]
-        const employeePractice = (await sequelize.query(proc.viewEmployeePractice(id)))[0]
-        res.send({personalInfo, employeeDepartments, employeePractice})
+        const personalInfo = await proc.viewEmployeePersonalInfo(id)
+        const departments = await proc.viewEmployeeDepartments(id)
+        const practice = await proc.viewEmployeePractice(id)
+        const badges = await proc.viewemployeeBadges(id)
+        res.send({personalInfo, practice, departments, badges})
     }catch{
         res.status(400).send()
     }
