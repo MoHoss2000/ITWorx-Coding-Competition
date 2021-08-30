@@ -37,8 +37,8 @@ exports.resetPassword = async (req, res) => {
 exports.changePassword = async (req,res) =>{
     const token = req.params.token
     const newPassword = req.body.password
-    const user
-    const Model
+    let user
+    let Model
     jwt.verify(token, process.env.Reset_Password, (err, data) =>{
         if (err){
             return res.status(400).json({ message: "Token is incorrect or expired"})

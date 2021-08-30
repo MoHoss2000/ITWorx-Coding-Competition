@@ -2,6 +2,8 @@ const path = require('path')
 const excel = require('exceljs');
 const {Employee, Admin} = require('../models')
 const proc = require('../db/procedures')
+const fs = require('fs');
+const https = require('https');
 
 
 exports.viewParticipants = async (req, res) => {
@@ -13,7 +15,6 @@ exports.viewParticipants = async (req, res) => {
         console.log(e)
     }
 }
-
 exports.exportToExcel = async(req, res) => {
     const list = req.body.result
     console.log(list.length)
@@ -41,9 +42,23 @@ exports.exportToExcel = async(req, res) => {
         "attachment; filename=" + "participants.xlsx"
       );
 
-    return workbook.xlsx.writeFile("participants.xlsx")
+     workbook.xlsx.writeFile("participants.xlsx")
 		.then(function() {
 			console.log("file saved!")
             res.status(200).send()
 	});
+    
+    // URL of the image
+    const url = 'participants.xlsx';
+    
+    https.get(url,(res) => {
+        // Image will be stored at this path
+        const path = `${__dirname}/files/img.jpeg`; 
+        const filePath = fs.createWriteStream(path);
+        res.pipe(filePath);
+        filePath.on('finish',() => {
+            filePath.close();
+            console.log('Download Completed'); 
+        })
+})
 }
