@@ -1,19 +1,54 @@
-const { Employee, Cycle , EmployeeCycle, EmployeeBadge} = require('../models');
+const { Employee, Cycle, EmployeeCycle, EmployeeBadge, Activity } = require('../models');
 
+exports.viewCompletedTasks = async (empID, cycleID) => 
+    await Activity.findAll({
+        where: {CycleId: cycleID},
+        include: {
+            model: Employee,
+            required: true,
+            where: {id: empID},
+            attributes: [],
+            through: {
+                where: {status: 'completed'}
+            }
+        }
+})
 
+exports.viewPendingTasks = async (empID) => 
+    await Activity.findAll({
+        include: {
+            model: Employee,
+            required: true,
+            where: {id: empID},
+            attributes: [],
+            through: {
+                where: {status: 'pending'}
+            }
+        }
+})
 
-exports.viewCompletedTasks = (empID) =>
-`SELECT A.* 
-FROM employee E INNER JOIN employeeActivity EA ON E.id = EA.EmployeeId 
-                INNER JOIN activity A ON A.id = EA.ActivityId
-WHERE E.id = ${empID} AND EA.isComplete = TRUE`;
+exports.viewToBeSubmittedTasks = async (empID) => 
+    await Activity.findAll({
+        include: {
+            model: Employee,
+            required: true,
+            where: {id: empID},
+            attributes: [],
+            through: {
+                where: {status: 'inProgress'}
+            }
+        }
+    })
 
-exports.viewEmployeeCycles = (empID) => 
-`SELECT C.*
-FROM employeeActivity EA INNER JOIN activity A ON EA.ActivityId = A.id
-                         INNER JOIN cycle C ON C.id = A.CycleId
-WHERE EA.EmployeeId = ${empID}`;
-
+exports.viewEmployeeCycles = async (empID) => 
+    await Cycle.findAll({
+        include:{
+            model: Employee,
+            required: true,
+            where: {id: empID},
+            attributes: [],
+        }
+    })
 
 exports.viewEmployeeBadges = (empID) => 
 `SELECT  EB.date_acquired, B.*
@@ -48,27 +83,15 @@ Cycle C INNER JOIN Activity A ON A.CycleId = C.id
 WHERE  EA.isComplete = true AND C.id = ${cycleID}
 GROUP BY P.name`;
 
-
 exports.viewCycleDetailsForEmployee = async (empID, cycleID) => 
-await Employee.findAll({
+await Employee.findOne({
     where: {id: empID},
     include:{
         model: Activity,
         required: true,
-        include: {model: Cycle, required: true, where: {id: cycleID}}
+        include: { model: Cycle, required: true, where: {id: cycleID}, attributes: [] }
     },
 })
-
-// exports.viewCycleDetailsForEmployee = async (empID, cycleID) => 
-// await Employee.findAll({
-//     where: {id: empID},
-//     include:{
-//         // How do you join Employee & Activity? No common column
-//         model: Activity,
-//         required: true,
-//         include: {model: Cycle, required: true, where: {id: cycleID }}
-//     },
-// })
 
 exports.viewEmployeesInCycle = async (cycleId) => 
     await Employee.findAll({
@@ -98,7 +121,7 @@ exports.viewEmployeeCycleVirtualRecognition = async (empId, cycleId) => {
     // all virtual recognition earned by an employee in a cycle
     await Activity.findOne({
         attributes: ['virtual_recognition'],
-        where: {CycleId: cycleId, virtual_recognition:1},
+        where: {CycleId: cycleId, virtual_recognition: 1},
         include:{   
             model: EmployeeActivity,
             where: {id: EmployeeId , isComplete:1}} 
