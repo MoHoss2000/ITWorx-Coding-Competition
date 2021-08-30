@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const EmployeeBadge = sequelize.define("EmployeeCycle", {
+    const EmployeeCycle = sequelize.define("EmployeeCycle", {
      
     },
     {
@@ -7,5 +7,5 @@ module.exports = (sequelize, DataTypes) => {
       freezeTableName: true,
     }
     );
-    return EmployeeBadge;
+    return EmployeeCycle;
   };

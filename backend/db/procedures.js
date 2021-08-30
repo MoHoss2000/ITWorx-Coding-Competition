@@ -1,4 +1,5 @@
-const { Employee, Cycle } = require('../models')
+const { Employee, Cycle , EmployeeCycle, EmployeeBadge} = require('../models');
+
 
 
 exports.viewCompletedTasks = (empID) =>
@@ -48,16 +49,16 @@ WHERE  EA.isComplete = true AND C.id = ${cycleID}
 GROUP BY P.name`;
 
 
-exports.viewCycleDetailsForEmployee = async (empID, cycleID) => 
-await Employee.findAll({
-    where: {id: empID},
-    include:{
-        model: Activity,
-        required: true,
-        include: {model: Cycle, required: true, where: {id: cycleID }}
-    },
-})
-
+// exports.viewCycleDetailsForEmployee = async (empID, cycleID) => 
+// await Employee.findAll({
+//     where: {id: empID},
+//     include:{
+//         // How do you join Employee & Activity? No common column
+//         model: Activity,
+//         required: true,
+//         include: {model: Cycle, required: true, where: {id: cycleID }}
+//     },
+// })
 
 exports.viewEmployeesInCycle = async (cycleId) => 
     await Employee.findAll({
@@ -71,4 +72,33 @@ exports.viewCycleActivities = async (cycleId) =>
         include: {Activity},
     })
 
- 
+exports.EmployeeinCycle = async (empID, cycleID) => 
+await Employee.findOne({
+    where: {id: empID},
+    include:{
+        model: EmployeeCycle,
+        required: true,
+        include: {model: Cycle, required: true, where: {id: cycleID }}
+    },
+})
+
+exports.viewEmployeeCycleVirtualRecognition = async (empId, cycleId) => {
+    // all virtual recognition earned by an employee in a cycle
+    await Activity.findOne({
+        attributes: ['virtual_recognition'],
+        where: {CycleId: cycleId, virtual_recognition:1},
+        include:{   
+            model: EmployeeActivity,
+            where: {id: EmployeeId , isComplete:1}} 
+    })
+}
+
+exports.viewEmployeeCycleBadges = async (empId, cycleId) => {
+    // all badges earned by an employee in a cycle
+    await EmployeeBadge.findOne({
+        where: {EmployeeId: empId, CycleId: cycleId},
+        include:{   
+            model: Badge,
+            where: {BadgeId: id }} 
+    })
+}

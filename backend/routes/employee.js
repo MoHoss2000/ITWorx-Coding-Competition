@@ -3,6 +3,7 @@ const { db, sequelize } = require('../db/mysql')
 const { Employee, Activity, EmployeeActivity, Cycle } = require('../models/index')
 const proc = require('../db/procedures')
 const authenticateToken = require('../utils/authenticate')
+const controllers = require ('../controllers/employee')
 
 const router = new express.Router()
 router.use(express.json())
@@ -39,19 +40,19 @@ router.get('/profile', authenticateToken, async (req, res) => {
     }
 })
 
-router.get('/cycles/view/:cycleId', authenticateToken, async (req, res) => {
-    const empID = req.id
-    const cycleID = req.params.cycleId
-    try{
-        const result = await proc.viewCycleDetailsForEmployee(empID, cycleID)
-        if(result.length === 0)
-            res.status(404).send()
-        res.json({ result })
-    }catch(e){
-        console.log(e)
-        res.status(500).send()
-    }
-})
+// router.get('/cycles/view/:cycleId', authenticateToken, async (req, res) => {
+//     const empID = req.id
+//     const cycleID = req.params.cycleId
+//     try{
+//         const result = await proc.viewCycleDetailsForEmployee(empID, cycleID)
+//         if(result.length === 0)
+//             res.status(404).send()
+//         res.json({ result })
+//     }catch(e){
+//         console.log(e)
+//         res.status(500).send()
+//     }
+// })
 
-
+router.get('achievments/:userid/:cycleid', authenticateToken, controllers.viewAchievements)
 module.exports = router

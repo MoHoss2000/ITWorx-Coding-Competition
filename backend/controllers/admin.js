@@ -15,6 +15,7 @@ exports.viewParticipants = async (req, res) => {
         console.log(e)
     }
 }
+
 exports.exportToExcelParticipants = async(req, res) => {
     const list = req.body.result
     let newList = []
@@ -69,7 +70,7 @@ exports.viewProfile = async (req, res) => {
     }
 }
 
-	
+
 // exports.exportToExcelLeaderboard = async(req, res) => {
 //     const list = req.body.result
 //     const sort = req.body.sort
