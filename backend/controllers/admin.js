@@ -1,7 +1,10 @@
 const path = require('path')
 const excel = require('exceljs');
-const {Employee, Admin} = require('../models')
-const proc = require('../db/procedures');
+const {Cycle} = require('../models')
+const proc = require('../db/procedures')
+const fs = require('fs');
+const https = require('https');
+
 
 exports.viewParticipants = async (req, res) => {
     const cycleID = req.params.cycleID
@@ -12,6 +15,7 @@ exports.viewParticipants = async (req, res) => {
         console.log(e)
     }
 }
+
 exports.exportToExcelParticipants = async(req, res) => {
     const list = req.body.result
     let newList = []
@@ -35,8 +39,37 @@ exports.exportToExcelParticipants = async(req, res) => {
             const excelPath = __dirname.split('controllers')[0] + 'participants.xlsx'
             res.download(excelPath)
             res.status(200).send()
-	}).catch((e) => res.status(400).send(e));
+	});
+} 
+
+exports.disableCycle = async (req, res) => {
+    cycleID = req.params.cycleID
+    try{
+    await Cycle.update({disabled: 1}, {where: {id: cycleID}});
+    res.status(200).json({message: 'Cycle disabled successfully'});
+
+    } catch(e) {
+        res.status(400).json({ error: err });
+    }
 }
+
+exports.viewProfile = async (req, res) => {
+    adminID = req.params.id   
+    try{
+        const admin = await adminId.findOne({ where: {id: adminID}}) 
+        const personalInfo = { id: admin.id, 
+                               first_name: admin.first_name, 
+                               last_name: admin.last_name,
+                               username: admin.user_name
+                               //avatar: admin.avatar 
+                            }
+                      
+        return res.send({personalInfo})
+    }catch{
+        return res.status(400).send()
+    }
+}
+
 
 // exports.exportToExcelLeaderboard = async(req, res) => {
 //     const list = req.body.result
@@ -64,4 +97,4 @@ exports.exportToExcelParticipants = async(req, res) => {
 //             res.download(excelPath)
 //             res.status(200).send()
 // 	}).catch((e) => res.status(400).send(e));
-// }
+//}
