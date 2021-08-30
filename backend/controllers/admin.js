@@ -52,6 +52,23 @@ exports.disableCycle = async (req, res) => {
     }
 }
 
+exports.viewProfile = async (req, res) => {
+    adminID = req.params.id   
+    try{
+        const admin = await adminId.findOne({ where: {id: adminID}}) 
+        const personalInfo = { id: admin.id, 
+                               first_name: admin.first_name, 
+                               last_name: admin.last_name,
+                               username: admin.user_name
+                               //avatar: admin.avatar 
+                            }
+                      
+        return res.send({personalInfo})
+    }catch{
+        return res.status(400).send()
+    }
+}
+
 	
 // exports.exportToExcelLeaderboard = async(req, res) => {
 //     const list = req.body.result

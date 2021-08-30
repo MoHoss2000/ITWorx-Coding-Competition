@@ -3,14 +3,13 @@ const { db, sequelize } = require('../db/mysql')
 const { Cycle, Badge } = require('../models/index')
 const authenticateToken = require('../utils/authenticate')
 const proc = require('../db/procedures')
-const {viewParticipants, exportToExcelParticipants, disableCycle} = require('../controllers/admin')
+const {viewParticipants, exportToExcelParticipants, disableCycle, viewProfile} = require('../controllers/admin')
 
 const router = express.Router()
 router.use(express.json())
 
-//const {authenticateToken} = require ('../utils/authenticate')
+router.get('/profile:id', authenticateToken, viewProfile)
 
-// create new cycle
 router.post('/cycle', /*checkAdmin,*/ (req, res) => {
     var startDate = req.body.start_date;
     var endDate = req.body.end_date;
