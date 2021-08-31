@@ -1,9 +1,13 @@
 const express = require('express')
 const { db, sequelize } = require('../db/mysql')
 const { Cycle, Badge } = require('../models/index')
+<<<<<<< HEAD
+const  controller= require('../conrollers/admin')
+=======
 const authenticateToken = require('../utils/authenticate')
 const proc = require('../db/procedures')
 const controllers = require('../controllers/admin')
+>>>>>>> bf7186c24ef17deed4a8003b3cee360b2e06b516
 
 const router = express.Router()
 router.use(express.json())
@@ -54,7 +58,19 @@ router.post('/badge', /*checkAdmin,*/ (req, res) => {
         } 
     });
 })
+router.get('/getActivities', controller.getActivities)
 
+<<<<<<< HEAD
+router.get('/viewActivity', /*checkAdmin,*/  controller.activityInfo)
+
+router.post('/newActivity', /*checkAdmin,*/  controller.createNewActivity)
+
+router.post('/editActivity', /*checkAdmin,*/  controller.editActivity)
+
+router.post('/assignActivity', /*checkAdmin,*/  controller.assignEmployeeToActivity)
+
+router.post('/markActivityAsComplete', controller.markActivityAsComplete)
+=======
 router.get('/badge/view', authenticateToken, async (req, res) => {
     try{
         const result = await Badge.findAll()
@@ -107,5 +123,6 @@ router.get('/employeeStatus/:employeeId', authenticateToken, controllers.viewEmp
 
 
 //router.get('/leaderboard/excelfile', authenticateToken, exportToExcelLeaderboard)
+>>>>>>> bf7186c24ef17deed4a8003b3cee360b2e06b516
 
 module.exports = router

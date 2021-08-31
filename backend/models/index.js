@@ -1,5 +1,4 @@
 'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
@@ -47,8 +46,6 @@ db.Department.belongsToMany(db.Employee, {through: 'EmployeeDepartment'})
 db.Badge.belongsToMany(db.Employee, {through: 'EmployeeBadge'})
 db.Employee.belongsToMany(db.Badge, {through: 'EmployeeBadge'})
 
-db.Employee.belongsToMany(db.Activity, {through: 'EmployeeActivity'})
-db.Activity.belongsToMany(db.Employee, {through: 'EmployeeActivity'})
 
 db.Cycle.belongsTo(db.Admin)
 db.Admin.hasMany(db.Cycle)

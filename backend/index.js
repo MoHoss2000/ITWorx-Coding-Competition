@@ -26,6 +26,8 @@ db.sequelize.sync({force: true}).then(() => {
     });
 });
 
+
+
 // Used to insert dummy records in the database
 
 //let i = 1
