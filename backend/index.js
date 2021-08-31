@@ -16,6 +16,7 @@ app.use('/employee', employeeRouter)
 app.use('/admin', adminRouter)
 app.use('/leaderboard', leaderboardRouter)
 
+<<<<<<< HEAD
 const currentCycleID = async () => {
 
   try {
@@ -37,11 +38,13 @@ exports.currentCycleID =currentCycleID()
 
 
 
+=======
+>>>>>>> bf7186c24ef17deed4a8003b3cee360b2e06b516
 const db = require("./models");
 //built-in middleware function in Express. It parses incoming requests with JSON 
 app.use(express.json());
 
-db.sequelize.sync().then(() => {
+db.sequelize.sync({force: true}).then(() => {
     app.listen(8080, () => {
       console.log("Server running on port 8080");
     });

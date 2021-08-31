@@ -1,49 +1,29 @@
 const express = require('express')
 const { db, sequelize } = require('../db/mysql')
-const { Employee, Activity, EmployeeActivity } = require('../models/index')
+const { Employee, Activity, EmployeeActivity, Cycle } = require('../models/index')
 const proc = require('../db/procedures')
 const authenticateToken = require('../utils/authenticate')
-const  controller= require('../conrollers/employee')
+const controllers = require ('../controllers/employee')
 
 const router = new express.Router()
+
 router.use(express.json())
 
-router.get('/tasks/completed/:id', async (req, res) => {
-    try{
-        const result = await sequelize.query(proc.viewCompletedTasks(req.params.id))
-        res.send(result)
-    }
-    catch(e){
-        console.log(e)
-    }
-})
+router.get('/activities/completed/:cycleID', authenticateToken, controllers.viewCompletedTasks)
 
-router.get('/cycles', authenticateToken, async (req, res) => {
-    const id = req.id
-    try{
-        const result = (await sequelize.query(proc.viewEmployeeCycles(id)))[0]
-        res.send({result})
-    }catch{
-        res.status(400).send()
-    }
-})
+router.get('/activities/pending', authenticateToken, controllers.viewPendingTasks)
 
-router.get('/profile', authenticateToken, async (req, res) => {
-    const id = req.id
-    try{
-        const personalInfo = (await sequelize.query(proc.viewEmployeePersonalInfo(id)))[0]
-        const employeeDepartments = (await sequelize.query(proc.viewEmployeeDepartment(id)))[0]
-        const employeePractice = (await sequelize.query(proc.viewEmployeePractice(id)))[0]
-        res.send({personalInfo, employeeDepartments, employeePractice})
-    }catch{
-        res.status(400).send()
-    }
-})
+router.get('/activities/toBeSubmitted', authenticateToken, controllers.viewToBeSubmittedTasks)
 
-router.get('/achievments/:userid/:cycleid', async (req, res) => {
-    
-})
+router.get('/cycles', authenticateToken, controllers.viewEmployeeCycles)
 
-router.get('/assignedActivities', controller.getAssignedActivities)
+router.get('/profile', authenticateToken, controllers.viewEmployeeProfile)
+
+router.get('/cycles/view/:cycleId', authenticateToken, controllers.viewCycleDetails)
+
+router.get('achievments/:userid/:cycleid', authenticateToken, controllers.viewAchievements)
+
+
+router.get('/assignedActivities', controllers.getAssignedActivities)
 
 module.exports = router

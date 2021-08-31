@@ -1,33 +1,19 @@
 const express = require('express')
 const { db, sequelize } = require('../db/mysql')
 const { Cycle, Badge } = require('../models/index')
+<<<<<<< HEAD
 const  controller= require('../conrollers/admin')
+=======
+const authenticateToken = require('../utils/authenticate')
+const proc = require('../db/procedures')
+const controllers = require('../controllers/admin')
+>>>>>>> bf7186c24ef17deed4a8003b3cee360b2e06b516
 
 const router = express.Router()
 router.use(express.json())
 
-function checkAdmin(req,res, next) {
-    try {
-        const token = req.headers.authorization.split(" ")[1];
-        // console.log(token);
-        const decoded = jwt.verify(token, process.env.JWT_KEY);
-        console.log(decoded);
-        if(decoded.user_type == 'admin'){
-            req.userData = decoded;
-            next();
-        } else {
-            return res.status(401).json({
-                message: 'Auth failed'
-            });
-        }
-    } catch (error) {
-        return res.status(401).json({
-            message: 'Auth failed'
-        });
-    }
-} 
+router.get('/profile:id', authenticateToken, controllers.viewProfile)
 
-// create new cycle
 router.post('/cycle', /*checkAdmin,*/ (req, res) => {
     var startDate = req.body.start_date;
     var endDate = req.body.end_date;
@@ -74,6 +60,7 @@ router.post('/badge', /*checkAdmin,*/ (req, res) => {
 })
 router.get('/getActivities', controller.getActivities)
 
+<<<<<<< HEAD
 router.get('/viewActivity', /*checkAdmin,*/  controller.activityInfo)
 
 router.post('/newActivity', /*checkAdmin,*/  controller.createNewActivity)
@@ -83,5 +70,59 @@ router.post('/editActivity', /*checkAdmin,*/  controller.editActivity)
 router.post('/assignActivity', /*checkAdmin,*/  controller.assignEmployeeToActivity)
 
 router.post('/markActivityAsComplete', controller.markActivityAsComplete)
+=======
+router.get('/badge/view', authenticateToken, async (req, res) => {
+    try{
+        const result = await Badge.findAll()
+        res.send(result)  
+        
+    }catch (error) {
+        res.status(400).json({ error: err });
+    }
+
+});
+
+router.get('/cycles/view', authenticateToken, async (req, res) => {
+    try{
+        const result = await Cycle.findAll()
+        res.send(result)  
+        
+    }catch (error) {
+        res.status(400).json({ error: err });
+    }
+})
+
+router.patch('/badge/:badgeID', /*checkAdmin,*/ async (req, res) => {
+    var badgeID = req.params.badgeID;
+    console.log(req.body);
+
+    try{
+        await Badge.update(
+            req.body, 
+            {
+                where: {
+                    id: badgeID
+                }
+            }
+        );
+
+        res.status(200).json({message: 'Badge info updated successfully'});
+    } catch(e) {
+        res.status(400).json({ error: err });
+    }
+});
+
+router.get('/cycle/participants/:cycleID', authenticateToken, controllers.viewParticipants)
+
+router.get('/participants/excelfile', authenticateToken, controllers.exportToExcelParticipants)
+
+router.patch('/cycle/disable/:cycleID', authenticateToken, controllers.disableCycle)
+
+router.get('/employeeStatus/:employeeId', authenticateToken, controllers.viewEmployeeStatus)
+
+
+
+//router.get('/leaderboard/excelfile', authenticateToken, exportToExcelLeaderboard)
+>>>>>>> bf7186c24ef17deed4a8003b3cee360b2e06b516
 
 module.exports = router
