@@ -1,6 +1,6 @@
 const express = require('express')
 const { Employee } = require("../models/employee");
-const { EmployeeActivity } = require('../models/employeeActivity');
+const { EmployeeActivity } = require('../models/employeeActivityCycle');
 const { Activity } = require('../models/activity');
 const { db, sequelize } = require('../db/mysql')
 const authenticateToken = require('../utils/authenticate');

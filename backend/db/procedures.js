@@ -1,6 +1,6 @@
 const  sequelize = require('../db/mysql')
 const Sequelize = require('sequelize')
-const { Employee, Cycle, EmployeeCycle, EmployeeBadge, Activity, Badge, Department, Practice, EmployeeActivity } = require('../models');
+const { Employee, Cycle, EmployeeBadge, Activity, Badge, Department, Practice } = require('../models');
 
 exports.viewCompletedTasks = async (empID, cycleID) => 
     await Activity.findAll({
