@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+const employeeActivity = require('./employeeActivity');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
@@ -46,6 +47,9 @@ db.Employee.belongsToMany(db.Badge, {through: 'EmployeeBadge'})
 
 db.Employee.belongsToMany(db.Activity, {through: 'EmployeeActivity'})
 db.Activity.belongsToMany(db.Employee, {through: 'EmployeeActivity'})
+
+db.Cycle.hasMany(db.EmployeeActivity)
+db.EmployeeActivity.belongsTo(db.Cycle)
 
 db.Cycle.belongsTo(db.Admin)
 db.Admin.hasMany(db.Cycle)

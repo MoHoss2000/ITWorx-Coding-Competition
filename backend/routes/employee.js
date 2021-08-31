@@ -3,6 +3,7 @@ const { db, sequelize } = require('../db/mysql')
 const { Employee, Activity, EmployeeActivity } = require('../models/index')
 const proc = require('../db/procedures')
 const authenticateToken = require('../utils/authenticate')
+const  controller= require('../conrollers/employee')
 
 const router = new express.Router()
 router.use(express.json())
@@ -42,5 +43,7 @@ router.get('/profile', authenticateToken, async (req, res) => {
 router.get('/achievments/:userid/:cycleid', async (req, res) => {
     
 })
+
+router.get('/assignedActivities', controller.getAssignedActivities)
 
 module.exports = router

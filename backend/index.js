@@ -16,6 +16,26 @@ app.use('/employee', employeeRouter)
 app.use('/admin', adminRouter)
 app.use('/leaderboard', leaderboardRouter)
 
+const currentCycleID = async () => {
+
+  try {
+      const activites = await Cycle.findAll({where: {current: true}})
+      if(activites.length===0)
+         return null
+      return activites
+
+  } catch(err){
+    return "Error connecting to databse"
+    
+  }
+}
+
+
+
+
+exports.currentCycleID =currentCycleID()
+
+
 
 const db = require("./models");
 //built-in middleware function in Express. It parses incoming requests with JSON 
@@ -26,6 +46,8 @@ db.sequelize.sync().then(() => {
       console.log("Server running on port 8080");
     });
 });
+
+
 
 // Used to insert dummy records in the database
 

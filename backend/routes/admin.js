@@ -1,6 +1,7 @@
 const express = require('express')
 const { db, sequelize } = require('../db/mysql')
 const { Cycle, Badge } = require('../models/index')
+const  controller= require('../conrollers/admin')
 
 const router = express.Router()
 router.use(express.json())
@@ -71,6 +72,16 @@ router.post('/badge', /*checkAdmin,*/ (req, res) => {
         } 
     });
 })
+router.get('/getActivities', controller.getActivities)
 
+router.get('/viewActivity', /*checkAdmin,*/  controller.activityInfo)
+
+router.post('/newActivity', /*checkAdmin,*/  controller.createNewActivity)
+
+router.post('/editActivity', /*checkAdmin,*/  controller.editActivity)
+
+router.post('/assignActivity', /*checkAdmin,*/  controller.assignEmployeeToActivity)
+
+router.post('/markActivityAsComplete', controller.markActivityAsComplete)
 
 module.exports = router
