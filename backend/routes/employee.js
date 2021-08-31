@@ -9,7 +9,7 @@ const router = new express.Router()
 
 router.use(express.json())
 
-router.get('/activities/completed/:cycleID', authenticateToken, controllers.viewCompletedTasks)
+router.get('/activities/completed/:cycleID', authenticateToken, isEmployee, controllers.viewCompletedTasks)
 
 router.get('/activities/pending', authenticateToken, controllers.viewPendingTasks)
 
