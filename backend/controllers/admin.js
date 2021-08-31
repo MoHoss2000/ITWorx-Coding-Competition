@@ -2,9 +2,6 @@ const path = require('path')
 const excel = require('exceljs');
 const {Cycle} = require('../models')
 const proc = require('../db/procedures')
-const fs = require('fs');
-const https = require('https');
-
 
 exports.viewParticipants = async (req, res) => {
     const cycleID = req.params.cycleID
@@ -113,3 +110,4 @@ exports.viewEmployeeStatus = async (req, res) => {
 //             res.status(200).send()
 // 	}).catch((e) => res.status(400).send(e));
 //}
+

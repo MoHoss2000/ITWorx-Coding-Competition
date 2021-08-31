@@ -4,9 +4,12 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false
       },
-      isComplete: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
+      status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          isIn: [['completed', 'pending', 'inProgress']]
+        },
       }
     },
     {

@@ -16,7 +16,6 @@ app.use('/employee', employeeRouter)
 app.use('/admin', adminRouter)
 app.use('/leaderboard', leaderboardRouter)
 
-
 const db = require("./models");
 //built-in middleware function in Express. It parses incoming requests with JSON 
 app.use(express.json());

@@ -137,7 +137,9 @@ router.post("/login", async (req, res) => {
         }  
 })
 
+
 router.patch('/changepassword', authenticateToken, controllers.changePassword)
+
 
 router.get('/cycle/activities/:cycleID', authenticateToken, async (req, res) => {
     const cycleID = req.params.cycleID
