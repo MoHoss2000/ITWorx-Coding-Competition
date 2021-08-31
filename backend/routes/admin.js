@@ -3,12 +3,12 @@ const { db, sequelize } = require('../db/mysql')
 const { Cycle, Badge } = require('../models/index')
 const authenticateToken = require('../utils/authenticate')
 const proc = require('../db/procedures')
-const {viewParticipants, exportToExcelParticipants, disableCycle, viewProfile} = require('../controllers/admin')
+const controllers = require('../controllers/admin')
 
 const router = express.Router()
 router.use(express.json())
 
-router.get('/profile:id', authenticateToken, viewProfile)
+router.get('/profile:id', authenticateToken, controllers.viewProfile)
 
 router.post('/cycle', /*checkAdmin,*/ (req, res) => {
     var startDate = req.body.start_date;
@@ -96,11 +96,15 @@ router.patch('/badge/:badgeID', /*checkAdmin,*/ async (req, res) => {
     }
 });
 
-router.get('/cycle/participants/:cycleID', authenticateToken, viewParticipants)
+router.get('/cycle/participants/:cycleID', authenticateToken, controllers.viewParticipants)
 
-router.get('/participants/excelfile', authenticateToken, exportToExcelParticipants)
+router.get('/participants/excelfile', authenticateToken, controllers.exportToExcelParticipants)
 
-router.patch('/cycle/disable/:cycleID', authenticateToken, disableCycle)
+router.patch('/cycle/disable/:cycleID', authenticateToken, controllers.disableCycle)
+
+router.get('/employeeStatus/:employeeId', authenticateToken, controllers.viewEmployeeStatus)
+
+
 
 //router.get('/leaderboard/excelfile', authenticateToken, exportToExcelLeaderboard)
 

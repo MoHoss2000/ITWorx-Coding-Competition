@@ -2,6 +2,7 @@ const express = require('express')
 const bcrypt = require("bcrypt");
 const { Employee, Admin } = require("../models");
 const db = require('../db/mysql')
+const proc = require('../db/procedures')
 const router = new express.Router()
 router.use(express.json())
 const {createToken} = require ('../utils/tokens')
@@ -10,6 +11,18 @@ const controllers = require ('../controllers/general')
 
 const cookieParser = require("cookie-parser");
 router.use(cookieParser())
+
+router.get('/test', async (req, res) => {
+    let sum
+    console.log("Hi")
+    const result= proc.totalGainedPoints(2)
+    for (p in result){
+        console.log(p)
+          sum += p
+    }
+    console.log(sum)
+    return
+})
 
 router.post("/register", async (req, res) => {
     // we take the input enetered by the user from the request

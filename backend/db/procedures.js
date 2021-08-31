@@ -1,5 +1,6 @@
-const { Employee, Cycle , EmployeeCycle, EmployeeBadge} = require('../models');
-
+const { Employee, Cycle , EmployeeCycle, EmployeeBadge, Activity, EmployeeActivity} = require('../models');
+const  sequelize = require('../db/mysql')
+const Sequelize = require('sequelize')
 
 
 exports.viewCompletedTasks = (empID) =>
@@ -89,7 +90,7 @@ exports.viewEmployeeCycleVirtualRecognition = async (empId, cycleId) => {
         where: {CycleId: cycleId, virtual_recognition:1},
         include:{   
             model: EmployeeActivity,
-            where: {id: EmployeeId , isComplete:1}} 
+            where: {id: empId , isComplete:1}} 
     })
 }
 
@@ -100,5 +101,44 @@ exports.viewEmployeeCycleBadges = async (empId, cycleId) => {
         include:{   
             model: Badge,
             where: {BadgeId: id }} 
+    })
+}
+
+exports.viewCompletedActivities = async (empId) => {
+    await Activity.findOne({
+        include:{   
+            model: Employee,
+            where: {id: empId , isComplete:1}} 
+    })
+}
+
+exports.viewmployeeBadges = async (empId) =>{
+     // all badges earned by an employee in a cycle
+     await EmployeeBadge.findOne({
+        where: {EmployeeId: empId},
+        include:{   
+            model: Badge,
+            where: {BadgeId: id }} 
+    })
+}
+
+exports.viewEmployeVirtualRecognition = async (empId) => {
+    // all virtual recognition earned by an employee
+    await Activity.findOne({
+        attributes: ['virtual_recognition'],
+        where: {virtual_recognition:1},
+        include:{   
+            model: Employee,
+            where: {id: EmployeeId , isComplete:1}} 
+    })
+}
+
+exports.totalGainedPoints = async (empId) => {
+    // all points earned by an employee
+    await Activity.findAll({
+        attributes: ['points'],
+        include:{   
+            model: Employee,
+            where: {id: empId , isComplete:1}} 
     })
 }

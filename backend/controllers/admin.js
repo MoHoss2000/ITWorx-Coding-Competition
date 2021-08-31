@@ -70,6 +70,21 @@ exports.viewProfile = async (req, res) => {
     }
 }
 
+exports.viewEmployeeStatus = async (req, res) => {
+    id = req.params.employeeId
+
+    //activities completed by this employee
+    const activities = proc.viewCompletedActivities(id)
+    //total gained points
+    const total_points = proc.totalGainedPoints(id)
+    //all badges earned by this employee
+    const badges = proc.viewmployeeBadges(id)
+    //all VR earned by this employee
+    const virtual_recognitions = proc.viewEmployeVirtualRecognition(id)
+
+    return res.send({activities, total_points, badges, virtual_recognitions})
+
+}
 
 // exports.exportToExcelLeaderboard = async(req, res) => {
 //     const list = req.body.result
