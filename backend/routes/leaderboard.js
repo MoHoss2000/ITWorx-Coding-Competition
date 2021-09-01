@@ -1,6 +1,6 @@
 const express = require('express')
 const db = require('../db/mysql')
-const authenticateToken = require('../utils/authenticate');
+const authenticateToken = require('../middleware/authenticate');
 
 
 const router = new express.Router()

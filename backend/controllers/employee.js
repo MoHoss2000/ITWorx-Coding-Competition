@@ -98,8 +98,14 @@ exports.viewCycleDetails = async (req, res) => {
 
 //current cycle??
 exports.getAssignedActivities = async (req, res) => {
-    const id = req.id  
-    let result   
+    employeeID = req.id  
+    cycleID = 0 //Current cycle?
+    let result  
+    db.query(
+        'CALL viewEmployeeActivitiesInCycle(?,?)', 
+        [employeeID,cycleID ],
+        (err, queryRes) => result = queryRes
+    ) 
   }
 
 exports.submitActivity = async (req, res) => {
