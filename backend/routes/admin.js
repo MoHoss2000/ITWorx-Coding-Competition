@@ -9,7 +9,7 @@ router.use(express.json())
 router.use(authenticateToken)
 router.use(isAdmin)
 
-router.get('/profile:id', controllers.viewProfile)
+router.get('/profile/:id', controllers.viewProfile)
 
 router.post('/cycle', (req, res) => {
     var startDate = req.body.start_date;

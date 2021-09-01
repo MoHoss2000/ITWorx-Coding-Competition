@@ -34,15 +34,15 @@ router.get('/department', async (req, res) => {
 
 })
 
-router.get('/practice/:cycleId', authenticateToken, async (req, res) => {
-    const cycleId = req.params.cycleId
-    try{
-        const rank = (await sequelize.query(proc.viewPracticeRank(cycleId)))[0]
-        res.send({ rank })
-    }catch{
-        res.sendStatus(400)
-    }
-})
+// router.get('/practice/:cycleId', authenticateToken, async (req, res) => {
+//     const cycleId = req.params.cycleId
+//     try{
+//         const rank = (await sequelize.query(proc.viewPracticeRank(cycleId)))[0]
+//         res.send({ rank })
+//     }catch{
+//         res.sendStatus(400)
+//     }
+// })
 
 
 

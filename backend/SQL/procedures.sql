@@ -137,7 +137,7 @@ END //
 
 
 DELIMITER //
-CREATE PROCEDURE totalGainedPointsInCycle (IN employeeID INT, IN cycleID INT)
+CREATE PROCEDURE  totalGainedPointsInCycle (IN employeeID INT, IN cycleID INT)
 BEGIN
 	SELECT SUM(A.points * EAC.quantity)
     FROM employeeactivitycycle EAC INNER JOIN activity A ON A.id = EAC.activity_id
