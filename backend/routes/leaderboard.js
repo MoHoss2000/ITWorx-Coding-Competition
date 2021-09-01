@@ -1,10 +1,7 @@
 const express = require('express')
-const { Employee } = require("../models/employee");
-const { EmployeeActivity } = require('../models/employeeActivityCycle');
-const { Activity } = require('../models/activity');
-const { db, sequelize } = require('../db/mysql')
+const db = require('../db/mysql')
 const authenticateToken = require('../utils/authenticate');
-const proc = require('../db/procedures')
+
 
 const router = new express.Router()
 router.use(express.json())

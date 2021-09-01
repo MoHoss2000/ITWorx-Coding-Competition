@@ -1,7 +1,5 @@
 const path = require('path')
 const excel = require('exceljs');
-const {Cycle, Activity, EmployeeActivity, Employee} = require('../models')
-const proc = require('../db/procedures')
 
 exports.viewParticipants = async (req, res) => {
     const cycleID = req.params.cycleID

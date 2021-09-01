@@ -1,5 +1,4 @@
 const nodemailer = require("nodemailer");
-const {Employee, Admin} = require('../models')
 const {sendEmail} = require('../utils/email')
 const jwt = require("jsonwebtoken");
 

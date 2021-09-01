@@ -1,16 +1,16 @@
 const express = require('express')
 const bcrypt = require("bcrypt");
-const { Employee, Admin } = require("../models");
 const db = require('../db/mysql')
-const proc = require('../db/procedures')
-const router = new express.Router()
-router.use(express.json())
 const {createToken} = require ('../utils/tokens')
 const authenticateToken = require('../utils/authenticate')
 const controllers = require ('../controllers/general')
-
 const cookieParser = require("cookie-parser");
+
+const router = new express.Router()
+
+router.use(express.json())
 router.use(cookieParser())
+router.use(authenticateToken)
 
 router.get('/test', async (req, res) => {
     let sum
@@ -138,10 +138,10 @@ router.post("/login", async (req, res) => {
 })
 
 
-router.patch('/changepassword', authenticateToken, controllers.changePassword)
+router.patch('/changepassword', controllers.changePassword)
 
 
-router.get('/cycle/activities/:cycleID', authenticateToken, async (req, res) => {
+router.get('/cycle/activities/:cycleID', async (req, res) => {
     const cycleID = req.params.cycleID
     try{
         const result = await proc.viewCycleActivities(cycleID)
@@ -154,19 +154,19 @@ router.get('/cycle/activities/:cycleID', authenticateToken, async (req, res) => 
         }
 });
 
-router.get('/resetPassword', (req, res) =>{
+router.get('/resetPassword', (req, res) => {
     //Form to enter email
 });
 
 router.post('/resetPassword', controllers.resetPassword );
 
-router.get('/newPassword/:token', (req, res) =>{
+router.get('/newPassword/:token', (req, res) => {
     //Form to enter new Password 
 });
 router.post('/newPassword/:token', controllers.newPassword);
 
 
-// router.get("/logout", authenticateToken, (req, res) => {
+// router.get("/logout", (req, res) => {
 //       res.clearCookie('token');
 //       return res.redirect('/login');
 //   });

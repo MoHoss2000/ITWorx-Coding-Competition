@@ -1,29 +1,28 @@
 const express = require('express')
-const { db, sequelize } = require('../db/mysql')
-const { Employee, Activity, Cycle } = require('../models/index')
-const proc = require('../db/procedures')
+const db = require('../db/mysql')
 const authenticateToken = require('../utils/authenticate')
+const {isEmployee} = require('../utils/authorization')
 const controllers = require ('../controllers/employee')
-const  isEmployee  = require('../utils/authorization')
 
 const router = new express.Router()
 
 router.use(express.json())
+router.use(authenticateToken)
+router.use(isEmployee)
 
-router.get('/activities/completed/:cycleID', authenticateToken, isEmployee, controllers.viewCompletedTasks)
+router.get('/activities/completed/:cycleID', controllers.viewCompletedTasks)
 
-router.get('/activities/pending', authenticateToken, controllers.viewPendingTasks)
+router.get('/activities/pending', controllers.viewPendingTasks)
 
-router.get('/activities/toBeSubmitted', authenticateToken, controllers.viewToBeSubmittedTasks)
+router.get('/activities/toBeSubmitted', controllers.viewToBeSubmittedTasks)
 
-router.get('/cycles', authenticateToken, controllers.viewEmployeeCycles)
+router.get('/cycles', controllers.viewEmployeeCycles)
 
-router.get('/profile', authenticateToken, controllers.viewEmployeeProfile)
+router.get('/profile', controllers.viewEmployeeProfile)
 
-router.get('/cycles/view/:cycleId', authenticateToken, controllers.viewCycleDetails)
+router.get('/cycles/view/:cycleId', controllers.viewCycleDetails)
 
-router.get('achievments/:userid/:cycleid', authenticateToken, controllers.viewAchievements)
-
+router.get('achievments/:userid/:cycleid', controllers.viewAchievements)
 
 router.get('/assignedActivities', controllers.getAssignedActivities)
 

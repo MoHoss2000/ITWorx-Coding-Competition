@@ -1,20 +1,17 @@
 const express = require('express')
-const { db, sequelize } = require('../db/mysql')
-const { Cycle, Badge } = require('../models/index')
-<<<<<<< HEAD
-const  controller= require('../conrollers/admin')
-=======
+const db = require('../db/mysql')
 const authenticateToken = require('../utils/authenticate')
-const proc = require('../db/procedures')
 const controllers = require('../controllers/admin')
->>>>>>> bf7186c24ef17deed4a8003b3cee360b2e06b516
+const {isAdmin} = require('../utils/authorization')
 
 const router = express.Router()
 router.use(express.json())
+router.use(authenticateToken)
+router.use(isAdmin)
 
-router.get('/profile:id', authenticateToken, controllers.viewProfile)
+router.get('/profile:id', controllers.viewProfile)
 
-router.post('/cycle', /*checkAdmin,*/ (req, res) => {
+router.post('/cycle', (req, res) => {
     var startDate = req.body.start_date;
     var endDate = req.body.end_date;
     var adminID =  req.userData.id;
@@ -36,7 +33,7 @@ router.post('/cycle', /*checkAdmin,*/ (req, res) => {
     });
 })
 
-router.post('/badge', /*checkAdmin,*/ (req, res) => {
+router.post('/badge', (req, res) => {
     var name = req.body.name;
     var description = req.body.description;
     var type = req.body.type;
@@ -58,20 +55,19 @@ router.post('/badge', /*checkAdmin,*/ (req, res) => {
         } 
     });
 })
-router.get('/getActivities', controller.getActivities)
+router.get('/getActivities', controllers.getActivities)
 
-<<<<<<< HEAD
-router.get('/viewActivity', /*checkAdmin,*/  controller.activityInfo)
+router.get('/viewActivity', controllers.activityInfo)
 
-router.post('/newActivity', /*checkAdmin,*/  controller.createNewActivity)
+router.post('/newActivity', controllers.createNewActivity)
 
-router.post('/editActivity', /*checkAdmin,*/  controller.editActivity)
+router.post('/editActivity', controllers.editActivity)
 
-router.post('/assignActivity', /*checkAdmin,*/  controller.assignEmployeeToActivity)
+router.post('/assignActivity', controllers.assignEmployeeToActivity)
 
-router.post('/markActivityAsComplete', controller.markActivityAsComplete)
-=======
-router.get('/badge/view', authenticateToken, async (req, res) => {
+router.post('/markActivityAsComplete', controllers.markActivityAsComplete)
+
+router.get('/badge/view', async (req, res) => {
     try{
         const result = await Badge.findAll()
         res.send(result)  
@@ -82,7 +78,7 @@ router.get('/badge/view', authenticateToken, async (req, res) => {
 
 });
 
-router.get('/cycles/view', authenticateToken, async (req, res) => {
+router.get('/cycles/view', async (req, res) => {
     try{
         const result = await Cycle.findAll()
         res.send(result)  
@@ -92,7 +88,7 @@ router.get('/cycles/view', authenticateToken, async (req, res) => {
     }
 })
 
-router.patch('/badge/:badgeID', /*checkAdmin,*/ async (req, res) => {
+router.patch('/badge/:badgeID', async (req, res) => {
     var badgeID = req.params.badgeID;
     console.log(req.body);
 
@@ -112,17 +108,16 @@ router.patch('/badge/:badgeID', /*checkAdmin,*/ async (req, res) => {
     }
 });
 
-router.get('/cycle/participants/:cycleID', authenticateToken, controllers.viewParticipants)
+router.get('/cycle/participants/:cycleID', controllers.viewParticipants)
 
-router.get('/participants/excelfile', authenticateToken, controllers.exportToExcelParticipants)
+router.get('/participants/excelfile', controllers.exportToExcelParticipants)
 
-router.patch('/cycle/disable/:cycleID', authenticateToken, controllers.disableCycle)
+router.patch('/cycle/disable/:cycleID', controllers.disableCycle)
 
-router.get('/employeeStatus/:employeeId', authenticateToken, controllers.viewEmployeeStatus)
+router.get('/employeeStatus/:employeeId', controllers.viewEmployeeStatus)
 
 
 
-//router.get('/leaderboard/excelfile', authenticateToken, exportToExcelLeaderboard)
->>>>>>> bf7186c24ef17deed4a8003b3cee360b2e06b516
+//router.get('/leaderboard/excelfile', exportToExcelLeaderboard)
 
 module.exports = router

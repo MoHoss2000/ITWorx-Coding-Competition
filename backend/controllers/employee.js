@@ -1,13 +1,20 @@
-const { Employee, Cycle, EmployeeBadges, Activity } = require('../models')
-const proc = require('../db/procedures')
+const db = require('../db/mysql')
 
 exports.viewAchievements = async (req, res) => {
     employeeId = req.params.userid
     cycleId = req.params.cycleid
-
-    const virtual_recognitions = proc.viewEmployeeCycleVirtualRecognition(employeeId, cycleId)
-    const badges = proc.viewEmployeeCycleBadges(employeeId, cycleId)
-    return res.json({virtual_recognitions, badges})
+    let result = {}
+    db.query(
+        'CALL viewEmployeeCycleVirtualRecognition(?,?)', 
+        [employeeId, cycleID],
+        (err, queryRes) => result.virtual_recognitions = queryRes
+    )
+    db.query(
+        'CALL viewEmployeeCycleBadges(?,?)',
+        [employeeId, cycleID],
+        (err, queryRes) => result.badges = queryRes
+        )
+    return res.json({result})
 }   
     
 exports.viewCompletedTasks = async (req, res) => {
@@ -104,7 +111,7 @@ exports.getAssignedActivities = async (req, res) => {
     }
   }
 
-  exports.submitActivity= async (req, res) => {
+  exports.submitActivity = async (req, res) => {
 
     const { EmployeeId , ActivityId } = req.body
 
