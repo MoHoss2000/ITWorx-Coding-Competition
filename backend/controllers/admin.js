@@ -46,7 +46,7 @@ exports.exportToExcelParticipants = async(req, res) => {
 exports.disableCycle = async (req, res) => {
     cycleID = req.params.cycleID
     try{
-    await Cycle.update({disabled: 1}, {where: {id: cycleID}});
+    await Cycle.update({current: 0}, {where: {id: cycleID}});
     res.status(200).json({message: 'Cycle disabled successfully'});
 
     } catch(e) {
