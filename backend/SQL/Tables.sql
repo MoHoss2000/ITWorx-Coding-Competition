@@ -3,7 +3,7 @@ USE ITWorx;
 
 CREATE TABLE employee(
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    firt_name VARCHAR(20),
+    first_name VARCHAR(20),
     last_name VARCHAR(20),
     username VARCHAR(50) UNIQUE,
     password VARCHAR(100) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE employee(
 );
 CREATE TABLE admin (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    firt_name VARCHAR(20),
+    first_name VARCHAR(20),
     last_name VARCHAR(20),
     username VARCHAR(50) UNIQUE,
     password VARCHAR(100) NOT NULL

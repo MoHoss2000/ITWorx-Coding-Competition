@@ -158,3 +158,61 @@ BEGIN
     SET    status ="pending"
     WHERE  employee_id = @employeeID and activity_id = @activityID and cycle_id = @cycleID
 END //
+
+DELIMITER //
+CREATE PROCEDURE findAdmin ( IN username VARCHAR(25))
+BEGIN
+    SELECT *
+    From admin
+    WHERE  username = @username
+END //
+
+DELIMITER //
+CREATE PROCEDURE findEmployee ( IN username VARCHAR(50))
+BEGIN
+    SELECT *
+    From employee
+    WHERE  username = @username
+END //
+
+DELIMITER //
+CREATE PROCEDURE addEmployee ( IN id INT,  IN first_name VARCHAR(20),  
+                                IN last_name VARCHAR(20) IN username VARCHAR(50), 
+                                IN password VARCHAR(100), IN is_developer BOOLEAN)
+BEGIN
+    INSERT INTO employee
+                (id,
+                first_name,
+                last_name,
+                username,
+                password,
+                is_developer
+                )
+
+    VALUES     ( @id,
+                 @first_name,
+                 @last_name,
+                 @username,
+                 @password,
+                 @is_developer
+END //
+
+DELIMITER //
+CREATE PROCEDURE addAdmin ( IN id INT,  IN first_name VARCHAR(20),  
+                            IN last_name VARCHAR(20) IN username VARCHAR(50), 
+                            IN password VARCHAR(100))
+BEGIN
+    INSERT INTO employee
+                (id,
+                first_name,
+                last_name,
+                username,
+                password
+                )
+
+    VALUES     ( @id,
+                 @first_name,
+                 @last_name,
+                 @username,
+                 @password
+END //
