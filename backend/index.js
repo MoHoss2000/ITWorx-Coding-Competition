@@ -10,10 +10,11 @@ const leaderboardRouter = require('./routes/leaderboard')
 const adminRouter = require('./routes/admin')
 
 app.use(express.json())
-app.use('/', generalRouter)
 app.use('/employee', employeeRouter)
 app.use('/admin', adminRouter)
 app.use('/leaderboard', leaderboardRouter)
+app.use('/', generalRouter)
+
 
 
 //built-in middleware function in Express. It parses incoming requests with JSON 

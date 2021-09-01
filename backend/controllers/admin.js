@@ -1,13 +1,17 @@
 const path = require('path')
 const excel = require('exceljs');
+const db = require('../db/mysql')
+
 
 exports.viewParticipants = async (req, res) => {
     const cycleID = req.params.cycleID
     try{
-        const result = await proc.viewEmployeesInCycle(cycleID)
-        res.json({ result })
-    }catch(e){
-        console.log(e)
+      db.query('CALL viewEmployeesInCycle(?)', cycleID ,(err, result) => {
+          res.send(result[0]);
+      })
+    } catch(e){
+      console.log(e)
+      res.status(400).send(e);
     }
 }
 
@@ -37,6 +41,8 @@ exports.exportToExcelParticipants = async(req, res) => {
 	});
 } 
 
+
+/// warning: no disabled column in cycle table?
 exports.disableCycle = async (req, res) => {
     cycleID = req.params.cycleID
     try{
@@ -50,19 +56,28 @@ exports.disableCycle = async (req, res) => {
 
 exports.viewProfile = async (req, res) => {
     adminID = req.params.id   
+
     try{
-        const admin = await adminId.findOne({ where: {id: adminID}}) 
-        const personalInfo = { id: admin.id, 
-                               first_name: admin.first_name, 
-                               last_name: admin.last_name,
-                               username: admin.user_name
-                               //avatar: admin.avatar 
-                            }
-                      
-        return res.send({personalInfo})
-    }catch{
-        return res.status(400).send()
-    }
+      db.query('SELECT * FROM admin WHERE id = (?)', adminID ,(err, result) => {
+          // res.send(result[0]);
+
+          if(result.length == 0)
+            return res.status(404).json({'message': 'User not found'});
+
+
+          var userData = {
+            id: result[0].id,
+            first_name: result[0].first_name,
+            last_name: result[0].last_name,
+            username: result[0].username,
+          }
+
+          return res.status(200).send(userData);
+      })
+   } catch(e){
+      console.log(e)
+      res.status(400).send(e);
+  }
 }
 
 exports.viewEmployeeStatus = async (req, res) => {
@@ -76,6 +91,8 @@ exports.viewEmployeeStatus = async (req, res) => {
     const badges = proc.viewmployeeBadges(id)
     //all VR earned by this employee
     const virtual_recognitions = proc.viewEmployeVirtualRecognition(id)
+
+
 
     return res.send({activities, total_points, badges, virtual_recognitions})
 
@@ -122,12 +139,14 @@ exports.getActivities = async (req, res) => {
             message:
             err.message || "Some error occurred while creating the Activity." })
     }
+
+
 }
 
 exports.createNewActivity = async (req, res) => {
 
     const {name, description, type, enabled, virtual_recognition, points} = req.body
-
+    console.log("ACTIVITY");
     // Validate request
     if ( !( name && description && type && enabled && points) && virtual_recognition!==undefined) {
 
@@ -138,19 +157,20 @@ exports.createNewActivity = async (req, res) => {
     }
      
     // Create an new activity
-    const activity = { name, description, type, enabled, virtual_recognition, points}
+    const activity = [name, description, type, enabled, virtual_recognition, points]
 
-    // Save Tutorial in the database
     try{
-        const newActivity = await Activity.create(activity)
-        res.send(newActivity)
+      db.query(`INSERT INTO activity (name, description, type, enabled, virtual_recognition, points) 
+        VALUES (?,?,?,?,?,?)
+      `, activity ,(err, result) => {
+        console.log(result);
+        res.status(200).json({message: 'Activity added successfully '});
 
-    } catch(err){
-
-        res.status(500).send({
-            message:
-            err.message || "Some error occurred while creating the Activity." })
-    }
+      })
+   } catch(e){
+      console.log(e)
+      res.status(400).send(e);
+  }
 
   
   }
