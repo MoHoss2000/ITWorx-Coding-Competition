@@ -1,7 +1,7 @@
 const express = require('express')
 const db = require('../db/mysql')
-const authenticateToken = require('../utils/authenticate')
-const {isEmployee} = require('../utils/authorization')
+const authenticateToken = require('../middleware/authenticate')
+const {isEmployee} = require('../middleware/authorization')
 const controllers = require ('../controllers/employee')
 
 const router = new express.Router()

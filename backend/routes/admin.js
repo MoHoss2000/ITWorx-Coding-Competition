@@ -1,8 +1,8 @@
 const express = require('express')
 const db = require('../db/mysql')
-const authenticateToken = require('../utils/authenticate')
+const authenticateToken = require('../middleware/authenticate')
 const controllers = require('../controllers/admin')
-const {isAdmin} = require('../utils/authorization')
+const {isAdmin} = require('../middleware/authorization')
 
 const router = express.Router()
 router.use(express.json())
