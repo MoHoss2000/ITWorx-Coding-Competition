@@ -52,6 +52,16 @@ exports.disableCycle = async (req, res) => {
     } catch(e) {
         res.status(400).json({ error: err });
     }
+
+    const cycleID = req.params.cycleID
+    try{
+      db.query('UPDATE cycle SET disabled = 1 WHERE id = (?)', cycleID ,(err, result) => {
+          res.status(200).send('Cycle disabled successfully');
+      })
+    } catch(e){
+      console.log(e)
+      res.status(400).send(e);
+    }
 }
 
 exports.viewProfile = async (req, res) => {
@@ -130,23 +140,20 @@ exports.viewEmployeeStatus = async (req, res) => {
 
 exports.getActivities = async (req, res) => {
 
-    try {
-        const activites = await Activity.findAll()
-        res.send(activites)
-    } catch(err){
-
-        res.status(500).send({
-            message:
-            err.message || "Some error occurred while creating the Activity." })
-    }
-
-
+  try{
+    db.query(`SELECT * FROM activity`,(err, result) => {
+      res.status(200).send(result);
+    })
+  } catch(e){
+    console.log(e)
+    res.status(400).send(e);
+  }
 }
 
 exports.createNewActivity = async (req, res) => {
 
     const {name, description, type, enabled, virtual_recognition, points} = req.body
-    console.log("ACTIVITY");
+
     // Validate request
     if ( !( name && description && type && enabled && points) && virtual_recognition!==undefined) {
 
