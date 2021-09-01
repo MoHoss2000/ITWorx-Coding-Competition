@@ -50,9 +50,12 @@ exports.viewToBeSubmittedTasks = async (req, res) => {
 exports.viewEmployeeCycles = async (req, res) => {
     const id = req.id
     try{
-        const result = await proc.viewEmployeeCycles(id)
-        res.send({result})
-    }catch{
+        db.query('CALL viewEmployeeCycles(?)', id ,(err, result) => {
+            res.send(result[0])
+        })
+        
+    }catch(e){
+        console.log(e)
         res.status(400).send()
     }
 }
