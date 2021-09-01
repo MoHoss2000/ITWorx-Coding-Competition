@@ -24,6 +24,6 @@ router.get('/cycles/view/:cycleId', controllers.viewCycleDetails)
 
 router.get('achievments/:userid/:cycleid', controllers.viewAchievements)
 
-router.get('/assignedActivities', controllers.getAssignedActivities)
+router.get('/assignedActivities', controllers.getAssigneadActivities)
 
 module.exports = router

@@ -12,17 +12,6 @@ router.use(express.json())
 router.use(cookieParser())
 router.use(authenticateToken)
 
-router.get('/test', async (req, res) => {
-    let sum
-    console.log("Hi")
-    const result= proc.totalGainedPoints(2)
-    for (p in result){
-        console.log(p)
-          sum += p
-    }
-    console.log(sum)
-    return
-})
 
 router.post("/register", async (req, res) => {
     // we take the input enetered by the user from the request
@@ -137,9 +126,7 @@ router.post("/login", async (req, res) => {
         }  
 })
 
-
 router.patch('/changepassword', controllers.changePassword)
-
 
 router.get('/cycle/activities/:cycleID', async (req, res) => {
     const cycleID = req.params.cycleID
@@ -165,11 +152,6 @@ router.get('/newPassword/:token', (req, res) => {
 });
 router.post('/newPassword/:token', controllers.newPassword);
 
-
-// router.get("/logout", (req, res) => {
-//       res.clearCookie('token');
-//       return res.redirect('/login');
-//   });
 
 
 module.exports = router
