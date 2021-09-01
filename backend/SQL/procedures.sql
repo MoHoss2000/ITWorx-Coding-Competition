@@ -144,5 +144,17 @@ BEGIN
     WHERE EAC.status = "completed" AND EAC.employee_id = employeeID AND EAC.cycle_id = cycleID;
 END //
 
+DELIMITER //
+CREATE PROCEDURE allCycles ()
+BEGIN
+	SELECT *
+    FROM cycle
+END //
 
-
+DELIMITER //
+CREATE PROCEDURE submitActivity ( IN activityID INT,  IN employeeID INT, IN cycleID INT)
+BEGIN
+    UPDATE EmployeeActivityCycle
+    SET    status ="pending"
+    WHERE  employee_id = @employeeID and activity_id = @activityID and cycle_id = @cycleID
+END //

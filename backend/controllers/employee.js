@@ -18,129 +18,104 @@ exports.viewAchievements = async (req, res) => {
 }   
     
 exports.viewCompletedTasks = async (req, res) => {
-    try{
-        const result = await proc.viewCompletedTasks(req.id, req.params.cycleID)
-        res.send(result)
-    }
-    catch(e){
-        console.log(e)
-    }
+    employeeId = req.id
+    cycleId = req.params.cycleid
+    let result 
+    db.query(
+        'CALL viewEmployeeCycleVirtualRecognition(?,?)', 
+        [employeeId, cycleID],
+        (err, queryRes) => result = queryRes
+    )
 }
 
 exports.viewPendingTasks = async (req, res) => {
-    try{
-        const result = await proc.viewPendingTasks(req.id)
-        res.send(result)
-    }
-    catch(e){
-        console.log(e)
-    }
+    employeeId = req.id
+    let result
+    db.query(
+        'CALL viewPendingTasks(?)', 
+        [employeeId],
+        (err, queryRes) => result = queryRes
+    )
 }
 
 exports.viewToBeSubmittedTasks = async (req, res) => {
-    try{
-        const result = await proc.viewToBeSubmittedTasks(req.id)
-        res.send(result)
-    }
-    catch(e){
-        console.log(e)
-    }
+    employeeId = req.id
+    let result
+    db.query(
+        'CALL viewToBeSubmittedTasks(?)', 
+        [employeeId],
+        (err, queryRes) => result = queryRes
+    )
 }
 
 exports.viewEmployeeCycles = async (req, res) => {
-    const id = req.id
-    try{
-        db.query('CALL viewEmployeeCycles(?)', id ,(err, result) => {
-            res.send(result[0])
-        })
-        
-    }catch(e){
-        console.log(e)
-        res.status(400).send()
-    }
+    employeeId = req.id
+    let result
+    db.query(
+        'CALL viewEmployeeCycles(?)', 
+        [employeeId],
+        (err, queryRes) => result = queryRes
+    )
 }
            
 exports.viewEmployeeProfile = async (req, res) => {
-    const id = req.id
-    try{
-        const personalInfo = await proc.viewEmployeePersonalInfo(id)
-        const departments = await proc.viewEmployeeDepartments(id)
-        const practice = await proc.viewEmployeePractice(id)
-        const badges = await proc.viewemployeeBadges(id)
-        res.send({personalInfo, practice, departments, badges})
-    }catch{
-        res.status(400).send()
-    }
+    employeeId = req.id
+    let result = {}
+    db.query(
+        'CALL viewEmployeePersonalInfo(?)', 
+        [employeeId],
+        (err, queryRes) => result.personalInfo = queryRes
+    )
+    // badges of current cycle? - All badges
+    db.query(
+        'CALL viewEmployeeBadges(?)', 
+        [employeeId],
+        (err, queryRes) => result.employeeBadges = queryRes
+    )
+    db.query(
+        'CALL viewEmployeePractice(?)', 
+        [employeeId],
+        (err, queryRes) => result.employeePractice = queryRes
+    )
+    // virtual recognition - but i need current cycle
+    // db.query(
+    //     'CALL viewEmployeeBadges(?)', 
+    //     [employeeId],
+    //     (err, queryRes) => result.employeeBadges = queryRes
+    // )
 }
 
 exports.viewCycleDetails = async (req, res) => {
-    const empID = req.id
+    const employeeId = req.id
     const cycleID = req.params.cycleId
-    try{
-        const result = await proc.viewCycleDetailsForEmployee(empID, cycleID)
-        if(result.length === 0)
-            res.status(404).send()
-        res.json({ result })
-    }catch(e){
-        console.log(e)
-        res.status(500).send()
-    }
+    let result 
+    db.query(
+        'CALL viewCycleDetailsForEmployee(?,?)', 
+        [employeeId,cycleID ],
+        (err, queryRes) => result = queryRes
+    )
 }
 
+//current cycle??
 exports.getAssignedActivities = async (req, res) => {
-
-    const id = req.body.id  
-    if (!id) {
-      res.status(400).send({
-        message: "Employee ID needed"
-    })
-      return
-    }
-    try{
-     //get activity information
-     const assignedTasks= await Employee.findAll({ 
-        where: { id , isComplete: false },
-        include: [{ 
-                model: Activity, 
-                required: true
-                 }] 
-     })  
-    res.send(assignedTasks)
-    } catch(err){
-
-        res.status(500).send({
-            message:
-            err.message || "Some error occurred while fetching the data." })        
-    }
+    employeeID = req.id  
+    cycleID = 0 //Current cycle?
+    let result  
+    db.query(
+        'CALL viewEmployeeActivitiesInCycle(?,?)', 
+        [employeeID,cycleID ],
+        (err, queryRes) => result = queryRes
+    ) 
   }
 
-  exports.submitActivity = async (req, res) => {
-
-    const { EmployeeId , ActivityId } = req.body
-
-    if(!(EmployeeId && ActivityId)){
-
-      res.status(400).send({
-          message: "Please provide all input fields!"
-        })
-        return
-    }
-
-    try{
-      //update does not return the new updated row- not supported for MySql
-      const submittedActivity = await EmployeeActivity.update({ inReview : true }, {
-          where: {
-              EmployeeId,
-              ActivityId
-          },
-          returning : true 
-      })
-      res.send(submittedActivity)
-
-    }catch(err){
-
-      res.status(500).send({
-          message:
-          err.message || "Some error occurred" })
-  }
+exports.submitActivity = async (req, res) => {
+    employeeId = req.id
+    activityId = req.id
+    cycleID = 0 //Current cycle?
+    let result
+    db.query(
+        'CALL submitActivity(?,?,?)', 
+        [activityId, employeeId,cycleID ],
+        (err, queryRes) => result = queryRes
+    )
   }
