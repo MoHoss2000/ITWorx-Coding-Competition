@@ -10,7 +10,7 @@ router.use(express.json())
 router.use(authenticateToken)
 router.use(isEmployee)
 
-router.get('/activities/completed/:cycleID', controllers.viewCompletedTasks)
+router.get('/activities/completed', controllers.viewCompletedTasks)
 
 router.get('/activities/pending', controllers.viewPendingTasks)
 
@@ -20,9 +20,9 @@ router.get('/cycles', controllers.viewEmployeeCycles)
 
 router.get('/profile', controllers.viewEmployeeProfile)
 
-router.get('/cycles/view/:cycleId', controllers.viewCycleDetails)
+router.get('/cycles/view', controllers.viewCycleDetails)
 
-router.get('achievments/:userid/:cycleid', controllers.viewAchievements)
+router.get('/achievments', controllers.viewAchievements)
 
 router.get('/assignedActivities', controllers.getAssignedActivities)
 
