@@ -1,8 +1,7 @@
 const db = require('../db/mysql')
 
 exports.viewAchievements = async (req, res) => {
-    employeeId = req.params.userid
-    cycleId = req.params.cycleid
+    const {employeeId,cycleID}  = req.body
     let result = {}
     db.query(
         'CALL viewEmployeeCycleVirtualRecognition(?,?)', 
@@ -18,55 +17,58 @@ exports.viewAchievements = async (req, res) => {
 }   
     
 exports.viewCompletedTasks = async (req, res) => {
-    employeeId = req.id
-    cycleId = req.params.cycleid
+    const {employeeId, cycleID}  = req.body
     let result 
     db.query(
         'CALL viewEmployeeCycleVirtualRecognition(?,?)', 
         [employeeId, cycleID],
         (err, queryRes) => result = queryRes
     )
+    return res.json({result})
 }
 
 exports.viewPendingTasks = async (req, res) => {
-    employeeId = req.id
+    employeeId = req.body.id
     let result
     db.query(
         'CALL viewPendingTasks(?)', 
         [employeeId],
         (err, queryRes) => result = queryRes
     )
+    return res.json({result})
 }
 
 exports.viewToBeSubmittedTasks = async (req, res) => {
-    employeeId = req.id
+    employeeId = req.body.id
     let result
     db.query(
         'CALL viewToBeSubmittedTasks(?)', 
         [employeeId],
         (err, queryRes) => result = queryRes
     )
+    return res.json({result})
 }
 
 exports.viewEmployeeCycles = async (req, res) => {
-    employeeId = req.id
+    employeeId = req.body.id
     let result
     db.query(
         'CALL viewEmployeeCycles(?)', 
         [employeeId],
         (err, queryRes) => result = queryRes
     )
+    return res.json({result})
 }
            
 exports.viewEmployeeProfile = async (req, res) => {
-    employeeId = req.id
+    const {employeeId,cycleID } = req.body
     let result = {}
     db.query(
         'CALL viewEmployeePersonalInfo(?)', 
         [employeeId],
         (err, queryRes) => result.personalInfo = queryRes
     )
-    // badges of current cycle? - All badges
+    //all badges? in current cycle only>
     db.query(
         'CALL viewEmployeeBadges(?)', 
         [employeeId],
@@ -77,45 +79,43 @@ exports.viewEmployeeProfile = async (req, res) => {
         [employeeId],
         (err, queryRes) => result.employeePractice = queryRes
     )
-    // virtual recognition - but i need current cycle
-    // db.query(
-    //     'CALL viewEmployeeBadges(?)', 
-    //     [employeeId],
-    //     (err, queryRes) => result.employeeBadges = queryRes
-    // )
+    db.query(
+        'CALL viewEmployeeCycleVirtualRecognition(?,?)', 
+        [employeeId, cycleID],
+        (err, queryRes) => result.virtual_recognitions = queryRes
+    )
+    return res.json({result})
 }
 
 exports.viewCycleDetails = async (req, res) => {
-    const employeeId = req.id
-    const cycleID = req.params.cycleId
+    const {employeeID,cycleID } = req.body
     let result 
     db.query(
         'CALL viewCycleDetailsForEmployee(?,?)', 
-        [employeeId,cycleID ],
+        [employeeID,cycleID ],
         (err, queryRes) => result = queryRes
     )
+    return res.json({result})
 }
 
-//current cycle??
 exports.getAssignedActivities = async (req, res) => {
-    employeeID = req.id  
-    cycleID = 0 //Current cycle?
+    const {employeeID,cycleID } = req.body
     let result  
     db.query(
         'CALL viewEmployeeActivitiesInCycle(?,?)', 
         [employeeID,cycleID ],
         (err, queryRes) => result = queryRes
     ) 
-  }
+    return res.json({result})
+}
 
 exports.submitActivity = async (req, res) => {
-    employeeId = req.id
-    activityId = req.id
-    cycleID = 0 //Current cycle?
+    const {employeeId,activityId, cycleID } = req.body
     let result
     db.query(
         'CALL submitActivity(?,?,?)', 
         [activityId, employeeId,cycleID ],
         (err, queryRes) => result = queryRes
     )
-  }
+    return res.json({result})
+}

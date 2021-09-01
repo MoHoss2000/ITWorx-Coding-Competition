@@ -15,67 +15,58 @@ router.use(authenticateToken)
 
 router.post("/register", async (req, res) => {
     // we take the input enetered by the user from the request
-    const { first_name, last_name, username, password , is_developer, is_admin} = req.body;
-
+    const { first_name, last_name, username, password , is_developer, is_admin} = req.body;  
     if(is_admin){ //register as admin
-        //check to see if an admin with the same username exists
-        const adminUser = await Admin.findOne({where :{ username: username}});
-        if(adminUser) //username exists
+        let adminUser 
+        db.query(
+            'CALL findAdmin(?)', 
+            [username],
+            (err, queryRes) => adminUser = queryRes
+        ) 
+        if(adminUser) 
             res.status(400).json({error: "Username exists"});
         else{
             bcrypt.hash(password, 10).then((hash)=>{
-            const admin = Admin.create({
-                          first_name: first_name,
-                          last_name: last_name,
-                          username: username,
-                          password: hash,
-                          is_developer: is_developer
-                }). then(()=> {
-                    admin.type = 'admin'
-                    console.log(admin)
-                    const token = createToken(admin);
-                    //creating the cookie and saving it in the user's browser
-                    res.cookie("token", token, {
-                        maxAge: 60 * 60 * 24 * 30 * 1000, //30 days
-                        httpOnly: true,
-                    });
-                    res.json("User successfully registered");
-                }).catch((err) => {
-                    if (err) {
-                      res.status(400).json({ error: err });
-                    } 
-                });
-            }); 
+            let admin 
+            db.query(
+                'CALL addAdmin(?,?,?,?,?)', 
+                [first_name,last_name, username,password],
+                (err, queryRes) => admin = queryRes
+            )}) 
+            const token = createToken(admin);
+            res.cookie("token", token, {
+                maxAge: 60 * 60 * 24 * 30 * 1000, //30 days
+                httpOnly: true,
+            });
+            res.json("User successfully registered");
         }  
     }
     else{
-        const employeeUser = await Employee.findOne({where :{ username: username}});
-        if(employeeUser) //employee username exists
+        let employeeUser
+        db.query(
+            'CALL findEmployee(?)', 
+            [username],
+            (err, queryRes) => adminUser = queryRes
+        ) 
+        if(employeeUser) 
             res.status(400).json({error: "Username exists"});
-            // we hash the password and then create an entry in the db with the hashed password
+        else{    
             bcrypt.hash(password, 10).then((hash)=>{
-            const employee = Employee.create({
-                             first_name: first_name,
-                             last_name: last_name,
-                             username: username,
-                             password: hash,
-                             is_developer: is_developer
-                }). then(() => { 
-                    employee.type = 'employee'
-                    const token = createToken(employee);
-                    //creating the cookie and saving it in the user's browser
-                    res.cookie("token", token, {
-                        maxAge: 60 * 60 * 24 * 30 * 1000, //30 days
-                        httpOnly: true,
-                    });
-                    res.json("User successfully registered");
-                }).catch((err) => {
-                    if (err) {
-                    res.status(400).json({ error: err });
-                    } 
-                });
-            });  
+            let employee   
+            db.query(
+                'CALL addEmployee(?,?,?,?,?)', 
+                [first_name,last_name, username,password, is_developer],
+                (err, queryRes) => employee = queryRes
+            )    
+            })  
+            const token = createToken(employee);
+            res.cookie("token", token, {
+                maxAge: 60 * 60 * 24 * 30 * 1000, //30 days
+                httpOnly: true,
+            });
+            res.json("User successfully registered");   
         } 
+    }
 });
 
 router.post("/login", async (req, res) => {
