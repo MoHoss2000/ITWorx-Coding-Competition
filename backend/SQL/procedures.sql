@@ -156,7 +156,7 @@ CREATE PROCEDURE submitActivity ( IN activityID INT,  IN employeeID INT, IN cycl
 BEGIN
     UPDATE EmployeeActivityCycle
     SET    status ="pending"
-    WHERE  employee_id = @employeeID and activity_id = @activityID and cycle_id = @cycleID
+    WHERE  employee_id = employeeID and activity_id = activityID and cycle_id = cycleID
 END //
 
 DELIMITER //
