@@ -1,5 +1,4 @@
 const db = require('../db/mysql')
-const { getActivities } = require('./admin')
 
 exports.viewAchievements = async (req, res) => {
     const employeeId = req.id
@@ -116,9 +115,8 @@ exports.viewEmployeeProfile = async (req, res) => {
 }
 
 exports.viewCycleDetails = async (req, res) => {
-    cycleID= req.body.cycleID
-    employeeID = req.body.id
-    let result 
+    const cycleID = req.body.cycleID
+    const employeeID = req.id
     db.query(
         'CALL viewCycleDetailsForEmployee(?,?)', 
         [employeeID,cycleID ],
@@ -131,8 +129,8 @@ exports.viewCycleDetails = async (req, res) => {
 }
 
 exports.getAssignedActivities = async (req, res) => {
-    cycleID= req.body.cycleID
-    employeeID = req.body.employeeID
+    const cycleID= req.body.cycleID
+    const employeeID = req.id
     db.query(
         'CALL viewEmployeeActivitiesInCycle(?,?)', 
         [employeeID,cycleID ],
@@ -145,11 +143,11 @@ exports.getAssignedActivities = async (req, res) => {
 }
 
 exports.submitActivity = async (req, res) => {
-    const {employeeId,activityId, cycleID } = req.body
-    let result
+    const {activityId, cycleID } = req.body
+    const employeeID = req.id
     db.query(
         'CALL submitActivity(?,?,?)', 
-        [activityId, employeeId,cycleID ],
+        [activityId, employeeId, cycleID],
         (err, queryRes) => {
             if(!err)
                 return res.json(queryRes[0])
