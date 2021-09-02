@@ -151,48 +151,34 @@ exports.getActivities = async (req, res) => {
 }
 
 exports.createNewActivity = async (req, res) => {
-
-    const {name, description, type, enabled, virtual_recognition, points} = req.body
-
-    // Validate request
-    if ( !( name && description && type && enabled && points) && virtual_recognition!==undefined) {
-
-      res.status(400).send({
-        message: "Please provide all input fields!"
-      });
+  const adminID = req.id
+  const {name, description, type, enabled, virtual_recognition, points} = req.body
+  if (!( name && description && type && enabled && points) && virtual_recognition!==undefined) {
+    res.status(400).send({
+      message: "Please provide all input fields!"
+    });
       return;
-    }
-     
-    // Create an new activity
-    const activity = [name, description, type, enabled, virtual_recognition, points]
-
-    try{
-      db.query(`INSERT INTO activity (name, description, type, enabled, virtual_recognition, points) 
-        VALUES (?,?,?,?,?,?)
-      `, activity ,(err, result) => {
-        console.log(result);
+  }
+    // Create a new activity
+    const activity = [name, description, type, enabled, virtual_recognition, points, adminID]
+    db.query('CALL createNewActivity(?,?,?,?,?,?,?)', activity ,(err, result) => {
+      if(result)
         res.status(200).json({message: 'Activity added successfully '});
+      else
+        res.status(400).send()
+    })
+}
+exports.editActivity= async (req, res) => {
 
-      })
-   } catch(e){
-      console.log(e)
-      res.status(400).send(e);
+  const { ActivityId ,name, description, type, enabled, virtual_recognition, points } = req.body
+
+  // Validate request
+  if ( !( ActivityId && name && description && type && enabled && points) && virtual_recognition!==undefined) {
+    res.status(400).send({
+      message: "Please provide all input fields!"
+    });
+    return;
   }
-
-  
-  }
-  exports.editActivity= async (req, res) => {
-
-    const { ActivityId ,name, description, type, enabled, virtual_recognition, points} = req.body
-
-    // Validate request
-    if ( !( ActivityId && name && description && type && enabled && points) && virtual_recognition!==undefined) {
-
-      res.status(400).send({
-        message: "Please provide all input fields!"
-      });
-      return;
-    }
      
     // Create an new activity
     const activity = { name, description, type, enabled, virtual_recognition, points}

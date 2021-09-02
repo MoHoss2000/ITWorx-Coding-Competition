@@ -7,6 +7,7 @@ const controllers = require ('../controllers/employee')
 const router = new express.Router()
 
 router.use(express.json())
+
 router.use(authenticateToken)
 router.use(isEmployee)
 

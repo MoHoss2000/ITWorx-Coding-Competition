@@ -1,3 +1,4 @@
+
 CREATE DATABASE ITWorx;
 USE ITWorx;
 
@@ -7,7 +8,8 @@ CREATE TABLE employee(
     last_name VARCHAR(20),
     username VARCHAR(50) UNIQUE,
     password VARCHAR(100) NOT NULL,
-    is_developer BOOLEAN
+    is_developer BOOLEAN,
+    points INT
 );
 CREATE TABLE admin (
 	id INT PRIMARY KEY AUTO_INCREMENT,
@@ -64,7 +66,6 @@ CREATE TABLE cycle(
     start_date DATE,
     end_date DATE,
     admin_id INT,
-    current BOOLEAN,
     FOREIGN KEY(admin_id) REFERENCES admin(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -81,7 +82,7 @@ CREATE TABLE employeeBadgeCycle(
 
 CREATE TABLE Activity ( 
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50),
+    name VARCHAR(50) UNIQUE,
     description VARCHAR(100),
     type VARCHAR(50),
     enabled BOOLEAN,
@@ -106,10 +107,15 @@ CREATE TABLE EmployeeActivityCycle (
 );
 
 
-CREATE TABLE EmployeeCycles (
+CREATE TABLE EmployeeCycle (
 	employee_id INT,
     cycle_id INT,
     PRIMARY KEY (employee_id, cycle_id) ,
     FOREIGN KEY (employee_id) REFERENCES employee(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (cycle_id) REFERENCES cycle(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
+
+
+
