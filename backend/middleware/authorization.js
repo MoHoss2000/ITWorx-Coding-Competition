@@ -1,13 +1,13 @@
 const isEmployee = async (req, res, next) => {
     if (req.userType === 'employee') 
         next();
-    else     
+    else
         return res.status(401).send("Unauthorized!");   
 }
 const isAdmin = async (req, res, next) => {
     if (req.userType === 'admin') 
         next();
-    else     
+    else
         return res.status(401).send("Unauthorized!");
 
 }

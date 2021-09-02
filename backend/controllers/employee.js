@@ -2,92 +2,117 @@ const db = require('../db/mysql')
 const { getActivities } = require('./admin')
 
 exports.viewAchievements = async (req, res) => {
-    const {employeeId,cycleID}  = req.body
+    const employeeId = req.id
+    const {cycleID}  = req.body
     let result = {}
     db.query(
         'CALL viewEmployeeCycleVirtualRecognition(?,?)', 
         [employeeId, cycleID],
-        (err, queryRes) => result.virtual_recognitions = queryRes
+        (err, queryRes) => {
+            result.virtual_recognitions = queryRes[0]
+            db.query(
+                'CALL viewEmployeeCycleBadges(?,?)',
+                [employeeId, cycleID],
+                (err, queryRes) => {
+                    result.badges = queryRes[0]
+                    return res.send(result)
+                }
+            )
+        }
     )
-    db.query(
-        'CALL viewEmployeeCycleBadges(?,?)',
-        [employeeId, cycleID],
-        (err, queryRes) => result.badges = queryRes
-        )
-    return res.json({result})
 }   
     
 exports.viewCompletedTasks = async (req, res) => {
-    cycleID= req.body.cycleID
-    employeeID = req.id
+    const employeeID = req.id
+    const {cycleID}  = req.body
     let result 
     db.query(
         'CALL viewCompletedTasks(?,?)', 
         [employeeID, cycleID],
-        (err, queryRes) => result = queryRes
+        (err, queryRes) => {
+            if(!err){
+                result = queryRes[0]
+                return res.json({result})
+            }
+            else
+                return res.json({err}) 
+        }
     )
-    return res.json({result})
 }
 
 exports.viewPendingTasks = async (req, res) => {
-    employeeId = req.id
-    let result
+    const employeeID = req.id
     db.query(
         'CALL viewPendingTasks(?)', 
-        [employeeId],
-        (err, queryRes) => result = queryRes
+        [employeeID],
+        (err, queryRes) => {
+            if(!err)
+                return res.json(queryRes[0])
+            else
+                return res.status(400).json({err}) 
+        }
     )
-    return res.json({result})
 }
 
 exports.viewToBeSubmittedTasks = async (req, res) => {
-    employeeId = req.id
-    let result
+    const employeeId = req.id
     db.query(
         'CALL viewToBeSubmittedTasks(?)', 
         [employeeId],
-        (err, queryRes) => result = queryRes
+        (err, queryRes) => {
+            if(!err)
+                return res.json(queryRes[0])
+            else
+                return res.status(400).json({err}) 
+        }
     )
-    return res.json({result})
 }
 
 exports.viewEmployeeCycles = async (req, res) => {
-    employeeId = req.id
-    let result
+    const employeeId = req.id
     db.query(
         'CALL viewEmployeeCycles(?)', 
         [employeeId],
-        (err, queryRes) => result = queryRes
+        (err, queryRes) => res.send(queryRes[0])
     )
-    return res.json({result})
 }
            
 exports.viewEmployeeProfile = async (req, res) => {
-    cycleID= req.body.cycleID
-    employeeID = req.id
+    const employeeId = req.id
+    const {cycleID}  = req.body
     let result = {}
     db.query(
         'CALL viewEmployeePersonalInfo(?)', 
         [employeeId],
-        (err, queryRes) => result.personalInfo = queryRes
+        (err, queryRes) => {
+            result.personalInfo = queryRes[0]
+
+            db.query(
+                'CALL viewEmployeeBadges(?)', 
+                [employeeId],
+                (err, queryRes) => {
+                    result.employeeBadges = queryRes[0]
+
+                    db.query(
+                        'CALL viewEmployeePractice(?)', 
+                        [employeeId],
+                        (err, queryRes) => {
+                            result.employeePractice = queryRes[0]
+
+                            db.query(
+                                'CALL viewEmployeeCycleVirtualRecognition(?,?)', 
+                                [employeeId, cycleID],
+                                (err, queryRes) => {
+                                    result.virtual_recognitions = queryRes[0]
+                                    return res.json({result})
+                                }
+                            )
+                        }
+                    )
+                }         
+            )
+        }
     )
-    //all badges? in current cycle only>
-    db.query(
-        'CALL viewEmployeeBadges(?)', 
-        [employeeId],
-        (err, queryRes) => result.employeeBadges = queryRes
-    )
-    db.query(
-        'CALL viewEmployeePractice(?)', 
-        [employeeId],
-        (err, queryRes) => result.employeePractice = queryRes
-    )
-    db.query(
-        'CALL viewEmployeeCycleVirtualRecognition(?,?)', 
-        [employeeId, cycleID],
-        (err, queryRes) => result.virtual_recognitions = queryRes
-    )
-    return res.json({result})
 }
 
 exports.viewCycleDetails = async (req, res) => {
@@ -98,8 +123,10 @@ exports.viewCycleDetails = async (req, res) => {
         'CALL viewCycleDetailsForEmployee(?,?)', 
         [employeeID,cycleID ],
         (err, queryRes) => {
-            result = queryRes[0]
-            return res.json({result})
+            if(!err)
+                return res.json(queryRes[0])
+            else
+                return res.status(400).json({err}) 
         })   
 }
 
@@ -110,8 +137,10 @@ exports.getAssignedActivities = async (req, res) => {
         'CALL viewEmployeeActivitiesInCycle(?,?)', 
         [employeeID,cycleID ],
         (err, queryRes) => {
-            result = queryRes[0]
-            return res.json({result})
+            if(!err)
+                return res.json(queryRes[0])
+            else
+                return res.status(400).json({err}) 
         })     
 }
 
@@ -122,7 +151,9 @@ exports.submitActivity = async (req, res) => {
         'CALL submitActivity(?,?,?)', 
         [activityId, employeeId,cycleID ],
         (err, queryRes) => {
-            result = queryRes[0]
-            return res.json({result})
+            if(!err)
+                return res.json(queryRes[0])
+            else
+                return res.status(400).json({err}) 
         })
 }
