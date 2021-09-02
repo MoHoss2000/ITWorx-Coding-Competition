@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const db = require('../db/mysql')
 const bcrypt = require('bcrypt')
 const {createToken} = require ('../utils/tokens')
+
 exports.changePassword = async (req, res) =>{
     const  id = req.id 
     const userType = req.userType
