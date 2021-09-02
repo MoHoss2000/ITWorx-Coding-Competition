@@ -1,4 +1,5 @@
 const db = require('../db/mysql')
+const { getActivities } = require('./admin')
 
 exports.viewAchievements = async (req, res) => {
     const {employeeId,cycleID}  = req.body
@@ -17,18 +18,19 @@ exports.viewAchievements = async (req, res) => {
 }   
     
 exports.viewCompletedTasks = async (req, res) => {
-    const {employeeId, cycleID}  = req.body
+    cycleID= req.body.cycleID
+    employeeID = req.id
     let result 
     db.query(
-        'CALL viewEmployeeCycleVirtualRecognition(?,?)', 
-        [employeeId, cycleID],
+        'CALL viewCompletedTasks(?,?)', 
+        [employeeID, cycleID],
         (err, queryRes) => result = queryRes
     )
     return res.json({result})
 }
 
 exports.viewPendingTasks = async (req, res) => {
-    employeeId = req.body.id
+    employeeId = req.id
     let result
     db.query(
         'CALL viewPendingTasks(?)', 
@@ -39,7 +41,7 @@ exports.viewPendingTasks = async (req, res) => {
 }
 
 exports.viewToBeSubmittedTasks = async (req, res) => {
-    employeeId = req.body.id
+    employeeId = req.id
     let result
     db.query(
         'CALL viewToBeSubmittedTasks(?)', 
@@ -50,7 +52,7 @@ exports.viewToBeSubmittedTasks = async (req, res) => {
 }
 
 exports.viewEmployeeCycles = async (req, res) => {
-    employeeId = req.body.id
+    employeeId = req.id
     let result
     db.query(
         'CALL viewEmployeeCycles(?)', 
@@ -61,7 +63,8 @@ exports.viewEmployeeCycles = async (req, res) => {
 }
            
 exports.viewEmployeeProfile = async (req, res) => {
-    const {employeeId,cycleID } = req.body
+    cycleID= req.body.cycleID
+    employeeID = req.id
     let result = {}
     db.query(
         'CALL viewEmployeePersonalInfo(?)', 
@@ -88,25 +91,28 @@ exports.viewEmployeeProfile = async (req, res) => {
 }
 
 exports.viewCycleDetails = async (req, res) => {
-    const {employeeID,cycleID } = req.body
+    cycleID= req.body.cycleID
+    employeeID = req.body.id
     let result 
     db.query(
         'CALL viewCycleDetailsForEmployee(?,?)', 
         [employeeID,cycleID ],
-        (err, queryRes) => result = queryRes
-    )
-    return res.json({result})
+        (err, queryRes) => {
+            result = queryRes[0]
+            return res.json({result})
+        })   
 }
 
 exports.getAssignedActivities = async (req, res) => {
-    const {employeeID,cycleID } = req.body
-    let result  
+    cycleID= req.body.cycleID
+    employeeID = req.body.employeeID
     db.query(
         'CALL viewEmployeeActivitiesInCycle(?,?)', 
         [employeeID,cycleID ],
-        (err, queryRes) => result = queryRes
-    ) 
-    return res.json({result})
+        (err, queryRes) => {
+            result = queryRes[0]
+            return res.json({result})
+        })     
 }
 
 exports.submitActivity = async (req, res) => {
@@ -115,7 +121,8 @@ exports.submitActivity = async (req, res) => {
     db.query(
         'CALL submitActivity(?,?,?)', 
         [activityId, employeeId,cycleID ],
-        (err, queryRes) => result = queryRes
-    )
-    return res.json({result})
+        (err, queryRes) => {
+            result = queryRes[0]
+            return res.json({result})
+        })
 }
