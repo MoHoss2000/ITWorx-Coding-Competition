@@ -5,6 +5,7 @@ const db = mysql.createConnection({
     host: 'itworx.mysql.database.azure.com',
     password: 'Admin@2021',
     database: 'itworx',
+    multipleStatements: true
 })
 
 module.exports = db

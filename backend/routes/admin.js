@@ -6,8 +6,8 @@ const { isAdmin } = require('../middleware/authorization')
 
 const router = express.Router()
 router.use(express.json())
-router.use(authenticateToken)
-router.use(isAdmin)
+//router.use(authenticateToken)
+//router.use(isAdmin)
 
 router.get('/profile/:id', controllers.viewProfile)
 
@@ -59,6 +59,8 @@ router.get('/getActivities', controllers.getActivities)
 
 router.get('/viewActivity', controllers.activityInfo)
 
+router.get('/pending', controllers.pendingActivities)
+
 router.post('/newActivity', controllers.createNewActivity)
 
 router.post('/editActivity', controllers.editActivity)
@@ -66,6 +68,8 @@ router.post('/editActivity', controllers.editActivity)
 router.post('/assignActivity', controllers.assignEmployeeToActivity)
 
 router.post('/markActivityAsComplete', controllers.markActivityAsComplete)
+
+router.post('/removeActivityCompletion', controllers.removeActivityCompletion)
 
 router.get('/badge/view', async (req, res) => {
     try{

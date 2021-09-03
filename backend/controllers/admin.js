@@ -151,21 +151,29 @@ exports.getActivities = async (req, res) => {
 }
 
 exports.createNewActivity = async (req, res) => {
+
   const adminID = req.id
-  const {name, description, type, enabled, virtual_recognition, points} = req.body
-  if (!( name && description && type && enabled && points) && virtual_recognition!==undefined) {
+  const {name, description, type, virtual_recognition, points} = req.body
+  if (!( name && description && type && points) && virtual_recognition!==undefined ) {
     res.status(400).send({
       message: "Please provide all input fields!"
     });
       return;
   }
     // Create a new activity
-    const activity = [name, description, type, enabled, virtual_recognition, points, adminID]
-    db.query('CALL createNewActivity(?,?,?,?,?,?,?)', activity ,(err, result) => {
-      if(result)
-        res.status(200).json({message: 'Activity added successfully '});
-      else
-        res.status(400).send()
+    const activity = [name, description, type,  virtual_recognition, points, adminID]
+    db.query('CALL createNewActivity(?,?,?,?,?,?, @stat); select @stat AS status;', activity ,(err, result) => {
+      if(result){
+        const status = result[1][0].status
+        if(status===0)
+          res.status(200).json('An Activity with this name already exists, please choose another one');
+        else
+          res.status(200).json('Activity created succesfully!');
+      }
+      else{
+        console.log(err)
+        res.status(400).send(err)
+      }
     })
 }
 exports.editActivity= async (req, res) => {
@@ -178,28 +186,23 @@ exports.editActivity= async (req, res) => {
       message: "Please provide all input fields!"
     });
     return;
-  }
-     
-    // Create an new activity
-    const activity = { name, description, type, enabled, virtual_recognition, points}
+  } 
+    
+    const activity = [ ActivityId, name, description, type, enabled, virtual_recognition, points ];
 
-    // Save Tutorial in the database
-    try{
-        const updatedActivity = await Activity.update(activity, {
-            where: {
-              id: ActivityId
-            },
-            returning : true 
-        })
-        res.send(updatedActivity)
-
-    } catch(err){
-
-        res.status(500).send({
-            message:
-            err.message || "Some error occurred while creating the Activity." })
-    }
-
+    db.query('CALL editActivity(?,?,?,?,?,?,?, @stat); select @stat AS status;', activity ,(err, result) => {
+      if(result){
+        const status = result[1][0].status
+        if(status===0)
+          res.status(200).json('An Activity with this name already exists, please choose another one');
+        else
+          res.status(200).json('Activity updated succesfully');
+      }
+      else{
+        console.log(err)
+        res.status(400).send(err)
+      }
+    })
   
   }
 
@@ -214,22 +217,17 @@ exports.editActivity= async (req, res) => {
           })
           return
   }
-    const employeeActivity={
-        EmployeeId,
-        ActivityId,
-        CycleId,
-        status: 'A'
-    }
-    try{
-        const assignedEmployee = await EmployeeActivity.create(employeeActivity)
-        res.send(assignedEmployee)
+    const employeeActivity=[EmployeeId, ActivityId, CycleId]
 
-    }catch(err){
-
-        res.status(500).send({
-            message:
-            err.message || "Some error occurred while Assigning the employee." })
-    }
+     db.query('CALL assignEmployeeToActivity(?,?,?);', employeeActivity ,(err, result) => {
+      if(result){
+          res.status(200).json('Employee Assigned to Activity');    
+      }
+      else{
+        res.status(400).send(err)
+      }
+    })
+    
   }
 
   exports.markActivityAsComplete = async (req, res) =>{
@@ -243,25 +241,16 @@ exports.editActivity= async (req, res) => {
           })
           return
       }
+      const employeeActivity=[EmployeeId, ActivityId, CycleId];
 
-      try{
-        //update does not return the new updated row- not supported for MySql
-        const assignedEmployee = await EmployeeActivity.update({ status : 'C'  }, {
-            where: {
-                EmployeeId,
-                ActivityId, 
-                CycleId
-            }
-           
-        })
-        res.send(assignedEmployee)
-
-      }catch(err){
-
-        res.status(500).send({
-            message:
-            err.message || "Some error occurred" })
-    }
+      db.query('CALL markActivityAsComplete(?,?,?);', employeeActivity ,(err, result) => {
+        if(result){
+            res.status(200).json('Action done successfully');    
+        }
+        else{
+          res.status(400).send(err)
+        }
+      })
       
   }
 
@@ -276,31 +265,23 @@ exports.editActivity= async (req, res) => {
           })
           return
       }
+      const employeeActivity=[EmployeeId, ActivityId, CycleId];
 
-      try{
-        //update does not return the new updated row- not supported for MySql
-        const assignedEmployee = await EmployeeActivity.update({ status : 'A'  }, {
-            where: {
-                EmployeeId,
-                ActivityId, 
-                CycleId
-            },
-            returning : true 
-        })
-        res.send(assignedEmployee)
+      db.query('CALL removeActivityCompletion(?,?,?);', employeeActivity ,(err, result) => {
+        if(result){
+            res.status(200).json('Action done successfully');    
+        }
+        else{
+          res.status(400).send(err)
+        }
+      })
 
-      }catch(err){
-
-        res.status(500).send({
-            message:
-            err.message || "Some error occurred" })
-    }
-      
+    
   }
 
   exports.activityInfo = async (req, res) => {
 
-    const {id, CycleId} = req.body.id
+    const {id, CycleId} = req.body
 
     if (!(id && CycleId)) {
       res.status(400).send({
@@ -308,67 +289,37 @@ exports.editActivity= async (req, res) => {
       });
       return
     }
-    try{
-     //get activity information
-     const assignedEmployees= await Activity.findAll({ 
-        where: { id },
-        include: [{ 
-                model: Employee, 
-                required: true,
-                include :[{
-                     model : Cycle, 
-                     where: {CycleId},
-                     required: true
-                    }]
-             }
-        ] 
-      })
-   
-    res.send(assignedEmployees)
-
-    } catch(err){
-
-        res.status(500).send({
-            message:
-            err.message || "Some error occurred while Assigning the employee." })        
-    }
+    db.query('CALL viewActivity(?,?);',[id, CycleId],(err, result) => {
+      if(result){
+          console.log(result)
+          res.status(200).send(result).json('Action done successfully');    
+      }
+      else{
+        res.status(400).send(err)
+      }
+    })
   }
 
   exports.pendingActivities = async (req, res) => {
 
-    const {id, CycleId} = req.body.id  
+    const cycleID  = req.body
 
-    if (!(id && CycleId)) {
+    if (!cycleID ) {
       res.status(400).send({
         message: "Please specify activity name or ID"
       });
       return
     }
-    try{
-     //get activity information
-     const employees= await Activity.findAll({ 
-        where: { id },
-        include: [{ 
-                model: Employee, 
-                where: { inReview: true },
-                required: true,
-                include :[{
-                    model : Cycle, 
-                    where: {CycleId},
-                    required: true
-                   }]
-             }
-        ] 
-      })
-   
-    res.send(employees)
-
-    } catch(err){
-
-        res.status(500).send({
-            message:
-            err.message || "Some error occurred while Assigning the employee." })        
-    }
+    db.query('CALL getPendingActivities(?);', [cycleID],(err, result) => {
+      if(result){
+          console.log(result)
+          res.status(200).send(result).json('Action done successfully');    
+      }
+      else{
+        res.status(400).send(err)
+      }
+    })
+    
   }
 
 

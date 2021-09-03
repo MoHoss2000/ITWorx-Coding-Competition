@@ -8,8 +8,10 @@ const router = new express.Router()
 
 router.use(express.json())
 
-router.use(authenticateToken)
-router.use(isEmployee)
+//router.use(authenticateToken)
+//router.use(isEmployee)
+
+router.post('/activities/submitActivity', controllers.submitActivity)
 
 router.get('/activities/completed', controllers.viewCompletedTasks)
 

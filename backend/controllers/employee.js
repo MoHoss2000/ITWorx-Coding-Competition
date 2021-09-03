@@ -143,8 +143,9 @@ exports.getAssignedActivities = async (req, res) => {
 }
 
 exports.submitActivity = async (req, res) => {
-    const {activityId, cycleID } = req.body
-    const employeeID = req.id
+    
+    const {activityId, cycleID, employeeId } = req.body
+   
     db.query(
         'CALL submitActivity(?,?,?)', 
         [activityId, employeeId, cycleID],
