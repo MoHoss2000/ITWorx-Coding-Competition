@@ -36,12 +36,12 @@ router.get('/resetPassword', authenticateToken,(req, res) => {
     //Form to enter email
 });
 
-router.post('/resetPassword', authenticateToken, controllers.resetPassword );
+router.post('/resetPassword', controllers.resetPassword);
 
 router.get('/newPassword/:token', (req, res) => {
     //Form to enter new Password 
 });
-router.post('/newPassword/:token', authenticateToken, controllers.newPassword);
+router.post('/newPassword/:token', controllers.newPassword);
 
 
 
