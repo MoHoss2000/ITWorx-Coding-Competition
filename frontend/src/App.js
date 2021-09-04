@@ -1,9 +1,11 @@
-import "./css/App.css";
-import Form from "./Components/Form";
+import logo from './logo.svg';
+import './App.css';
+import Activities from './Components/Activities'
+
 function App() {
   return (
     <div className="App">
-      <Form />
+      <Activities />
     </div>
   );
 }
