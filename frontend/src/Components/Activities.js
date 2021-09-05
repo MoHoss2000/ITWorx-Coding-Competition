@@ -8,6 +8,7 @@ function Activities() {
 
     useEffect(() => {
         setLoading(true)
+        console.log('GETTING ACTIVITIES');
         axios.get('http://localhost:3001/admin/getActivities')
             .then((data) =>{
                 console.log(data)
