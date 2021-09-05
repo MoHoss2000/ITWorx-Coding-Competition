@@ -1,6 +1,6 @@
 import react ,{useEffect, useState} from 'react';
 import ReactDOM from "react-dom";
-
+import axios from 'axios';
 
 
 
@@ -12,26 +12,25 @@ function fetchPost () {
 function Activities() {
     const[loading, setLoading] = useState(true)
 
-   useEffect(() => {
-    setLoading(true)
-
-    fetchPost()
-      .then((data) => {
-        console.log(data)
-        setLoading(false)
-      })
-      .catch((e) => {
-        console.warn(e.message)
+    useEffect(() => {
         setLoading(true)
-      })
-  }, [])
-
+        axios.get('http://localhost:3001/admin/getActivities')
+            .then((data) =>{
+                console.log(data)
+                setLoading(false)
+              })
+              .catch((e) => {
+                console.warn(e.message)
+                setLoading(true)
+              })
+    
+    // empty dependency array means this effect will only run once (like componentDidMount in classes)
+    }, []);
 
   if (loading === true) {
     return <p>Loading</p>
   }
   
-
 
   return (
     <div>
