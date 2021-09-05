@@ -5,7 +5,7 @@ require('./db/mysql')
 
 const app = express();
 
-app.use(cors({origin: ['http://localhost:3002']}));
+app.use(cors());
 const employeeRouter = require('./routes/employee')
 const generalRouter = require('./routes/general')
 const leaderboardRouter = require('./routes/leaderboard')
