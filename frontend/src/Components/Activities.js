@@ -3,12 +3,6 @@ import ReactDOM from "react-dom";
 import axios from 'axios';
 
 
-
-function fetchPost () {
-  return fetch('http://localhost:3001/admin/getActivities')
-    .then((res) => res.json())
-}
-
 function Activities() {
     const[loading, setLoading] = useState(true)
 
@@ -24,7 +18,6 @@ function Activities() {
                 setLoading(true)
               })
     
-    // empty dependency array means this effect will only run once (like componentDidMount in classes)
     }, []);
 
   if (loading === true) {
