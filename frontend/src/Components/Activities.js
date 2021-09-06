@@ -1,5 +1,4 @@
-import react ,{useEffect, useState} from 'react';
-import ReactDOM from "react-dom";
+import react ,{useEffect, useState} from 'react'
 import axios from 'axios';
 
 
@@ -9,7 +8,7 @@ function Activities() {
     useEffect(() => {
         setLoading(true)
         console.log('GETTING ACTIVITIES');
-        axios.get('http://localhost:3001/admin/getActivities')
+        axios.get('http://localhost:3001/employee/cycles/view')
             .then((data) =>{
                 console.log(data)
                 setLoading(false)

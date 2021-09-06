@@ -2,6 +2,7 @@ import React , {useState} from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import '../index.css';
+import DescriptionCard from './CycleDescriptionCard'
 import { Layout, Menu, Avatar } from 'antd';
 import {
   HomeOutlined ,
@@ -73,7 +74,7 @@ function NavBar (){
         </Menu>
         
         </Header>
-        
+        <DescriptionCard />
         </Layout>
       </Layout>
       </div>

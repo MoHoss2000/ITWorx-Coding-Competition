@@ -1,8 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import Activities from './Components/Activities'
-import LoginForm from './Components/LoginForm'
 import NavBar from './Components/NavBar';
+import DescriptionCard from './Components/CycleDescriptionCard';
 
 
 function App() {
