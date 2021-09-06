@@ -71,9 +71,9 @@ router.post('/markActivityAsComplete', controllers.markActivityAsComplete)
 
 router.post('/removeActivityCompletion', controllers.removeActivityCompletion)
 
-router.get('/badge/view', controllers.getBadges);
+router.get('/badges', controllers.getBadges);
 
-router.get('/cycles/view', controllers.getCycles)
+router.get('/cycles', controllers.getCycles)
 
 router.patch('/badge/:badgeID', async (req, res) => {
     var badgeID = req.params.badgeID;
