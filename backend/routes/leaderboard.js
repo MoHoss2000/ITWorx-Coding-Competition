@@ -1,33 +1,23 @@
 const express = require('express')
 const db = require('../db/mysql')
 const authenticateToken = require('../middleware/authenticate');
+const {isAdmin} = require('../middleware/authorization')
 
 
 const router = new express.Router()
 router.use(express.json())
+// router.use(authenticateToken)
+// router.use(isAdmin)
 
-router.get("/employee", async (req, res) => {
-    try { 
-        const result = await Employee.findAll({ 
-        attributes: ["", ""], 
-        include: [ 
-            { 
-                model: EmployeeActivity, 
-                // attributes: ['employeeId'], 
-                required: true, 
-            }, 
-            { 
-                model: Activity,     
-                // attributes: ["employee"], 
-                required: true, 
-            }, 
-        ], 
-    }); 
-        res.status(status).json(result); 
-    } catch (err) { 
-        res.status(400).json(err); 
-    } 
-});
+router.post('/employee', async (req, res) => {
+    const {cycleID} = req.body
+    db.query('CALL getEmployeeRankings(?)', cycleID, (err, result) => {
+        if(result && result[0]){
+            return res.send(result[0])
+        }
+        return res.status(400).send()
+    })
+})
 
 router.get('/department', async (req, res) => {
 
