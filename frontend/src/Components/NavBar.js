@@ -2,7 +2,7 @@ import React , {useState} from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import '../index.css';
-import DescriptionCard from './CycleDescriptionCard'
+import DescriptionCard from './General/CycleDescriptionCard'
 import { Layout, Menu, Avatar } from 'antd';
 import {
   HomeOutlined ,
@@ -14,7 +14,6 @@ import {
   UserOutlined,
   CrownOutlined
 } from '@ant-design/icons';
-import Leaderboard from './leaderboard';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;

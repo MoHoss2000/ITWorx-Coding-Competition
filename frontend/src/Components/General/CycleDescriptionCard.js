@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import 'antd/dist/antd.css';
-import '../index.css';
+import '../components.css';
 import { Card } from 'antd';
 import axios from 'axios';
 

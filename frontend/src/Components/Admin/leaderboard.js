@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { Table, Button, Space } from 'antd';
 import axios from 'axios'
-import Spinner from './loadingSpinner'
+import Spinner from '../General/loadingSpinner'
 
 const Leaderboard = () => {
     const [loading, setLoading] = useState(true)
@@ -17,6 +17,7 @@ const Leaderboard = () => {
                 else
                     i.developer = 'Non-developer'
             }
+            console.log(res.data)
             setData(res.data)
             setLoading(false)
         }
