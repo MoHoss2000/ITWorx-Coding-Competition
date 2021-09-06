@@ -129,9 +129,9 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
     const { username, password } = req.body; 
-
     db.query('CALL findEmployee(?)', username, async (err, found) => {
-        if(found[0][0]){
+        console.log(found)
+        if(found){
             const hashedPassword = found[0][0].password
             const matched = await bcrypt.compare(password, hashedPassword)
             if(!matched) return res.status(400).json('Wrong username or password!')
@@ -147,7 +147,7 @@ exports.login = async (req, res) => {
         }
         else{
             db.query('CALL findAdmin(?)', username, async (err, found) => {
-                if(found[0][0]){
+                if(found){
                     const hashedPassword = found[0][0].password
                     const matched = await bcrypt.compare(password, hashedPassword)
                     if(!matched) return res.status(400).json('Wrong username or password!')
