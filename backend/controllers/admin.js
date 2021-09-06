@@ -150,6 +150,30 @@ exports.getActivities = async (req, res) => {
   }
 }
 
+exports.getBadges= async (req, res) => {
+
+  try{
+    db.query(`SELECT * FROM badge`,(err, result) => {
+      res.status(200).send(result);
+    })
+  } catch(e){
+    console.log(e)
+    res.status(400).send(e);
+  }
+}
+
+exports.getCycles= async (req, res) => {
+
+  try{
+    db.query(`SELECT * FROM cycle`,(err, result) => {
+      res.status(200).send(result);
+    })
+  } catch(e){
+    console.log(e)
+    res.status(400).send(e);
+  }
+}
+
 exports.createNewActivity = async (req, res) => {
 
   const adminID = req.id
