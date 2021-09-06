@@ -10,7 +10,7 @@ function Activities() {
         setLoading(true)
         console.log('GETTING ACTIVITIES');
         axios.get('http://localhost:3001/admin/getActivities')
-            .then((data) =>{
+            .then((data) => {
                 console.log(data)
                 setLoading(false)
               })
