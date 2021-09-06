@@ -1,7 +1,7 @@
 import '../App.css';
-import { Button, Grid, Paper, Checkbox, Avatar, TextField, FormControlLabel, Typography, Link } from '@material-ui/core'
+import { Button, Grid, Paper, Avatar, TextField, Typography, Link } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
