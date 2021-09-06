@@ -1,27 +1,25 @@
 import react ,{useEffect, useState} from 'react';
 import ReactDOM from "react-dom";
+import axios from 'axios';
 
-function fetchPost () {
-  return fetch('http://localhost:3001/admin/getActivities')
-    .then((res) => res.json())
-}
 
 function Activities() {
-   const[loading, setLoading] = useState(true)
-   useEffect(() => {
-    setLoading(true)
+    const[loading, setLoading] = useState(true)
 
-    fetchPost()
-      .then((data) => {
-        console.log(data)
-        setLoading(false)
-      })
-      .catch((e) => {
-        console.warn(e.message)
+    useEffect(() => {
         setLoading(true)
-      })
-  }, [])
-
+        console.log('GETTING ACTIVITIES');
+        axios.get('http://localhost:3001/admin/getActivities')
+            .then((data) =>{
+                console.log(data)
+                setLoading(false)
+              })
+              .catch((e) => {
+                console.warn(e.message)
+                setLoading(true)
+              })
+    
+    }, []);
 
   if (loading === true) {
     return <p>Loading</p>

@@ -1,6 +1,7 @@
 const mysql = require('mysql')
 
-const db = mysql.createConnection({
+
+const db = mysql.createPool({
     user: 'itworx@itworx',
     host: 'itworx.mysql.database.azure.com',
     password: 'Admin@2021',
