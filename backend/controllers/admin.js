@@ -4,7 +4,7 @@ const db = require('../db/mysql')
 
 
 exports.viewParticipants = async (req, res) => {
-    const cycleID = req.params.cycleID
+    const cycleID = req.body.cycleID
     try{
       db.query('CALL viewEmployeesInCycle(?)', cycleID ,(err, result) => {
           res.send(result[0]);
@@ -41,8 +41,6 @@ exports.exportToExcelParticipants = async(req, res) => {
 	});
 } 
 
-
-/// warning: no disabled column in cycle table?
 exports.disableCycle = async (req, res) => {
     cycleID = req.params.cycleID
     try{

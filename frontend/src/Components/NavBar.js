@@ -2,8 +2,8 @@ import React , {useState} from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import '../index.css';
-
-import { Layout, Menu, Avatar, Breadcrumb } from 'antd';
+import DescriptionCard from './General/CycleDescriptionCard'
+import { Layout, Menu, Avatar } from 'antd';
 import {
   HomeOutlined ,
   SyncOutlined,
@@ -14,7 +14,6 @@ import {
   UserOutlined,
   CrownOutlined
 } from '@ant-design/icons';
-import Leaderboard from './leaderboard';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -75,7 +74,7 @@ function NavBar (props) {
         </Menu>
         
         </Header>
-        <Leaderboard/>
+        <DescriptionCard />
         </Layout>
         
       </Layout>
