@@ -30,40 +30,48 @@ code {
   margin-top: 20px !important;
 }
 
-
 .site-layout .site-layout-background {
   background: #fff;
 }
-  [data-theme="dark"] .site-layout .site-layout-background {
-    background: rgba(255, 22, 22, 0.3);
-  }
-  .logo {
-    float: left;
-    width: 100px;
-    height: 31px;
-    margin: 16px 24px 16px 0;
-    background: rgba(255, 255, 255, 0.3);
-  }
-  
-  .ant-row-rtl .logo {
-    float: right;
-    margin: 10px 0 16px 24px;
-  }
-  
-  .site-layout-background {
-    background: #fff;
-  }
- #menu{
-   margin-top: 60px;
- }
-
-#header{
-  background-color: rgb(255, 255, 255);
-  justify-content: flex-end;
- 
+[data-theme="dark"] .site-layout .site-layout-background {
+  background: rgba(255, 22, 22, 0.3);
+}
+.logo {
+  float: left;
+  width: 100px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.3);
 }
 
-#m{
-  display:flex;
-  flex-direction:row-reverse;
+.ant-row-rtl .logo {
+  float: right;
+  margin: 10px 0 16px 24px;
+}
+
+.site-layout-background {
+  background: #fff;
+}
+#menu {
+  margin-top: 60px;
+}
+
+#header {
+  background-color: rgb(255, 255, 255);
+  justify-content: flex-end;
+}
+
+#m {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.ant-spin-nested-loading {
+  margin: 20px 5% 0 5%;
+}
+
+.title {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 40px;
+  color: #b72025;
 }
