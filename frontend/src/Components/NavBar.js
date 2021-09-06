@@ -14,11 +14,12 @@ import {
   UserOutlined,
   CrownOutlined
 } from '@ant-design/icons';
+import Leaderboard from './leaderboard';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-function NavBar (){
+function NavBar (props) {
   const [collapsed, SetCollapsed ] = useState(true)
 
   const onCollapse = collapsed => {
@@ -76,6 +77,7 @@ function NavBar (){
         </Header>
         <DescriptionCard />
         </Layout>
+        
       </Layout>
       </div>
     );
