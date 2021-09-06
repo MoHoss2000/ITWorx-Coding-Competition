@@ -71,26 +71,9 @@ router.post('/markActivityAsComplete', controllers.markActivityAsComplete)
 
 router.post('/removeActivityCompletion', controllers.removeActivityCompletion)
 
-router.get('/badge/view', async (req, res) => {
-    try{
-        const result = await Badge.findAll()
-        res.send(result)  
-        
-    }catch (error) {
-        res.status(400).json({ error: err });
-    }
+router.get('/badge/view', controllers.getBadges);
 
-});
-
-router.get('/cycles/view', async (req, res) => {
-    try{
-        const result = await Cycle.findAll()
-        res.send(result)  
-        
-    }catch (error) {
-        res.status(400).json({ error: err });
-    }
-})
+router.get('/cycles/view', controllers.getCycles)
 
 router.patch('/badge/:badgeID', async (req, res) => {
     var badgeID = req.params.badgeID;
