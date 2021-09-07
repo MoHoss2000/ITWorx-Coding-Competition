@@ -1,5 +1,4 @@
-import react ,{useEffect, useState} from 'react';
-import ReactDOM from "react-dom";
+import react ,{useEffect, useState} from 'react'
 import axios from 'axios';
 
 

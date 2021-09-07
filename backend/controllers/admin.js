@@ -4,7 +4,7 @@ const db = require('../db/mysql')
 
 
 exports.viewParticipants = async (req, res) => {
-    const cycleID = req.params.cycleID
+    const cycleID = req.body.cycleID
     try{
       db.query('CALL viewEmployeesInCycle(?)', cycleID ,(err, result) => {
           res.send(result[0]);
@@ -41,8 +41,6 @@ exports.exportToExcelParticipants = async(req, res) => {
 	});
 } 
 
-
-/// warning: no disabled column in cycle table?
 exports.disableCycle = async (req, res) => {
     cycleID = req.params.cycleID
     try{
@@ -142,6 +140,30 @@ exports.getActivities = async (req, res) => {
 
   try{
     db.query(`SELECT * FROM activity`,(err, result) => {
+      res.status(200).send(result);
+    })
+  } catch(e){
+    console.log(e)
+    res.status(400).send(e);
+  }
+}
+
+exports.getBadges= async (req, res) => {
+
+  try{
+    db.query(`SELECT * FROM badge`,(err, result) => {
+      res.status(200).send(result);
+    })
+  } catch(e){
+    console.log(e)
+    res.status(400).send(e);
+  }
+}
+
+exports.getCycles= async (req, res) => {
+
+  try{
+    db.query(`SELECT * FROM cycle`,(err, result) => {
       res.status(200).send(result);
     })
   } catch(e){
