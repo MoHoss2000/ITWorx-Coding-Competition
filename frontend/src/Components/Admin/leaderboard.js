@@ -10,14 +10,16 @@ const Leaderboard = () => {
     const [filter, setFilter] = useState({})
     useEffect(() => {
         const getLeaderboard = async () => {
-            const res = (await axios.post('http://localhost:3001/leaderboard/employee', {cycleID: 1}))
-            for(let i of res.data){
-                if(i.developer)
-                    i.developer = 'Developer'
+            const cycleID = 1
+            const res = (await axios.get(`http://localhost:3001/leaderboard/employee/${cycleID}`))
+            for(let i = 0 ; i < res.data.length ; i++){
+                res.data[i].key = i
+                res.data[i].rank = i + 1
+                if(res.data[i].developer)
+                    res.data[i].developer = 'Developer'
                 else
-                    i.developer = 'Non-developer'
+                    res.data[i].developer = 'Non-developer'
             }
-            console.log(res.data)
             setData(res.data)
             setLoading(false)
         }
@@ -25,8 +27,7 @@ const Leaderboard = () => {
     }, [])
     
     const handleChange = (pagination, filters, sorter) => {
-        //console.log('Various parameters', pagination, filters, sorter);
-        console.log(filters)
+        console.log('Various parameters', pagination, filters, sorter);
         setFilter(filters)
         setSort(sorter)
     }
@@ -51,12 +52,17 @@ const Leaderboard = () => {
 
     const columns = [
         {
+            title: 'Rank',
+            dataIndex: 'rank',
+            key: 'rank',
+        },
+        {
           title: 'Name',
           dataIndex: 'name',
           key: 'name',
         },
         {
-            title: 'Total Point',
+            title: 'Total Points',
             dataIndex: 'points',
             key: 'points',
             sorter: (a, b) => a.points - b.points,
@@ -81,15 +87,11 @@ const Leaderboard = () => {
             dataIndex: 'email',
             key: 'email',
         },
-
-
     ]
 
     if(loading)
         return <Spinner/>
-
-
-    console.log(data)
+        
     return (
         <>
         <h1 className="title">Leaderboard</h1>

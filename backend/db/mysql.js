@@ -9,7 +9,6 @@ const db = mysql.createConnection({
     database: 'defaultdb',
     ssl:{
         ca : fs.readFileSync(__dirname + '/ca-certificate.crt'),
-    
     },
 })
 

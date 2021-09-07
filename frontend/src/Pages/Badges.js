@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { Row, Card, Col,Button } from 'antd';
 import axios from 'axios'
-import Spinner from '../Components/loadingSpinner'
+import Spinner from '../Components/General/loadingSpinner'
 
 const Badges = () => {
     const [loading, setLoading] = useState(true)

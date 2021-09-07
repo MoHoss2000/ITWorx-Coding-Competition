@@ -216,3 +216,39 @@ BEGIN
                  @username,
                  @password
 END //
+
+
+
+
+DELIMITER //
+CREATE PROCEDURE getEmployeeRankings(IN cycleID INT)
+BEGIN
+	SELECT CONCAT(first_name, ' ', last_name) AS name, E.points, E.is_developer AS developer, E.username AS email
+    FROM EmployeeCycle EC INNER JOIN employee E ON E.id = EC.employee_id
+    WHERE EC.cycle_id = cycleID
+    ORDER BY E.points DESC;
+END //
+
+
+DELIMITER //
+CREATE PROCEDURE viewPracticeRanking(IN cycleID INT)
+BEGIN
+	SELECT P.name, AVG(P.no_of_employees) AS numberOfEmployees ,SUM(A.points) AS TotalPoints, (SUM(A.points)/AVG(P.no_of_employees)) AS pointsPerEmployee FROM
+	EmployeeActivityCycle EAC INNER JOIN EmployeePractice EP ON EP.employee_id = EAC.employee_id
+							  INNER JOIN practice P ON P.id = EP.practice_id
+                              INNER JOIN Activity A ON A.id = EAC.activity_id
+	WHERE EAC.cycle_id = cycleID AND EAC.status = 'completed'
+	GROUP BY P.name
+    ORDER BY pointsPerEmployee DESC;
+END//
+
+DELIMITER //
+CREATE PROCEDURE getDepartmentRankings(IN cycleID INT)
+BEGIN
+	SELECT D.name, AVG(D.no_of_employees) AS numberOfEmployees, SUM(A.points * (ED.percentage/100)) AS WeightedPoints FROM
+	EmployeeActivityCycle EAC INNER JOIN EmployeeDepartment ED ON ED.employee_id = EAC.employee_id
+							  INNER JOIN department D ON D.id = ED.department_id
+                              INNER JOIN Activity A ON A.id = EAC.activity_id
+	WHERE EAC.cycle_id = cycleID AND EAC.status = 'completed'
+	GROUP BY D.name;
+END//
