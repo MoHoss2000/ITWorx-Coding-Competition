@@ -149,9 +149,28 @@ exports.getActivities = async (req, res) => {
 }
 
 exports.getBadges= async (req, res) => {
-
+  // console.log('GET BADGES');
   try{
-    db.query(`SELECT * FROM badge`,(err, result) => {
+    db.query(`SELECT * FROM Badge`,(err, result) => {
+      res.status(200).send(result);
+    })
+  } catch(e){
+    console.log(e)
+    res.status(400).send(e);
+  }
+}
+
+
+exports.createBadge= async (req, res) => {
+  var name = req.body.name;
+  var description = req.body.description;
+  var type = req.body.type;
+  var pointsNeeded = req.body.points;
+  var isEnabled  = req.body.enabled;
+  
+  try{
+    db.query(`INSERT INTO Badge (name, description, type, points_needed, enabled) 
+    VALUES (?,?,?,?,?)`, [name, description, type, pointsNeeded, isEnabled], (err, result) => {
       res.status(200).send(result);
     })
   } catch(e){
