@@ -279,6 +279,17 @@ exports.editActivity= async (req, res) => {
     
   }
 
+  exports.cycleInfo = async () => {
+    const cycleID = req.params.cycleID
+    db.query('CALL viewCycleDetailsForAdmin(?)', cycleID, (err, result) => {
+      if(result && result[0]){
+        return res.send(result[0])
+      }
+      return res.status(400).send()
+    })
+  }
+
+
   exports.activityInfo = async (req, res) => {
 
     const {id, CycleId} = req.body
