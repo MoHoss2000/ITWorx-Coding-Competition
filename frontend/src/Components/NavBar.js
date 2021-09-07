@@ -14,6 +14,7 @@ import {
   UserOutlined,
   CrownOutlined
 } from '@ant-design/icons';
+import DisableSwitch from './Admin/DisableSwitch';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -74,7 +75,7 @@ function NavBar (props) {
         </Menu>
         
         </Header>
-        <DescriptionCard />
+        <DisableSwitch />
         </Layout>
         
       </Layout>
