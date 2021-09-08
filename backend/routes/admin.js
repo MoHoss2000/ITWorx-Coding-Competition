@@ -33,28 +33,8 @@ router.post('/cycle', (req, res) => {
     });
 })
 
-router.post('/badge', (req, res) => {
-    var name = req.body.name;
-    var description = req.body.description;
-    var type = req.body.type;
-    var pointsNeeded = req.body.points_needed;
-    // var adminID =  req.userData.id;
+router.post('/badge', controllers.createBadge);
 
-    Badge.create({
-        name: name,
-        description: description,
-        type: type,
-        points_needed: pointsNeeded,
-        enabled: 1
-    }). then((newBadge)=> {
-        console.log(newBadge);
-        res.status(200).json({message: 'Badge created successfully', data: newBadge});
-    }).catch((err) => {
-        if (err) {
-          res.status(400).json({ error: err });
-        } 
-    });
-})
 router.get('/getActivities', controllers.getActivities)
 
 router.get('/viewActivity', controllers.activityInfo)
@@ -71,26 +51,9 @@ router.post('/markActivityAsComplete', controllers.markActivityAsComplete)
 
 router.post('/removeActivityCompletion', controllers.removeActivityCompletion)
 
-router.get('/badge/view', async (req, res) => {
-    try{
-        const result = await Badge.findAll()
-        res.send(result)  
-        
-    }catch (error) {
-        res.status(400).json({ error: err });
-    }
+router.get('/badges', controllers.getBadges);
 
-});
-
-router.get('/cycles/view', async (req, res) => {
-    try{
-        const result = await Cycle.findAll()
-        res.send(result)  
-        
-    }catch (error) {
-        res.status(400).json({ error: err });
-    }
-})
+router.get('/cycles', controllers.getCycles)
 
 router.patch('/badge/:badgeID', async (req, res) => {
     var badgeID = req.params.badgeID;
@@ -120,7 +83,7 @@ router.patch('/cycle/disable/:cycleID', controllers.disableCycle)
 
 router.get('/employeeStatus/:employeeId', controllers.viewEmployeeStatus)
 
-
+router.get('cycle/view/:cycleID', controllers.cycleInfo)
 
 //router.get('/leaderboard/excelfile', exportToExcelLeaderboard)
 
