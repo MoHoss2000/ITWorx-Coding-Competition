@@ -1,5 +1,6 @@
 import React , {useState} from 'react';
 import 'antd/dist/antd.css';
+import '../components.css';
 import { Switch } from 'antd';
 
 

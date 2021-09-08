@@ -80,4 +80,8 @@ body {
     font-size: 40px;
     color: #b72025;
   }
+  .ant-switch {
+    display:flex;
+    flex-direction:row-reverse;
+  }
   

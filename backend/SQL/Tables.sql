@@ -19,7 +19,6 @@ CREATE TABLE admin (
     password VARCHAR(100) NOT NULL
 );
 
-
 CREATE TABLE department(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(20),
@@ -31,9 +30,11 @@ CREATE TABLE EmployeeDepartment(
     department_id INT,
     start_date DATE,
     end_date DATE,
+    percentage INT,
     PRIMARY KEY(employee_id, department_id),
     FOREIGN KEY(employee_id) REFERENCES employee(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(department_id) REFERENCES department(id) ON DELETE CASCADE ON UPDATE CASCADE
+    CHECK (percentage between 1 AND 100)
 );
 
 CREATE TABLE practice(
@@ -115,7 +116,10 @@ CREATE TABLE EmployeeCycle (
     FOREIGN KEY (cycle_id) REFERENCES cycle(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
-
-
-
+CREATE TABLE ActivityCycle (
+	activity_id INT,
+    cycle_id INT,
+    PRIMARY KEY (activity_id, cycle_id) ,
+    FOREIGN KEY (activity_id) REFERENCES activity(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (cycle_id) REFERENCES cycle(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
