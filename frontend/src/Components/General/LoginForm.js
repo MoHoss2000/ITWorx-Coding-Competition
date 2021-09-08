@@ -1,4 +1,3 @@
-import '../App.css';
 import { Button, Grid, Paper, Avatar, TextField, Typography, Link } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import React from 'react';
@@ -12,7 +11,7 @@ const schema = yup.object().shape({
   password: yup.string().min(4).required()
 })
 
-const paperStyle = { padding: 20, height: '45vh', width: 280, margin: "60px auto" }
+const paperStyle = { padding: 20, height: '50vh', width: 300, margin: "10% auto" }
 const avatarStyle = { backgroundColor: '#000090' }
 const btnStyle = { margin: '8px 0' }
 
@@ -38,7 +37,7 @@ const LoginForm = () => {
           <Avatar style={avatarStyle}><LockOutlinedIcon /></Avatar>
           <h2>Sign in</h2>
         </Grid>
-        <TextField label="Username" placeholder="Enter username" {...register("email")} fullWidth required></TextField>
+        <TextField label="Email" placeholder="Enter email" {...register("email")} fullWidth required></TextField>
         <p>{errors.username?.message}</p>
         <TextField label="Password" type="password" placeholder="Enter password"  {...register("password")} fullWidth required></TextField>
         <p>{errors.password?.message}</p>

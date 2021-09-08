@@ -21,7 +21,7 @@ router.get('/activities/toBeSubmitted', controllers.viewToBeSubmittedTasks)
 
 router.get('/cycles', controllers.viewEmployeeCycles)
 
-router.get('/profile', controllers.viewEmployeeProfile)
+router.get('/profile/:id/:cycleID', controllers.viewEmployeeProfile)
 
 router.get('/cycles/view', controllers.viewCycleDetails)
 

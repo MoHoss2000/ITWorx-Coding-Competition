@@ -77,41 +77,63 @@ exports.viewEmployeeCycles = async (req, res) => {
 }
            
 exports.viewEmployeeProfile = async (req, res) => {
-    const employeeId = req.id
-    const {cycleID}  = req.body
+    const employeeId = parseInt(req.params.id)
+    const cycleID  = parseInt(req.params.cycleID)
+    
     let result = {}
-    db.query(
-        'CALL viewEmployeePersonalInfo(?)', 
-        [employeeId],
-        (err, queryRes) => {
-            result.personalInfo = queryRes[0]
 
-            db.query(
-                'CALL viewEmployeeBadges(?)', 
-                [employeeId],
-                (err, queryRes) => {
-                    result.employeeBadges = queryRes[0]
+    const personalInfo = new Promise((resolve, reject) => {
+        db.query('CALL getemployeeInfo(?)', employeeId, (err, result) => {
+            if(err)
+                reject(err)
+            else
+                resolve(result)
+        })
+    })
 
-                    db.query(
-                        'CALL viewEmployeePractice(?)', 
-                        [employeeId],
-                        (err, queryRes) => {
-                            result.employeePractice = queryRes[0]
+    const badges = new Promise((resolve, reject) => {
+        db.query('CALL viewEmployeeBadges(?)', employeeId, (err, result) => {
+            if(err)
+                reject(err)
+            else
+                resolve(result)
+        })
+    })
+    
+    const practice = new Promise((resolve, reject) => {
+        db.query('CALL viewEmployeePractice(?)', employeeId, (err, result) => {
+            if(err)
+                reject(err)
+            else
+                resolve(result)
+        })
+    })
 
-                            db.query(
-                                'CALL viewEmployeeCycleVirtualRecognition(?,?)', 
-                                [employeeId, cycleID],
-                                (err, queryRes) => {
-                                    result.virtual_recognitions = queryRes[0]
-                                    return res.json({result})
-                                }
-                            )
-                        }
-                    )
-                }         
-            )
-        }
-    )
+    const virtual_recognitions = new Promise((resolve, reject) => {
+        db.query('CALL viewEmployeeCycleVirtualRecognition(?,?)', [employeeId, cycleID], (err, result) => {
+            if(err)
+                reject(err)
+            else
+                resolve(result)
+        })
+    })
+
+    try{
+        const res1 = await personalInfo 
+        //const res2 = await badges
+        //const res3 = await practice
+        //const res4 = await virtual_recognitions
+    }catch(e){
+        res.send(e)
+    }
+    
+    console.log(res1)
+    console.log(res2)
+    console.log(res3)
+    console.log(res4)
+
+    //res.send('tmam')
+
 }
 
 exports.viewCycleDetails = async (req, res) => {

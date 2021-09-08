@@ -15,7 +15,6 @@ const Badges = () => {
             setData(res.data)
             setLoading(false)
         }
-
         getBadges();
     }, [])
     

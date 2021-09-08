@@ -40,14 +40,6 @@ END //
 
 
 DELIMITER //
-CREATE PROCEDURE viewEmployeePersonalInfo (IN employeeID INT)
-BEGIN
-	SELECT E.id, E.first_name, E.last_name, E.username, E.is_developer
-    FROM Employee E
-    WHERE E.id = employeeID;
-END //
-
-DELIMITER //
 CREATE PROCEDURE viewEmployeeDepartments (IN employeeID INT)
 BEGIN
 	SELECT D.* FROM 
@@ -218,8 +210,6 @@ BEGIN
 END //
 
 
-
-
 DELIMITER //
 CREATE PROCEDURE getEmployeeRankings(IN cycleID INT)
 BEGIN
@@ -251,4 +241,21 @@ BEGIN
                               INNER JOIN Activity A ON A.id = EAC.activity_id
 	WHERE EAC.cycle_id = cycleID AND EAC.status = 'completed'
 	GROUP BY D.name;
+END//
+
+DELIMITER //
+CREATE PROCEDURE getemployeeInfo(IN employeeID INT)
+BEGIN
+	SELECT E.id, E.first_name, E.last_name, E.username, E.is_developer
+    FROM employee E
+    WHERE E.id = employeeID;
+END//
+
+
+DELIMITER //
+CREATE PROCEDURE "viewEmployeeActivitiesInCycle"(IN employeeID INT, IN cycleID INT)
+BEGIN
+	SELECT A.id, A.name AS title, A.description, EAC.status FROM
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON A.id = EAC.Activity_id
+    WHERE EAC.employee_id = employeeID AND EAC.cycle_id = cycleID;
 END//

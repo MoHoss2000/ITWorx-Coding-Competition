@@ -137,27 +137,32 @@ exports.viewEmployeeStatus = async (req, res) => {
 
 
 exports.getActivities = async (req, res) => {
-
+  const {cycleID} = req.body
   try{
-    db.query(`SELECT * FROM activity`,(err, result) => {
-      res.status(200).send(result);
+    db.query(`CALL viewActivities(?)`, cycleID, (err, result) => {
+      if(result && result[0])
+        res.status(200).send(result[0]);
+      else if (err)
+        res.status(400).send(err);
+      else 
+        res.status(200).send([]);
     })
   } catch(e){
-    console.log(e)
     res.status(400).send(e);
   }
 }
 
 exports.getBadges= async (req, res) => {
+    db.query(`SELECT * FROM Badge`,(err, result) => {
+      if(result && result[0])
+        res.status(200).send(result)
+      else if(err)
+        res.status(400).send(err)
+      else
+      res.status(200).send([])
 
-  try{
-    db.query(`SELECT * FROM badge`,(err, result) => {
-      res.status(200).send(result);
     })
-  } catch(e){
-    console.log(e)
-    res.status(400).send(e);
-  }
+
 }
 
 exports.getCycles= async (req, res) => {
