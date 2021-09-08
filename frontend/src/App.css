@@ -36,3 +36,6 @@
     transform: rotate(360deg);
   }
 }
+.ant-menu.ant-menu-dark .ant-menu-item-selected.customclass {
+  background-color: '#B039CC';
+} 
