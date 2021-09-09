@@ -10,9 +10,6 @@ function Activities() {
   const [activities, setActivities] = useState([])
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
-  const {path, url} = useRouteMatch()
-  console.log(path)
-  console.log(url)
 
   useEffect(() => {
     console.log('GETTING ACTIVITIES');
@@ -32,11 +29,11 @@ function Activities() {
     return (
       <div>
         <h1> ACTIVITIES</h1>
-        <h3>Error fethcing data</h3>
+        <h3>Error fetching data</h3>
       </div>
     )
   }
-  if (activities == []) {
+  if (activities === []) {
     return <p>Loading</p>
   }
 
@@ -53,7 +50,7 @@ function Activities() {
                 extra={<Button type="primary"
                 >
                   <SketchOutlined/>
-                  <Link to={{pathname: `${url}/${name}`, state: {id}}}>
+                  <Link to={`/activities/${id}`}>
                     View Activity
                   </Link>
                 </Button>}
