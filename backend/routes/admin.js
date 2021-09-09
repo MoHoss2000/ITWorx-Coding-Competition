@@ -63,7 +63,7 @@ router.patch('/cycle/disable/:cycleID', controllers.disableCycle)
 
 router.get('/employeeStatus/:employeeId', controllers.viewEmployeeStatus)
 
-router.get('cycle/view/:cycleID', controllers.cycleInfo)
+router.get('/cycle/view/:cycleID', controllers.cycleInfo)
 
 
 

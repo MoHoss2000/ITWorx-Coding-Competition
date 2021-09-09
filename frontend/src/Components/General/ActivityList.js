@@ -1,11 +1,12 @@
 import React , {useState, useEffect} from 'react';
 import 'antd/dist/antd.css';
-import { List, Card , Button, Avatar} from 'antd';
+import { List, Card , Button, Avatar, Typography, Divider} from 'antd';
 import Spinner from './loadingSpinner'
 import axios from 'axios'
 import '../components.css';
+const { Title } = Typography;
 
-const ActivityList = () => {
+function ActivityList() {
     const [loading, setLoading] = useState(true) 
     const [data, setData] = useState([])
     const [error, setError] = useState(null)
@@ -30,8 +31,9 @@ const ActivityList = () => {
         
     return(
     <div className="site-card-border-less-wrapper">
-    <Card className ="activities-card" bordered={false} loading={loading}
-          title={<span style={{"marginLeft": "285px", "fontSize": "20px", "color": "rgb(0, 153, 204)" }}>Activities</span>} >
+    <Card className ="activities-card" bordered={false} loading={loading}>
+    <Title level={4}> Cycle Activities </Title>
+        <Divider className="small-divider"/>
         <List
             size="small"
             itemLayout="horizontal"

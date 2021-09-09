@@ -96,7 +96,8 @@ body {
   .activities-card{
     top: 20%;
     left: 5%;
-    width : 900px;
+    width : 700px;
+    margin-bottom: 30px;
     background:rgba(0, 153, 204, 0);
     box-shadow: 10px 8px 30px 0 rgba(0, 0, 0, 0.26);
     transition: 0.3s;
@@ -118,8 +119,19 @@ body {
   }
   .title-divider{
     width: 400px;
-    background-color:rgb(0, 0, 0)
+    background-color:rgb(0, 0, 0);
   }
   .logo{
-    
+
+  }
+
+.gridStyle {
+    width: '600px';
+  }
+
+  .small-divider{
+    background-color:rgba(0, 0, 0, 0.24);
+  }
+  .switch{
+    margin-left: 5%;
   }

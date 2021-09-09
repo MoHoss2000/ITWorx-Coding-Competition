@@ -335,11 +335,12 @@ exports.editActivity= async (req, res) => {
     
   }
 
-  exports.cycleInfo = async () => {
-    const cycleID = req.params.cycleID
+  exports.cycleInfo = async (req,res) => {
+    const cycleID = parseInt(req.params.cycleID)
+    console.log(cycleID)
     db.query('CALL viewCycleDetailsForAdmin(?)', cycleID, (err, result) => {
       if(result && result[0]){
-        return res.send(result[0])
+        return res.send(result[0][0])
       }
       return res.status(400).send()
     })
