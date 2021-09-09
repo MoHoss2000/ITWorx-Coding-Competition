@@ -85,3 +85,25 @@ body {
     flex-direction:row-reverse;
   }
   
+  /* .site-card-border-less-wrapper {
+  padding: 30px;
+  background: #361414;
+} */
+  [data-theme="dark"] .site-card-border-less-wrapper {
+    background: #303030;
+  }
+
+  .activities-card{
+    top: 20%;
+    left: 5%;
+    width : 700px;
+    background:rgba(0, 153, 204, 0);
+    box-shadow: 10px 8px 30px 0 rgba(0, 0, 0, 0.26);
+    transition: 0.3s;
+  }
+
+  .view-all-button{
+    margin-left: 50px;
+    margin-top: 20px;
+
+  }

@@ -13,7 +13,7 @@ import {
 } from 'react-router-dom'
 import HeaderAdmin from './Components/Navigation/HeaderAdmin';
 import SiderAdmin  from './Components/Navigation/SiderAdmin';
-import ActivityList from './Components/General/CycleActivities'
+import ActivityList from './Components/General/ActivitiesOverview'
 
 function App() {
   return (
