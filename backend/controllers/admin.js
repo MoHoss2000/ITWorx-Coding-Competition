@@ -139,7 +139,7 @@ exports.viewEmployeeStatus = async (req, res) => {
 exports.getActivities = async (req, res) => {
 
   try{
-    db.query(`SELECT * FROM activity`,(err, result) => {
+    db.query(`SELECT * FROM Activity`,(err, result) => {
       res.status(200).send(result);
     })
   } catch(e){
