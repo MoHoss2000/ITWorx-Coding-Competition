@@ -3,7 +3,7 @@ import axios from 'axios';
 import 'antd/dist/antd.css';
 import {Button, Card, Divider} from 'antd';
 import {CarryOutOutlined, SketchOutlined} from '@ant-design/icons';
-import {Link, useRouteMatch,} from 'react-router-dom'
+import {Link,} from 'react-router-dom'
 
 
 function Activities() {
@@ -47,10 +47,14 @@ function Activities() {
 
         activities.map(({id, name, description}) => (
           <Card key={id} title={name} type="inner" loading={loading}
-                extra={<Button type="primary"
+                extra={<Button type="primary" style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
+                }}
                 >
                   <SketchOutlined/>
-                  <Link to={`/activities/${id}`}>
+                  <Link to={`/activities/${id}`} style={{color: 'white', marginLeft: 5}}>
                     View Activity
                   </Link>
                 </Button>}
