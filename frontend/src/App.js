@@ -9,6 +9,7 @@ import {BrowserRouter as Router, Route, Switch,} from 'react-router-dom'
 import HeaderAdmin from './Components/Navigation/HeaderAdmin';
 import SiderAdmin from './Components/Navigation/SiderAdmin';
 import Activity from "./Components/Admin/Activity";
+import NotFound404 from "./Components/404Component";
 
 
 function App() {
@@ -33,9 +34,10 @@ function App() {
           <Layout style={{flex: 1, paddingLeft: 50, paddingTop: 50}}>
             <Switch>
               <Route exact path='/' component={AdminHome}/>
-              <Route path='/activities' component={Activities}/>
               <Route path='/newActivity' component={CreateActivity}/>
               <Route path={'/activities/:activityId'} component={Activity} />
+              <Route path='/activities' component={Activities}/>
+              <Route component={NotFound404}/>
             </Switch>
           </Layout>
         </Layout>

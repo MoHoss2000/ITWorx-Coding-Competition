@@ -42,7 +42,7 @@ function Activity() {
     <Card
       style={{width: '800px'}}
       title="MY ACTIVITY">
-
+test
 
     </Card>
 
