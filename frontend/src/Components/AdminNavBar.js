@@ -1,10 +1,8 @@
 import React , {useState} from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import '../index.css';
 import {
     BrowserRouter as Router,
-    Route,
     Link,
   } from 'react-router-dom'
 import { Layout, Menu, Avatar } from 'antd';
@@ -19,7 +17,7 @@ import {
   CrownOutlined
 } from '@ant-design/icons';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header,  Sider } = Layout;
 const { SubMenu } = Menu;
 
 function AdminNavBar (props) {
@@ -35,8 +33,8 @@ function AdminNavBar (props) {
         <div>
       <Router>
       <Layout style={{ minHeight: '100vh'}}>
-        
-        <Sider collapsible collapsed={collapsed} 
+
+        <Sider collapsible collapsed={collapsed}
         onCollapse={onCollapse}
         style={{
           overflow: 'auto',
@@ -44,7 +42,7 @@ function AdminNavBar (props) {
           position: 'fixed',
           left: 0,
         }}>
-        
+
           <Menu id="menu" theme="dark" defaultSelectedKeys={['1']} mode="inline">
 
             <Menu.Item key="1" icon={<HomeOutlined /> }>
@@ -62,7 +60,7 @@ function AdminNavBar (props) {
               <Menu.Item key="5">
                   <Link to={'/activities'}>All Activites</Link>
              </Menu.Item>
-              
+
             </SubMenu>
             <Menu.Item key="8" icon={<TrophyOutlined />}>
             Leaderboard
@@ -70,11 +68,11 @@ function AdminNavBar (props) {
             <Menu.Item key="9" icon={<SettingOutlined />}>
             Settings
             </Menu.Item>
-            
-        
+
+
           </Menu>
         </Sider>
-      
+
        <Layout >
         <Header className="header" id="header">
         <Menu theme="light" mode="horizontal" id ="m" defaultSelectedKeys={['1']}>
@@ -85,11 +83,11 @@ function AdminNavBar (props) {
             </Menu.Item>
             <Menu.Item key="11" icon={<SketchOutlined />}>Points</Menu.Item>
             <Menu.Item key="12" icon={<CrownOutlined />}>Badges</Menu.Item>
-            
-        </Menu>      
-        </Header> 
+
+        </Menu>
+        </Header>
         </Layout>
-        
+
       </Layout>
       </Router>
       </div>
