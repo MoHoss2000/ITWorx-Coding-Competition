@@ -9,7 +9,7 @@ import {BrowserRouter as Router, Route, Switch,} from 'react-router-dom'
 import HeaderAdmin from './Components/Navigation/HeaderAdmin';
 import SiderAdmin from './Components/Navigation/SiderAdmin';
 import Activity from "./Components/Admin/Activity";
-import NotFound404 from "./Components/404Component";
+import NotFound404 from "./Components/NotFound404";
 
 
 function App() {
