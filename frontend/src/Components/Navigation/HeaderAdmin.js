@@ -19,6 +19,7 @@ import {
   UserOutlined,
   CrownOutlined
 } from '@ant-design/icons';
+import MenuItem from 'antd/lib/menu/MenuItem';
 
 const { Sider, Header } = Layout;
 const { SubMenu } = Menu;
@@ -33,23 +34,27 @@ function HeaderAdmin () {
   };
 
     return (
+ 
         <Header className="header" id="header"
         style={{
           overflow: 'auto',
-          width: "100%",
+          width: "100vw",
           zIndex: '1000',
           left: 0,
+          backgroundColor:"#131629",
         }}>
-        <Menu theme="light" mode="horizontal" id ="m" defaultSelectedKeys={['1']}>
+      
+        <Menu theme="dark" mode="horizontal" id ="m" defaultSelectedKeys={['1']} >
             <Menu.Item key="10">
                 <Avatar
                     style={{backgroundColor: '#87d068', }}
                     icon={<UserOutlined />}/>
             </Menu.Item>
             <Menu.Item key="11" icon={<SketchOutlined />}>Points</Menu.Item>
-            <Menu.Item key="12" icon={<CrownOutlined />}>Badges</Menu.Item>      
-        </Menu>      
-        </Header> 
+            <Menu.Item key="12" icon={<CrownOutlined />}>Badges</Menu.Item>  
+        </Menu>  
+        </Header>
+       
     );
   }
 export default HeaderAdmin;

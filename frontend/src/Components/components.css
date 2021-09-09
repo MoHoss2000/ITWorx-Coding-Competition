@@ -96,7 +96,7 @@ body {
   .activities-card{
     top: 20%;
     left: 5%;
-    width : 700px;
+    width : 900px;
     background:rgba(0, 153, 204, 0);
     box-shadow: 10px 8px 30px 0 rgba(0, 0, 0, 0.26);
     transition: 0.3s;
@@ -106,4 +106,20 @@ body {
     margin-left: 50px;
     margin-top: 20px;
 
+  }
+  .employee-list{
+    margin-top: 40px;
+    left: 5%;
+    width : 900px;
+  }
+  .title{
+    margin-top: 50px;
+    left: 0%;
+  }
+  .title-divider{
+    width: 400px;
+    background-color:rgb(0, 0, 0)
+  }
+  .logo{
+    
   }

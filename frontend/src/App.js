@@ -13,7 +13,7 @@ import {
 } from 'react-router-dom'
 import HeaderAdmin from './Components/Navigation/HeaderAdmin';
 import SiderAdmin  from './Components/Navigation/SiderAdmin';
-import PendingList from './Components/Admin/PendingOverview'
+import Participants from './Components/Admin/CycleParticipants'
 
 function App() {
   return (
@@ -35,7 +35,7 @@ function App() {
     <SiderAdmin/>
   </Layout>
   <Layout style={{width: '80%' }} >
-    <PendingList/>
+    <Participants style={{width: '50%' }} />
       <Route exact path='/' component={AdminHome}/> 
       <Route path='/activities' component={Activities}/> 
       <Route path='/newActivity' component={CreateActivity}/>      

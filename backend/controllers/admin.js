@@ -4,9 +4,10 @@ const db = require('../db/mysql')
 
 
 exports.viewParticipants = async (req, res) => {
-    const cycleID = req.body.cycleID
+    const cycleID = parseInt(req.params.cycleID)
     try{
       db.query('CALL viewEmployeesInCycle(?)', cycleID ,(err, result) => {
+          console.log(result)
           res.send(result[0]);
       })
     } catch(e){
@@ -155,9 +156,6 @@ exports.createBadge= async (req, res) => {
 
 exports.createCycle= async (req, res) => {
   var {start_date, end_date, admin_id} = req.body;
-  // console.log(start_date);
-  // console.log(end_date);
-  // console.log(admin_id);
   try{
     db.query(`INSERT INTO cycle (start_date, end_date, admin_id) 
     VALUES (?,?,?)`, [start_date, end_date, admin_id], (err, result) => {
