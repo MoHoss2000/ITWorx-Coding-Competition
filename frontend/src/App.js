@@ -26,12 +26,12 @@ function App() {
             <HeaderAdmin/>
           </Layout>
         </Layout>
-        <Layout style={{display: 'flex', flexDirection: 'row'}}>
+        <Layout style={{display: 'flex', flexDirection: 'row', overflow: 'hidden', height: 'calc(100vh - 64px)'}}>
 
           <Layout style={{flex: 0}}>
             <SiderAdmin/>
           </Layout>
-          <Layout style={{flex: 1, paddingLeft: 50, paddingTop: 50}}>
+          <Layout style={{flex: 1, paddingLeft: 50, paddingTop: 50, paddingRight: 20, paddingBottom: 50, overflowY: 'scroll'}}>
             <Switch>
               <Route exact path='/' component={AdminHome}/>
               <Route path='/newActivity' component={CreateActivity}/>
