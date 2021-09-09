@@ -2,8 +2,11 @@ import React , {useState} from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import '../index.css';
-import DescriptionCard from './General/CycleDescriptionCard'
-import PersonalInfo from './Home/PersonalInfo'
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+  } from 'react-router-dom'
 import { Layout, Menu, Avatar } from 'antd';
 import {
   HomeOutlined ,
@@ -15,12 +18,11 @@ import {
   UserOutlined,
   CrownOutlined
 } from '@ant-design/icons';
-import DisableSwitch from './Admin/DisableSwitch';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-function NavBar (props) {
+function AdminNavBar (props) {
   const [collapsed, SetCollapsed ] = useState(true)
 
   const onCollapse = collapsed => {
@@ -31,9 +33,17 @@ function NavBar (props) {
     // const { collapsed } = this.state;
     return (
         <div>
+      <Router>
       <Layout style={{ minHeight: '100vh'}}>
         
-        <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+        <Sider collapsible collapsed={collapsed} 
+        onCollapse={onCollapse}
+        style={{
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+        }}>
         
           <Menu id="menu" theme="dark" defaultSelectedKeys={['1']} mode="inline">
 
@@ -46,10 +56,13 @@ function NavBar (props) {
               <Menu.Item key="3">Cycle Participants</Menu.Item>
             </SubMenu>
             <SubMenu key="sub2" icon={<FileDoneOutlined />} title="Activities">
-              <Menu.Item key="4">Create New Activity</Menu.Item>
-              <Menu.Item key="5">Pending Activities</Menu.Item>
-              <Menu.Item key="6">Completed Activities</Menu.Item>
-              <Menu.Item key="7">In Progress Activities</Menu.Item>
+              <Menu.Item key="4">
+                  <Link to={'/newActivity'}>Create New Activity</Link>
+             </Menu.Item>
+              <Menu.Item key="5">
+                  <Link to={'/activities'}>All Activites</Link>
+             </Menu.Item>
+              
             </SubMenu>
             <Menu.Item key="8" icon={<TrophyOutlined />}>
             Leaderboard
@@ -62,7 +75,7 @@ function NavBar (props) {
           </Menu>
         </Sider>
       
-      <Layout  >
+       <Layout >
         <Header className="header" id="header">
         <Menu theme="light" mode="horizontal" id ="m" defaultSelectedKeys={['1']}>
             <Menu.Item key="10">
@@ -73,21 +86,15 @@ function NavBar (props) {
             <Menu.Item key="11" icon={<SketchOutlined />}>Points</Menu.Item>
             <Menu.Item key="12" icon={<CrownOutlined />}>Badges</Menu.Item>
             
-        </Menu>
-        
-        </Header>
-<<<<<<< HEAD
-        <PersonalInfo/>
-=======
-        <DisableSwitch />
->>>>>>> f44f5410e7a8c67e3c419b74ca53a724735f50ba
+        </Menu>      
+        </Header> 
         </Layout>
         
       </Layout>
-      
+      </Router>
       </div>
     );
   }
 
 
-export default NavBar;
+export default AdminNavBar;
