@@ -2,6 +2,7 @@ import React , {useState, useEffect} from 'react';
 import 'antd/dist/antd.css';
 import { List } from 'antd';
 import Spinner from './loadingSpinner'
+import axios from 'axios'
 
 const ActivityList = () => {
     const [loading, setLoading] = useState(true) 
@@ -9,22 +10,16 @@ const ActivityList = () => {
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        axios(
-        {
-            method: 'get',
-            url: 'http://localhost:3001/admin/viewActivity',
-            headers: {}, 
-            data: { id, 
-                    CycleId : 1 }
-        }).then((res) =>{          
+        const cycleID = 1
+        axios.get( `http://localhost:3001/admin/getActivities/${cycleID}`
+        ).then((res) =>{          
                 setData(res.data)
-                setLoading(false)               
+                setLoading(false)  
+                console.log(res)             
               })
               .catch((e) => {
                 setError("Oops there seems to be a problem connecting to the network. Please try again later")
                 console.log(e)
-                
-                
          })
     
     }, []);
@@ -50,3 +45,4 @@ const ActivityList = () => {
     )
 }
   
+export default ActivityList

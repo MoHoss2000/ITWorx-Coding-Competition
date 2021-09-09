@@ -134,11 +134,26 @@ exports.viewEmployeeStatus = async (req, res) => {
 // 	}).catch((e) => res.status(400).send(e));
 //}
 
-
+exports.createBadge= async (req, res) => {
+  var name = req.body.name;
+  var description = req.body.description;
+  var type = req.body.type;
+  var pointsNeeded = req.body.points;
+  var isEnabled  = req.body.enabled;
+  
+  try{
+    db.query(`INSERT INTO Badge (name, description, type, points_needed, enabled) 
+    VALUES (?,?,?,?,?)`, [name, description, type, pointsNeeded, isEnabled], (err, result) => {
+      res.status(200).send(result);
+    })
+  } catch(e){
+    console.log(e)
+    res.status(400).send(e);
+  }
+}
 
 exports.getActivities = async (req, res) => {
-  const {cycleID} = req.body
-  try{
+  const {cycleID} = req.params
     db.query(`CALL viewActivities(?)`, cycleID, (err, result) => {
       if(result && result[0])
         res.status(200).send(result[0]);
@@ -147,9 +162,7 @@ exports.getActivities = async (req, res) => {
       else 
         res.status(200).send([]);
     })
-  } catch(e){
-    res.status(400).send(e);
-  }
+  
 }
 
 exports.getBadges= async (req, res) => {

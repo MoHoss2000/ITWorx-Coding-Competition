@@ -35,7 +35,7 @@ router.post('/cycle', (req, res) => {
 
 router.post('/badge', controllers.createBadge);
 
-router.get('/getActivities', controllers.getActivities)
+router.get('/getActivities/:cycleID', controllers.getActivities)
 
 router.get('/viewActivity', controllers.activityInfo)
 

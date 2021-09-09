@@ -76,11 +76,7 @@ function NavBar (props) {
         </Menu>
         
         </Header>
-<<<<<<< HEAD
         <PersonalInfo/>
-=======
-        <DisableSwitch />
->>>>>>> f44f5410e7a8c67e3c419b74ca53a724735f50ba
         </Layout>
         
       </Layout>
