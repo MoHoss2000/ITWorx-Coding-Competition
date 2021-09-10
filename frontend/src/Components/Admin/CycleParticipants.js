@@ -14,6 +14,7 @@ class Participants extends React.Component {
     data: [],
     searchText: '',
     searchedColumn: '',
+    loading: true,
   };
 
   componentWillMount(){
@@ -30,6 +31,7 @@ class Participants extends React.Component {
                     res.data[i].developer = 'Non-developer'
         }
           this.setState({data:res.data})
+          this.setState({loading:false})
       }
       getParticipants()
 
@@ -143,7 +145,7 @@ class Participants extends React.Component {
       <div>
         <Title className= "title"> Cycle Participants</Title>
         <Divider className="title-divider"/>
-        <Table columns={columns}  dataSource={this.state.data} />
+        <Table loading ={this.state.loading} columns={columns}  dataSource={this.state.data} />
       </div>);
   }
 }

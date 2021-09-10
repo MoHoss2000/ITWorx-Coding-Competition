@@ -210,14 +210,14 @@ BEGIN
 END //
 
 
-DELIMITER //
-CREATE PROCEDURE getEmployeeRankings(IN cycleID INT)
-BEGIN
-	SELECT CONCAT(first_name, ' ', last_name) AS name, E.points, E.is_developer AS developer, E.username AS email
-    FROM EmployeeCycle EC INNER JOIN employee E ON E.id = EC.employee_id
-    WHERE EC.cycle_id = cycleID
-    ORDER BY E.points DESC;
-END //
+-- DELIMITER //
+-- CREATE PROCEDURE getEmployeeRankings(IN cycleID INT)
+-- BEGIN
+-- 	SELECT CONCAT(first_name, ' ', last_name) AS name, E.points, E.is_developer AS developer, E.username AS email
+--     FROM EmployeeCycle EC INNER JOIN employee E ON E.id = EC.employee_id
+--     WHERE EC.cycle_id = cycleID
+--     ORDER BY E.points DESC;
+-- END //
 
 
 DELIMITER //
@@ -282,4 +282,16 @@ BEGIN
 	SELECT A.* FROM
     EmployeeActivityCycle EAC INNER JOIN Activity A ON A.id = EAC.activity_id
     WHERE EAC.status = 'completed' AND EAC.employee_id = employeeID AND EAC.cycle_id = cycleID ;
+END//
+
+DELIMITER //
+CREATE PROCEDURE "getEmployeeRankings"(IN cycleID INT)
+BEGIN
+	SELECT E.id, sum(A.points) , CONCAT(first_name, ' ', last_name) AS name, E.is_developer
+    FROM EmployeeActivityCycle EAC 
+    INNER JOIN Activity A ON A.id = EAC.activity_id 
+    INNER JOIN employee E ON EAC.employee_id = E.id
+    WHERE EAC.cycle_id = cycleID and EAC.status='completed'
+    Group By E.id
+    Order By sum(A.points) desc;
 END//

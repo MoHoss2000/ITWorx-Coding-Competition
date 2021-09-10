@@ -16,4 +16,5 @@ router.get('/department/:cycleID', controllers.viewDepartmentRanking)
 
 router.get('/practice/:cycleID', controllers.viewPracticerank)
 
+
 module.exports = router

@@ -18,6 +18,7 @@ import PendingList from './Components/Admin/PendingOverview';
 import EmployeeStatus from './Components/Admin/EmployeeStatus';
 import NotFound404 from "./Components/NotFound404";
 import CycleOverview from './Components/General/CycleOverview';
+import Leaderboard from './Components/Admin/leaderboard';
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           <Layout style={{flex: 1, paddingLeft: 50, paddingTop: 50, paddingRight: 20, paddingBottom: 50, overflowY: 'scroll'}}>
             <Switch>
               <Route path ='/participants' component ={Participants} />
+              <Route path ='/leaderboard' component ={Leaderboard} />
               <Route path ='/cycleOverview' component ={CycleOverview} />
               <Route exact path='/' component={AdminHome}/>
               <Route path='/newActivity' component={CreateActivity}/>

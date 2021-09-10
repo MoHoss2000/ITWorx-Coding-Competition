@@ -5,9 +5,9 @@ import { Switch } from 'antd';
 
 
 function DisableSwitch (){
-
+  
   return (
-    <Switch defaultChecked style={{width: 50}}/>
+    <Switch  checkedChildren="Cycle Enabled" unCheckedChildren="Cycle Disabled" defaultChecked style={{width: 50}}/>
   )
 }
 

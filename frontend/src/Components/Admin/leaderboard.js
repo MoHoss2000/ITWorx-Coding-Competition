@@ -13,6 +13,7 @@ const Leaderboard = () => {
             const cycleID = 1
             const res = (await axios.get(`http://localhost:3001/leaderboard/employee/${cycleID}`))
             for(let i = 0 ; i < res.data.length ; i++){
+                console.log(res.data)
                 res.data[i].key = i
                 res.data[i].rank = i + 1
                 if(res.data[i].developer)
@@ -63,7 +64,7 @@ const Leaderboard = () => {
         },
         {
             title: 'Total Points',
-            dataIndex: 'points',
+            dataIndex: 'sum(A.points)',
             key: 'points',
             sorter: (a, b) => a.points - b.points,
             sortOrder: sort.columnKey === 'points' && sort.order,
@@ -82,11 +83,7 @@ const Leaderboard = () => {
             ellipsis: true,
 
         },
-        {
-            title: 'Email',
-            dataIndex: 'email',
-            key: 'email',
-        },
+
     ]
 
     if(loading)
