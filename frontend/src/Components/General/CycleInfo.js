@@ -29,7 +29,7 @@ const CycleInfo = () =>{
     }, [])
 return(
  <div>
-    <Card className="activities-card" style={{ width: '700px'}}>
+    <Card className="activities-card" >
          <Title level={4}> Cycle Information </Title>
         <Divider className="small-divider"/>
         <p> <b> Cycle ID: </b> {cycleID} </p>

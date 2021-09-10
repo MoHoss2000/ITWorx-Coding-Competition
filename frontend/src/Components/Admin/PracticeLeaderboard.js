@@ -79,11 +79,7 @@ const PracticeLeaderboard = () => {
 
     return (
         <>
-        <h1 className="title">Practice Leaderboard</h1>
             <Table columns={columns} dataSource={data} onChange={handleChange} />
-            <Space style={{ marginBottom: 16, marginLeft: '5%'}}>
-            <Button onClick={setPointsSort}>Sort based on Rank</Button>
-            </Space>
         </>
     );
 }

@@ -18,7 +18,7 @@ import PendingList from './Components/Admin/PendingOverview';
 import EmployeeStatus from './Components/Admin/EmployeeStatus';
 import NotFound404 from "./Components/NotFound404";
 import CycleOverview from './Components/General/CycleOverview';
-import Leaderboard from './Components/Admin/leaderboard';
+import Leaderboard from './Components/Admin/Leaderboard';
 
 
 function App() {
