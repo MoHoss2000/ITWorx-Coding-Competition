@@ -268,3 +268,13 @@ BEGIN
     WHERE C.id= cycleID;
 END//
 
+DELIMITER //
+CREATE PROCEDURE "updateBadge"( IN name VARCHAR(20), IN description VARCHAR(100), 
+                                IN type VARCHAR(10), IN points_needed INT, 
+                                IN enabled TINYINT(1), IN badgeID INT)
+BEGIN
+    UPDATE Badge 
+    SET name = name, description = description, type = type,
+    points_needed = points_needed, enabled = enabled
+    WHERE id = badgeID;  
+END

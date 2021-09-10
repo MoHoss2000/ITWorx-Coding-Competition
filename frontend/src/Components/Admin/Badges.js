@@ -52,7 +52,6 @@ const Badges = () => {
 
                             <h5>{badge.description}</h5>
                             <h2>Points Needed: {badge.points_needed}</h2>
-
                         </div>
 
                     </Card>
