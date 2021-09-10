@@ -11,27 +11,7 @@ router.use(express.json())
 
 router.get('/profile/:id', controllers.viewProfile)
 
-router.post('/cycle', (req, res) => {
-    var startDate = req.body.start_date;
-    var endDate = req.body.end_date;
-    var adminID =  req.userData.id;
-
-    console.log(adminID);
-
-    Cycle.create({
-        start_date: startDate,
-        end_date: endDate,
-        AdminId: adminID,
-        current: 1
-    }). then((newCycle)=> {
-        console.log(newCycle);
-        res.status(200).json({message: 'Cycle created successfully', data: newCycle});
-    }).catch((err) => {
-        if (err) {
-          res.status(400).json({ error: err });
-        } 
-    });
-})
+router.post('/newCycle',controllers.createNewCycle)
 
 router.post('/badge', controllers.createBadge);
 
