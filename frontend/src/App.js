@@ -21,28 +21,27 @@ function App() {
   return (
     <Router>
   <Layout>
-  <Layout >
-  <Layout   style={{
-   height: '50px',
-   display: 'flex',
-   textAlign:"center",
-   width: "100%"
-   }}>
-   <HeaderAdmin/>
-    </Layout>
-  </Layout>
- <Layout style={{  display:'flex' , flexDirection :'row'}} >
-   
-  <Layout style={{width: '10%' }}>
-    <SiderAdmin/>
-  </Layout>
-  <Layout style={{width: '80%', marginRight: '80px' }} >
-    <AdminCycleHistory />
-      <Route exact path='/' component={AdminHome}/> 
-      <Route path='/activities' component={Activities}/> 
-      <Route path='/newActivity' component={CreateActivity}/>      
-  </Layout>
-</Layout>    
+ 
+    <Layout   style={{
+        height: '50px',
+        width: '100%',
+        }}>
+
+        <HeaderAdmin />
+      </Layout>
+  <Layout style={{  display:'flex' , flexDirection :'row'}} >
+        <Layout style={{width: '10%'}}>
+          <SiderAdmin />
+        </Layout>
+
+        <Layout style={{width: '80%', marginRight: '80px' }} >
+          <AdminCycleHistory />
+            <Route exact path='/' component={AdminHome}/> 
+            <Route path='/activities' component={Activities}/> 
+            <Route path='/newActivity' component={CreateActivity}/>      
+        </Layout>
+  </Layout>  
+
  </Layout>
  </Router>    
   );

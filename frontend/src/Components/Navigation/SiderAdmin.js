@@ -34,13 +34,12 @@ function SiderAdmin () {
         onCollapse={onCollapse}
         style={{
           overflow: 'auto',
-          height: '100vh',
           zIndex: '100',
+          height: '100vh',
           left: 0,
-          backgroundColor: '#0099cc',
         }}>
         
-          <Menu id="menu" theme ='light' className='side-menu' defaultSelectedKeys={['1']} mode="inline">
+          <Menu id="menu" theme ='dark' defaultSelectedKeys={['1']} mode="inline">
 
             <Menu.Item key="1" icon={<HomeOutlined /> }>
                Home

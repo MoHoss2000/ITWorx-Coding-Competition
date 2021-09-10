@@ -64,6 +64,7 @@ body {
   #m{
     display:flex;
     flex-direction:row-reverse;
+    height: 100%;
   }
   .code-box-demo p {
     margin: 100;

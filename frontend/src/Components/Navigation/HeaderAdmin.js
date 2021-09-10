@@ -38,10 +38,9 @@ function HeaderAdmin () {
         <Header className="header" id="header"
         style={{
           overflow: 'auto',
-          width: "100vw",
           zIndex: '1000',
-          left: 0,
           backgroundColor:"white",
+         
         }}>
       
         <Menu theme="light" mode="horizontal" id ="m" defaultSelectedKeys={['1']} >
