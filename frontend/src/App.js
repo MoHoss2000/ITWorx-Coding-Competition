@@ -1,5 +1,4 @@
 import './App.css';
-import Activities from './Components/Admin/Activities';
 import React from 'react';
 import 'antd/dist/antd.css';
 import {Layout} from 'antd';
@@ -12,8 +11,9 @@ import SiderAdmin from './Components/Navigation/SiderAdmin';
 import Activity from "./Components/Admin/Activity";
 import Badges from "./Components/Admin/Badges";
 import CreateBadge from "./Components/Admin/CreateBadge";
-
+import Participants from './Components/Admin/CycleParticipants';
 import NotFound404 from "./Components/NotFound404";
+import CycleOverview from './Components/General/CycleOverview';
 
 
 function App() {
@@ -34,16 +34,22 @@ function App() {
 
           <Layout style={{flex: 0}}>
             <SiderAdmin/>
+    
           </Layout>
+          
           <Layout style={{flex: 1, paddingLeft: 50, paddingTop: 50, paddingRight: 20, paddingBottom: 50, overflowY: 'scroll'}}>
             <Switch>
+              <Route path ='/participants' component ={Participants} />
+              <Route path ='/cycleOverview' component ={CycleOverview} />
               <Route exact path='/' component={AdminHome}/>
               <Route path='/newActivity' component={CreateActivity}/>
               <Route path={'/activities/:activityId'} component={Activity} />
-              <Route path='/activities' component={Activities}/>
+              {/* <Route path='/activities' component={Activities}/> */}
               <Route path='/badges' component={Badges}/>
               <Route path='/newBadge' component={CreateBadge}/>
               <Route component={NotFound404}/>
+              
+
             </Switch>
           </Layout>
         </Layout>

@@ -115,8 +115,7 @@ body {
     width : 900px;
   }
   .title{
-    margin-top: 50px;
-    left: 0%;
+    margin-left: 20px;
   }
   .title-divider{
     width: 400px;
@@ -140,6 +139,7 @@ body {
   .cycle-list{
     background-color: #0099cc1f;
     border-bottom-right-radius: 1cm;
+    margin-left: 20px;
   }
 
   .side-menu{
