@@ -22,19 +22,19 @@ exports.viewAchievements = async (req, res) => {
 }   
     
 exports.viewCompletedTasks = async (req, res) => {
-    const employeeID = req.id
-    const {cycleID}  = req.body
+    const employeeID  = parseInt(req.params.employeeID)
+    const cycleID = parseInt(req.params.cycleID)
     let result 
     db.query(
-        'CALL viewCompletedTasks(?,?)', 
+        'CALL getCompletedActivities(?,?)', 
         [employeeID, cycleID],
-        (err, queryRes) => {
-            if(!err){
-                result = queryRes[0]
-                return res.json({result})
-            }
+        (err, result) => {
+            if(result && result[0])
+                res.send(result[0])
+            else if(err)
+                res.status(400).send(err)
             else
-                return res.json({err}) 
+                res.send([])
         }
     )
 }

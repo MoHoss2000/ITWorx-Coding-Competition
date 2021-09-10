@@ -8,7 +8,7 @@ const Badges = (props) => {
     })
 
     return(
-        <Card className='info-card'>
+        <Card className='info-card1'>
             <span style={{fontWeight: 'bold', fontSize: '25px'}}>Badges</span>
             <List
                 itemLayout="horizontal"
@@ -21,7 +21,7 @@ const Badges = (props) => {
                             />
                     </List.Item>
                 )}
-            />,
+            />
         </Card>
         )
 

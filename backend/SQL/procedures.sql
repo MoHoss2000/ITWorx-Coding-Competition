@@ -268,3 +268,18 @@ BEGIN
     WHERE C.id= cycleID;
 END//
 
+DELIMITER //
+CREATE PROCEDURE "getPendingActivities"(IN cycleID INT)
+BEGIN
+	SELECT A.* FROM
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON A.id = EAC.activity_id
+    WHERE EAC.status = 'pending';
+END//
+
+DELIMITER //
+CREATE PROCEDURE "getCompletedActivities"(IN employeeID INT, IN cycleID INT)
+BEGIN
+	SELECT A.* FROM
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON A.id = EAC.activity_id
+    WHERE EAC.status = 'completed' AND EAC.employee_id = employeeID AND EAC.cycle_id = cycleID ;
+END//

@@ -11,7 +11,8 @@ const PendingList = () => {
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        axios.get( `http://localhost:3001/admin/pending`
+        const cycleID = 1
+        axios.get( `http://localhost:3001/admin/pending/${cycleID}`
         ).then((res) =>{         
                 setData(res.data.slice(0,3))
                 setLoading(false)  
@@ -21,7 +22,6 @@ const PendingList = () => {
                 setError("Oops there seems to be a problem connecting to the network. Please try again later")
                 console.log(e)
          })
-    
     }, []);
 
     if(loading)

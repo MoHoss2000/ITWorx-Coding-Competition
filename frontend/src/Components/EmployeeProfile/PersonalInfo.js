@@ -1,6 +1,6 @@
 import React from 'react'
-import {Descriptions, Card, Button} from 'antd'
-import {SketchOutlined} from '@ant-design/icons';
+import {Descriptions, Card, Button, Avatar, Row, Col} from 'antd'
+import {SketchOutlined, UserOutlined} from '@ant-design/icons';
 
 const PersonalInfo = (props) => {
     const personalInfo = props.data.personalInfo[0]
@@ -24,28 +24,37 @@ const PersonalInfo = (props) => {
 
     return (
         <div>
-            <Card style={{height: '340px', width: '690px'}} className="info-card">
-        
-                <Descriptions column={1} style={{width: '45%'}} title="User Information">
-                    <Descriptions.Item label="Name">{personalInfo.first_name + " " + personalInfo.last_name}</Descriptions.Item>
-                
-                    <Descriptions.Item label="Email">{personalInfo.username}</Descriptions.Item>
             
-                    <Descriptions.Item label="Developer">{isDeveloper}</Descriptions.Item>
-
-                    <Descriptions.Item label="Departments">{employeeDepartments}</Descriptions.Item>
-
-                    <Descriptions.Item label="Practices">{employeePractice}</Descriptions.Item>
-                </Descriptions>
-
-                <Button style={{color: '#0782CF', marginRight: '20px'}}>Change Password</Button>
-                <Button style={{color: '#0782CF', marginRight: '20px'}}>Edit data</Button>
-                <div style={{position: 'relative', left: '50%', top:'-250px', display:'flex', flexDirection:'column', width: '200px'}}>
-                    <span style={{fontWeight: 'bold', fontSize: '30px', textAlign: 'center'}}>Earned Points</span>
-                    <SketchOutlined style={{color: "#0782CF", fontSize: "100px"}}/>
-                    <span style={{fontWeight: 'bold', fontSize: '30px', textAlign: 'center'}}>{personalInfo.points}</span>
+            <Card className="info-card">
+                <Row gutter={[16,8]}>
+                    <Col style={{display: 'flex', flexDirection: 'column'}}>
+                    <Avatar size={120} style={{backgroundColor: '#87d068'}} icon={<UserOutlined/>}/>
+                    <Button type='primary' style={{color: 'white', marginTop: '30px', left: '-10px'}}>Change Password</Button>
+                    <Button type='primary' style={{color: 'white', marginTop: '10px', left: '-10px'}}>Edit data</Button>
+                    </Col>
+                    <Col>
+                    <div>
+                        <p><b>User Information</b></p>
+                        <p><b>Name: </b>{personalInfo.first_name + " " + personalInfo.last_name}</p>
+                        <p><b>Email: </b>{personalInfo.username}</p>
+                        <p><b>Developer: </b>{isDeveloper}</p>
+                        <p><b>Departments: </b>{employeeDepartments}</p>
+                        <p><b>Practices: </b>{employeePractice}</p>
+                    </div>
+                    
+                   
+                    
+                    </Col>
+                <Col>
+                <div style={{display:'flex', flexDirection:'column'}}>
+                    <span style={{fontWeight: 'bold', fontSize: '20px', textAlign: 'center'}}>Earned Points</span>
+                    <SketchOutlined style={{color: "#0782CF", fontSize: "60px"}}/>
+                    <span style={{fontWeight: 'bold', fontSize: '20px', textAlign: 'center'}}>{personalInfo.points}</span>
                 </div>
+                </Col>
+                </Row>
             </Card>
+            
         </div>
     )
 }
