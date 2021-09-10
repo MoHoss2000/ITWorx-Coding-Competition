@@ -15,7 +15,7 @@ router.post('/newCycle',controllers.createNewCycle)
 
 router.post('/badge', controllers.createBadge);
 
-router.get('/getActivities', controllers.getActivities)
+router.get('/getActivities/:cycleID', controllers.getActivities)
 
 router.get('/viewActivity', controllers.activityInfo)
 
@@ -63,7 +63,10 @@ router.patch('/cycle/disable/:cycleID', controllers.disableCycle)
 
 router.get('/employeeStatus/:employeeId', controllers.viewEmployeeStatus)
 
-router.get('cycle/view/:cycleID', controllers.cycleInfo)
+router.get('/cycle/view/:cycleID', controllers.cycleInfo)
+
+
+
 
 //router.get('/leaderboard/excelfile', exportToExcelLeaderboard)
 

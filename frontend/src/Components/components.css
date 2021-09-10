@@ -80,4 +80,58 @@ body {
     font-size: 40px;
     color: #b72025;
   }
+  .ant-switch {
+    display:flex;
+    flex-direction:row-reverse;
+  }
   
+  /* .site-card-border-less-wrapper {
+  padding: 30px;
+  background: #361414;
+} */
+  [data-theme="dark"] .site-card-border-less-wrapper {
+    background: #303030;
+  }
+
+  .activities-card{
+    top: 20%;
+    left: 5%;
+    width : 700px;
+    margin-bottom: 30px;
+    background:rgba(0, 153, 204, 0);
+    box-shadow: 10px 8px 30px 0 rgba(0, 0, 0, 0.26);
+    transition: 0.3s;
+  }
+
+  .view-all-button{
+    margin-left: 50px;
+    margin-top: 20px;
+
+  }
+  .employee-list{
+    margin-top: 40px;
+    left: 5%;
+    width : 900px;
+  }
+  .title{
+    margin-top: 50px;
+    left: 0%;
+  }
+  .title-divider{
+    width: 400px;
+    background-color:rgb(0, 0, 0);
+  }
+  .logo{
+
+  }
+
+.gridStyle {
+    width: '600px';
+  }
+
+  .small-divider{
+    background-color:rgba(0, 0, 0, 0.24);
+  }
+  .switch{
+    margin-left: 5%;
+  }

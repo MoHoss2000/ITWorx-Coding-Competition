@@ -9,7 +9,7 @@ import { Card } from 'antd';
 function AdminHome() {
 
     
- return <h1>Hello</h1>
+ return <h1></h1>
 }
 
 export default AdminHome;

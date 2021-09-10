@@ -32,9 +32,10 @@ exports.createNewCycle= async (req,res)=>{
 
 
 exports.viewParticipants = async (req, res) => {
-    const cycleID = req.body.cycleID
+    const cycleID = parseInt(req.params.cycleID)
     try{
       db.query('CALL viewEmployeesInCycle(?)', cycleID ,(err, result) => {
+          console.log(result)
           res.send(result[0]);
       })
     } catch(e){
@@ -162,33 +163,6 @@ exports.viewEmployeeStatus = async (req, res) => {
 // 	}).catch((e) => res.status(400).send(e));
 //}
 
-
-
-exports.getActivities = async (req, res) => {
-
-  try{
-    db.query(`SELECT * FROM Activity`,(err, result) => {
-      res.status(200).send(result);
-    })
-  } catch(e){
-    console.log(e)
-    res.status(400).send(e);
-  }
-}
-
-exports.getBadges= async (req, res) => {
-  // console.log('GET BADGES');
-  try{
-    db.query(`SELECT * FROM Badge`,(err, result) => {
-      res.status(200).send(result);
-    })
-  } catch(e){
-    console.log(e)
-    res.status(400).send(e);
-  }
-}
-
-
 exports.createBadge= async (req, res) => {
   var name = req.body.name;
   var description = req.body.description;
@@ -205,6 +179,47 @@ exports.createBadge= async (req, res) => {
     console.log(e)
     res.status(400).send(e);
   }
+}
+
+
+exports.createCycle= async (req, res) => {
+  var {start_date, end_date, admin_id} = req.body;
+  try{
+    db.query(`INSERT INTO cycle (start_date, end_date, admin_id) 
+    VALUES (?,?,?)`, [start_date, end_date, admin_id], (err, result) => {
+      console.log(result);
+      res.status(200).send('Cycle added successfully');
+    })
+  } catch(e){
+    console.log(e)
+    res.status(400).send(e);
+  }
+}
+
+exports.getActivities = async (req, res) => {
+  const {cycleID} = req.params
+    db.query(`CALL viewActivities(?)`, cycleID, (err, result) => {
+      if(result && result[0])
+        res.status(200).send(result[0]);
+      else if (err)
+        res.status(400).send(err);
+      else 
+        res.status(200).send([]);
+    })
+  
+}
+
+exports.getBadges= async (req, res) => {
+    db.query(`SELECT * FROM Badge`,(err, result) => {
+      if(result && result[0])
+        res.status(200).send(result)
+      else if(err)
+        res.status(400).send(err)
+      else
+      res.status(200).send([])
+
+    })
+
 }
 
 exports.getCycles= async (req, res) => {
@@ -348,11 +363,12 @@ exports.editActivity= async (req, res) => {
     
   }
 
-  exports.cycleInfo = async () => {
-    const cycleID = req.params.cycleID
+  exports.cycleInfo = async (req,res) => {
+    const cycleID = parseInt(req.params.cycleID)
+    console.log(cycleID)
     db.query('CALL viewCycleDetailsForAdmin(?)', cycleID, (err, result) => {
       if(result && result[0]){
-        return res.send(result[0])
+        return res.send(result[0][0])
       }
       return res.status(400).send()
     })
