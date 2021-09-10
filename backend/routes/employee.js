@@ -13,7 +13,7 @@ router.use(express.json())
 
 router.post('/activities/submitActivity', controllers.submitActivity)
 
-router.get('/activities/completed', controllers.viewCompletedTasks)
+router.get('/activities/completed/:employeeID/:cycleID', controllers.viewCompletedTasks)
 
 router.get('/activities/pending', controllers.viewPendingTasks)
 

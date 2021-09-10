@@ -31,10 +31,10 @@ BEGIN
 END //
 
 DELIMITER //
-CREATE PROCEDURE viewEmployeeBadges (IN employeeID INT)
+CREATE PROCEDURE "viewEmployeeBadges"(IN employeeID INT)
 BEGIN
-	SELECT B.* FROM
-    badge B INNER JOIN employeeBadgeCycle EBC ON B.id = EBC.badge_id
+	SELECT B.*, EBC.date_acquired AS date FROM
+    Badge B INNER JOIN employeeBadgeCycle EBC ON B.id = EBC.badge_id
     WHERE EBC.employee_id = employeeID;
 END //
 
@@ -246,7 +246,7 @@ END//
 DELIMITER //
 CREATE PROCEDURE getemployeeInfo(IN employeeID INT)
 BEGIN
-	SELECT E.id, E.first_name, E.last_name, E.username, E.is_developer
+	SELECT E.id, E.first_name, E.last_name, E.username, E.is_developer, E.points
     FROM employee E
     WHERE E.id = employeeID;
 END//
@@ -268,3 +268,18 @@ BEGIN
     WHERE C.id= cycleID;
 END//
 
+DELIMITER //
+CREATE PROCEDURE "getPendingActivities"(IN cycleID INT)
+BEGIN
+	SELECT A.* FROM
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON A.id = EAC.activity_id
+    WHERE EAC.status = 'pending';
+END//
+
+DELIMITER //
+CREATE PROCEDURE "getCompletedActivities"(IN employeeID INT, IN cycleID INT)
+BEGIN
+	SELECT A.* FROM
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON A.id = EAC.activity_id
+    WHERE EAC.status = 'completed' AND EAC.employee_id = employeeID AND EAC.cycle_id = cycleID ;
+END//

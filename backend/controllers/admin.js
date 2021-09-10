@@ -387,25 +387,22 @@ exports.editActivity= async (req, res) => {
   }
 
   exports.pendingActivities = async (req, res) => {
-
-    const cycleID  = req.body
-
-    if (!cycleID ) {
-      res.status(400).send({
-        message: "Please specify activity name or ID"
-      });
-      return
-    }
-    db.query('CALL getPendingActivities(?);', [cycleID],(err, result) => {
-      if(result){
-          console.log(result)
-          res.status(200).send(result).json('Action done successfully');    
-      }
-      else{
-        res.status(400).send(err)
-      }
-    })
+    const cycleID  = parseInt(req.params.cycleID)
+    if (!cycleID ) 
+      return res.status(400).send({message: "Please specify activity name or ID"})
+  
     
+    db.query('CALL getPendingActivities(?)', [cycleID],(err, result) => {
+      if(result && result[0])
+          res.status(200).send(result[0]);    
+      
+      else if(err)
+        res.status(400).send(err)
+
+      else 
+        res.send([])
+      
+    })
   }
 
 

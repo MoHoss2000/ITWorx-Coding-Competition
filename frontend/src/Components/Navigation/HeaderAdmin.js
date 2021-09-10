@@ -24,6 +24,10 @@ function HeaderAdmin() {
         </Menu.Item>
         <Menu.Item key="11" icon={<SketchOutlined/>}>Points</Menu.Item>
         <Menu.Item key="12" icon={<CrownOutlined/>}>Badges</Menu.Item>
+        <Menu.Item key="13" >
+          <img id="logo" src="full.png"/>
+        </Menu.Item>
+
       </Menu>
     </Header>
   );
