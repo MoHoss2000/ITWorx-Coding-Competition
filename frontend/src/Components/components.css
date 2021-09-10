@@ -133,5 +133,14 @@ body {
     background-color:rgba(0, 0, 0, 0.24);
   }
   .switch{
+    display:inline-flexbox;
     margin-left: 5%;
+  }
+  .cycle-list{
+    background-color: #0099cc1f;
+    border-bottom-right-radius: 1cm;
+  }
+
+  .side-menu{
+    background-color: #0099cc;
   }

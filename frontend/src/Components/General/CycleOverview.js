@@ -15,8 +15,8 @@ function CycleOverview (){
         <div>
             <Title className= "title"> Cycle Overview</Title>
             <div className="switch">
-                Disable/Enable Cycle
-            <DisableSwitch />
+                <p>Disable/Enable Cycle</p>
+                <DisableSwitch />
             </div>
             <Divider className="title-divider"/>
             <CycleInfo />

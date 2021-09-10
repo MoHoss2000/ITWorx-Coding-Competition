@@ -25,7 +25,7 @@ function Activities() {
 
     useEffect(() => {
         console.log('GETTING ACTIVITIES');
-        axios.get('http://localhost:3001/admin/getActivities')
+        axios.get(`http://localhost:3001/admin/getActivities`)
             .then((res) => {           
                 setActivities(res.data)      
                 setLoading(false)         
@@ -40,8 +40,7 @@ function Activities() {
   if(error){
    return ( 
      <div>
-       <h1> ACTIVITIES</h1>
-       <h3>Error fethcing data</h3>
+    
        </div>
      )
   }

@@ -4,7 +4,7 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import AdminHome from './Components/AdminHome';
-import CycleInfo from './Components/General/CycleInfo';
+import AdminCycleHistory from './Components/Admin/AdminCycleHistory';
 import CreateActivity from './Components/Admin/CreateActivity';
 import ActivityList from './Components/General/ActivityList';
 import {
@@ -33,11 +33,11 @@ function App() {
   </Layout>
  <Layout style={{  display:'flex' , flexDirection :'row'}} >
    
-  <Layout style={{width: '20%' }}>
+  <Layout style={{width: '10%' }}>
     <SiderAdmin/>
   </Layout>
-  <Layout style={{width: '80%' }} >
-    <CycleOverview />
+  <Layout style={{width: '80%', marginRight: '80px' }} >
+    <AdminCycleHistory />
       <Route exact path='/' component={AdminHome}/> 
       <Route path='/activities' component={Activities}/> 
       <Route path='/newActivity' component={CreateActivity}/>      

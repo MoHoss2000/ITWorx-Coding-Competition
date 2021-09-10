@@ -10,21 +10,20 @@ const CycleInfo = () =>{
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
     const [name, setName] = useState("")
-    const [id, setId] = useState("")
+    const [cycleID, setCycleID] = useState("")
+    const [adminID, setAdminID] = useState("")
 
 
     useEffect(() => {
         const getTime = async () => {
             const cycleID = 1
             const res = (await axios.get(`http://localhost:3001/admin/cycle/view/${cycleID}`))
-            console.log(res.data)
             setStartDate(res.data.start_date)
             setEndDate(res.data.end_date)
-            console.log(res.data.first_name)
             var name = res.data.first_name+ ' ' + res.data.last_name
-            console.log(name)
             setName(name)
-            setId(res.data.id)
+            setAdminID(res.data.id)
+            setCycleID(res.data.CycleID)
         }
         getTime()
     }, [])
@@ -33,6 +32,7 @@ return(
     <Card className="activities-card" style={{ width: '700px'}}>
          <Title level={4}> Cycle Information </Title>
         <Divider className="small-divider"/>
+        <p> <b> Cycle ID: </b> {cycleID} </p>
          <p> <b>Start Date: </b> {startDate} </p>
          <p> <b>End Date: </b> {endDate} </p>
          <p> <b> Cycle Was Created By: </b><a> {name} </a> </p>

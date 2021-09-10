@@ -41,10 +41,10 @@ function HeaderAdmin () {
           width: "100vw",
           zIndex: '1000',
           left: 0,
-          backgroundColor:"#131629",
+          backgroundColor:"white",
         }}>
       
-        <Menu theme="dark" mode="horizontal" id ="m" defaultSelectedKeys={['1']} >
+        <Menu theme="light" mode="horizontal" id ="m" defaultSelectedKeys={['1']} >
             <Menu.Item key="10">
                 <Avatar
                     style={{backgroundColor: '#87d068', }}

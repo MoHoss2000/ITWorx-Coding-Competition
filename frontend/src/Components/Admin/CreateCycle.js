@@ -139,4 +139,4 @@ function CreateCycle() {
 
 }
 
-export default CreateActivity;
+export default CreateCycle;
