@@ -10,6 +10,9 @@ import {BrowserRouter as Router, Route, Switch,} from 'react-router-dom'
 import HeaderAdmin from './Components/Navigation/HeaderAdmin';
 import SiderAdmin from './Components/Navigation/SiderAdmin';
 import Activity from "./Components/Admin/Activity";
+import Badges from "./Components/Admin/Badges";
+import CreateBadge from "./Components/Admin/CreateBadge";
+
 import NotFound404 from "./Components/NotFound404";
 
 
@@ -38,6 +41,8 @@ function App() {
               <Route path='/newActivity' component={CreateActivity}/>
               <Route path={'/activities/:activityId'} component={Activity} />
               <Route path='/activities' component={Activities}/>
+              <Route path='/badges' component={Badges}/>
+              <Route path='/newBadge' component={CreateBadge}/>
               <Route component={NotFound404}/>
             </Switch>
           </Layout>

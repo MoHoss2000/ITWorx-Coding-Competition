@@ -153,6 +153,24 @@ exports.createBadge= async (req, res) => {
   }
 }
 
+exports.updateBadge = async(req, res) => {
+  var {name, description, type, points_needed, enabled} = req.body;
+  var id = req.params.badgeID;
+
+  console.log(req.body);
+  console.log(id);
+  try{
+    db.query(`UPDATE Badge SET name = '?', description = '?', type = '?', points_needed = ?, enabled = ? WHERE id = ?`), 
+    [name, description, type, parseInt(points_needed), parseInt(points_needed), parseInt(id)], (err, result) => {
+      console.log(result);
+      res.status(200).send('Badge updated successfully');
+    }
+  } catch(e){
+    console.log(e)
+    res.status(400).send(e);
+  }
+}
+
 
 exports.createCycle= async (req, res) => {
   var {start_date, end_date, admin_id} = req.body;

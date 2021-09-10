@@ -6,13 +6,12 @@ import axios from 'axios'
 const Badges = () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
-    // const [sort, setSort] = useState({})
-    // const [filter, setFilter] = useState({})
+
     useEffect(() => {
         const getBadges = async () => {
             try{
                 const res = (await axios.get('http://localhost:3001/admin/badges'))
-                console.log(res);
+                // console.log(res);
                 setData(res.data)
             } catch(e){
                 setData(null);
@@ -21,8 +20,6 @@ const Badges = () => {
             setLoading(false)
 
         }
-
-
         getBadges();
     }, [])
     
@@ -34,7 +31,7 @@ const Badges = () => {
 
 
 
-    console.log('DATA ' + data)
+    // console.log('DATA ' + data)
     return (
         <>
         <div>
@@ -49,10 +46,15 @@ const Badges = () => {
             data.map((badge) => (
                 <Col span={8}>
                     <Card hoverable='true' actions={[<Button size='large'>Edit</Button>, <Button size='large' >Disable</Button>]} title={<h1>{badge.name}</h1>}>
-                        <img width='100' height='100' src='/badge.png'></img>
-                        <h1>{badge.type == 'developers' ? 'Developers': 'All Employees'}</h1>
-                        <h5>{badge.description}</h5>
-                        <h2>Points Needed: {badge.points_needed}</h2>
+                        <div style={{alignItems:'center', color:'red' }}>
+                            <img width='100' height='100' src='/badge.png'></img>
+                            <h1>{badge.type == 'developers' ? 'Developers': 'All Employees'}</h1>
+
+                            <h5>{badge.description}</h5>
+                            <h2>Points Needed: {badge.points_needed}</h2>
+
+                        </div>
+
                     </Card>
                 </Col>
             ))}

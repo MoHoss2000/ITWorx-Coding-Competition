@@ -8,7 +8,6 @@ const router = express.Router()
 router.use(express.json())
 //router.use(authenticateToken)
 //router.use(isAdmin)
-
 router.get('/profile/:id', controllers.viewProfile)
 
 router.post('/cycle', controllers.createCycle)
@@ -35,25 +34,7 @@ router.get('/badges', controllers.getBadges);
 
 router.get('/cycles', controllers.getCycles)
 
-router.patch('/badge/:badgeID', async (req, res) => {
-    var badgeID = req.params.badgeID;
-    console.log(req.body);
-
-    try{
-        await Badge.update(
-            req.body, 
-            {
-                where: {
-                    id: badgeID
-                }
-            }
-        );
-
-        res.status(200).json({message: 'Badge info updated successfully'});
-    } catch(e) {
-        res.status(400).json({ error: err });
-    }
-});
+router.patch('/badge/:badgeID', controllers.updateBadge);
 
 router.get('/cycle/participants/:cycleID', controllers.viewParticipants)
 
