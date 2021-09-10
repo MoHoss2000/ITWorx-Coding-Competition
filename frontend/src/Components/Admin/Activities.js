@@ -11,26 +11,27 @@ function Activities() {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        console.log('GETTING ACTIVITIES');
-        axios.get(`http://localhost:3001/admin/getActivities`)
-            .then((res) => {           
-                setActivities(res.data)      
-                setLoading(false)         
-              })
-              .catch((e) => {
-                setError(true)
-                console.warn(e.message)
-                
-              })
-    
-    }, []);
-  if(error){
-   return ( 
-     <div>
-    
-       </div>
-     )
+  useEffect(() => {
+    console.log('GETTING ACTIVITIES');
+    axios.get('http://localhost:3001/admin/getActivities')
+      .then((res) => {
+        setActivities(res.data)
+        setLoading(false)
+      })
+      .catch((e) => {
+        setError(true)
+        console.warn(e.message)
+
+      })
+
+  }, []);
+  if (error) {
+    return (
+      <div>
+        <h1> ACTIVITIES</h1>
+        <h3>Error fetching data</h3>
+      </div>
+    )
   }
   if (activities === []) {
     return <p>Loading</p>
