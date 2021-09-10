@@ -259,3 +259,12 @@ BEGIN
     EmployeeActivityCycle EAC INNER JOIN Activity A ON A.id = EAC.Activity_id
     WHERE EAC.employee_id = employeeID AND EAC.cycle_id = cycleID;
 END//
+
+DELIMITER //
+CREATE PROCEDURE "viewCycleDetailsForAdmin"(IN cycleID INT)
+BEGIN
+	SELECT C.start_date, C.end_date, A.first_name, A.last_name, A.id FROM
+    cycle C INNER JOIN admin A ON A.id = C.admin_id
+    WHERE C.id= cycleID;
+END//
+

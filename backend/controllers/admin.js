@@ -4,9 +4,10 @@ const db = require('../db/mysql')
 
 
 exports.viewParticipants = async (req, res) => {
-    const cycleID = req.body.cycleID
+    const cycleID = parseInt(req.params.cycleID)
     try{
       db.query('CALL viewEmployeesInCycle(?)', cycleID ,(err, result) => {
+          console.log(result)
           res.send(result[0]);
       })
     } catch(e){
@@ -145,6 +146,39 @@ exports.createBadge= async (req, res) => {
     db.query(`INSERT INTO Badge (name, description, type, points_needed, enabled) 
     VALUES (?,?,?,?,?)`, [name, description, type, pointsNeeded, isEnabled], (err, result) => {
       res.status(200).send(result);
+    })
+  } catch(e){
+    console.log(e)
+    res.status(400).send(e);
+  }
+}
+
+exports.updateBadge = async(req, res) => {
+  var {name, description, type, points_needed, enabled} = req.body;
+  var id = req.params.badgeID;
+
+  console.log(req.body);
+  console.log(id);
+  try{
+    db.query(`UPDATE Badge SET name = '?', description = '?', type = '?', points_needed = ?, enabled = ? WHERE id = ?`), 
+    [name, description, type, parseInt(points_needed), parseInt(points_needed), parseInt(id)], (err, result) => {
+      console.log(result);
+      res.status(200).send('Badge updated successfully');
+    }
+  } catch(e){
+    console.log(e)
+    res.status(400).send(e);
+  }
+}
+
+
+exports.createCycle= async (req, res) => {
+  var {start_date, end_date, admin_id} = req.body;
+  try{
+    db.query(`INSERT INTO cycle (start_date, end_date, admin_id) 
+    VALUES (?,?,?)`, [start_date, end_date, admin_id], (err, result) => {
+      console.log(result);
+      res.status(200).send('Cycle added successfully');
     })
   } catch(e){
     console.log(e)
@@ -319,11 +353,12 @@ exports.editActivity= async (req, res) => {
     
   }
 
-  exports.cycleInfo = async () => {
-    const cycleID = req.params.cycleID
+  exports.cycleInfo = async (req,res) => {
+    const cycleID = parseInt(req.params.cycleID)
+    console.log(cycleID)
     db.query('CALL viewCycleDetailsForAdmin(?)', cycleID, (err, result) => {
       if(result && result[0]){
-        return res.send(result[0])
+        return res.send(result[0][0])
       }
       return res.status(400).send()
     })
