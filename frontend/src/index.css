@@ -61,15 +61,16 @@ code {
   justify-content: flex-end;
 }
 
-#m{
-  display:flex;
-  flex-direction:row-reverse;
+#m {
+  display: flex;
+  flex-direction: row-reverse;
 }
 .code-box-demo p {
   margin: 100;
 }
-.ant-card { margin-bottom: 30px; }
-
+.ant-card {
+  margin-bottom: 30px;
+}
 
 .ant-spin-nested-loading {
   margin: 20px 5% 0 5%;
