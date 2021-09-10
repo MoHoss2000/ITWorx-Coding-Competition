@@ -14,6 +14,7 @@ import {
 import HeaderAdmin from './Components/Navigation/HeaderAdmin';
 import SiderAdmin  from './Components/Navigation/SiderAdmin';
 import ActivityList from './Components/General/CycleActivities'
+import EmployeeProfile from './Components/EmployeeProfile/EmployeeProfile';
 
 function App() {
   return (
@@ -31,17 +32,18 @@ function App() {
   </Layout>
  <Layout style={{  display:'flex' , flexDirection :'row'}} >
    
-  <Layout style={{width: '20%' }}>
+  <Layout style={{width: '10%' }}>
     <SiderAdmin/>
   </Layout>
-  <Layout style={{width: '80%' }} >
-    <ActivityList/>
+  <Layout style={{width: '90%' }} >
+  <EmployeeProfile/>
       <Route exact path='/' component={AdminHome}/> 
       <Route path='/activities' component={Activities}/> 
       <Route path='/newActivity' component={CreateActivity}/>      
   
   </Layout>
 </Layout>    
+   
  </Layout>
  </Router>    
   );

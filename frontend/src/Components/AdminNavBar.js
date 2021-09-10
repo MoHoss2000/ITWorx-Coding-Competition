@@ -79,7 +79,7 @@ function AdminNavBar (props) {
         <Header className="header" id="header">
         <Menu theme="light" mode="horizontal" id ="m" defaultSelectedKeys={['1']}>
             <Menu.Item key="10">
-                <Avatar
+            <Avatar
                     style={{backgroundColor: '#87d068', }}
                     icon={<UserOutlined />}/>
             </Menu.Item>

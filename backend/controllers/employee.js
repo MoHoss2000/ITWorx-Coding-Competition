@@ -91,6 +91,15 @@ exports.viewEmployeeProfile = async (req, res) => {
         })
     })
 
+    const departments = new Promise((resolve, reject) => {
+        db.query('CALL viewEmployeeDepartments(?)', employeeId, (err, result) => {
+            if(err)
+                reject(err)
+            else
+                resolve(result)
+        })
+    })
+
     const badges = new Promise((resolve, reject) => {
         db.query('CALL viewEmployeeBadges(?)', employeeId, (err, result) => {
             if(err)
@@ -119,20 +128,32 @@ exports.viewEmployeeProfile = async (req, res) => {
     })
 
     try{
-        const res1 = await personalInfo 
-        //const res2 = await badges
-        //const res3 = await practice
-        //const res4 = await virtual_recognitions
+        result.personalInfo = (await personalInfo)[0]
     }catch(e){
-        res.send(e)
+        result.personalInfo = []
     }
-    
-    console.log(res1)
-    console.log(res2)
-    console.log(res3)
-    console.log(res4)
+    try{
+        result.badges = (await badges)[0]
+    }catch(e){
+        result.badges = []
+    }
+    try{
+        result.practice = (await practice)[0]
+    }catch(e){
+        result.practice = []
+    }
+    try{
+        result.virtual_recognitions = (await virtual_recognitions)[0]
+    }catch(e){
+        result.virtual_recognitions = []
+    }
+    try{
+        result.departments = (await departments)[0]
+    }catch(e){
+        departments = []
+    }
 
-    //res.send('tmam')
+    res.send(result)
 
 }
 
