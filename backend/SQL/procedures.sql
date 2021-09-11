@@ -263,8 +263,8 @@ END//
 DELIMITER //
 CREATE PROCEDURE "viewCycleDetailsForAdmin"(IN cycleID INT)
 BEGIN
-	SELECT C.start_date, C.end_date, A.first_name, A.last_name, A.id FROM
-    cycle C INNER JOIN admin A ON A.id = C.admin_id
+	SELECT C.id AS CycleID, C.start_date, C.end_date, A.first_name, A.last_name, A.id, C.current 
+    FROM cycle C INNER JOIN admin A ON A.id = C.admin_id
     WHERE C.id= cycleID;
 END//
 

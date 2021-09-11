@@ -43,7 +43,6 @@ const EmployeeProfile = () => {
                     <Badges data={data.badges}/>
                 </Col>
             </Row>    
-        
         </div>
         </div>
     )
