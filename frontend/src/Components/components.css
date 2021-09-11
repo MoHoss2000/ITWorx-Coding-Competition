@@ -190,21 +190,21 @@ body {
 
 .info-card {
   top: 20%;
-  width: 690px;
-  height: 280px;
-  box-shadow: 10px 8px 30px 0 rgba(0, 0, 0, 0.26);
-  transition: 0.3s;
+  width: 800px;
+  height: auto;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  border-top-left-radius: 2cm;
+  border-color: white;
+  
+
 }
 
 .info-card1 {
   top: 20%;
+  height:auto;
   width: 690px;
-  box-shadow: 10px 8px 30px 0 rgba(0, 0, 0, 0.26);
-  transition: 0.3s;
+  border-color: white;
 }
 
 .leaderboard-tab-list{
@@ -224,7 +224,7 @@ body {
   text-align: left;
   background: #b72025;
   border-bottom: 1px solid #f0f0f0;
-  transition: background 0.3s ease;
+  transition:  0.3s ease;
 }
 
 .ant-table-thead  :hover{
@@ -234,8 +234,30 @@ body {
   text-align: left;
   background:transparent;
   border-bottom: 1px solid #f0f0f0;
-  transition: background 0.3s ease;
+  transition:  0.3s ease;
 }
 .ant-tabs-tab ant-tabs-tab-active{
   color:springgreen
+}
+
+.semi-back{
+  background: #b72025;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #00009071, #0099cc);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #00009038, #0099cc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: 600px
+}
+
+.semi-lower{
+  background-color: white;
+  height: auto;
+  /* width: 1200px; */
+  margin-left: 15%;
+  margin-right: 15%;
+  top: -380px;
+  border-radius: 4cm;
+}
+
+.profile-components{
+  display: flex;
+  justify-content: center;
 }
