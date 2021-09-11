@@ -83,7 +83,7 @@ exports.viewEmployeeStatus = async (req, res) => {
     //activities completed by this employee
     const activities = proc.viewCompletedTasks(id, cycleID)
     //total gained points
-    const total_points = proc.totalGainedPoints(id, cycleID)
+    const total_points = proc.totalGainedPointsInCycle(id, cycleID)
     //all badges earned by this employee
     const badges = proc.viewEmployeeCycleBadges(id, cycleID)
     //all VR earned by this employee
