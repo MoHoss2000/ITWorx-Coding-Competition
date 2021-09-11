@@ -12,20 +12,35 @@ const { Title } = Typography;
 
 
 function CycleOverview (){
+
+    const [data, setData] = useState([])
+    const [current, setCurrent] = useState(false)
+  
+    useEffect(() => {
+        const getTime = async () => {
+            const cycleID = 1
+            const res = (await axios.get(`http://localhost:3001/admin/cycle/view/${cycleID}`))
+            setData(res.data)
+            setCurrent(res.data.current)
+            console.log(res.data)
+            console.log(res.data.current == true)
+        }
+        getTime()
+    }, [])
+
     return(
         <div>
             <div className='header-group'>
                 <h1 className= "title"> <b>Cycle Overview </b></h1>
                 <div className="switch">
-                    <p>Disable Cycle</p>
-                    <DisableSwitch />
+                    <DisableSwitch current={current} />
                 </div>
             </div>
             <Divider className="title-divider"/>
            <Row align='top'>
                 <Col flex="620px">
     
-                <CycleInfo />
+                <CycleInfo data={data}/>
                 <ActivityList />
 
                 </Col>

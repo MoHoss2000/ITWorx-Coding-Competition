@@ -56,6 +56,7 @@ const EmployeeLeaderboard = () => {
             title: 'Rank',
             dataIndex: 'rank',
             key: 'rank',
+            width: '10%'
            
         },
         {
@@ -71,6 +72,7 @@ const EmployeeLeaderboard = () => {
             sorter: (a, b) => a.points - b.points,
             sortOrder: sort.columnKey === 'points' && sort.order,
             ellipsis: true,
+            width: '20%'
         },
         {
             title: 'Developer/Non-developer',

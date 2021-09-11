@@ -43,24 +43,11 @@ exports.exportToExcelParticipants = async(req, res) => {
 } 
 
 exports.disableCycle = async (req, res) => {
-    cycleID = req.params.cycleID
-    try{
-    await Cycle.update({current: 0}, {where: {id: cycleID}});
-    res.status(200).json({message: 'Cycle disabled successfully'});
-
-    } catch(e) {
-        res.status(400).json({ error: err });
-    }
-
     const cycleID = req.params.cycleID
-    try{
-      db.query('UPDATE cycle SET disabled = 1 WHERE id = (?)', cycleID ,(err, result) => {
-          res.status(200).send('Cycle disabled successfully');
-      })
-    } catch(e){
-      console.log(e)
-      res.status(400).send(e);
-    }
+    db.query('UPDATE cycle SET current = 0 WHERE id = (?)', cycleID ,(err, result) => {
+        res.status(200).send('Cycle disabled successfully');
+    })
+  
 }
 
 exports.viewProfile = async (req, res) => {
