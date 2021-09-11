@@ -78,15 +78,16 @@ exports.viewProfile = async (req, res) => {
 
 exports.viewEmployeeStatus = async (req, res) => {
     id = req.params.employeeId
+    cycleID = req.params.cycleID
 
     //activities completed by this employee
-    const activities = proc.viewCompletedActivities(id)
+    const activities = proc.viewCompletedTasks(id, cycleID)
     //total gained points
-    const total_points = proc.totalGainedPoints(id)
+    const total_points = proc.totalGainedPoints(id, cycleID)
     //all badges earned by this employee
-    const badges = proc.viewmployeeBadges(id)
+    const badges = proc.viewEmployeeCycleBadges(id, cycleID)
     //all VR earned by this employee
-    const virtual_recognitions = proc.viewEmployeVirtualRecognition(id)
+    const virtual_recognitions = proc.viewEmployeVirtualRecognition(id, cycleID)
 
 
 
