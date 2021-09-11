@@ -298,7 +298,7 @@ END//
 DELIMITER //
 CREATE PROCEDURE "getEmployeeRankings"(IN cycleID INT)
 BEGIN
-	SELECT E.id, sum(A.points) , CONCAT(first_name, ' ', last_name) AS name, E.is_developer
+	SELECT E.id, sum(A.points) AS points, CONCAT(first_name, ' ', last_name) AS name, E.is_developer
     FROM EmployeeActivityCycle EAC 
     INNER JOIN Activity A ON A.id = EAC.activity_id 
     INNER JOIN employee E ON EAC.employee_id = E.id
