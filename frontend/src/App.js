@@ -15,11 +15,10 @@ import Badges from "./Components/Admin/Badges";
 import CreateBadge from "./Components/Admin/CreateBadge";
 import Participants from './Components/Admin/CycleParticipants';
 import PendingList from './Components/Admin/PendingOverview';
-import EmployeeStatus from './Components/Admin/EmployeeStatus';
 import NotFound404 from "./Components/NotFound404";
 import CycleOverview from './Components/General/CycleOverview';
 import Leaderboard from './Components/Admin/Leaderboard';
-import CycleInfo from './Components/General/CycleInfo';
+import EmployeeCycleStatus from './Components/Admin/viewEmployeeCycleStatus/EmployeeCycleStatus';
 
 
 function App() {
@@ -45,10 +44,11 @@ function App() {
           
           <Layout style={{flex: 1, paddingLeft: 50, paddingTop: 50, paddingRight: 20, paddingBottom: 50, overflowY: 'scroll'}}>
             <Switch>
+              <Route path ='/employeeStatus' component ={EmployeeCycleStatus} />
               <Route path ='/participants' component ={Participants} />
               <Route path ='/leaderboard' component ={Leaderboard} />
               <Route path ='/cycleOverview' component ={CycleOverview} />
-              <Route path ='/cycleInfo' component ={CycleInfo} />
+              
               <Route exact path='/' component={AdminHome}/>
               <Route path='/newActivity' component={CreateActivity}/>
               <Route path={'/activities/:activityId'} component={Activity} />

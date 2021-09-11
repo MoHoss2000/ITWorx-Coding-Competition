@@ -104,7 +104,7 @@ DELIMITER //
 CREATE PROCEDURE viewEmployeeCycleBadges (IN employeeID INT, IN cycleID INT)
 BEGIN
 	SELECT B.* FROM
-    employeebadgecycle EBC INNER JOIN badge B ON EBC.badge_id = B.id
+    employeeBadgeCycle EBC INNER JOIN badge B ON EBC.badge_id = B.id
     WHERE EBC.employee_id = employeeID AND EBC.cycle_id = cycleID;
 END //
 
@@ -301,12 +301,4 @@ BEGIN
     WHERE EAC.cycle_id = cycleID and EAC.status='completed'
     Group By E.id
     Order By sum(A.points) desc;
-END//
-
-DELIMITER //
-CREATE PROCEDURE "viewEmployeeCycleBadges"(IN employeeID INT, IN cycleID INT)
-BEGIN
-	SELECT B.* FROM
-    employeebadgecycle EBC INNER JOIN badge B ON EBC.badge_id = B.id
-    WHERE EBC.employee_id = employeeID AND EBC.cycle_id = cycleID;
 END//

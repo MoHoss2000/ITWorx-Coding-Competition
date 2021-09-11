@@ -1,28 +1,28 @@
 import React, {useState, useEffect} from 'react'
 import {Badge, Descriptions, Tabs, Typography, Divider, Card, Avatar} from 'antd'
 import axios from 'axios'
-import PersonalInfo from './PersonalInfo'
-import Spinner from '../General/loadingSpinner'
-import VirtualRecognitions from './VirtualRecognitions'
-import Badges from './Badges'
-import {SketchOutlined, UserOutlined} from '@ant-design/icons';
-import '../components.css'
+
+import Spinner from '../../General/loadingSpinner'
+
+
+
+import '../../components.css'
 import CycleInfo from '../../General/CycleInfo'
 const { TabPane } = Tabs;
 const { Title } = Typography;
 
-const EmployeeStatus= () => {
+const EmployeeCycleStatus= () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
 
     useEffect(() => {
         const employeeId = 1
         const cycleID = 1
-        const getStatus= async () => {
-            const {data} = await (axios.get(`http://localhost:3001/employeeStatus/${employeeId}/${cycleID}`))
+        const getStatus = async () => {
+            const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${employeeId}/${cycleID}`))
+            console.log(data)
             setData(data)
             setLoading(false)
-            console.log(data)
         } 
         getStatus()
     }, [])
@@ -32,9 +32,9 @@ const EmployeeStatus= () => {
 
     return(
         <div>
-            <CycleInfo data={data}/>
+            <CycleInfo data={data.cycleInfo[0]}/>
         </div>
     )
 }
 
-export default EmployeeStatus
+export default EmployeeCycleStatus
