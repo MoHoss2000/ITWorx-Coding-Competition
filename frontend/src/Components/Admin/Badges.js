@@ -48,7 +48,7 @@ const Badges = () => {
                 {
                     data.map((badge, index) => (
                         <Col span={8}>
-                            <Card style={{borderRadius: 40, backgroundColor: badge.enabled? 'ffffff':'#D7D7D7'}} hoverable='true' actions={[<Button size='large' onClick={() => {
+                            <Card style={{borderRadius: 40, backgroundColor: badge.enabled? 'ffffff':'#E7E7E7'}} hoverable='true' actions={[<Button size='large' onClick={() => {
                                 setSelectedData(badge);
                                 console.log(`selected is: ${selectedData}`);
                                 setVisible(true);
