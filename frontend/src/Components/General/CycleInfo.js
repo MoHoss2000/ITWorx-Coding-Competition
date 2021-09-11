@@ -7,6 +7,7 @@ import axios from 'axios';
 const { Title } = Typography;
 
 const CycleInfo = (props) =>{
+   console.log(props)
   
 return(
  <div>

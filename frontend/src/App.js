@@ -19,6 +19,7 @@ import EmployeeStatus from './Components/Admin/EmployeeStatus';
 import NotFound404 from "./Components/NotFound404";
 import CycleOverview from './Components/General/CycleOverview';
 import Leaderboard from './Components/Admin/Leaderboard';
+import CycleInfo from './Components/General/CycleInfo';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
               <Route path ='/participants' component ={Participants} />
               <Route path ='/leaderboard' component ={Leaderboard} />
               <Route path ='/cycleOverview' component ={CycleOverview} />
+              <Route path ='/cycleInfo' component ={CycleInfo} />
               <Route exact path='/' component={AdminHome}/>
               <Route path='/newActivity' component={CreateActivity}/>
               <Route path={'/activities/:activityId'} component={Activity} />

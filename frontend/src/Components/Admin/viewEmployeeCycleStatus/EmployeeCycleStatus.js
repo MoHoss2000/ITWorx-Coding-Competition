@@ -7,6 +7,7 @@ import VirtualRecognitions from './VirtualRecognitions'
 import Badges from './Badges'
 import {SketchOutlined, UserOutlined} from '@ant-design/icons';
 import '../components.css'
+import CycleInfo from '../../General/CycleInfo'
 const { TabPane } = Tabs;
 const { Title } = Typography;
 
@@ -31,6 +32,7 @@ const EmployeeStatus= () => {
 
     return(
         <div>
+            <CycleInfo data={data}/>
         </div>
     )
 }
