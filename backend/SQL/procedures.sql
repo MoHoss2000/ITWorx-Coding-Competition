@@ -1,10 +1,9 @@
-DELIMITER //
-CREATE PROCEDURE viewCompletedTasks (IN employeeID INT, IN cycleID INT)
-BEGIN
-	SELECT * FROM
+CREATE PROCEDURE "viewCompletedTasks"(IN employeeID INT, IN cycleID INT)
+BEGIN 
+	SELECT A.* FROM
     employeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
     WHERE EAC.employee_id = employeeID AND EAC.cycle_id = cycleID AND A.status = 'completed';
-END //
+END
 
 DELIMITER //
 CREATE PROCEDURE viewPendingTasks (IN employeeID INT)
@@ -93,13 +92,12 @@ BEGIN
 END //
 
 
-DELIMITER //
-CREATE PROCEDURE viewEmployeeCycleVirtualRecognition (IN employeeID INT, IN cycleID INT)
+CREATE PROCEDURE "viewEmployeeCycleVirtualRecognition"(IN employeeID INT, IN cycleID INT)
 BEGIN
 	SELECT A.* FROM
     EmployeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
-    WHERE EAC.employee_id = employeeID AND EAC.cycle_id = cycleID AND EAC.status = "completed" AND A.virtual_recognition = TRUE;
-END //
+    WHERE EAC.employee_id = employeeID AND EAC.cycle_id = cycleID AND EAC.status = 'completed' AND A.virtual_recognition = TRUE;
+END
 
 
 DELIMITER //
@@ -127,14 +125,12 @@ BEGIN
     WHERE EAC.status = "completed" AND EAC.employee_id = employeeID;
 END //
 
-
-DELIMITER //
-CREATE PROCEDURE  totalGainedPointsInCycle (IN employeeID INT, IN cycleID INT)
+CREATE PROCEDURE "totalGainedPointsInCycle"(IN employeeID INT, IN cycleID INT)
 BEGIN
 	SELECT SUM(A.points * EAC.quantity)
     FROM employeeactivitycycle EAC INNER JOIN activity A ON A.id = EAC.activity_id
     WHERE EAC.status = "completed" AND EAC.employee_id = employeeID AND EAC.cycle_id = cycleID;
-END //
+END
 
 DELIMITER //
 CREATE PROCEDURE allCycles ()
@@ -305,4 +301,12 @@ BEGIN
     WHERE EAC.cycle_id = cycleID and EAC.status='completed'
     Group By E.id
     Order By sum(A.points) desc;
+END//
+
+DELIMITER //
+CREATE PROCEDURE "viewEmployeeCycleBadges"(IN employeeID INT, IN cycleID INT)
+BEGIN
+	SELECT B.* FROM
+    employeebadgecycle EBC INNER JOIN badge B ON EBC.badge_id = B.id
+    WHERE EBC.employee_id = employeeID AND EBC.cycle_id = cycleID;
 END//
