@@ -19,7 +19,7 @@ function Leaderboard (){
             {/* <Title className= "title"> Leaderboard</Title>
             <Divider className="title-divider"/> */}
           
-            <Tabs defaultActiveKey="2" centered='true' size='large' tabBarGutter={50} >
+            <Tabs defaultActiveKey="1" centered='true' size='large' tabBarGutter={50} >
                 <TabPane
                     tab={<span > <UserOutlined /> Employee  </span> }
                     key="1"
@@ -30,14 +30,14 @@ function Leaderboard (){
                 
                 <TabPane
                     tab={<span > <UsergroupAddOutlined /> Department </span> }
-                    key="3"
+                    key="2"
                 >
                 <DepartmentLeaderboard />
                 </TabPane>
 
                 <TabPane
                     tab={<span> <UsergroupAddOutlined /> Practice </span> }
-                    key="2"
+                    key="3"
                 >
                 <PracticeLeaderboard />
                 </TabPane>

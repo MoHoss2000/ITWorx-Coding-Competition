@@ -14,31 +14,26 @@ const { Title } = Typography;
 function CycleOverview (){
     return(
         <div>
-            <Title className= "title"> Cycle Overview</Title>
-            <div className="switch">
-                <p>Disable/Enable Cycle</p>
-                <DisableSwitch />
+            <div className='header-group'>
+                <h1 className= "title"> <b>Cycle Overview </b></h1>
+                <div className="switch">
+                    <p>Disable Cycle</p>
+                    <DisableSwitch />
+                </div>
             </div>
             <Divider className="title-divider"/>
            <Row align='top'>
-                <Col flex="800px">
+                <Col flex="620px">
     
                 <CycleInfo />
                 <ActivityList />
 
                 </Col>
-                <Col span={12}>
-                <Leaderboard style={{width:'100px'}} />
+                <Col span={14}>
+                <Leaderboard  />
                 </Col>
                 </Row>
-                <Row>
-                <Col span={8}>
-                    {/* <div style= {{display: 'flex', flexDirection: 'row-reverse'}}> */}
-                   
-                {/* </div> */}
-                </Col>
-                 
-                </Row>
+                
           
 
             {/* <Row>

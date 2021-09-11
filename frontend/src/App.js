@@ -29,7 +29,7 @@ function App() {
           <Layout style={{
             // height: '50px',
             display: 'flex',
-            textAlign: "center",
+            textAlign: 'right',
             width: "100%"
           }}>
             <HeaderAdmin/>
