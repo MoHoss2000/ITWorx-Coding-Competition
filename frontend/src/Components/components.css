@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
+.code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
@@ -36,13 +36,6 @@ code {
 [data-theme="dark"] .site-layout .site-layout-background {
   background: rgba(255, 22, 22, 0.3);
 }
-.logo {
-  float: left;
-  width: 100px;
-  height: 31px;
-  margin: 16px 24px 16px 0;
-  background: rgba(255, 255, 255, 0.3);
-}
 
 .ant-row-rtl .logo {
   float: right;
@@ -54,22 +47,28 @@ code {
 }
 #menu {
   margin-top: 60px;
+  background-color: transparent
 }
 
 #header {
-  /* background-color: rgb(4, 21, 39); */
-  background-color: rgb(255, 255, 255);
+  background-color: white; 
   justify-content: flex-end;
+
 }
 
 #m {
+  right: 10%;
   display: flex;
   flex-direction: row-reverse;
+  background-color: transparent;
+  border-color: transparent;
   height: 100%;
 }
+
 .code-box-demo p {
   margin: 100;
 }
+
 .ant-card {
   margin-bottom: 30px;
 }
@@ -78,15 +77,51 @@ code {
   margin: 20px 5% 0 5%;
 }
 
-.ant-switch {
+/* .ant-switch {
   display: flex;
   flex-direction: row-reverse;
-}
-
-/* .site-card-border-less-wrapper {
-  padding: 30px;
-  background: #361414;
 } */
+
+  [data-theme="dark"] .site-card-border-less-wrapper {
+    background: #303030;
+  }
+
+
+  .view-all-button{
+    margin-left: 50px;
+    margin-top: 20px;
+
+  }
+
+  .employee-list{
+    margin-top: 40px;
+    left: 5%;
+    width : 900px;
+  }
+
+
+.gridStyle {
+    width: '600px';
+  }
+
+ 
+
+  .switch{
+    margin-left: 5%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .cycle-list{
+    background-color: #0099cc1f;
+    border-bottom-right-radius: 1cm;
+    margin-left: 20px;
+  }
+
+  .side-menu{
+    background-color: #0099cc;
+  }
+
 [data-theme="dark"] .site-card-border-less-wrapper {
   background: #303030;
 }
@@ -94,11 +129,21 @@ code {
 .activities-card {
   top: 20%;
   left: 5%;
-  width: 700px;
+  width: 600px;
   margin-bottom: 30px;
-  background: rgba(0, 153, 204, 0);
-  box-shadow: 10px 8px 30px 0 rgba(0, 0, 0, 0.26);
+  background: rgba(255, 255, 255, 0); 
+  box-shadow: 10px 8px 20px 0 #b7202593;
   transition: 0.3s;
+
+}
+
+
+.side-bar{
+
+  background: #b72025;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #000090, #b72025);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #000090, #b72025); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
 }
 
 .view-all-button {
@@ -113,28 +158,27 @@ code {
 .title {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin-left: 20px;
+  color: #b72025
+  
 }
 .title-divider {
   width: 400px;
   background-color: rgb(0, 0, 0);
 }
 #logo {
-  width: 200px;
+  width: 100px;
   position: relative;
-  left: -1120px;
+  left: -1270px;
 }
 
 .gridStyle {
   width: "600px";
 }
 
-.small-divider {
-  background-color: rgba(0, 0, 0, 0.24);
+.small-divider{
+  background-color: #b72025;
 }
-.switch {
-  display: inline-flexbox;
-  margin-left: 5%;
-}
+
 .cycle-list {
   background-color: #0099cc1f;
   border-bottom-right-radius: 1cm;
@@ -161,4 +205,37 @@ code {
   width: 690px;
   box-shadow: 10px 8px 30px 0 rgba(0, 0, 0, 0.26);
   transition: 0.3s;
+}
+
+.leaderboard-tab-list{
+  margin-left: 100px;
+}
+
+.header-group{
+  display: flex;
+  flex-direction: row;
+}
+
+
+.ant-table-thead >tr >th {
+  position: relative;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+  text-align: left;
+  background: #b72025;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.3s ease;
+}
+
+.ant-table-thead  :hover{
+  position: relative;
+  color: rgba(0, 0, 0);
+  font-weight: 500;
+  text-align: left;
+  background:transparent;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.3s ease;
+}
+.ant-tabs-tab ant-tabs-tab-active{
+  color:springgreen
 }

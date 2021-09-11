@@ -1,26 +1,64 @@
 import React , {useState, useEffect} from 'react';
 import 'antd/dist/antd.css';
-import { List, Card , Button, Avatar, Typography, Divider} from 'antd';
+import { List, Card , Button, Avatar, Typography, Divider, Row, Col} from 'antd';
 import Spinner from './loadingSpinner'
 import axios from 'axios'
 import '../components.css';
 import CycleInfo from '../General/CycleInfo'
 import ActivityList from '../General/ActivityList'
 import DisableSwitch from '../Admin/DisableSwitch'
+import Leaderboard from '../Admin/Leaderboard';
 const { Title } = Typography;
 
 
 function CycleOverview (){
+
+    const [data, setData] = useState([])
+    const [current, setCurrent] = useState(false)
+  
+    useEffect(() => {
+        const getTime = async () => {
+            const cycleID = 1
+            const res = (await axios.get(`http://localhost:3001/admin/cycle/view/${cycleID}`))
+            setData(res.data)
+            setCurrent(res.data.current)
+            console.log(res.data)
+            console.log(res.data.current == true)
+        }
+        getTime()
+    }, [])
+
     return(
         <div>
-            <Title className= "title"> Cycle Overview</Title>
-            <div className="switch">
-                <p>Disable/Enable Cycle</p>
-                <DisableSwitch />
+            <div className='header-group'>
+                <h1 className= "title"> <b>Cycle Overview </b></h1>
+                <div className="switch">
+                    <DisableSwitch current={current} />
+                </div>
             </div>
             <Divider className="title-divider"/>
-            <CycleInfo />
-            <ActivityList />
+           <Row align='top'>
+                <Col flex="620px">
+    
+                <CycleInfo data={data}/>
+                <ActivityList />
+
+                </Col>
+                <Col span={14}>
+                <Leaderboard  />
+                </Col>
+                </Row>
+                
+          
+
+            {/* <Row>
+                <Col>
+                <Leaderboard />
+                </Col>
+            </Row> */}
+            
+           
+           
         </div>
     )
 }

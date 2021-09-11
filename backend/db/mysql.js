@@ -2,7 +2,7 @@
 const mysql = require('mysql')
 const fs = require('fs');
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
     user: 'admin',
     host: 'db-mysql-nyc1-90314-do-user-9802367-0.b.db.ondigitalocean.com',
     password: 'SMkcUUHo3IbL-5jO',
