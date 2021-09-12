@@ -19,6 +19,8 @@ import CycleOverview from './Components/General/CycleOverview';
 import Leaderboard from './Components/Admin/leaderboard';
 import EmployeeCycleStatus from './Components/Admin/viewEmployeeCycleStatus/EmployeeCycleStatus';
 import MyStatus from './Components/Employee/MyStatus';
+import EmployeeHome from './Components/Home/HomePage';
+
 
 
 function App() {
@@ -43,10 +45,12 @@ function App() {
           </Layout>
           
           <Layout style={{flex: 1, paddingLeft: 50, paddingTop: 50, paddingRight: 20, paddingBottom: 50, overflowY: 'scroll'}}>
+           
             <Switch>
               <Route path ='/employeeStatus' component ={EmployeeCycleStatus} />
               <Route path ='/participants' component ={Participants} />
               <Route path ='/leaderboard' component ={Leaderboard} />
+              <Route path ='/home' component ={EmployeeHome} />
               <Route path ='/cycleOverview' component ={CycleOverview} />
               <Route path ='/myStatus' component ={MyStatus} />
               <Route exact path='/' component={AdminHome}/>

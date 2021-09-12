@@ -317,3 +317,11 @@ BEGIN
     Group By E.id
     Order By sum(A.points) desc;
 END//
+
+DELIMITER //
+CREATE PROCEDURE "getDeadline"()
+BEGIN
+	SELECT end_date, start_date
+	From cycle 
+	where current=1;
+END //

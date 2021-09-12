@@ -52,42 +52,42 @@ const EmployeeCycleStatus= () => {
                 <Tabs defaultActiveKey="1" centered>
 
                     <TabPane tab={<span style={{fontSize:'23px'}}> Activities  </span>} key="2" >
-    <div className='info-display info-tab'>
-     <Card className='activities-container'>
-        <Tabs defaultActiveKey="1" centered='true' size='large' tabBarGutter={30}>
-            <TabPane
-                tab={<span style={{fontSize:'16px'}}> Completed Activities  </span>}
-                key="1"
-            >
-                <div className='profile-components'>
-                    <ActivitiesDone data={data.completed_activities} /> 
-                </div>
-            </TabPane>
-            <TabPane
+                         <div className='info-display info-tab'>
+                                <Card className='activities-container'>
+                                    <Tabs defaultActiveKey="1" centered='true' size='large' tabBarGutter={30}>
+                                        <TabPane
+                                            tab={<span style={{fontSize:'16px'}}> Completed Activities  </span>}
+                                            key="1"
+                                        >
+                                            <div className='profile-components'>
+                                                <ActivitiesDone data={data.completed_activities} /> 
+                                            </div>
+                                        </TabPane>
+                                        <TabPane
 
-            tab={<span style={{fontSize:'16px'}}> Pending Activities </span>
-            }
-            key="2"
-            >
-                <div className='profile-components'>
-                <ActivitiesDone data={data.pending_activities}  /> 
-                </div>
-            </TabPane>
-            <TabPane
+                                        tab={<span style={{fontSize:'16px'}}> Pending Activities </span>
+                                        }
+                                        key="2"
+                                        >
+                                            <div className='profile-components'>
+                                            <ActivitiesDone data={data.pending_activities}  /> 
+                                            </div>
+                                        </TabPane>
+                                        <TabPane
 
-            tab={
-                <span style={{fontSize:'16px'}}> In Progress Activities  </span> }
-            key="3"
-            >
-                <div className='profile-components'>
-                <ActivitiesDone data={data.inprogress_activities}  /> 
-                </div>
-            </TabPane>
-    
-        </Tabs>
-    </Card>
-</div>
-</TabPane>
+                                        tab={
+                                            <span style={{fontSize:'16px'}}> In Progress Activities  </span> }
+                                        key="3"
+                                        >
+                                            <div className='profile-components'>
+                                            <ActivitiesDone data={data.inprogress_activities}  /> 
+                                            </div>
+                                        </TabPane>
+                                
+                                    </Tabs>
+                                </Card>
+                            </div>
+                    </TabPane>
 
                     <TabPane tab={<span style={{fontSize:'23px'}}> Badges  </span>} key="3">
      <div className='status-tabs'>

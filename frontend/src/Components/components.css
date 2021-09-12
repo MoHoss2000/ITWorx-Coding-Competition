@@ -289,3 +289,71 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.App{
+  display: flex;
+  flex-direction: row;
+}
+.profile-activities{
+  width: 900px;
+  padding: 0cm;
+  border-radius: 1cm;
+
+}
+.components-header{
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 25px;
+  color: #b72025;
+  margin-left: 5%;
+}
+.activities-home{
+  box-shadow: 10px 8px 20px 0 #0000907e;
+  transition: 0.3s;
+  margin-left: 5%;
+}
+
+.clock-header{
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 25px;
+  color: #b72025;
+  margin-left: 20%;
+}
+.welcome-bar{
+  width: 1350px;
+  height: 300px;
+  margin: 0 auto;
+  margin-top: 40px;
+  margin-bottom: 5%;
+  border-radius: 2cm;
+  background: #b72025;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #000090, #b72025);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #00009073, #b72025); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.home{
+  margin: 0 auto;
+}
+
+.welcome-statement{
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 15%;
+  font-size: 35px;
+  color:white
+}
+.avatar{
+  width: 350px;
+  padding-bottom: 90px;
+
+}
+.avatar-block{
+  top:-100px;
+}
+
+.rowsss{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 3%;
+}
+

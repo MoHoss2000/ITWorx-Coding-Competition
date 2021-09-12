@@ -29,4 +29,6 @@ router.get('/achievments', controllers.viewAchievements)
 
 router.get('/assignedActivities', controllers.getAssignedActivities)
 
+router.get('/currentActivities/:employeeID', controllers.getCurrentActivities)
+
 module.exports = router

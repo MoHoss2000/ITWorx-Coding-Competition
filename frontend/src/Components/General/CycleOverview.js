@@ -50,11 +50,7 @@ function CycleOverview (){
                 
           
 
-            <Row>
-                <Col>
-                <Leaderboard />
-                </Col>
-            </Row>
+            
             
            
            
