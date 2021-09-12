@@ -12,13 +12,12 @@ import ActivityList from './Components/General/ActivityList'
 import EmployeeProfile from './Components/EmployeeProfile/EmployeeProfile';
 import Activity from "./Components/Admin/Activity";
 import Badges from "./Components/Admin/Badges";
-import CreateBadge from "./Components/Admin/CreateBadge";
 import Participants from './Components/Admin/CycleParticipants';
 import PendingList from './Components/Admin/PendingOverview';
 import EmployeeStatus from './Components/Admin/EmployeeStatus';
 import NotFound404 from "./Components/NotFound404";
 import CycleOverview from './Components/General/CycleOverview';
-import Leaderboard from './Components/Admin/Leaderboard';
+import Leaderboard from './Components/Admin/leaderboard';
 
 
 function App() {
@@ -52,7 +51,6 @@ function App() {
               <Route path={'/activities/:activityId'} component={Activity} />
               {/* <Route path='/activities' component={Activities}/> */}
               <Route path='/badges' component={Badges}/>
-              <Route path='/newBadge' component={CreateBadge}/>
               <Route path='/employee-profile' component={EmployeeProfile}/>
               <Route component={NotFound404}/>
               

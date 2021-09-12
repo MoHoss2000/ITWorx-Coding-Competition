@@ -126,7 +126,7 @@ exports.createBadge= async (req, res) => {
   var name = req.body.name;
   var description = req.body.description;
   var type = req.body.type;
-  var pointsNeeded = req.body.points;
+  var pointsNeeded = req.body.points_needed;
   var isEnabled  = req.body.enabled;
   
   try{

@@ -7,7 +7,7 @@ import '../components.css';
 import CycleInfo from '../General/CycleInfo'
 import ActivityList from '../General/ActivityList'
 import DisableSwitch from '../Admin/DisableSwitch'
-import Leaderboard from '../Admin/Leaderboard';
+import Leaderboard from '../Admin/leaderboard';
 const { Title } = Typography;
 
 

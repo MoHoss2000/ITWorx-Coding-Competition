@@ -9,6 +9,7 @@ const Badges = () => {
     const [data, setData] = useState([])
     const [selectedData, setSelectedData] = useState([])
     const [visible, setVisible] = useState(false)
+    const [newBadgeMode, setNewBadgeMode] = useState(false);
 
     useEffect(() => {
         const getBadges = async () => {
@@ -32,7 +33,32 @@ const Badges = () => {
     if (loading)
         return <Spin size='large' />
 
+    
+    const EditBadgeButton = (props) => {
+        return <Button size='large' onClick={() => {
+            setNewBadgeMode(false);
+            setSelectedData(props.badge);
+            setVisible(true);
+        }}>Edit</Button>
+    }
 
+    const ToggleBadgeStatus = (props) => {
+        const badge = props.badge;
+        return <Button size='large' onClick={
+            async ()=>{
+                badge.enabled = !badge.enabled;
+
+                await axios.patch(`http://localhost:3001/admin/badge/${badge.id}`, badge);
+                // window.location.reload();
+                const res = await axios.get('http://localhost:3001/admin/badges')
+                // console.log(res);
+                setData(res.data)
+            
+            }
+        }> 
+            {badge.enabled? 'Disable': 'Enable' }
+        </Button>
+    }
 
     // console.log('DATA ' + data)
     return (
@@ -40,7 +66,13 @@ const Badges = () => {
             <div>
                 <h1 className="title">Badges</h1>
                 <div style={{ display: "flex", flexDirection: 'row-reverse' }}>
-                    <Button type='primary' size='large' shape='round'>Create New Badge</Button>
+                    <Button type='primary' size='large' shape='round' onClick={
+                        () => {
+                            setNewBadgeMode(true);
+                            setSelectedData(null);
+                            setVisible(true);
+                        }
+                    } > Add New Badge</Button>
                 </div>
             </div>
 
@@ -48,11 +80,7 @@ const Badges = () => {
                 {
                     data.map((badge, index) => (
                         <Col span={8}>
-                            <Card style={{borderRadius: 40, backgroundColor: badge.enabled? 'ffffff':'#E7E7E7'}} hoverable='true' actions={[<Button size='large' onClick={() => {
-                                setSelectedData(badge);
-                                console.log(`selected is: ${selectedData}`);
-                                setVisible(true);
-                            }}>Edit</Button>, <Button size='large'> {badge.enabled? 'Disable': 'Enable'} </Button>]} headStyle={{display:'flex', alignItems: 'center', flexDirection: 'column'}} title={<h2>{badge.name}</h2>}>
+                            <Card style={{borderRadius: 40, backgroundColor: badge.enabled? '#ffffff':'#E7E7E7'}} hoverable='true' actions={[<EditBadgeButton badge={badge}/>, <ToggleBadgeStatus badge ={badge}/>]} headStyle={{display:'flex', alignItems: 'center', flexDirection: 'column'}} title={<h2>{badge.name}</h2>}>
                                 <div style={{ display: "flex", flexDirection: "column" , alignItems: 'center'}}>
                                     <img width='100' height='100' src='/badge.png'></img>
                                     <h1>{badge.type == 'developers' ? 'Developers' : 'All Employees'}</h1>
@@ -67,10 +95,13 @@ const Badges = () => {
             </Row>
 
             <FloatingBox
-                visible={visible} setVisible={setVisible} data={selectedData} seteData={setData}
+                visible={visible} newBadge={newBadgeMode} setVisible={setVisible} data={selectedData} setData={setData}
             />
         </>
     );
+
 }
+
+
 
 export default Badges
