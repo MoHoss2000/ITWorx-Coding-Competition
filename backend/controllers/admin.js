@@ -83,9 +83,16 @@ exports.viewEmployeeStatus = async (req, res) => {
 
     let result = {}
 
+    const employeeInfo = new Promise ((resolve, reject) => {
+      db.query('CALL viewEmployeePersonalInfo(?)', id, (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result[0])
+      })
+    })
 
-
-    const activities = new Promise ((resolve, reject) => {
+    const completed_activities = new Promise ((resolve, reject) => {
       db.query('CALL viewCompletedTasks(?,?)', [id, cycleID], (err, result) => {
         if(err)
           reject(err)
@@ -93,7 +100,24 @@ exports.viewEmployeeStatus = async (req, res) => {
           resolve(result[0])
       })
     })
+
+    const pending_activities = new Promise ((resolve, reject) => {
+      db.query('CALL viewCyclePendingTasks(?,?)', [id, cycleID], (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result[0])
+      })
+    })
   
+    const inprogress_activities = new Promise ((resolve, reject) => {
+      db.query('CALL viewCycleToBeSubmittedTasks(?,?)', [id, cycleID], (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result[0])
+      })
+    })
     const total_points = new Promise ((resolve, reject) => {
       db.query('CALL totalGainedPointsInCycle(?,?)', [id, cycleID], (err, result) => {
         if(err)
@@ -131,12 +155,20 @@ exports.viewEmployeeStatus = async (req, res) => {
       })
     })
 
-    
-
     try{
-      result.activities = await activities
+      result.pending_activities = await pending_activities
     }catch{
-      res.activities = []
+      res.pending_activities = []
+    }
+    try{
+      result.completed_activities = await completed_activities
+    }catch{
+      res.completed_activities = []
+    }
+    try{
+      result.inprogress_activities = await inprogress_activities
+    }catch{
+      res.inprogress_activities = []
     }
     try{
       result.total_points = await total_points
@@ -157,6 +189,11 @@ exports.viewEmployeeStatus = async (req, res) => {
       result.cycleInfo = await cycleInfo
     }catch{
       result.cycleInfo = []
+    }
+    try{
+      result.personalInfo = await employeeInfo
+    }catch{
+      result.personalInfo = []
     }
     
   return res.send(result)

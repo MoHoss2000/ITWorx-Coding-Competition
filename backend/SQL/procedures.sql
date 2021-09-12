@@ -8,14 +8,14 @@ END
 DELIMITER //
 CREATE PROCEDURE viewCyclePendingTasks (IN employeeID INT, IN cycleID INT)
 BEGIN
-	SELECT * FROM
+	SELECT A.* FROM
     EmployeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
     WHERE EAC.employee_id = employeeID AND EAC.status = 'pending' AND  EAC.cycle_id = cycleID;
 END //
 
 DELIMITER //
-CREATE PROCEDURE viewCycleToBeSubmittedTasks (IN employeeID INT, IN cycleID INT
-	SELECT * FROM
+CREATE PROCEDURE viewCycleToBeSubmittedTasks (IN employeeID INT, IN cycleID INT)
+	SELECT A.* FROM
     EmployeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
     WHERE EAC.employee_id = employeeID AND EAC.status = 'inProgress' AND EAC.cycle_id = cycleID;
 END //
