@@ -10,8 +10,14 @@ import axios from 'axios'
 //      4     |     6
 //      3     |     8
 
-const BadgesDisplay = ({data, setVisible, setSelectedData, setNewBadgeMode, setData, adminMode = false, span = 8}) => {
-    const EditBadgeButton = (props) => {
+
+// for general use, set data to the array of badges
+// and you can use span to determine no of columns
+// all other props are used in admin mode
+const BadgesDisplay = ({data, setVisible, setSelectedData,
+     setNewBadgeMode, setData, adminMode = false, span = 8}) => {
+    
+        const EditBadgeButton = (props) => {
         return <Button size='large' onClick={() => {
             setNewBadgeMode(false);
             setSelectedData(props.badge);
