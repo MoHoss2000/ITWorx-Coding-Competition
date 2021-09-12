@@ -39,7 +39,7 @@ function CycleOverview (){
            <Row align='top'>
                 <Col flex="620px"> 
 {   
-                 <CycleInfo data={data}/> }
+                 <CycleInfo data={data} className={'info-display'}/> }
                   <ActivityList />
 
                 </Col> 

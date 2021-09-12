@@ -14,7 +14,7 @@ const ActivitiesDone = (props) =>{
         <div className="site-card-border-less-wrapper">
         <Card className ="activities-view" bordered={false} >
             <List
-                size="small"
+                size="small" 
                 itemLayout="horizontal"
                 dataSource={props.data}
                 renderItem={item => (

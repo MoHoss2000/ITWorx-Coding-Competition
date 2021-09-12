@@ -11,7 +11,7 @@ const CycleInfo = (props) =>{
   
 return(
  <div>
-    <Card className="info-display" >
+    <Card className={props.className} >
        <Title level={4}> Cycle Information </Title>
         <Divider className="small-divider"/>
         <p> <b> Cycle ID: </b> {props.data.id} </p>

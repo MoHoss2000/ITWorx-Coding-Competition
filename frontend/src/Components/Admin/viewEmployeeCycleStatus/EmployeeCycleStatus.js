@@ -8,6 +8,7 @@ import ActivitiesDone from './ActivitiesDone'
 import EmployeeProfile from './EmployeeProfile'
 import PersonalInfo from '../../EmployeeProfile/PersonalInfo'
 import VirtualRecognitions from '../../EmployeeProfile/VirtualRecognitions'
+import BadgesDisplay from '../../BadgesDisplay'
 const { TabPane } = Tabs;
 const { Title } = Typography;
 
@@ -31,63 +32,81 @@ const EmployeeCycleStatus= () => {
         return <Spinner/>
 
     return(
-        <div >
-            <Title className= "title"> Employee Cycle Status</Title>
+        <div>
+            <h1 className= "title"> <b>Employee Status </b></h1>
             <Divider className="title-divider"/> 
-            <Row gutter={[100,8]}>
+            
+            <Row style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                 <Col>
-                    <EmployeeProfile data={data.personalInfo[0]} />
+                    <div className='info-tab' style={{width: '600px'}}>
+                        <CycleInfo data={data.cycleInfo[0]} className='status-tab' /> 
+                    </div>
                 </Col>
                 <Col>
-                     <CycleInfo data={data.cycleInfo[0]}/>
+                    <div className='info-tab' style={{width: '600px'}}>
+                        <EmployeeProfile data={data.personalInfo[0]} />
+                    </div>
                 </Col>
             </Row>
-            <Row gutter={[100,8]}>
-                <Col>
-                    <Card className='activities-container'>
-                        <Tabs defaultActiveKey="1" centered='true' size='large' tabBarGutter={30}>
-                            <TabPane
-                                tab={<span style={{fontSize:'16px'}}> Completed Activities  </span>}
-                                key="1"
-                            >
-                                <div className='profile-components'>
-                                    <ActivitiesDone data={data.completed_activities} /> 
-                                </div>
-                            </TabPane>
-
-                            <TabPane
             
-                            tab={<span style={{fontSize:'16px'}}> Pending Activities </span>
-                            }
-                            key="2"
-                            >
-                                <div className='profile-components'>
-                                <ActivitiesDone data={data.pending_activities}  /> 
-                                </div>
-                            </TabPane>
-                            <TabPane
-            
-                            tab={
-                                <span style={{fontSize:'16px'}}> In Progress Activities  </span> }
-                            key="3"
-                            >
-                                <div className='profile-components'>
-                                <ActivitiesDone data={data.inprogress_activities}  /> 
-                                </div>
-                            </TabPane>
-                    
-                        </Tabs>
-                        </Card>
-                </Col>
+                <Tabs defaultActiveKey="1" centered>
 
-                <Col>
-                <div className='info-display'>
-                   <VirtualRecognitions data={data.virtual_recognitions}/>
+                    <TabPane tab={<span style={{fontSize:'23px'}}> Activities  </span>} key="2" >
+    <div className='info-display info-tab'>
+     <Card className='activities-container'>
+        <Tabs defaultActiveKey="1" centered='true' size='large' tabBarGutter={30}>
+            <TabPane
+                tab={<span style={{fontSize:'16px'}}> Completed Activities  </span>}
+                key="1"
+            >
+                <div className='profile-components'>
+                    <ActivitiesDone data={data.completed_activities} /> 
                 </div>
-                </Col>
-            </Row>
+            </TabPane>
+            <TabPane
+
+            tab={<span style={{fontSize:'16px'}}> Pending Activities </span>
+            }
+            key="2"
+            >
+                <div className='profile-components'>
+                <ActivitiesDone data={data.pending_activities}  /> 
+                </div>
+            </TabPane>
+            <TabPane
+
+            tab={
+                <span style={{fontSize:'16px'}}> In Progress Activities  </span> }
+            key="3"
+            >
+                <div className='profile-components'>
+                <ActivitiesDone data={data.inprogress_activities}  /> 
+                </div>
+            </TabPane>
+    
+        </Tabs>
+    </Card>
+</div>
+</TabPane>
+
+                    <TabPane tab={<span style={{fontSize:'23px'}}> Badges  </span>} key="3">
+     <div className='status-tabs'>
+    <BadgesDisplay  adminMode={false} data={data.badges} />
+    </div>
+</TabPane>
+
+<                   TabPane tab={<span style={{fontSize:'23px'}}> Virtual Recognitions  </span>} key="4" >
+  <div className='info-display status-tabs'  >
+   <VirtualRecognitions data={data.virtual_recognitions}/>
+</div>
+</TabPane>
+
+                </Tabs>
+
+           
         </div>
     )
 }
 
 export default EmployeeCycleStatus
+

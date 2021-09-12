@@ -6,6 +6,7 @@ import '../components.css'
 import CycleInfo from '../General/CycleInfo'
 import ActivitiesDone from '../Admin/viewEmployeeCycleStatus/ActivitiesDone'
 import VirtualRecognitions from '../EmployeeProfile/VirtualRecognitions'
+import BadgesDisplay from '../BadgesDisplay'
 const { TabPane } = Tabs;
 const { Title } = Typography;
 
@@ -30,23 +31,17 @@ const MyStatus= () => {
 
     return(
         <div >
-            <Title className= "title"> My Status</Title>
+            <h1 className= "title"> <b>My Status </b></h1>
             <Divider className="title-divider"/> 
-            <Row gutter={[100,8]}>
-                <Col>
-                     <CycleInfo data={data.cycleInfo[0]}/>
-                </Col>
+                    <div className='info-tab'>
+                          <CycleInfo data={data.cycleInfo[0]} className='status-tab' />
+                     </div>
+                
+            <Tabs defaultActiveKey="1" centered>
 
-                <Col>
-                <div className='info-display'>
-                   <VirtualRecognitions data={data.virtual_recognitions}/>
-                </div>
-                </Col>
-            </Row>
-
-            <Row gutter={[100,8]}>
-                <Col>
-                    <Card className='activities-container'>
+                <TabPane tab={<span style={{fontSize:'23px'}}> Activities  </span>} key="2" >
+                    <div className='info-display info-tab'>
+                     <Card className='activities-container'>
                         <Tabs defaultActiveKey="1" centered='true' size='large' tabBarGutter={30}>
                             <TabPane
                                 tab={<span style={{fontSize:'16px'}}> Completed Activities  </span>}
@@ -56,7 +51,6 @@ const MyStatus= () => {
                                     <ActivitiesDone data={data.completed_activities} /> 
                                 </div>
                             </TabPane>
-
                             <TabPane
             
                             tab={<span style={{fontSize:'16px'}}> Pending Activities </span>
@@ -79,11 +73,30 @@ const MyStatus= () => {
                             </TabPane>
                     
                         </Tabs>
-                        </Card>
-                </Col>
+                    </Card>
+                </div>
+        </TabPane>
 
-               
-            </Row>
+               <TabPane tab={<span style={{fontSize:'23px'}}> Badges  </span>} key="3">
+                     <div className='status-tabs'>
+                    <BadgesDisplay  adminMode={false} data={data.badges} />
+                    </div>
+                </TabPane>
+
+                <TabPane tab={<span style={{fontSize:'23px'}}> Virtual Recognitions  </span>} key="4" >
+                  <div className='info-display status-tabs'  >
+                   <VirtualRecognitions data={data.virtual_recognitions}/>
+                </div>
+                </TabPane>
+
+       
+
+     </Tabs>
+
+
+           
+
+
         </div>
     )
 }
