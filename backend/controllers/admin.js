@@ -130,7 +130,6 @@ exports.viewEmployeeStatus = async (req, res) => {
           resolve(result[0])
       })
     })
-
     
 
     try{

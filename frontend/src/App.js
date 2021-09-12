@@ -3,18 +3,15 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import {Layout} from 'antd';
 import AdminHome from './Components/AdminHome';
-import AdminCycleHistory from './Components/Admin/AdminCycleHistory';
 import CreateActivity from './Components/Admin/CreateActivity';
 import {BrowserRouter as Router, Route, Switch,} from 'react-router-dom'
 import HeaderAdmin from './Components/Navigation/HeaderAdmin';
 import SiderAdmin  from './Components/Navigation/SiderAdmin';
-import ActivityList from './Components/General/ActivityList'
 import EmployeeProfile from './Components/EmployeeProfile/EmployeeProfile';
 import Activity from "./Components/Admin/Activity";
 import Badges from "./Components/Admin/Badges";
 import CreateBadge from "./Components/Admin/CreateBadge";
 import Participants from './Components/Admin/CycleParticipants';
-import PendingList from './Components/Admin/PendingOverview';
 import NotFound404 from "./Components/NotFound404";
 import CycleOverview from './Components/General/CycleOverview';
 import Leaderboard from './Components/Admin/Leaderboard';
@@ -57,13 +54,10 @@ function App() {
               <Route path='/newBadge' component={CreateBadge}/>
               <Route path='/employee-profile' component={EmployeeProfile}/>
               <Route component={NotFound404}/>
-              
-
+    
             </Switch>
           </Layout>
-          
         </Layout>
-        
       </Layout>
     </Router>
 

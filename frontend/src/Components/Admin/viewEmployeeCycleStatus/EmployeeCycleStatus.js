@@ -8,6 +8,7 @@ import Spinner from '../../General/loadingSpinner'
 
 import '../../components.css'
 import CycleInfo from '../../General/CycleInfo'
+import EmployeeProfile from '../../EmployeeProfile/EmployeeProfile'
 const { TabPane } = Tabs;
 const { Title } = Typography;
 
@@ -32,6 +33,7 @@ const EmployeeCycleStatus= () => {
 
     return(
         <div>
+            <EmployeeProfile/>
             <CycleInfo data={data.cycleInfo[0]}/>
         </div>
     )

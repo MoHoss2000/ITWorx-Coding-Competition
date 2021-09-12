@@ -1,7 +1,6 @@
 import React , {useState, useEffect} from 'react';
 import 'antd/dist/antd.css';
 import { List, Card , Button, Avatar, Typography, Divider, Row, Col} from 'antd';
-import Spinner from './loadingSpinner'
 import axios from 'axios'
 import '../components.css';
 import CycleInfo from '../General/CycleInfo'
@@ -22,8 +21,6 @@ function CycleOverview (){
             const res = (await axios.get(`http://localhost:3001/admin/cycle/view/${cycleID}`))
             setData(res.data)
             setCurrent(res.data.current)
-            console.log(res.data)
-            console.log(res.data.current == true)
         }
         getTime()
     }, [])
@@ -31,7 +28,7 @@ function CycleOverview (){
     return(
         <div>
             <div className='header-group'>
-                <h1 className= "title"> <b>Cycle Overview </b></h1>
+                <h1 className= "title"> <b>Cycle Overview</b></h1>
                 <div className="switch">
                     <DisableSwitch current={current} />
                 </div>
@@ -39,26 +36,20 @@ function CycleOverview (){
             <Divider className="title-divider"/>
            <Row align='top'>
                 <Col flex="620px">
-    
-                <CycleInfo data={data}/>
+                    <CycleInfo data={data}/>
                 <ActivityList />
 
                 </Col>
                 <Col span={14}>
-                <Leaderboard  />
+                    <Leaderboard  />
                 </Col>
-                </Row>
+            </Row>
                 
-          
-
-            {/* <Row>
+            <Row>
                 <Col>
                 <Leaderboard />
                 </Col>
-            </Row> */}
-            
-           
-           
+            </Row> 
         </div>
     )
 }
