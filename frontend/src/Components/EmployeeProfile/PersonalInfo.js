@@ -1,7 +1,6 @@
 import React from 'react'
 import {Descriptions, Card, Button, Avatar, Row, Col} from 'antd'
-import {SketchOutlined, UserOutlined} from '@ant-design/icons';
-
+import {SketchOutlined, UserOutlined} from '@ant-design/icons'
 const PersonalInfo = (props) => {
     const personalInfo = props.data.personalInfo[0]
     const departments = props.data.departments
@@ -24,7 +23,6 @@ const PersonalInfo = (props) => {
 
     return (
         <div>
-            
             <Card className="info-card">
                 <Row gutter={[16,8]}>
                     <Col style={{display: 'flex', flexDirection: 'column'}}>
@@ -41,9 +39,6 @@ const PersonalInfo = (props) => {
                         <p><b>Departments: </b>{employeeDepartments}</p>
                         <p><b>Practices: </b>{employeePractice}</p>
                     </div>
-                    
-                   
-                    
                     </Col>
                 <Col>
                 <div style={{display:'flex', flexDirection:'column'}}>
@@ -54,7 +49,6 @@ const PersonalInfo = (props) => {
                 </Col>
                 </Row>
             </Card>
-            
         </div>
     )
 }

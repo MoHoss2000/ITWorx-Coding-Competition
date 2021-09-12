@@ -7,6 +7,7 @@ import axios from 'axios';
 const { Title } = Typography;
 
 const CycleInfo = (props) =>{
+   console.log(props.data)
   
 return(
  <div>
@@ -14,10 +15,10 @@ return(
          <Title level={4}> Cycle Information </Title>
         <Divider className="small-divider"/>
         <p> <b> Cycle ID: </b> {props.data.id} </p>
-         <p> <b>Start Date: </b> {props.data.start_date} </p>
-         <p> <b>End Date: </b> {props.data.end_date} </p>
+         <p> <b>Start Date: </b> {props.data.start_date.slice(0, 10)} </p>
+         <p> <b>End Date: </b> {props.data.end_date.slice(0, 10)} </p>
          <p> <b> Cycle Was Created By: </b><a> {props.data.first_name + ' ' + props.data.last_name} </a> </p>
-          </Card>
+      </Card>
 </div>
 )
 }

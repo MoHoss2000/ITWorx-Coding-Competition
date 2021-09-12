@@ -67,7 +67,7 @@ const EmployeeLeaderboard = () => {
         },
         {
             title: 'Total Points',
-            dataIndex: 'sum(A.points)',
+            dataIndex: 'points',
             key: 'points',
             sorter: (a, b) => a.points - b.points,
             sortOrder: sort.columnKey === 'points' && sort.order,

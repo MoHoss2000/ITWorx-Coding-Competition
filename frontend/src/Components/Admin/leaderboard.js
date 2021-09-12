@@ -5,7 +5,7 @@ import axios from 'axios'
 import '../components.css';
 import CycleInfo from '../General/CycleInfo'
 import ActivityList from '../General/ActivityList'
-// import DisableSwitch from '../Admin./Admin/DisableSwitch'
+import DisableSwitch from './DisableSwitch'
 import { UserOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import EmployeeLeaderboard from './EmployeeLeaderboard';
 import DepartmentLeaderboard from './DepartmentLeaderboard';

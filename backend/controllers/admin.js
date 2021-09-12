@@ -77,21 +77,89 @@ exports.viewProfile = async (req, res) => {
 }
 
 exports.viewEmployeeStatus = async (req, res) => {
-    id = req.params.employeeId
-
+    id = parseInt(req.params.employeeId)
+    cycleID = parseInt(req.params.cycleID)
     //activities completed by this employee
-    const activities = proc.viewCompletedActivities(id)
-    //total gained points
-    const total_points = proc.totalGainedPoints(id)
-    //all badges earned by this employee
-    const badges = proc.viewmployeeBadges(id)
-    //all VR earned by this employee
-    const virtual_recognitions = proc.viewEmployeVirtualRecognition(id)
+
+    let result = {}
 
 
 
-    return res.send({activities, total_points, badges, virtual_recognitions})
+    const activities = new Promise ((resolve, reject) => {
+      db.query('CALL viewCompletedTasks(?,?)', [id, cycleID], (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result[0])
+      })
+    })
+  
+    const total_points = new Promise ((resolve, reject) => {
+      db.query('CALL totalGainedPointsInCycle(?,?)', [id, cycleID], (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result[0])
+      })
+    })
 
+    const badges = new Promise ((resolve, reject) => {
+      db.query('CALL viewEmployeeCycleBadges(?,?)', [id, cycleID], (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result[0])
+      })
+    })
+
+    const virtual_recognitions = new Promise ((resolve, reject) => {
+      db.query('CALL viewEmployeeCycleVirtualRecognition(?,?)', [id, cycleID], (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result[0])
+      })
+    })
+
+
+    const cycleInfo = new Promise ((resolve, reject) => {
+      db.query('CALL viewCycleDetailsForAdmin(?)', [cycleID], (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result[0])
+      })
+    })
+
+    
+
+    try{
+      result.activities = await activities
+    }catch{
+      res.activities = []
+    }
+    try{
+      result.total_points = await total_points
+    }catch{
+      result.total_points = []
+    }
+    try{
+      result.badges  = await badges
+    }catch{
+      result.badges = []
+    }
+    try{
+      result.virtual_recognitions = await virtual_recognitions
+    }catch{
+      result.virtual_recognitions = []
+    }
+    try{
+      result.cycleInfo = await cycleInfo
+    }catch{
+      result.cycleInfo = []
+    }
+    
+  return res.send(result)
 }
 
 // exports.exportToExcelLeaderboard = async(req, res) => {

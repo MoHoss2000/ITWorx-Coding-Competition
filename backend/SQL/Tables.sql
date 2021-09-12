@@ -67,6 +67,7 @@ CREATE TABLE cycle(
     start_date DATE,
     end_date DATE,
     admin_id INT,
+    current BOOLEAN,
     FOREIGN KEY(admin_id) REFERENCES admin(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
