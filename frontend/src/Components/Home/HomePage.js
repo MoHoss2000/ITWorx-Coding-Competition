@@ -48,6 +48,7 @@ function EmployeeHome (){
                         </Col>
                         <Col>
                         <h1 className='welcome-statement'> {'Welcome Back, ' + profile.personalInfo[0].first_name + ' '+ profile.personalInfo[0].last_name +'!'} </h1>
+                        <h3 className='welcome-line'> Glad to see you again!</h3>
                         </Col>
                     </Row>
                 </Card>
