@@ -1,7 +1,7 @@
 CREATE PROCEDURE "viewCompletedTasks"(IN employeeID INT, IN cycleID INT)
 BEGIN 
 	SELECT A.* FROM
-    employeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
     WHERE EAC.employee_id = employeeID AND EAC.cycle_id = cycleID AND A.status = 'completed';
 END
 
