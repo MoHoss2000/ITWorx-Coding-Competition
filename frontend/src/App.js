@@ -16,7 +16,7 @@ import Participants from './Components/Admin/CycleParticipants';
 import PendingList from './Components/Admin/PendingOverview';
 import NotFound404 from "./Components/NotFound404";
 import CycleOverview from './Components/General/CycleOverview';
-import Leaderboard from './Components/Admin/Leaderboard';
+import Leaderboard from './Components/Admin/leaderboard';
 import EmployeeCycleStatus from './Components/Admin/viewEmployeeCycleStatus/EmployeeCycleStatus';
 
 
