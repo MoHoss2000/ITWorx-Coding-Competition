@@ -1,24 +1,39 @@
 CREATE PROCEDURE "viewCompletedTasks"(IN employeeID INT, IN cycleID INT)
 BEGIN 
-	SELECT A.* FROM
+	SELECT A.*, EAC.quantity, EAC.date_of_completion FROM
     EmployeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
-    WHERE EAC.employee_id = employeeID AND EAC.cycle_id = cycleID AND A.status = 'completed';
+    WHERE EAC.employee_id = employeeID AND EAC.cycle_id = cycleID AND EAC.status = 'completed';
 END
+
+DELIMITER //
+CREATE PROCEDURE viewCyclePendingTasks (IN employeeID INT, IN cycleID INT)
+BEGIN
+	SELECT * FROM
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
+    WHERE EAC.employee_id = employeeID AND EAC.status = 'pending' AND  EAC.cycle_id = cycleID;
+END //
+
+DELIMITER //
+CREATE PROCEDURE viewCycleToBeSubmittedTasks (IN employeeID INT, IN cycleID INT
+	SELECT * FROM
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
+    WHERE EAC.employee_id = employeeID AND EAC.status = 'inProgress' AND EAC.cycle_id = cycleID;
+END //
 
 DELIMITER //
 CREATE PROCEDURE viewPendingTasks (IN employeeID INT)
 BEGIN
 	SELECT * FROM
-    employeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
-    WHERE EAC.employee_id = employeeID AND A.status = 'pending';
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
+    WHERE EAC.employee_id = employeeID AND EAC.status = 'pending';
 END //
 
 DELIMITER //
 CREATE PROCEDURE viewToBeSubmittedTasks (IN employeeID INT)
 BEGIN
 	SELECT * FROM
-    employeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
-    WHERE EAC.employee_id = employeeID AND A.status = 'inProgress';
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
+    WHERE EAC.employee_id = employeeID AND EAC.status = 'inProgress';
 END //
 
 DELIMITER //
