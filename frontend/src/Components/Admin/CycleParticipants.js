@@ -143,7 +143,7 @@ class Participants extends React.Component {
      
     return(
       <div>
-        <Title className= "title"> Cycle Participants</Title>
+        <h1 className= "title"> <b> Cycle Participants </b></h1>
         <Divider className="title-divider"/>
         <Table loading ={this.state.loading} columns={columns}  dataSource={this.state.data} />
       </div>);

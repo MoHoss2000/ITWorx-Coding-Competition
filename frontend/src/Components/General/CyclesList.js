@@ -20,7 +20,7 @@ const CycleList = (props) =>{
   return( 
    <div>
       
-      <Title className= "title"> Cycle History</Title>
+      <h1 className= "title"> <b> Cycles History </b></h1>
       <Divider className="title-divider"/>
        
       {
@@ -35,7 +35,7 @@ const CycleList = (props) =>{
                             {/* </Link>  */}
                         </Button>
                     }
-                style={{ width: 800, marginTop: 20  }}
+                style={{ width: '70%', marginTop: 20 }}
                 hoverable='true'
                 >
       <div style={{display:'flex' , flexDirection :'row' }}>

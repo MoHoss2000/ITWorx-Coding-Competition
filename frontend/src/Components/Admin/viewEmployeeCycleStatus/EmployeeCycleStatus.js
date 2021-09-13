@@ -36,7 +36,7 @@ const EmployeeCycleStatus= () => {
             <h1 className= "title"> <b>Employee Status </b></h1>
             <Divider className="title-divider"/> 
             
-            <Row style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <Row style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}} gutter={[30,8]}>
                 <Col>
                     <div className='info-tab' style={{width: '600px'}}>
                         <CycleInfo data={data.cycleInfo[0]} className='status-tab' /> 
