@@ -25,6 +25,9 @@ import EmployeeCycleHistory from './Components/Employee/Cycles'
 import Activities from './Components/Admin/Activities'
 import ChangePassword from './Components/General/ChangePassword';
 import AdminProfile from './Components/Admin/AdminProfile/AdminProfile'
+import LoginForm from './Components/General/LoginForm';
+import ForgotPassword from './Components/General/ForgotPassword';
+import ResetPassword from './Components/General/ResetPassword';
 
 function App() {
   return (
@@ -70,6 +73,10 @@ function App() {
               <Route path='/employee/myCycles' component={EmployeeCycleHistory}/> 
               <Route path='/badges' component={Badges}/>
               <Route path='/employee-profile' component={EmployeeProfile}/>
+              <Route path='/login' component={LoginForm}/>
+              <Route path='/resetPassword/:token' component={ResetPassword}/>
+              <Route path='/forgotPassword' component={ForgotPassword}/>
+
               <Route component={NotFound404}/>
     
             </Switch>

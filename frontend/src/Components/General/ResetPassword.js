@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 
 import { Link, useParams } from 'react-router-dom';
 
-const ChangePassword = () => {
+const ResetPassword = () => {
 
   const { token } = useParams();
 
@@ -14,12 +14,21 @@ const ChangePassword = () => {
 
 
   const onFinish = async ({ currentPassword, newPassword, confirmPassword }) => {
-    await axios.patch('http://localhost:3001/changepassword', {
-      currentPassword,
-      newPassword,
-      confirmPassword
+    console.log(currentPassword, newPassword, token);
+    try{
+      var res = await axios.patch('http://localhost:3001/changepassword', {
+        "oldPassword": currentPassword,
+        "newPassword": newPassword,
+        "token": token,
+      });
 
-    })
+      window.alert(res.data);
+    } catch(e){
+      window.alert(e.response.data);
+
+    }
+
+
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -113,4 +122,4 @@ const ChangePassword = () => {
   );
 };
 
-export default ChangePassword
+export default ResetPassword

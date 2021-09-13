@@ -177,16 +177,6 @@ exports.viewEmployeeStatus = async (req, res) => {
       })
     })
 
-    const employeeInfo = new Promise ((resolve, reject) => {
-      db.query('CALL viewEmployeePersonalInfo(?)', id, (err, result) => {
-        if(err)
-          reject(err)
-        else
-          resolve(result[0])
-      })
-    })
-
-
     try{
       result.pending_activities = await pending_activities
     }catch{
