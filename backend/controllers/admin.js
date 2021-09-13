@@ -71,29 +71,15 @@ exports.exportToExcelParticipants = async(req, res) => {
 } 
 
 exports.disableCycle = async (req, res) => {
-    cycleID = req.params.cycleID
-    try{
-    await Cycle.update({current: 0}, {where: {id: cycleID}});
-    res.status(200).json({message: 'Cycle disabled successfully'});
-
-    } catch(e) {
-        res.status(400).json({ error: err });
-    }
-
     const cycleID = req.params.cycleID
-    try{
-      db.query('UPDATE cycle SET disabled = 1 WHERE id = (?)', cycleID ,(err, result) => {
-          res.status(200).send('Cycle disabled successfully');
-      })
-    } catch(e){
-      console.log(e)
-      res.status(400).send(e);
-    }
+    db.query('UPDATE cycle SET current = 0 WHERE id = (?)', cycleID ,(err, result) => {
+        res.status(200).send('Cycle disabled successfully');
+    })
+  
 }
 
 exports.viewProfile = async (req, res) => {
-    adminID = req.params.id   
-
+    adminID = parseInt(req.params.id) 
     try{
       db.query('SELECT * FROM admin WHERE id = (?)', adminID ,(err, result) => {
           // res.send(result[0]);
@@ -118,21 +104,126 @@ exports.viewProfile = async (req, res) => {
 }
 
 exports.viewEmployeeStatus = async (req, res) => {
-    id = req.params.employeeId
-
+    id = parseInt(req.params.employeeId)
+    cycleID = parseInt(req.params.cycleID)
     //activities completed by this employee
-    const activities = proc.viewCompletedActivities(id)
-    //total gained points
-    const total_points = proc.totalGainedPoints(id)
-    //all badges earned by this employee
-    const badges = proc.viewmployeeBadges(id)
-    //all VR earned by this employee
-    const virtual_recognitions = proc.viewEmployeVirtualRecognition(id)
+
+    let result = {}
+
+    const employeeInfo = new Promise ((resolve, reject) => {
+      db.query('CALL viewEmployeePersonalInfo(?)', id, (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result[0])
+      })
+    })
+
+    const completed_activities = new Promise ((resolve, reject) => {
+      db.query('CALL viewCompletedTasks(?,?)', [id, cycleID], (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result[0])
+      })
+    })
+
+    const pending_activities = new Promise ((resolve, reject) => {
+      db.query('CALL viewCyclePendingTasks(?,?)', [id, cycleID], (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result[0])
+      })
+    })
+  
+    const inprogress_activities = new Promise ((resolve, reject) => {
+      db.query('CALL viewCycleToBeSubmittedTasks(?,?)', [id, cycleID], (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result[0])
+      })
+    })
+    const total_points = new Promise ((resolve, reject) => {
+      db.query('CALL totalGainedPointsInCycle(?,?)', [id, cycleID], (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result[0])
+      })
+    })
+
+    const badges = new Promise ((resolve, reject) => {
+      db.query('CALL viewEmployeeCycleBadges(?,?)', [id, cycleID], (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result[0])
+      })
+    })
+
+    const virtual_recognitions = new Promise ((resolve, reject) => {
+      db.query('CALL viewEmployeeCycleVirtualRecognition(?,?)', [id, cycleID], (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result[0])
+      })
+    })
 
 
+    const cycleInfo = new Promise ((resolve, reject) => {
+      db.query('CALL viewCycleDetailsForAdmin(?)', [cycleID], (err, result) => {
+        if(err)
+          reject(err)
+        else
+          resolve(result[0])
+      })
+    })
 
-    return res.send({activities, total_points, badges, virtual_recognitions})
-
+    try{
+      result.pending_activities = await pending_activities
+    }catch{
+      res.pending_activities = []
+    }
+    try{
+      result.completed_activities = await completed_activities
+    }catch{
+      res.completed_activities = []
+    }
+    try{
+      result.inprogress_activities = await inprogress_activities
+    }catch{
+      res.inprogress_activities = []
+    }
+    try{
+      result.total_points = await total_points
+    }catch{
+      result.total_points = []
+    }
+    try{
+      result.badges  = await badges
+    }catch{
+      result.badges = []
+    }
+    try{
+      result.virtual_recognitions = await virtual_recognitions
+    }catch{
+      result.virtual_recognitions = []
+    }
+    try{
+      result.cycleInfo = await cycleInfo
+    }catch{
+      result.cycleInfo = []
+    }
+    try{
+      result.personalInfo = await employeeInfo
+    }catch{
+      result.personalInfo = []
+    }
+    
+  return res.send(result)
 }
 
 // exports.exportToExcelLeaderboard = async(req, res) => {
@@ -167,7 +258,7 @@ exports.createBadge= async (req, res) => {
   var name = req.body.name;
   var description = req.body.description;
   var type = req.body.type;
-  var pointsNeeded = req.body.points;
+  var pointsNeeded = req.body.points_needed;
   var isEnabled  = req.body.enabled;
   
   try{
@@ -177,6 +268,24 @@ exports.createBadge= async (req, res) => {
     })
   } catch(e){
     console.log(e)
+    res.status(400).send(e);
+  }
+}
+
+exports.updateBadge = async(req, res) => {
+  var {name, description, type, points_needed, enabled} = req.body;
+  var id = req.params.badgeID;
+
+  console.log(req.body);
+  // console.log(id);
+  // console.log(description)
+  try{
+    db.query(`CALL updateBadge(?,?,?,?,?,?)`, 
+    [name, description, type, points_needed, enabled, id], (err, result) => {
+      res.status(200).send('Badge updated successfully');
+    });
+  } catch(e){
+    // console.log(e)
     res.status(400).send(e);
   }
 }
@@ -433,25 +542,22 @@ exports.editActivity= async (req, res) => {
   }
 
   exports.pendingActivities = async (req, res) => {
-
-    const cycleID  = req.body
-
-    if (!cycleID ) {
-      res.status(400).send({
-        message: "Please specify activity name or ID"
-      });
-      return
-    }
-    db.query('CALL getPendingActivities(?);', [cycleID],(err, result) => {
-      if(result){
-          console.log(result)
-          res.status(200).send(result).json('Action done successfully');    
-      }
-      else{
-        res.status(400).send(err)
-      }
-    })
+    const cycleID  = parseInt(req.params.cycleID)
+    if (!cycleID ) 
+      return res.status(400).send({message: "Please specify activity name or ID"})
+  
     
+    db.query('CALL getPendingActivities(?)', [cycleID],(err, result) => {
+      if(result && result[0])
+          res.status(200).send(result[0]);    
+      
+      else if(err)
+        res.status(400).send(err)
+
+      else 
+        res.send([])
+      
+    })
   }
 
 

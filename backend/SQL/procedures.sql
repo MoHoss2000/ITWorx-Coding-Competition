@@ -1,40 +1,54 @@
+CREATE PROCEDURE "viewCompletedTasks"(IN employeeID INT, IN cycleID INT)
+BEGIN 
+	SELECT A.*, EAC.quantity, EAC.date_of_completion FROM
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
+    WHERE EAC.employee_id = employeeID AND EAC.cycle_id = cycleID AND EAC.status = 'completed';
+END
+
 DELIMITER //
-CREATE PROCEDURE viewCompletedTasks (IN employeeID INT, IN cycleID INT)
+CREATE PROCEDURE viewCyclePendingTasks (IN employeeID INT, IN cycleID INT)
 BEGIN
-	SELECT * FROM
-    employeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
-    WHERE EAC.employee_id = employeeID AND EAC.cycle_id = cycleID AND A.status = 'completed';
+	SELECT A.* FROM
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
+    WHERE EAC.employee_id = employeeID AND EAC.status = 'pending' AND  EAC.cycle_id = cycleID;
+END //
+
+DELIMITER //
+CREATE PROCEDURE viewCycleToBeSubmittedTasks (IN employeeID INT, IN cycleID INT)
+	SELECT A.* FROM
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
+    WHERE EAC.employee_id = employeeID AND EAC.status = 'inProgress' AND EAC.cycle_id = cycleID;
 END //
 
 DELIMITER //
 CREATE PROCEDURE viewPendingTasks (IN employeeID INT)
 BEGIN
 	SELECT * FROM
-    employeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
-    WHERE EAC.employee_id = employeeID AND A.status = 'pending';
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
+    WHERE EAC.employee_id = employeeID AND EAC.status = 'pending';
 END //
 
 DELIMITER //
 CREATE PROCEDURE viewToBeSubmittedTasks (IN employeeID INT)
 BEGIN
 	SELECT * FROM
-    employeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
-    WHERE EAC.employee_id = employeeID AND A.status = 'inProgress';
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
+    WHERE EAC.employee_id = employeeID AND EAC.status = 'inProgress';
 END //
 
 DELIMITER //
 CREATE PROCEDURE viewEmployeeCycles (IN employeeID INT)
 BEGIN
 	SELECT C.* FROM
-    cycle C INNER JOIN employeeCycle EC ON C.id = EC.cycle_id
+    cycle C INNER JOIN EmployeeCycle EC ON C.id = EC.cycle_id
     WHERE EC.employee_id = employeeID;
 END //
 
 DELIMITER //
-CREATE PROCEDURE viewEmployeeBadges (IN employeeID INT)
+CREATE PROCEDURE "viewEmployeeBadges"(IN employeeID INT)
 BEGIN
-	SELECT B.* FROM
-    badge B INNER JOIN employeeBadgeCycle EBC ON B.id = EBC.badge_id
+	SELECT B.*, EBC.date_acquired AS date FROM
+    Badge B INNER JOIN employeeBadgeCycle EBC ON B.id = EBC.badge_id
     WHERE EBC.employee_id = employeeID;
 END //
 
@@ -93,20 +107,19 @@ BEGIN
 END //
 
 
-DELIMITER //
-CREATE PROCEDURE viewEmployeeCycleVirtualRecognition (IN employeeID INT, IN cycleID INT)
+CREATE PROCEDURE "viewEmployeeCycleVirtualRecognition"(IN employeeID INT, IN cycleID INT)
 BEGIN
 	SELECT A.* FROM
     EmployeeActivityCycle EAC INNER JOIN Activity A ON EAC.activity_id = A.id
-    WHERE EAC.employee_id = employeeID AND EAC.cycle_id = cycleID AND EAC.status = "completed" AND A.virtual_recognition = TRUE;
-END //
+    WHERE EAC.employee_id = employeeID AND EAC.cycle_id = cycleID AND EAC.status = 'completed' AND A.virtual_recognition = TRUE;
+END
 
 
 DELIMITER //
 CREATE PROCEDURE viewEmployeeCycleBadges (IN employeeID INT, IN cycleID INT)
 BEGIN
 	SELECT B.* FROM
-    employeebadgecycle EBC INNER JOIN badge B ON EBC.badge_id = B.id
+    employeeBadgeCycle EBC INNER JOIN badge B ON EBC.badge_id = B.id
     WHERE EBC.employee_id = employeeID AND EBC.cycle_id = cycleID;
 END //
 
@@ -127,14 +140,12 @@ BEGIN
     WHERE EAC.status = "completed" AND EAC.employee_id = employeeID;
 END //
 
-
-DELIMITER //
-CREATE PROCEDURE  totalGainedPointsInCycle (IN employeeID INT, IN cycleID INT)
+CREATE PROCEDURE "totalGainedPointsInCycle"(IN employeeID INT, IN cycleID INT)
 BEGIN
 	SELECT SUM(A.points * EAC.quantity)
     FROM employeeactivitycycle EAC INNER JOIN activity A ON A.id = EAC.activity_id
     WHERE EAC.status = "completed" AND EAC.employee_id = employeeID AND EAC.cycle_id = cycleID;
-END //
+END
 
 DELIMITER //
 CREATE PROCEDURE allCycles ()
@@ -210,14 +221,14 @@ BEGIN
 END //
 
 
-DELIMITER //
-CREATE PROCEDURE getEmployeeRankings(IN cycleID INT)
-BEGIN
-	SELECT CONCAT(first_name, ' ', last_name) AS name, E.points, E.is_developer AS developer, E.username AS email
-    FROM EmployeeCycle EC INNER JOIN employee E ON E.id = EC.employee_id
-    WHERE EC.cycle_id = cycleID
-    ORDER BY E.points DESC;
-END //
+-- DELIMITER //
+-- CREATE PROCEDURE getEmployeeRankings(IN cycleID INT)
+-- BEGIN
+-- 	SELECT CONCAT(first_name, ' ', last_name) AS name, E.points, E.is_developer AS developer, E.username AS email
+--     FROM EmployeeCycle EC INNER JOIN employee E ON E.id = EC.employee_id
+--     WHERE EC.cycle_id = cycleID
+--     ORDER BY E.points DESC;
+-- END //
 
 
 DELIMITER //
@@ -246,7 +257,7 @@ END//
 DELIMITER //
 CREATE PROCEDURE getemployeeInfo(IN employeeID INT)
 BEGIN
-	SELECT E.id, E.first_name, E.last_name, E.username, E.is_developer
+	SELECT E.id, E.first_name, E.last_name, E.username, E.is_developer, E.points
     FROM employee E
     WHERE E.id = employeeID;
 END//
@@ -263,8 +274,54 @@ END//
 DELIMITER //
 CREATE PROCEDURE "viewCycleDetailsForAdmin"(IN cycleID INT)
 BEGIN
-	SELECT C.start_date, C.end_date, A.first_name, A.last_name, A.id FROM
-    cycle C INNER JOIN admin A ON A.id = C.admin_id
+	SELECT C.id AS CycleID, C.start_date, C.end_date, A.first_name, A.last_name, A.id, C.current 
+    FROM cycle C INNER JOIN admin A ON A.id = C.admin_id
     WHERE C.id= cycleID;
 END//
 
+DELIMITER //
+CREATE PROCEDURE "updateBadge"( IN name VARCHAR(20), IN description VARCHAR(100), 
+                                IN type VARCHAR(10), IN points_needed INT, 
+                                IN enabled TINYINT(1), IN badgeID INT)
+BEGIN
+    UPDATE Badge 
+    SET name = name, description = description, type = type,
+    points_needed = points_needed, enabled = enabled
+    WHERE id = badgeID;  
+END//
+
+DELIMITER //
+CREATE PROCEDURE "getPendingActivities"(IN cycleID INT)
+BEGIN
+	SELECT A.* FROM
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON A.id = EAC.activity_id
+    WHERE EAC.status = 'pending';
+END//
+
+DELIMITER //
+CREATE PROCEDURE "getCompletedActivities"(IN employeeID INT, IN cycleID INT)
+BEGIN
+	SELECT A.* FROM
+    EmployeeActivityCycle EAC INNER JOIN Activity A ON A.id = EAC.activity_id
+    WHERE EAC.status = 'completed' AND EAC.employee_id = employeeID AND EAC.cycle_id = cycleID ;
+END//
+
+DELIMITER //
+CREATE PROCEDURE "getEmployeeRankings"(IN cycleID INT)
+BEGIN
+	SELECT E.id, sum(A.points) AS points, CONCAT(first_name, ' ', last_name) AS name, E.is_developer
+    FROM EmployeeActivityCycle EAC 
+    INNER JOIN Activity A ON A.id = EAC.activity_id 
+    INNER JOIN employee E ON EAC.employee_id = E.id
+    WHERE EAC.cycle_id = cycleID and EAC.status='completed'
+    Group By E.id
+    Order By sum(A.points) desc;
+END//
+
+DELIMITER //
+CREATE PROCEDURE "getDeadline"()
+BEGIN
+	SELECT end_date, start_date
+	From cycle 
+	where current=1;
+END //

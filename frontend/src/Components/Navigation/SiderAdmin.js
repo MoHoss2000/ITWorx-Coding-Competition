@@ -22,20 +22,22 @@ function SiderAdmin() {
 
       <Sider collapsible collapsed={collapsed}
              onCollapse={onCollapse}
+             className='side-bar'
              style={{
                overflow: 'auto',
                height: '100vh',
                zIndex: '1000',
                left: 0,
+              
              }}>
 
-        <Menu id="menu" theme="dark" defaultSelectedKeys={['1']} mode="inline">
+        <Menu id="menu" theme='dark' defaultSelectedKeys={['1']} mode="inline">
 
-          <Menu.Item key="1" icon={<HomeOutlined/>}>
+          <Menu.Item key="1" icon={<HomeOutlined style={{color:'white'}}/>}>
             <Link to={"/"} style={{color: 'white'}}>Home</Link>
           </Menu.Item>
 
-          <SubMenu key="sub1" icon={<SyncOutlined/>} title="Cycle">
+          <SubMenu key="sub1" icon={<SyncOutlined style={{color:'white'}}/>} title="Cycle">
             <Menu.Item key="2">
               {/*<Link>*/}
               Cycle Overview
@@ -50,7 +52,7 @@ function SiderAdmin() {
               <Link to={'/createCycle'}></Link>
             </Menu.Item>
           </SubMenu>
-          <SubMenu key="sub2" icon={<FileDoneOutlined/>} title="Activities">
+          <SubMenu key="sub2" icon={<FileDoneOutlined style={{color:'white'}}/>} title="Activities">
             <Menu.Item key="4">
               <Link to={'/newActivity'}>Create New Activity</Link>
             </Menu.Item>
@@ -58,12 +60,12 @@ function SiderAdmin() {
               <Link to={'/activities'}>All Activities</Link>
             </Menu.Item>
           </SubMenu>
-          <Menu.Item key="8" icon={<TrophyOutlined/>}>
+          <Menu.Item key="8" icon={<TrophyOutlined style={{color:'white'}}/>}>
             {/*<Link>*/}
             Leaderboard
             {/*</Link>*/}
           </Menu.Item>
-          <Menu.Item key="9" icon={<SettingOutlined/>}>
+          <Menu.Item key="9" icon={<SettingOutlined style={{color:'white'}}/>}>
             {/*<Link>*/}
             Settings
             {/*</Link>*/}

@@ -13,13 +13,13 @@ router.use(express.json())
 
 router.post('/activities/submitActivity', controllers.submitActivity)
 
-router.get('/activities/completed', controllers.viewCompletedTasks)
+router.get('/activities/completed/:employeeID/:cycleID', controllers.viewCompletedTasks)
 
 router.get('/activities/pending', controllers.viewPendingTasks)
 
 router.get('/activities/toBeSubmitted', controllers.viewToBeSubmittedTasks)
 
-router.get('/cycles', controllers.viewEmployeeCycles)
+router.get('/cycles/:employeeID', controllers.viewEmployeeCycles)
 
 router.get('/profile/:id/:cycleID', controllers.viewEmployeeProfile)
 
@@ -28,5 +28,7 @@ router.get('/cycles/view', controllers.viewCycleDetails)
 router.get('/achievments', controllers.viewAchievements)
 
 router.get('/assignedActivities', controllers.getAssignedActivities)
+
+router.get('/currentActivities/:employeeID', controllers.getCurrentActivities)
 
 module.exports = router

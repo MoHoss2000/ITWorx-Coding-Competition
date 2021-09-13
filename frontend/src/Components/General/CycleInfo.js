@@ -6,37 +6,19 @@ import { Card, Typography, Divider } from 'antd';
 import axios from 'axios';
 const { Title } = Typography;
 
-const CycleInfo = () =>{
-    const [startDate, setStartDate] = useState("")
-    const [endDate, setEndDate] = useState("")
-    const [name, setName] = useState("")
-    const [id, setId] = useState("")
-
-
-    useEffect(() => {
-        const getTime = async () => {
-            const cycleID = 1
-            const res = (await axios.get(`http://localhost:3001/admin/cycle/view/${cycleID}`))
-            console.log(res.data)
-            setStartDate(res.data.start_date)
-            setEndDate(res.data.end_date)
-            console.log(res.data.first_name)
-            var name = res.data.first_name+ ' ' + res.data.last_name
-            console.log(name)
-            setName(name)
-            setId(res.data.id)
-        }
-        getTime()
-    }, [])
+const CycleInfo = (props) =>{
+   console.log(props.data)
+  
 return(
  <div>
-    <Card className="activities-card" style={{ width: '700px'}}>
-         <Title level={4}> Cycle Information </Title>
+    <Card className={props.className} >
+       <Title level={4}> Cycle Information </Title>
         <Divider className="small-divider"/>
-         <p> <b>Start Date: </b> {startDate} </p>
-         <p> <b>End Date: </b> {endDate} </p>
-         <p> <b> Cycle Was Created By: </b><a> {name} </a> </p>
-          </Card>
+        <p> <b> Cycle ID: </b> {props.data.id} </p>
+         <p> <b>Start Date: </b> {props.data.start_date} </p>
+         <p> <b>End Date: </b> {props.data.end_date} </p>
+         <p> <b> Cycle Was Created By: </b><a> {props.data.first_name + ' ' + props.data.last_name} </a> </p>
+      </Card>
 </div>
 )
 }
