@@ -44,11 +44,11 @@ const BadgesDisplay = ({data, setVisible, setSelectedData,
     }
 
     return (
-        <Row gutter={[16, 16]}>
+        <Row gutter={[8, 16]}>
             {
                 data.map((badge, index) => (
                     <Col span={span}>
-                        <Card style={{ borderRadius: 40, width: 450 ,backgroundColor: badge.enabled ? '#ffffff' : '#E7E7E7' }} hoverable='true' actions={
+                        <Card style={{ borderRadius: 40 ,backgroundColor: badge.enabled ? '#ffffff' : '#E7E7E7' }} hoverable='true' actions={
                             adminMode ? [<EditBadgeButton badge={badge} />, <ToggleBadgeStatus badge={badge} />] : null} headStyle={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }} title={<h2>{badge.name}</h2>}>
                             <div style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
                                 <img width='100' height='100' src='/badge.png'></img>

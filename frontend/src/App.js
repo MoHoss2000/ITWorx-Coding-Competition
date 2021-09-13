@@ -60,7 +60,7 @@ function App() {
               <Route exact path='/' component={AdminHome}/>
               <Route path='/newActivity' component={CreateActivity}/>
               <Route path={'/activities/:id'} component={Activity} />
-              <Route path='/activities' component={Activities}/>
+              <Route path='/activities' component={Activities}/> 
               <Route path='/createCycle' component={CreateCycle}/>
               <Route path='/editActivity/:id' component={EditActivity}/>
               <Route path={'/activities/:activityId'} component={Activity} />

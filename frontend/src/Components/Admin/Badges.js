@@ -39,7 +39,7 @@ const Badges = () => {
             <div>
                 <h1 className="title">Badges</h1>
                 <Divider className="title-divider"/>
-                <div style={{ display: "flex", flexDirection: 'row-reverse' , marginBottom: '20px'}}>
+                <div style={{ display: "flex", flexDirection: 'row-reverse' }}>
                     <Button type='primary' size='large' shape='round' onClick={
                         () => {
                             setNewBadgeMode(true);
@@ -49,10 +49,10 @@ const Badges = () => {
                     } > Add New Badge</Button>
                 </div>
             </div>
-            <div cla>
+
             <BadgesDisplay adminMode={true} data={data} setNewBadgeMode={setNewBadgeMode}
                 setVisible={setVisible} setSelectedData={setSelectedData} setData={setData} />
-            </div>
+
             <FloatingBox
                 visible={visible} newBadge={newBadgeMode} setVisible={setVisible} data={selectedData} setData={setData}
             />
