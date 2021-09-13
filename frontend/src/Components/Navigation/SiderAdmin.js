@@ -48,6 +48,9 @@ function SiderAdmin() {
               Cycle Participants
               {/*</Link>*/}
             </Menu.Item>
+            <Menu.Item key="3">
+              <Link to={'/createCycle'}></Link>
+            </Menu.Item>
           </SubMenu>
           <SubMenu key="sub2" icon={<FileDoneOutlined style={{color:'white'}}/>} title="Activities">
             <Menu.Item key="4">

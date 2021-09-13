@@ -15,6 +15,8 @@ import Badges from "./Components/Admin/Badges";
 import Participants from './Components/Admin/CycleParticipants';
 import PendingList from './Components/Admin/PendingOverview';
 import NotFound404 from "./Components/NotFound404";
+import CreateCycle from './Components/Admin/CreateCycle';
+import EditActivity from './Components/Admin/EditActivity';
 import CycleOverview from './Components/General/CycleOverview';
 import Leaderboard from './Components/Admin/leaderboard';
 import EmployeeCycleStatus from './Components/Admin/viewEmployeeCycleStatus/EmployeeCycleStatus';
@@ -57,6 +59,10 @@ function App() {
               <Route path ='/myStatus' component ={MyStatus} />
               <Route exact path='/' component={AdminHome}/>
               <Route path='/newActivity' component={CreateActivity}/>
+              <Route path={'/activities/:id'} component={Activity} />
+              <Route path='/activities' component={Activities}/>
+              <Route path='/createCycle' component={CreateCycle}/>
+              <Route path='/editActivity/:id' component={EditActivity}/>
               <Route path={'/activities/:activityId'} component={Activity} />
               <Route path='/admin/cycles' component={AdminCycleHistory}/> 
               <Route path='/employee/myCycles' component={EmployeeCycleHistory}/> 
