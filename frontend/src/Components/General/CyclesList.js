@@ -16,7 +16,7 @@ const { Title } = Typography;
   
     
 const CycleList = (props) =>{    
-   
+   console.log(props)
   return( 
    <div>
       
@@ -24,6 +24,7 @@ const CycleList = (props) =>{
       <Divider className="title-divider"/>
        
       {
+      
        props.cycles.map ( ({id, start_date,end_date}) => (
        <Card key={id} className='cycle-list' title={id} type="inner" 
                 extra={

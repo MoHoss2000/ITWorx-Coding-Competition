@@ -21,7 +21,7 @@ import EmployeeCycleStatus from './Components/Admin/viewEmployeeCycleStatus/Empl
 import MyStatus from './Components/Employee/MyStatus';
 import EmployeeHome from './Components/HomePages/EmployeeHome';
 import AdminHome from './Components/HomePages/AdminHome';
-
+import EmployeeCycleHistory from './Components/Employee/Cycles'
 
 
 function App() {
@@ -59,6 +59,7 @@ function App() {
               <Route path='/newActivity' component={CreateActivity}/>
               <Route path={'/activities/:activityId'} component={Activity} />
               <Route path='/admin/cycles' component={AdminCycleHistory}/> 
+              <Route path='/employee/myCycles' component={EmployeeCycleHistory}/> 
               <Route path='/badges' component={Badges}/>
               <Route path='/employee-profile' component={EmployeeProfile}/>
               <Route component={NotFound404}/>

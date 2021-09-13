@@ -19,7 +19,7 @@ router.get('/activities/pending', controllers.viewPendingTasks)
 
 router.get('/activities/toBeSubmitted', controllers.viewToBeSubmittedTasks)
 
-router.get('/cycles', controllers.viewEmployeeCycles)
+router.get('/cycles/:employeeID', controllers.viewEmployeeCycles)
 
 router.get('/profile/:id/:cycleID', controllers.viewEmployeeProfile)
 

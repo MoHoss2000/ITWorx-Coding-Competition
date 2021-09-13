@@ -40,7 +40,7 @@ DELIMITER //
 CREATE PROCEDURE viewEmployeeCycles (IN employeeID INT)
 BEGIN
 	SELECT C.* FROM
-    cycle C INNER JOIN employeeCycle EC ON C.id = EC.cycle_id
+    cycle C INNER JOIN EmployeeCycle EC ON C.id = EC.cycle_id
     WHERE EC.employee_id = employeeID;
 END //
 

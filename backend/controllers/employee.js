@@ -68,12 +68,18 @@ exports.viewToBeSubmittedTasks = async (req, res) => {
 }
 
 exports.viewEmployeeCycles = async (req, res) => {
-    const employeeId = req.id
+    const employeeId = parseInt(req.params.employeeID)
     db.query(
         'CALL viewEmployeeCycles(?)', 
         [employeeId],
-        (err, queryRes) => res.send(queryRes[0])
-    )
+        (err, result) => {
+            if(result && result[0])
+                return res.send(result[0])
+            else if (err)
+                return res.send({err}) 
+            else 
+                return res.send([])    
+        })  
 }
            
 exports.viewEmployeeProfile = async (req, res) => {
