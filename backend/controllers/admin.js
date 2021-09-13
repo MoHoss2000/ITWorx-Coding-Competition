@@ -208,6 +208,18 @@ exports.getActivities = async (req, res) => {
     })
   
 }
+exports.getAllActivities = async (req, res) => {
+ 
+    db.query(`SELECT * FROM Activity`, (err, result) => {
+
+      if(result)
+        return res.status(200).send(result);
+      else (err)
+        return res.status(400).send(err);
+    
+    })
+  
+}
 
 exports.getBadges= async (req, res) => {
     db.query(`SELECT * FROM Badge`,(err, result) => {
@@ -233,6 +245,26 @@ exports.getCycles= async (req, res) => {
     res.status(400).send(e);
   }
 }
+exports.getEmployeesActivity = async (req, res) => {
+  const {activityId, cycleId}= req.query
+     if(!activityId){
+      res.status(400).send({
+        message: "Please provide all input fields!"
+      });
+      return;
+     }
+ 
+    db.query(`CALL getEmployeesActivity(?,?)`,[activityId, cycleId],(err, result) => {
+      if(result){
+        res.status(200).send(result);
+      }
+      else{
+        res.status(400).send(err);
+      }
+           
+    })
+  
+}
 
 exports.createNewActivity = async (req, res) => {
 
@@ -250,9 +282,9 @@ exports.createNewActivity = async (req, res) => {
       if(result){
         const status = result[1][0].status
         if(status===0)
-          res.status(200).json('An Activity with this name already exists, please choose another one');
+          res.status(200).json({message:'An Activity with this name already exists, please choose another one', status:0});
         else
-          res.status(200).json('Activity created succesfully!');
+          res.status(200).json({message:'Activity Created succesfully', status:1});
       }
       else{
         console.log(err)
@@ -263,9 +295,10 @@ exports.createNewActivity = async (req, res) => {
 exports.editActivity= async (req, res) => {
 
   const { ActivityId ,name, description, type, enabled, virtual_recognition, points } = req.body
-
+  console.log(req.body)
+  console.log(points)
   // Validate request
-  if ( !( ActivityId && name && description && type && enabled && points) && virtual_recognition!==undefined) {
+  if ( !( ActivityId && name && description && type && points) && virtual_recognition!==undefined && enabled!==undefined) {
     res.status(400).send({
       message: "Please provide all input fields!"
     });
@@ -273,14 +306,15 @@ exports.editActivity= async (req, res) => {
   } 
     
     const activity = [ ActivityId, name, description, type, enabled, virtual_recognition, points ];
+    console.log(activity)
 
     db.query('CALL editActivity(?,?,?,?,?,?,?, @stat); select @stat AS status;', activity ,(err, result) => {
       if(result){
         const status = result[1][0].status
         if(status===0)
-          res.status(200).json('An Activity with this name already exists, please choose another one');
+          res.status(200).json({message:'An Activity with this name already exists, please choose another one', status:0});
         else
-          res.status(200).json('Activity updated succesfully');
+          res.status(200).json({message:'Activity updated succesfully', status:1});
       }
       else{
         console.log(err)
@@ -376,8 +410,8 @@ exports.editActivity= async (req, res) => {
 
 
   exports.activityInfo = async (req, res) => {
-    console.log(req);
-    const {id, CycleId} = req.params.body
+    console.log(req.query);
+    const {id, CycleId} = req.query
   
     if (!(id && CycleId)) {
       res.status(400).send({

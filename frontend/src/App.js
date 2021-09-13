@@ -11,6 +11,8 @@ import HeaderAdmin from './Components/Navigation/HeaderAdmin';
 import SiderAdmin from './Components/Navigation/SiderAdmin';
 import Activity from "./Components/Admin/Activity";
 import NotFound404 from "./Components/NotFound404";
+import CreateCycle from './Components/Admin/CreateCycle';
+import EditActivity from './Components/Admin/EditActivity';
 
 
 function App() {
@@ -36,8 +38,10 @@ function App() {
             <Switch>
               <Route exact path='/' component={AdminHome}/>
               <Route path='/newActivity' component={CreateActivity}/>
-              <Route path={'/activities/:activityId'} component={Activity} />
+              <Route path={'/activities/:id'} component={Activity} />
               <Route path='/activities' component={Activities}/>
+              <Route path='/createCycle' component={CreateCycle}/>
+              <Route path='/editActivity/:id' component={EditActivity}/>
               <Route component={NotFound404}/>
             </Switch>
           </Layout>

@@ -36,6 +36,7 @@ function CreateCycle() {
         
         try {
           const values = await form.validateFields();
+          const {start_date, end_date} = values;
           setMessage(null)
           setError(null)
           setLoading(true);
@@ -45,7 +46,9 @@ function CreateCycle() {
             url: 'http://localhost:3001/admin/newCycle',
             data: {
                  adminID:1, 
-                 ...values }
+                 start_date:start_date.format("YYYY-MM-DD"),
+                 end_date: end_date.format("YYYY-MM-DD")
+                }
           });
         
           setMessage(post.data)
@@ -53,10 +56,12 @@ function CreateCycle() {
         } catch (e) {
           setMessage(null)
           setLoading(false)
-          if(e.errorFields)
+          if(e.errorFields){
           setError("Please fill all input fields")
-          else
+          }
+          else{
           setError("Oops, There seems to be a network problem, please try again :/")
+          }
           console.log('Failed:', e);
         }
       };
@@ -72,7 +77,7 @@ function CreateCycle() {
             
      <Form form={form} name="New Activity">
      <Form.Item 
-    name="start-date"
+    name="start_date"
     label="Start Date"
     rules={[
         {
@@ -83,7 +88,7 @@ function CreateCycle() {
           <DatePicker />
     </Form.Item>
     <Form.Item 
-     name="end-date"
+     name="end_date"
     label="End Date"
     rules={[
         {

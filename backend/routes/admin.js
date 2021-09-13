@@ -17,7 +17,11 @@ router.post('/badge', controllers.createBadge);
 
 router.get('/getActivities/:cycleID', controllers.getActivities)
 
+router.get('/Activities', controllers.getAllActivities)
+
 router.get('/viewActivity', controllers.activityInfo)
+
+router.get('/viewEmployeeActivity', controllers.getEmployeesActivity)
 
 router.get('/pending', controllers.pendingActivities)
 

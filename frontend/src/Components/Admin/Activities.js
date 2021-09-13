@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'antd/dist/antd.css';
-import { Button, Card, Divider } from 'antd';
-import { CarryOutOutlined, SketchOutlined } from '@ant-design/icons';
-import { Link, } from 'react-router-dom'
+import { List, Typography } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import ActivityListItem from './ActivityListItem';
+const {Title}=Typography
 
 
 function Activities() {
-  const [activities, setActivities] = useState([])
+  const [activities, setActivities] = useState(null)
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     console.log('GETTING ACTIVITIES');
-    axios.get('http://localhost:3001/admin/getActivities')
+    axios.get('http://localhost:3001/admin/Activities')
       .then((res) => {
         setActivities(res.data)
         setLoading(false)
@@ -38,38 +39,25 @@ function Activities() {
   }
 
   return (
+<div>
+    
+ <Title level={2} style={{ marginLeft:'65px'}}>Activities</Title>
+ { !activities ? <LoadingOutlined style={{ fontSize: 50 }} spin /> :
+ <List
+    itemLayout="vertical"
+    size="large"
+    pagination={{
+      pageSize: 5,
+    }}
+    dataSource={activities}
+    renderItem={activity => (
+      <ActivityListItem activity={activity}/>
+    )}
+   /> }
 
-    <div>
-
-
-      <h1> ACTIVITIES</h1>
-      {
-
-        activities.map(({ id, name, description }) => (
-          <Card key={id} title={name} type="inner" loading={loading}
-            extra={<Button type="primary" style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between'
-            }}
-            >
-              <SketchOutlined />
-              <Link to={`/activities/${id}`} style={{ color: 'white', marginLeft: 5 }}>
-                View Activity
-              </Link>
-            </Button>}
-            style={{ width: 800, marginTop: 20 }}
-            hoverable='true'>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-              <CarryOutOutlined style={{ fontSize: '250%' }} />
-              <Divider type="vertical" style={{ height: '50px', marginLeft: '20px' }} />
-              <h5 style={{ marginLeft: '20px' }}>{description}</h5>
-            </div>
-          </Card>
-
-        ))}
-
-    </div>
+</div>  
+    
+    
   );
 }
 

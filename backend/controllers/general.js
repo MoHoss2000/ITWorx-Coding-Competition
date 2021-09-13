@@ -1,7 +1,7 @@
-const {sendEmail} = require('../utils/email')
+const {sendEmail} = require('../utils/email');
 const jwt = require("jsonwebtoken");
-const db = require('../db/mysql')
-const bcrypt = require('bcrypt')
+const db = require('../db/mysql');
+const bcrypt = require('bcrypt');
 const { createToken } = require ('../utils/tokens');
 
 exports.changePassword = async (req, res) => {
