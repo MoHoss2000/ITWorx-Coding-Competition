@@ -16,40 +16,43 @@ function CycleOverview (){
     const [current, setCurrent] = useState(false)
   
     useEffect(() => {
-        const getTime = async () => {
+        const getCycle = async () => {
             const cycleID = 1
-            const res = (await axios.get(`http://localhost:3001/admin/cycle/view/${cycleID}`))
-            setData(res.data)
-            setCurrent(res.data.current)
+            const {data} = (await axios.get(`http://localhost:3001/admin/cycle/view/${cycleID}`))
+            setData(data)
+            setCurrent(data.current)
+            console.log(data.current == true)
         }
-        getTime()
+        getCycle()
     }, [])
 
     return(
         <div>
-            <div className='header-group'>
-                <h1 className= "title"> <b>Cycle Overview</b></h1>
+             <div className='header-group'>
+                <h1 className= "title"> <b>Cycle Overview </b></h1>
                 <div className="switch">
                     <DisableSwitch current={current} />
                 </div>
             </div>
             <Divider className="title-divider"/>
            <Row align='top'>
-                <Col flex="620px">
-                    <CycleInfo data={data}/>
-                <ActivityList />
+                <Col flex="620px"> 
+{   
+                 <CycleInfo data={data} className={'info-display'}/> }
+                  <ActivityList />
 
-                </Col>
-                <Col span={14}>
-                    <Leaderboard  />
-                </Col>
-            </Row>
+                </Col> 
+                    <Col span={14}>
+                         <Leaderboard  />
+                    </Col>
+                 </Row>
                 
-            <Row>
-                <Col>
-                <Leaderboard />
-                </Col>
-            </Row> 
+          
+
+            
+            
+           
+           
         </div>
     )
 }

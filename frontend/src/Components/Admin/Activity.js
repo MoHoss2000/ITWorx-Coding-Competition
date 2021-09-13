@@ -1,50 +1,23 @@
 import 'antd/dist/antd.css';
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
-import {Card} from 'antd';
+import React from 'react';
 import {useParams} from "react-router-dom";
+import { Divider } from 'antd';
+import EmployeeActivity from './EmployeeActivity';
+import ActivityCard from './ActivityCard';
+
 
 
 function Activity() {
 
-  const [activity, setActivity] = useState(null)
-  const [error, setError] = useState(null)
   const {id} = useParams();
 
-  useEffect(() => {
-
-    console.log('GETTING ACTIVITY');
-    setError(null)
-    axios(
-      {
-        method: 'get',
-        url: 'http://localhost:3001/admin/viewActivity',
-        headers: {},
-        data: {
-          id,
-          CycleId: 1
-        }
-      }).then((res) => {
-      console.log(res.data)
-      setActivity(res.data)
-    })
-      .catch((e) => {
-        setError("Oops there seems to be a problem connecting to the network")
-        console.log(e)
-
-
-      })
-
-  }, []);
-
   return (
-
-    <Card
-      style={{width: '800px'}}
-      title="MY ACTIVITY">
-test
-
-    </Card>
+    <div>
+      <h1 className="title">Activity</h1>
+      <Divider className="title-divider"/>
+    <ActivityCard  id={id} />
+    <EmployeeActivity id={id}/>
+    </div>
 
 
   )

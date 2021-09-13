@@ -1,7 +1,7 @@
-const {sendEmail} = require('../utils/email')
+const {sendEmail} = require('../utils/email');
 const jwt = require("jsonwebtoken");
-const db = require('../db/mysql')
-const bcrypt = require('bcrypt')
+const db = require('../db/mysql');
+const bcrypt = require('bcrypt');
 const { createToken } = require ('../utils/tokens');
 
 exports.changePassword = async (req, res) => {
@@ -167,4 +167,17 @@ exports.login = async (req, res) => {
             ) 
         }
     }) 
+}
+
+exports.getDeadline = async (req, res) =>{
+    db.query('CALL getDeadline()', 
+        (err, result) => {
+            if(result && result[0])
+                return res.send(result[0])
+            else if (err)
+                return res.send({err}) 
+            else 
+                return res.send([])    
+        }
+    )
 }

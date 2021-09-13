@@ -1,5 +1,4 @@
 import react ,{useEffect, useState} from 'react';
-import ReactDOM from "react-dom";
 import axios from 'axios';
 import 'antd/dist/antd.css';
 import { Card, Button, Layout,Divider, Typography} from 'antd';
@@ -20,7 +19,7 @@ const { Title } = Typography;
 
 
 const { Content} = Layout;
-function AdminCycleHistory() {
+function EmployeeCycleHistory() {
 
     const [current, setCurrent] = useState([])
     const [cycles, setCycles] = useState([])
@@ -29,9 +28,9 @@ function AdminCycleHistory() {
     const { path, url } = useRouteMatch()
     console.log(path)
     console.log(url)
-    var currentCycleID = 1
+    var employeeID = 1
     useEffect(() => {
-        axios.get('http://localhost:3001/admin/cycles')
+        axios.get(`http://localhost:3001/employee/cycles/${employeeID}`)
             .then((res) => {  
                 // console.log(res.data)
                 // res.data.map( cyc =>{
@@ -40,6 +39,7 @@ function AdminCycleHistory() {
                 //                 console.log(current)
                 //             } 
                 // })
+                console.log(res.data)
                 setCycles(res.data)
                 
                 })
@@ -60,9 +60,8 @@ function AdminCycleHistory() {
   }
 
   if (cycles==[]) {
-    return <Spinner />
-  }
-  
+    return <div> You didn't participate in any cycles yet</div>  }
+  else{
   return (
     
     <div>
@@ -72,6 +71,7 @@ function AdminCycleHistory() {
     </div>
   );
        }
+    }
 
 
-export default AdminCycleHistory;
+export default EmployeeCycleHistory;

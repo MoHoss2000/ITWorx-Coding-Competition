@@ -15,7 +15,7 @@ router.post('/register', controllers.register);
 
 router.post("/login", controllers.login)
 
-
+router.get('/time', controllers.getDeadline)
 
 router.patch('/changepassword', controllers.changePassword)
 

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Card, Col, Button, Spin } from 'antd';
+import { Row, Card, Col, Button, Spin , Divider} from 'antd';
 import axios from 'axios'
 // import Spinner from '../General/loadingSpinner'
 import FloatingBox from './floatingbox/FloatingBox';
+import BadgesDisplay from '../BadgesDisplay';
 
 const Badges = () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
     const [selectedData, setSelectedData] = useState([])
     const [visible, setVisible] = useState(false)
+    const [newBadgeMode, setNewBadgeMode] = useState(false);
 
     useEffect(() => {
         const getBadges = async () => {
@@ -31,44 +33,33 @@ const Badges = () => {
         return <Spin size='large' />
 
 
-
-    // console.log('DATA ' + data)
     return (
         <>
             <div>
                 <h1 className="title">Badges</h1>
+                <Divider className="title-divider"/>
                 <div style={{ display: "flex", flexDirection: 'row-reverse' }}>
-                    <Button type='primary' size='large' shape='round'>Create New Badge</Button>
+                    <Button type='primary' size='large' shape='round' onClick={
+                        () => {
+                            setNewBadgeMode(true);
+                            setSelectedData(null);
+                            setVisible(true);
+                        }
+                    } > Add New Badge</Button>
                 </div>
             </div>
 
-            <Row gutter={[16, 16]}>
-                {
-                    data.map((badge, index) => (
-                        <Col span={8}>
-                            <Card style={{borderRadius: 40, backgroundColor: badge.enabled? 'ffffff':'#E7E7E7'}} hoverable='true' actions={[<Button size='large' onClick={() => {
-                                setSelectedData(badge);
-                                console.log(`selected is: ${selectedData}`);
-                                setVisible(true);
-                            }}>Edit</Button>, <Button size='large'> {badge.enabled? 'Disable': 'Enable'} </Button>]} headStyle={{display:'flex', alignItems: 'center', flexDirection: 'column'}} title={<h2>{badge.name}</h2>}>
-                                <div style={{ display: "flex", flexDirection: "column" , alignItems: 'center'}}>
-                                    <img width='100' height='100' src='/badge.png'></img>
-                                    <h1>{badge.type == 'developers' ? 'Developers' : 'All Employees'}</h1>
-
-                                    <h5>{badge.description}</h5>
-                                    <h2 style={{textAlign:"center"}}>Points Needed <br /> {badge.points_needed}</h2>
-                                </div>
-
-                            </Card>
-                        </Col>
-                    ))}
-            </Row>
+            <BadgesDisplay adminMode={true} data={data} setNewBadgeMode={setNewBadgeMode}
+                setVisible={setVisible} setSelectedData={setSelectedData} setData={setData} />
 
             <FloatingBox
-                visible={visible} setVisible={setVisible} data={selectedData} seteData={setData}
+                visible={visible} newBadge={newBadgeMode} setVisible={setVisible} data={selectedData} setData={setData}
             />
         </>
     );
+
 }
+
+
 
 export default Badges

@@ -2,10 +2,13 @@ import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import react ,{useEffect, useState} from 'react';
 import axios from 'axios';
+import { Divider } from 'antd';
+import { SyncOutlined } from '@ant-design/icons';
 import {
     
     Spin, Alert, Switch,
     Typography,
+    DatePicker,
     Form,
     Card,
     Input,
@@ -34,16 +37,19 @@ function CreateCycle() {
         
         try {
           const values = await form.validateFields();
+          const {start_date, end_date} = values;
           setMessage(null)
           setError(null)
           setLoading(true);
           console.log('Success:', values);
           const post = await axios({
             method: 'post',
-            url: 'http://localhost:3001/admin/newActivity',
+            url: 'http://localhost:3001/admin/newCycle',
             data: {
                  adminID:1, 
-                 ...values }
+                 start_date:start_date.format("YYYY-MM-DD"),
+                 end_date: end_date.format("YYYY-MM-DD")
+                }
           });
         
           setMessage(post.data)
@@ -51,90 +57,62 @@ function CreateCycle() {
         } catch (e) {
           setMessage(null)
           setLoading(false)
-          if(e.errorFields)
+          if(e.errorFields){
           setError("Please fill all input fields")
-          else
+          }
+          else{
           setError("Oops, There seems to be a network problem, please try again :/")
+          }
           console.log('Failed:', e);
         }
       };
     return (
-       
-    <Spin spinning={loading} delay={400} >
-    <Card title={
-        <Title level={3} style={{ marginTop:'20px'}}>New Activity</Title>}  style={{ width: 800 , marginTop:'100px',marginBottom:'100px'}}>
-            
-     <Form form={form} name="New Activity">
-      <Form.Item
-        name="name"
-        label="Name"
-        rules={[
-          {
-            required: true,
-            message: 'Activity Name',
-          },
-        ]}
-      >
-        <Input placeholder="Please input activity name" />
-      </Form.Item>
-
-      <Form.Item
-        name="points"
-        label="points"
-        rules={[
-          {
-            required: true,
-            message: 'Please Specify number of points (must be a number)',
-          },
-        ]}
-      >
-     <InputNumber min={5}   />
-      </Form.Item>
-    
-    <Form.Item
-        name="type"
-        label="Type"
-        rules={[
-          {
-            required: true,
-            message: 'Please specify activity type!',
-          },
-        ]}
-      >
-        <Select placeholder="select Activity Type"  style={{ width: 200 }} >
-          <Option value="Developer">Developer</Option>
-          <Option value="Non-Developer">Non-Developer</Option>
-        </Select>
-     </Form.Item>
-     <Form.Item name="virtual_recognition" label="Virtual Recognition available" valuePropName="checked">
-          <Switch checked='false' />
-     </Form.Item>
-    <Card type="inner" title="Description" style={{ marginTop:'20px'}} >
-
-   
-    <Form.Item
-        name="description"
-        rules={[
-          {
-            required: true,
-            message: 'Description is required',
-          },
-        ]}
-      >
-       <TextArea placeholder="Enter activity description here" style={{ height:'100px'}} allowClear  />
-      </Form.Item>
-        
-    </Card>
-    { message && <Title level={5} style={{ marginLeft:'120px', marginTop:'20px', color:'green'}}>{message}</Title> }
-    { error && <Title level={5} style={{  marginLeft:'120px', marginTop:'20px', color:'red'}}>{error}</Title> }
-
-    <Button type="primary" onClick={onSubmit} style={{ marginLeft:'300px',  marginTop:'40px', width:'150px'}} >
-          Create Activity
-    </Button>
-    </Form>
-       </Card>
-       </Spin>
-       
+      <div >
+      
+            <h1 className="title">Create New Cycle </h1>
+            <Divider className="title-divider"/>
+            <div className ='centered-component'>
+            <Spin spinning={loading} delay={400} >
+            <Card title={
+                <div style={{ display: "flex", flexDirection :'row'}}>
+                <SyncOutlined  style={{ fontSize: '140%' }} />
+                <Title level={3} style={{ marginLeft:'20px'}}>New Cycle</Title>
+                </div>}  
+                style={{  marginTop:'50px',marginBottom:'50px'}}>
+                    
+            <Form form={form} name="New Activity">
+            <Form.Item 
+            name="start_date"
+            label="Start Date"
+            rules={[
+                {
+                  required: true,
+                  message: 'Please Specify start date ',
+                },
+              ]}>
+                  <DatePicker />
+            </Form.Item>
+            <Form.Item 
+            name="end_date"
+            label="End Date"
+            rules={[
+                {
+                  required: true,
+                  message: 'Please Specify end date ',
+                },
+              ]}>
+                  <DatePicker />
+            </Form.Item>
+            { message && <Title level={5} style={{ marginLeft:'120px', marginTop:'20px', color:'green'}}>{message}</Title> }
+            { error && <Title level={5} style={{  marginLeft:'120px', marginTop:'20px', color:'red'}}>{error}</Title> }
+            <Button type="primary" onClick={onSubmit} style={{ marginLeft:'300px',  marginTop:'40px', width:'150px'}} >
+                  Create Cycle 
+            </Button>
+            </Form>
+            </Card>
+            </Spin>
+            </div>
+     </div>    
     );
 
 }

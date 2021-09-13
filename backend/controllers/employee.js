@@ -68,12 +68,18 @@ exports.viewToBeSubmittedTasks = async (req, res) => {
 }
 
 exports.viewEmployeeCycles = async (req, res) => {
-    const employeeId = req.id
+    const employeeId = parseInt(req.params.employeeID)
     db.query(
         'CALL viewEmployeeCycles(?)', 
         [employeeId],
-        (err, queryRes) => res.send(queryRes[0])
-    )
+        (err, result) => {
+            if(result && result[0])
+                return res.send(result[0])
+            else if (err)
+                return res.send({err}) 
+            else 
+                return res.send([])    
+        })  
 }
            
 exports.viewEmployeeProfile = async (req, res) => {
@@ -172,8 +178,8 @@ exports.viewCycleDetails = async (req, res) => {
 }
 
 exports.getAssignedActivities = async (req, res) => {
-    const cycleID= req.body.cycleID
-    const employeeID = req.id
+    const cycleID= req.params.cycleID
+    const employeeID = req.params.employeeID
     db.query(
         'CALL viewEmployeeActivitiesInCycle(?,?)', 
         [employeeID,cycleID ],
@@ -198,4 +204,19 @@ exports.submitActivity = async (req, res) => {
             else
                 return res.status(400).json({err}) 
         })
+}
+
+exports.getCurrentActivities = async (req, res) => {
+    const employeeID = parseInt(req.params.employeeID)
+    db.query(
+        'CALL viewCurrentTasks(?)', 
+        [employeeID],
+        (err, result) => {
+            if(result && result[0])
+                return res.send(result[0])
+            else if (err)
+                return res.send({err}) 
+            else 
+                return res.send([])    
+        })     
 }

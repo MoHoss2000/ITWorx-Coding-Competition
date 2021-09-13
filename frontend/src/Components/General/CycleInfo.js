@@ -9,8 +9,8 @@ const CycleInfo = (props) =>{
   
 return(
  <div>
-    <Card loading={props.loading} className="activities-card" >
-         <Title level={4}> Cycle Information </Title>
+    <Card className={props.className} >
+       <Title level={4}> Cycle Information </Title>
         <Divider className="small-divider"/>
         <p> <b> Cycle ID: </b> {props.data.id} </p>
          <p> <b>Start Date: </b> {props.data.start_date} </p>

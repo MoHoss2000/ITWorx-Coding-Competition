@@ -10,14 +10,19 @@ router.use(express.json())
 //router.use(isAdmin)
 router.get('/profile/:id', controllers.viewProfile)
 
-router.post('/cycle', controllers.createCycle)
+router.post('/newCycle',controllers.createNewCycle)
 
 router.post('/badge', controllers.createBadge);
 
 router.get('/getActivities/:cycleID', controllers.getActivities)
 
+router.get('/Activities', controllers.getAllActivities)
+
 router.get('/viewActivity', controllers.activityInfo)
 
+router.get('/viewEmployeeActivity', controllers.getEmployeesActivity)
+
+router.get('/pending', controllers.pendingActivities)
 router.get('/pending/:cycleID', controllers.pendingActivities)
 
 router.post('/newActivity', controllers.createNewActivity)
