@@ -58,7 +58,7 @@ function App() {
               <Route exact path='/' component={AdminHome}/>
               <Route path='/newActivity' component={CreateActivity}/>
               <Route path={'/activities/:activityId'} component={Activity} />
-              {/* <Route path='/activities' component={Activities}/> */}
+              <Route path='/admin/cycles' component={AdminCycleHistory}/> 
               <Route path='/badges' component={Badges}/>
               <Route path='/employee-profile' component={EmployeeProfile}/>
               <Route component={NotFound404}/>
