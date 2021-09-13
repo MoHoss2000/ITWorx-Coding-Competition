@@ -47,13 +47,12 @@ body {
 }
 #menu {
   margin-top: 60px;
-  background-color: transparent
+  background-color: transparent;
 }
 
 #header {
-  background-color: white; 
+  background-color: white;
   justify-content: flex-end;
-
 }
 
 #m {
@@ -82,45 +81,40 @@ body {
   flex-direction: row-reverse;
 } */
 
-  [data-theme="dark"] .site-card-border-less-wrapper {
-    background: #303030;
-  }
+[data-theme="dark"] .site-card-border-less-wrapper {
+  background: #303030;
+}
 
+.view-all-button {
+  margin-left: 50px;
+  margin-top: 20px;
+}
 
-  .view-all-button{
-    margin-left: 50px;
-    margin-top: 20px;
-
-  }
-
-  .employee-list{
-    margin-top: 40px;
-    left: 5%;
-    width : 900px;
-  }
-
+.employee-list {
+  margin-top: 40px;
+  left: 5%;
+  width: 900px;
+}
 
 .gridStyle {
-    width: '600px';
-  }
+  width: "600px";
+}
 
- 
+.switch {
+  margin-left: 5%;
+  display: flex;
+  flex-direction: row;
+}
 
-  .switch{
-    margin-left: 5%;
-    display: flex;
-    flex-direction: row;
-  }
+.cycle-list {
+  background-color: #0099cc1f;
+  border-bottom-right-radius: 1cm;
+  margin-left: 20px;
+}
 
-  .cycle-list{
-    background-color: #0099cc1f;
-    border-bottom-right-radius: 1cm;
-    margin-left: 20px;
-  }
-
-  .side-menu{
-    background-color: #0099cc;
-  }
+.side-menu {
+  background-color: #0099cc;
+}
 
 [data-theme="dark"] .site-card-border-less-wrapper {
   background: #303030;
@@ -131,19 +125,23 @@ body {
   left: 5%;
   width: 600px;
   margin-bottom: 30px;
-  background: rgba(255, 255, 255, 0); 
+  background: rgba(255, 255, 255, 0);
   box-shadow: 10px 8px 20px 0 #b7202593;
   transition: 0.3s;
-
 }
 
-
-.side-bar{
-
-  background: #b72025;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #000090, #b72025);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top, #000090, #b72025); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
+.side-bar {
+  background: #b72025; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    #000090,
+    #b72025
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top,
+    #000090,
+    #b72025
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .view-all-button {
@@ -158,8 +156,7 @@ body {
 .title {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin-left: 20px;
-  color: #b72025
-  
+  color: #b72025;
 }
 .title-divider {
   width: 400px;
@@ -175,7 +172,7 @@ body {
   width: "600px";
 }
 
-.small-divider{
+.small-divider {
   background-color: #b72025;
 }
 
@@ -196,58 +193,63 @@ body {
   flex-wrap: wrap;
   flex-direction: row;
   border-color: white;
-  
-
 }
 
 .info-card1 {
   top: 20%;
-  height:auto;
+  height: auto;
   width: 690px;
   border-color: white;
 }
 
-.leaderboard-tab-list{
+.leaderboard-tab-list {
   margin-left: 100px;
 }
 
-.header-group{
+.header-group {
   display: flex;
   flex-direction: row;
 }
 
-
-.ant-table-thead >tr >th {
+.ant-table-thead > tr > th {
   position: relative;
   color: rgba(255, 255, 255, 0.85);
   font-weight: 500;
   text-align: left;
   background: #b72025;
   border-bottom: 1px solid #f0f0f0;
-  transition:  0.3s ease;
+  transition: 0.3s ease;
 }
 
-.ant-table-thead  :hover{
+.ant-table-thead :hover {
   position: relative;
   color: rgba(0, 0, 0);
   font-weight: 500;
   text-align: left;
-  background:transparent;
+  background: transparent;
   border-bottom: 1px solid #f0f0f0;
-  transition:  0.3s ease;
+  transition: 0.3s ease;
 }
-.ant-tabs-tab ant-tabs-tab-active{
-  color:springgreen
-}
-
-.semi-back{
-  background: #b72025;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #00009071, #0099cc);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top, #00009038, #0099cc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  height: 600px
+.ant-tabs-tab ant-tabs-tab-active {
+  color: springgreen;
 }
 
-.semi-lower{
+.semi-back {
+  background: #b72025; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    #00009071,
+    #0099cc
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top,
+    #00009038,
+    #0099cc
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: 600px;
+}
+
+.semi-lower {
   background-color: white;
   height: auto;
   /* width: 1200px; */
@@ -257,7 +259,13 @@ body {
   border-radius: 4cm;
 }
 
-.profile-components{
+.profile-components {
   display: flex;
   justify-content: center;
+}
+
+#change-password {
+  width: 40%;
+  box-shadow: 10px 8px 20px 0 #b7202593;
+  top: 40%;
 }

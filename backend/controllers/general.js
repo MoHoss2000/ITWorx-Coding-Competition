@@ -5,20 +5,20 @@ const bcrypt = require('bcrypt')
 const { createToken } = require ('../utils/tokens');
 
 exports.changePassword = async (req, res) => {
-    const  id = req.id 
+    const  id = req.id
     const userType = req.userType
     const { oldPassword, newPassword } = req.body
     if(oldPassword === newPassword) 
         return res.status(400).json({message: 'Old password and new password have to be different'})
-    const findUser = userType === 'employee' ? `SElECT * FROM Employee WHERE id = ${id}` : 
-                                               `SElECT * FROM Admin WHERE id = ${id}`
+    const findUser = userType == 'employee' ? `SELECT * FROM employee WHERE id = ${id}` : 
+                                               `SELECT * FROM admin WHERE id = ${id}`
     db.query(findUser, async (err, user) => {
         const hashedPassword = user[0].password
         const match = await bcrypt.compare(oldPassword, hashedPassword)
         if(!match) return res.status(400).json({message: 'Old password is incorrect'})
         const newHashedPassword = await bcrypt.hash(newPassword, 10)
-        const updateUser = userType === 'employee' ? `UPDATE Employee SET password = ? WHERE id = ${id};`
-                                                   : `UPDATE Admin SET password = ? WHERE id = ${id};`
+        const updateUser = userType === 'employee' ? `UPDATE employee SET password = ? WHERE id = ${id};`
+                                                   : `UPDATE admin SET password = ? WHERE id = ${id};`
         db.query(updateUser, newHashedPassword,(err, result) => {
             if(result)
                 return res.json({message: 'Password changed successfylly!'})

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Row, Card, Col, Button, Spin } from 'antd';
 import axios from 'axios'
 // import Spinner from '../General/loadingSpinner'
-import FloatingBox from './components/floatingbox/FloatingBox';
+import FloatingBox from './floatingbox/FloatingBox';
 
 const Badges = () => {
     const [loading, setLoading] = useState(true)
@@ -19,9 +19,7 @@ const Badges = () => {
             } catch (e) {
                 setData(null);
             }
-
             setLoading(false)
-
         }
         getBadges();
     }, [])

@@ -1,6 +1,7 @@
 import React from 'react'
-import {Descriptions, Card, Button, Avatar, Row, Col} from 'antd'
+import {Card, Button, Avatar, Row, Col} from 'antd'
 import {SketchOutlined, UserOutlined} from '@ant-design/icons'
+import { Link } from 'react-router-dom'
 const PersonalInfo = (props) => {
     const personalInfo = props.data.personalInfo[0]
     const departments = props.data.departments
@@ -27,7 +28,8 @@ const PersonalInfo = (props) => {
                 <Row gutter={[16,8]}>
                     <Col style={{display: 'flex', flexDirection: 'column'}}>
                     <Avatar size={120} style={{backgroundColor: '#87d068'}} icon={<UserOutlined/>}/>
-                    <Button type='primary' style={{color: 'white', marginTop: '30px', left: '-10px'}}>Change Password</Button>
+                    
+                    <Button type='primary' style={{color: 'white', marginTop: '10px', left: '-10px'}}><Link to="/changePassword" className="btn btn-primary">Change Password</Link></Button>
                     <Button type='primary' style={{color: 'white', marginTop: '10px', left: '-10px'}}>Edit data</Button>
                     </Col>
                     <Col>

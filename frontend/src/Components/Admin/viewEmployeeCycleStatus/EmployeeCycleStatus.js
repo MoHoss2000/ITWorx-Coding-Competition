@@ -8,7 +8,6 @@ import Spinner from '../../General/loadingSpinner'
 
 import '../../components.css'
 import CycleInfo from '../../General/CycleInfo'
-import EmployeeProfile from '../../EmployeeProfile/EmployeeProfile'
 const { TabPane } = Tabs;
 const { Title } = Typography;
 
@@ -20,7 +19,7 @@ const EmployeeCycleStatus= () => {
         const employeeId = 1
         const cycleID = 1
         const getStatus = async () => {
-            const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${employeeId}/${cycleID}`))
+            const { data } = await (axios.get(`http://localhost:3001/admin/employeeStatus/${employeeId}/${cycleID}`))
             console.log(data)
             setData(data)
             setLoading(false)
@@ -33,8 +32,7 @@ const EmployeeCycleStatus= () => {
 
     return(
         <div>
-            <EmployeeProfile/>
-            <CycleInfo data={data.cycleInfo[0]}/>
+            <CycleInfo data={data.cycleInfo[0]} />
         </div>
     )
 }

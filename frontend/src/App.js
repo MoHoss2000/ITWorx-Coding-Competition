@@ -16,6 +16,8 @@ import NotFound404 from "./Components/NotFound404";
 import CycleOverview from './Components/General/CycleOverview';
 import Leaderboard from './Components/Admin/Leaderboard';
 import EmployeeCycleStatus from './Components/Admin/viewEmployeeCycleStatus/EmployeeCycleStatus';
+import AdminProfile from './Components/Admin/AdminProfile/AdminProfile';
+import ChangePassword from './Components/General/ChangePassword';
 
 
 function App() {
@@ -41,7 +43,9 @@ function App() {
           
           <Layout style={{flex: 1, paddingLeft: 50, paddingTop: 50, paddingRight: 20, paddingBottom: 50, overflowY: 'scroll'}}>
             <Switch>
+              <Route path ='/changePassword' component ={ChangePassword} />
               <Route path ='/employeeStatus' component ={EmployeeCycleStatus} />
+              <Route path ='/adminProfile' component ={AdminProfile} />
               <Route path ='/participants' component ={Participants} />
               <Route path ='/leaderboard' component ={Leaderboard} />
               <Route path ='/cycleOverview' component ={CycleOverview} />
