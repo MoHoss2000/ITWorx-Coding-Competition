@@ -24,7 +24,8 @@ const ResetPassword = () => {
 
       window.alert(res.data);
     } catch(e){
-      window.alert(e.response.data);
+      // window.alert(e.response);
+      window.alert(e.response.data.message)
 
     }
 

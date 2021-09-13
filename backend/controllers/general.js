@@ -6,7 +6,7 @@ const { createToken } = require('../utils/tokens');
 
 
 function decodeResetPassToken(token) {
-    console.log("HEY");
+    // console.log("HEY");
     try {
         return jwt.verify(token, process.env.Reset_Password)
     }
@@ -18,7 +18,6 @@ function decodeResetPassToken(token) {
 exports.changePassword = async (req, res) => {
     // console.log(req);
     var resetPasswordToken = req.body.token;
-
     var id = req.id
     var userType = req.userType
 
@@ -28,10 +27,10 @@ exports.changePassword = async (req, res) => {
         if (payload == null)
             return res.status(400).send('Invalid or expired token');
 
+
         id = payload.id;
         userType = payload.type;
     }
-
 
 
     const { oldPassword, newPassword } = req.body
@@ -41,7 +40,7 @@ exports.changePassword = async (req, res) => {
         `SELECT * FROM admin WHERE id = ${id}`
 
     db.query(findUser, async (err, user) => {
-
+        
         const hashedPassword = user[0].password
         const match = await bcrypt.compare(oldPassword, hashedPassword)
         if (!match) return res.status(400).json({ message: 'Old password is incorrect' })
@@ -98,7 +97,7 @@ exports.resetPassword = async (req, res) => {
 
     const token = jwt.sign({ id: userID, type: userType }, process.env.Reset_Password, { expiresIn: '15m' })
     // generate URL to be sent in email (body)
-    const url = "http://localhost:3000/changePassword/" + token
+    const url = "http://localhost:3000/resetpassword/" + token
     // call sendEmail
     const subject = "ITWORX Reset Password"
     const body = `  <h3> Hello ${first_name} </h3>
