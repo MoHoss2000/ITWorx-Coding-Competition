@@ -51,8 +51,7 @@ exports.disableCycle = async (req, res) => {
 }
 
 exports.viewProfile = async (req, res) => {
-    adminID = req.params.id   
-
+    adminID = parseInt(req.params.id) 
     try{
       db.query('SELECT * FROM admin WHERE id = (?)', adminID ,(err, result) => {
           // res.send(result[0]);

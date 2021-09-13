@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import 'antd/dist/antd.css';
 import {Layout} from 'antd';
-import AdminHome from './Components/AdminHome';
+
 import AdminCycleHistory from './Components/Admin/AdminCycleHistory';
 import CreateActivity from './Components/Admin/CreateActivity';
 import {BrowserRouter as Router, Route, Switch,} from 'react-router-dom'
@@ -19,7 +19,8 @@ import CycleOverview from './Components/General/CycleOverview';
 import Leaderboard from './Components/Admin/leaderboard';
 import EmployeeCycleStatus from './Components/Admin/viewEmployeeCycleStatus/EmployeeCycleStatus';
 import MyStatus from './Components/Employee/MyStatus';
-import EmployeeHome from './Components/Home/HomePage';
+import EmployeeHome from './Components/HomePages/EmployeeHome';
+import AdminHome from './Components/HomePages/AdminHome';
 
 
 
@@ -51,6 +52,7 @@ function App() {
               <Route path ='/participants' component ={Participants} />
               <Route path ='/leaderboard' component ={Leaderboard} />
               <Route path ='/home' component ={EmployeeHome} />
+              <Route path ='/admin/home' component ={AdminHome} />
               <Route path ='/cycleOverview' component ={CycleOverview} />
               <Route path ='/myStatus' component ={MyStatus} />
               <Route exact path='/' component={AdminHome}/>
