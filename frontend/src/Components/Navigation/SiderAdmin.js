@@ -38,34 +38,44 @@ function SiderAdmin() {
           </Menu.Item>
 
           <SubMenu key="sub1" icon={<SyncOutlined style={{color:'white'}}/>} title="Cycle">
-            <Menu.Item key="2">
-              {/*<Link>*/}
+          <Menu.Item key="9">
+               <Link to={'/admin/cycles'}>
+              Cycle History
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="10">
+              <Link to={'/cycleOverview'}>
               Cycle Overview
-              {/*</Link>*/}
+              </Link>
             </Menu.Item>
             <Menu.Item key="3">
-              {/*<Link>*/}
+            <Link to={'/participants'}>
               Cycle Participants
-              {/*</Link>*/}
+              </Link>
             </Menu.Item>
-            <Menu.Item key="3">
-              <Link to={'/createCycle'}></Link>
+            <Menu.Item key="4">
+              <Link to={'/createCycle'}> Create New Cycle</Link>
             </Menu.Item>
           </SubMenu>
           <SubMenu key="sub2" icon={<FileDoneOutlined style={{color:'white'}}/>} title="Activities">
-            <Menu.Item key="4">
+            <Menu.Item key="5">
               <Link to={'/newActivity'}>Create New Activity</Link>
             </Menu.Item>
-            <Menu.Item key="5">
+            <Menu.Item key="6">
               <Link to={'/activities'}>All Activities</Link>
             </Menu.Item>
           </SubMenu>
-          <Menu.Item key="8" icon={<TrophyOutlined style={{color:'white'}}/>}>
-            {/*<Link>*/}
+          <Menu.Item key="7" icon={<TrophyOutlined style={{color:'white'}}/>}>
+            <Link to={'/leaderboard'}>
             Leaderboard
-            {/*</Link>*/}
+            </Link>
           </Menu.Item>
-          <Menu.Item key="9" icon={<SettingOutlined style={{color:'white'}}/>}>
+          <Menu.Item key="12" icon={<TrophyOutlined  style={{color:'white'}}/>}>
+          <Link to={'/badges'}>
+            Badges
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="8" icon={<SettingOutlined style={{color:'white'}}/>}>
             {/*<Link>*/}
             Settings
             {/*</Link>*/}

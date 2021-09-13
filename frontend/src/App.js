@@ -8,25 +8,26 @@ import CreateActivity from './Components/Admin/CreateActivity';
 import {BrowserRouter as Router, Route, Switch,} from 'react-router-dom'
 import HeaderAdmin from './Components/Navigation/HeaderAdmin';
 import SiderAdmin  from './Components/Navigation/SiderAdmin';
-import ActivityList from './Components/General/ActivityList'
 import EmployeeProfile from './Components/EmployeeProfile/EmployeeProfile';
 import Activity from "./Components/Admin/Activity";
 import Badges from "./Components/Admin/Badges";
 import Participants from './Components/Admin/CycleParticipants';
-import PendingList from './Components/Admin/PendingOverview';
 import NotFound404 from "./Components/NotFound404";
 import CreateCycle from './Components/Admin/CreateCycle';
 import EditActivity from './Components/Admin/EditActivity';
 import CycleOverview from './Components/General/CycleOverview';
-import Leaderboard from './Components/Admin/leaderboard';
+import Leaderboard from './Components/Admin/Leaderboard';
 import EmployeeCycleStatus from './Components/Admin/viewEmployeeCycleStatus/EmployeeCycleStatus';
 import MyStatus from './Components/Employee/MyStatus';
 import EmployeeHome from './Components/HomePages/EmployeeHome';
 import AdminHome from './Components/HomePages/AdminHome';
 import EmployeeCycleHistory from './Components/Employee/Cycles'
 import Activities from './Components/Admin/Activities'
+import ChangePassword from './Components/General/ChangePassword';
+import AdminProfile from './Components/Admin/AdminProfile/AdminProfile'
 import LoginForm from './Components/General/LoginForm';
-
+import ForgotPassword from './Components/General/ForgotPassword';
+import ResetPassword from './Components/General/ResetPassword';
 
 function App() {
   return (
@@ -52,7 +53,9 @@ function App() {
           <Layout style={{flex: 1, paddingLeft: 50, paddingTop: 50, paddingRight: 20, paddingBottom: 50, overflowY: 'scroll'}}>
            
             <Switch>
+              <Route path ='/changePassword' component ={ChangePassword} />
               <Route path ='/employeeStatus' component ={EmployeeCycleStatus} />
+              <Route path ='/adminProfile' component ={AdminProfile} />
               <Route path ='/participants' component ={Participants} />
               <Route path ='/leaderboard' component ={Leaderboard} />
               <Route path ='/home' component ={EmployeeHome} />
@@ -62,7 +65,7 @@ function App() {
               <Route exact path='/' component={AdminHome}/>
               <Route path='/newActivity' component={CreateActivity}/>
               <Route path={'/activities/:id'} component={Activity} />
-              <Route path='/activities' component={Activities}/>
+              <Route path='/activities' component={Activities}/> 
               <Route path='/createCycle' component={CreateCycle}/>
               <Route path='/editActivity/:id' component={EditActivity}/>
               <Route path={'/activities/:activityId'} component={Activity} />
@@ -74,12 +77,13 @@ function App() {
               
               <Route component={NotFound404}/>
               
+              <Route path='/resetPassword/:token' component={ResetPassword}/>
+              <Route path='/forgotPassword' component={ForgotPassword}/>
 
+    
             </Switch>
           </Layout>
-          
         </Layout>
-        
       </Layout>
     </Router>
 

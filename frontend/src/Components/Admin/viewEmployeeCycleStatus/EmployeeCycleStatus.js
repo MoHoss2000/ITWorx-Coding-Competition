@@ -20,7 +20,7 @@ const EmployeeCycleStatus= () => {
         const employeeId = 1
         const cycleID = 1
         const getStatus = async () => {
-            const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${employeeId}/${cycleID}`))
+            const { data } = await (axios.get(`http://localhost:3001/admin/employeeStatus/${employeeId}/${cycleID}`))
             console.log(data)
             setData(data)
             setLoading(false)
@@ -36,7 +36,7 @@ const EmployeeCycleStatus= () => {
             <h1 className= "title"> <b>Employee Status </b></h1>
             <Divider className="title-divider"/> 
             
-            <Row style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <Row style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}} gutter={[30,8]}>
                 <Col>
                     <div className='info-tab' style={{width: '600px'}}>
                         <CycleInfo data={data.cycleInfo[0]} className='status-tab' /> 

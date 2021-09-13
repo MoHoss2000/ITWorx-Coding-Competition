@@ -5,7 +5,7 @@ import axios from 'axios'
 import '../components.css';
 import ActivitiesDone from '../Admin/viewEmployeeCycleStatus/ActivitiesDone'
 import Clock from './Clock'
-import Leaderboard from '../Admin/leaderboard';
+import Leaderboard from '../Admin/Leaderboard';
 
 const { Title } = Typography;
 
@@ -63,7 +63,7 @@ function AdminHome (){
                     
                 
                       <div className='activities-home'>
-                      <h1 className= "components-header"> <b> Activities waiting for you to evaluate</b></h1>
+                      <h4 className= "components-header"> <b> Activities waiting for you to evaluate</b></h4>
                      <ActivitiesDone data={data} /> 
                      </div>
                 </div>

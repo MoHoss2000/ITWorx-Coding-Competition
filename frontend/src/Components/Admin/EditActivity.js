@@ -2,7 +2,7 @@ import 'antd/dist/antd.css';
 import {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 import {useParams} from "react-router-dom";
-import {Alert,Button, Card, Form, Input, InputNumber, Select, Space, Spin, Switch, Typography,} from 'antd';
+import {Alert,Button, Card, Divider, Form, Input, InputNumber, Select, Space, Spin, Switch, Typography,} from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 const {Option} = Select;
 const {Title} = Typography;
@@ -91,7 +91,10 @@ function EditActivity() {
   }
 
   return (
-        <Card title={<Title level={3}>Edit Activity</Title>}>
+    <div> 
+      <h1 className="title"> Edit Activity </h1>
+      <Divider className="title-divider"/>
+    <Card title={<Title level={3}></Title>} style={{marginLeft: '10%', marginRight: '10%'}}>
     <Space size="large" style={{display: 'block'}}>
       <Spin spinning={loading} size={"large"} style={{margin: 0}} delay={400}>
 
@@ -173,6 +176,8 @@ function EditActivity() {
       </Spin>
     </Space>
         </Card>
+
+        </div>
   );
 
 }

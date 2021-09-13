@@ -1,7 +1,7 @@
 import 'antd/dist/antd.css';
 import {useState} from 'react';
 import axios from 'axios';
-import {Alert,Button, Card, Form, Input, InputNumber, Select, Space, Spin, Switch, Typography,} from 'antd';
+import {Alert,Button, Card, Form, Input,Divider, InputNumber, Select, Space, Spin, Switch, Typography,} from 'antd';
 
 const {Option} = Select;
 const {Title} = Typography;
@@ -46,7 +46,10 @@ function CreateActivity() {
     }
   };
   return (
-        <Card title={<Title level={3}>New Activity</Title>}>
+<div>
+    <h1 className="title">Create New Activity</h1>
+    <Divider className="title-divider"/>
+        <Card title={<Title level={3}></Title>} style={{marginLeft: '10%', marginRight: '10%'}}>
     <Space size="large" style={{display: 'block'}}>
       <Spin spinning={loading} size={"large"} style={{margin: 0}} delay={400}>
 
@@ -124,6 +127,7 @@ function CreateActivity() {
       </Spin>
     </Space>
         </Card>
+        </div>
   );
 
 }

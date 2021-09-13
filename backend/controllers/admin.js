@@ -79,28 +79,23 @@ exports.disableCycle = async (req, res) => {
 }
 
 exports.viewProfile = async (req, res) => {
-    adminID = parseInt(req.params.id) 
-    try{
+    const adminID = parseInt(req.params.id)   
       db.query('SELECT * FROM admin WHERE id = (?)', adminID ,(err, result) => {
-          // res.send(result[0]);
-
-          if(result.length == 0)
-            return res.status(404).json({'message': 'User not found'});
-
-
-          var userData = {
-            id: result[0].id,
-            first_name: result[0].first_name,
-            last_name: result[0].last_name,
-            username: result[0].username,
+          if(result && result[0]){
+            var userData = {
+              id: result[0].id,
+              first_name: result[0].first_name,
+              last_name: result[0].last_name,
+              username: result[0].username,
+            }
+            return res.send(userData)
           }
-
-          return res.status(200).send(userData);
+          else if (err)
+            res.status(400).send(err)
+          
+          else
+            return res.send({})
       })
-   } catch(e){
-      console.log(e)
-      res.status(400).send(e);
-  }
 }
 
 exports.viewEmployeeStatus = async (req, res) => {
@@ -225,6 +220,50 @@ exports.viewEmployeeStatus = async (req, res) => {
     
   return res.send(result)
 }
+
+exports.exportToExcelLeaderboard = async(req, res) => {
+  //const list = []
+  let list = []
+  const cycleID = parseInt(req.params.cycleID)
+  const rank = new Promise((resolve, reject) => {
+    db.query('CALL getEmployeeRankings(?)', cycleID, (err, result) => {
+      if(result && result[0])
+          resolve(result[0])    
+      else  
+        reject(err)
+      })
+  })
+  list = await rank
+  
+  for(let i = 1 ; i < list.length ; i++){
+    list[i].rank = i
+    if(list[i].is_developer)
+      list[i].is_developer = 'Yes'
+    else  
+    list[i].is_developer = 'No'
+  }
+  
+  let workbook = new excel.Workbook()
+	let worksheet = workbook.addWorksheet('Sheet1')
+    worksheet.columns = [
+        { header: 'Rank', key: 'rank', width: 30 },
+        { header: 'Name', key: 'name', width: 30 },
+        { header: 'Total points', key: 'points', width: 30},
+        { header: 'Developer', key: 'is_developer', width: 10, outlineLevel: 1}
+    ];
+  worksheet.addRows(list);
+
+    workbook.xlsx.writeFile("participants.xlsx")
+		.then(function() {
+			console.log("file saved!")
+            const excelPath = __dirname.split('controllers')[0] + 'participants.xlsx'
+            res.sendFile(excelPath, (err) => {console.log(err, 'tmm')})
+
+            
+	}).catch((e) => res.status(400).json(e));
+}
+
+
 
 
 

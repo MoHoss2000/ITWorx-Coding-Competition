@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Card, Col, Button, Spin } from 'antd';
+import { Row, Card, Col, Button, Spin , Divider} from 'antd';
 import axios from 'axios'
 // import Spinner from '../General/loadingSpinner'
 import FloatingBox from './floatingbox/FloatingBox';
@@ -22,7 +22,6 @@ const Badges = () => {
                 setData(null);
             }
             setLoading(false)
-
         }
         getBadges();
     }, [])
@@ -38,6 +37,7 @@ const Badges = () => {
         <>
             <div>
                 <h1 className="title">Badges</h1>
+                <Divider className="title-divider"/>
                 <div style={{ display: "flex", flexDirection: 'row-reverse' }}>
                     <Button type='primary' size='large' shape='round' onClick={
                         () => {
