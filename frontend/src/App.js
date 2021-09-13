@@ -24,7 +24,7 @@ import MyStatus from './Components/Employee/MyStatus';
 import EmployeeHome from './Components/HomePages/EmployeeHome';
 import AdminHome from './Components/HomePages/AdminHome';
 import EmployeeCycleHistory from './Components/Employee/Cycles'
-
+import Activities from './Components/Admin/Activities'
 
 function App() {
   return (

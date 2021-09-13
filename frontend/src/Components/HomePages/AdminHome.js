@@ -63,7 +63,7 @@ function AdminHome (){
                     
                 
                       <div className='activities-home'>
-                      <h1 className= "components-header"> <b> Activities waiting for you to evaluate</b></h1>
+                      <h4 className= "components-header"> <b> Activities waiting for you to evaluate</b></h4>
                      <ActivitiesDone data={data} /> 
                      </div>
                 </div>

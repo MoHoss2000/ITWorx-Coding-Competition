@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'antd/dist/antd.css';
-import { List, Typography } from 'antd';
+import { List, Typography, Divider } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import ActivityListItem from './ActivityListItem';
 const {Title}=Typography
@@ -41,7 +41,8 @@ function Activities() {
   return (
 <div>
     
- <Title level={2} style={{ marginLeft:'65px'}}>Activities</Title>
+  <h1 className="title">Activities</h1>
+    <Divider className="title-divider"/>
  { !activities ? <LoadingOutlined style={{ fontSize: 50 }} spin /> :
  <List
     itemLayout="vertical"

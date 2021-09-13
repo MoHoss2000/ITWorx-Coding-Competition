@@ -362,3 +362,7 @@ body {
   color:white
 }
 
+.centered-component{
+  margin: 0 auto;
+}
+

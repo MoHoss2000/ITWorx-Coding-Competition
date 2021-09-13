@@ -111,7 +111,7 @@ function EmployeeActivity({id}) {
   return (
     
     <Card
-      style={{width: "800px"}}     
+    style={{marginLeft: '10%', marginRight: '10%'}}       
       tabList={tabList}
       activeTabKey={tab}
       onTabChange={ key => {
