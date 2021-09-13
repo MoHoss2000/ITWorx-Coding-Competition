@@ -40,7 +40,7 @@ exports.changePassword = async (req, res) => {
         `SELECT * FROM admin WHERE id = ${id}`
 
     db.query(findUser, async (err, user) => {
-        
+
         const hashedPassword = user[0].password
         const match = await bcrypt.compare(oldPassword, hashedPassword)
         if (!match) return res.status(400).json({ message: 'Old password is incorrect' })
@@ -49,7 +49,7 @@ exports.changePassword = async (req, res) => {
             : `UPDATE admin SET password = ? WHERE id = ${id};`
         db.query(updateUser, newHashedPassword, (err, result) => {
             if (result)
-                return res.status(200).send('Password changed successully!' )
+                return res.status(200).send('Password changed successully!')
             res.status(400).send(err)
         })
     })
@@ -135,24 +135,17 @@ exports.register = async (req, res) => {
     const addUser = is_admin ? 'CALL addAdmin(?,?,?,?)' : 'CALL addEmployee(?,?,?,?,?)'
 
     db.query(findUser, username, async (err, found) => {
-        if (found && found[0][0])
+        if (found[0][0])
             return res.status(400).json({ error: "Username exists" })
         const hashedPassword = await bcrypt.hash(password, 10)
-
         const arrayOfData = is_admin ?
             [first_name, last_name, username, hashedPassword] :
             [first_name, last_name, username, hashedPassword, is_developer]
-
-        console.log(addUser)
-        console.log(arrayOfData)
+        console.log(arrayOfData, addUser)
         db.query(addUser, arrayOfData, (err, queryRes) => {
-            if (err)
-                console.log(err)
             if (queryRes) {
-                console.log(queryRes);
                 db.query(findUser, username, (err, result) => {
                     const type = is_admin ? 'admin' : 'employee'
-                    console.log(result);
                     const user = { id: result[0][0].id, type }
                     const token = createToken(user)
                     res.cookie("token", token, {
@@ -162,6 +155,7 @@ exports.register = async (req, res) => {
                     return res.json("User successfully registered");
                 })
             }
+            else return res.status(400).send(err)
         })
     })
 }
@@ -169,8 +163,7 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
     const { username, password } = req.body;
     db.query('CALL findEmployee(?)', username, async (err, found) => {
-        console.log(found)
-        if (found) {
+        if (found && found[0].length) {
             const hashedPassword = found[0][0].password
             const matched = await bcrypt.compare(password, hashedPassword)
             if (!matched) return res.status(400).json('Wrong username or password!')
@@ -186,7 +179,7 @@ exports.login = async (req, res) => {
         }
         else {
             db.query('CALL findAdmin(?)', username, async (err, found) => {
-                if (found) {
+                if (found && found[0].length) {
                     const hashedPassword = found[0][0].password
                     const matched = await bcrypt.compare(password, hashedPassword)
                     if (!matched) return res.status(400).json('Wrong username or password!')
