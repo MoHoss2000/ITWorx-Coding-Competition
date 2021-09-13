@@ -46,7 +46,7 @@ const LoginForm = () => {
         <Button type="submit" variant="contained" style={btnStyle} color="primary" onClick={handleSubmit(submitForm)} fullWidth>Sign in</Button>
 
     <Typography>
-        <Link href="#">Forgot password ?</Link>
+        <Link href="#">Forgot password ? </Link>
     </Typography>
 
     <Typography>Do you have an account ?

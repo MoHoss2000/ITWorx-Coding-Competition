@@ -24,6 +24,8 @@ import MyStatus from './Components/Employee/MyStatus';
 import EmployeeHome from './Components/HomePages/EmployeeHome';
 import AdminHome from './Components/HomePages/AdminHome';
 import EmployeeCycleHistory from './Components/Employee/Cycles'
+import Activities from './Components/Admin/Activities'
+import LoginForm from './Components/General/LoginForm';
 
 
 function App() {
@@ -68,6 +70,8 @@ function App() {
               <Route path='/employee/myCycles' component={EmployeeCycleHistory}/> 
               <Route path='/badges' component={Badges}/>
               <Route path='/employee-profile' component={EmployeeProfile}/>
+              <Route path='/login' component={LoginForm}/>
+              
               <Route component={NotFound404}/>
               
 
