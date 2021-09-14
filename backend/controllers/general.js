@@ -172,6 +172,7 @@ exports.login = async (req, res) => {
 exports.getDeadline = async (req, res) =>{
     db.query('CALL getDeadline()', 
         (err, result) => {
+            console.log(result)
             if(result && result[0])
                 return res.send(result[0])
             else if (err)
