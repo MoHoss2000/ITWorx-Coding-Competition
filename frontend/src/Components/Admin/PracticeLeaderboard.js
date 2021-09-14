@@ -3,7 +3,7 @@ import { Table, Button, Space } from 'antd';
 import axios from 'axios'
 import Spinner from '../General/loadingSpinner'
 
-const PracticeLeaderboard = () => {
+const PracticeLeaderboard = ({id}) => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
     const [sort, setSort] = useState({})
@@ -11,8 +11,7 @@ const PracticeLeaderboard = () => {
 
     useEffect(() => {
         const getLeaderboard = async () => {
-            const cycleID = 1
-            const res = (await axios.get(`http://localhost:3001/leaderboard/practice/${cycleID}`))
+            const res = (await axios.get(`http://localhost:3001/leaderboard/practice/${id}`))
             for(let i = 0 ; i < res.data.length ; i++){
                 res.data[i].rank = i+1
                 res.data[i].key = i

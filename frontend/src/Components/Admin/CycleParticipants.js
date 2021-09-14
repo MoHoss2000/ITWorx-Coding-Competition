@@ -4,8 +4,14 @@ import 'antd/dist/antd.css';
 import '../components.css';
 import { Table, Input, Button, Space, Typography, Divider } from 'antd';
 import Highlighter from 'react-highlight-words';
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined} from '@ant-design/icons';
 import axios from 'axios'
+import {
+  BrowserRouter as Router,
+  Link,
+  useParams
+} from 'react-router-dom'
+import { withRouter } from "react-router";
 const { Title } = Typography;
 
 
@@ -16,11 +22,11 @@ class Participants extends React.Component {
     searchedColumn: '',
     loading: true,
   };
+   
 
   componentWillMount(){
       const getParticipants = async () => {
-          const cycleID = 1
-          const res = (await axios.get(`http://localhost:3001/admin/cycle/participants/${cycleID}`))
+          const res = (await axios.get(`http://localhost:3001/admin/cycle/participants/${this.props.match.params.id}`))
           console.log(res.data)
           for(let i = 0 ; i < res.data.length ; i++){
             res.data[i].name = res.data[i].first_name + ' ' + res.data[i].last_name
@@ -118,10 +124,17 @@ class Participants extends React.Component {
     
     const columns = [
       {
+        title: ' ID',
+        dataIndex: 'id',
+        key: 'id',
+        ...this.getColumnSearchProps('id'),
+       
+      },
+      {
         title: ' Name',
         dataIndex: 'name',
         key: 'name',
-        width: '35%',
+        width: '25%',
         ...this.getColumnSearchProps('name'),
        
       },
@@ -138,7 +151,24 @@ class Participants extends React.Component {
         dataIndex: 'developer',
         key: 'developer',
         ...this.getColumnSearchProps('developer'),
-      }
+      },
+      {
+        title: 'Job Type',
+        dataIndex: 'developer',
+        key: 'developer',
+        ...this.getColumnSearchProps('developer'),
+      },
+      {
+        title: 'Status',
+        key: 'status',
+        render: (text, record) => (
+          <Space size="middle">
+            <Link to={`/employeeStatus/${this.props.match.params.id}/${record.id}`}> 
+              View Status 
+            </Link>
+          </Space>
+          )
+      },
     ];
      
     return(
@@ -150,4 +180,4 @@ class Participants extends React.Component {
   }
 }
 
-export default Participants;
+export default withRouter(Participants);

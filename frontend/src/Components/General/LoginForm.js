@@ -45,7 +45,7 @@ const LoginForm = () => {
         localStorage.setItem("user", JSON.stringify(user));
 
 
-         (targetPath === "") ? history.replace(type == 'employee' ? '/employee/home' : '/home') : history.replace(targetPath)
+         (targetPath === "") ? history.replace(type == 'employee' ? '/employee/home' : '/admin/home') : history.replace(targetPath)
         
   
       

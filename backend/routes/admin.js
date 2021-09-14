@@ -49,7 +49,7 @@ router.patch('/cycle/disable/:cycleID', controllers.disableCycle)
 
 router.get('/employeeStatus/:employeeId/:cycleID', controllers.viewEmployeeStatus)
 
-router.get('/cycle/view/:cycleID', controllers.cycleInfo)
+router.get('/cycle/view/:id', controllers.cycleInfo)
 
 router.get('/leaderboard/excelfile/:cycleID', controllers.exportToExcelLeaderboard)
 

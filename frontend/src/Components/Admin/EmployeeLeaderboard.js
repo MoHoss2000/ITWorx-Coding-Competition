@@ -3,17 +3,16 @@ import { Table, Button, Space } from 'antd';
 import axios from 'axios'
 import Spinner from '../General/loadingSpinner'
 
-const EmployeeLeaderboard = ({pass}) => {
+const EmployeeLeaderboard = ({pass, id}) => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
     const [sort, setSort] = useState({})
     const [filter, setFilter] = useState({})
-    
+
 
     useEffect(() => {
         const getLeaderboard = async () => {
-            const cycleID = 1
-            const res = (await axios.get(`http://localhost:3001/leaderboard/employee/${cycleID}`))
+            const res = (await axios.get(`http://localhost:3001/leaderboard/employee/${id}`))
             for(let i = 0 ; i < res.data.length ; i++){
                 console.log(res.data)
                 res.data[i].key = i

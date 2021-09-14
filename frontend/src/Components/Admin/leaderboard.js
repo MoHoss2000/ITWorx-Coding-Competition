@@ -14,8 +14,8 @@ import { Redirect } from 'react-router';
 const { Title } = Typography;
 const { TabPane } = Tabs;
 
-function Leaderboard (){
-
+function Leaderboard (props){
+    const {id} = props
     const passDataToParent = async(data) => {
          const cycleID = 1
          axios.get(`http://localhost:3001/admin`)
@@ -31,7 +31,7 @@ function Leaderboard (){
                     tab={<span > <UserOutlined /> Employee  </span> }
                     key="1"
                 >
-                <EmployeeLeaderboard pass={passDataToParent}/>
+                <EmployeeLeaderboard pass={passDataToParent} id={id}/>
                 </TabPane>
 
                 
@@ -39,14 +39,14 @@ function Leaderboard (){
                     tab={<span > <UsergroupAddOutlined /> Department </span> }
                     key="2"
                 >
-                <DepartmentLeaderboard />
+                <DepartmentLeaderboard id={id}/>
                 </TabPane>
 
                 <TabPane
                     tab={<span> <UsergroupAddOutlined /> Practice </span> }
                     key="3"
                 >
-                <PracticeLeaderboard />
+                <PracticeLeaderboard id={id}/>
                 </TabPane>
                
                 </Tabs>

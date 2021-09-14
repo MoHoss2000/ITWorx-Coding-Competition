@@ -30,9 +30,9 @@ const CycleList = (props) =>{
                 extra={
                         <Button type="primary" style={{'backgroundColor': '#0099cc', 'color': 'white'}}>   
                             <SyncOutlined/>
-                            {/* <Link to={{ pathname: `${url}/${id}`, state: { id } }}> */}
-                            View Cycle
-                            {/* </Link>  */}
+                             <Link to={`/admin/cycles/${id}`}> 
+                              View Cycle
+                             </Link>  
                         </Button>
                     }
                 style={{ width: '70%', marginTop: 20 }}
