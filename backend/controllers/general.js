@@ -162,20 +162,34 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
     const { username, password } = req.body;
+    const getCurrentCycle = new Promise((resolve, reject) => {
+        db.query('SELECT id FROM cycle WHERE current = 1', (err, result) => {
+            if(err)
+                reject(err)
+            else
+                resolve(result)
+        })
+    })
     db.query('CALL findEmployee(?)', username, async (err, found) => {
         if (found && found[0].length) {
             const hashedPassword = found[0][0].password
             const matched = await bcrypt.compare(password, hashedPassword)
             if (!matched) return res.status(400).json('Wrong username or password!')
             else {
-                const User = { id: found[0][0].id, type: 'employee' }
+                const cycleID = (await getCurrentCycle)[0].id
+                let User = { id: found[0][0].id, type: 'employee' }
                 const token = createToken(User)
                 res.cookie("token", token, {
                     maxAge: 60 * 60 * 24 * 30 * 1000, //30 days
                     httpOnly: true,
                 });
-                return res.json({message: "Login Successful",
-                token, id, type:'e'})
+                return res.send({
+                    message:'Employee logged in successfully!',
+                    accessToken: token,
+                    cycleID,
+                    type: 'employee',
+                    id: found[0][0].id
+            })
             }
         }
         else {
@@ -185,14 +199,20 @@ exports.login = async (req, res) => {
                     const matched = await bcrypt.compare(password, hashedPassword)
                     if (!matched) return res.status(400).json('Wrong username or password!')
                     else {
-                        const User = { id: found[0][0].id, type: 'admin' }
+                        const cycleID = (await getCurrentCycle)[0].id
+                        let User = { id: found[0][0].id, type: 'admin' }
                         const token = createToken(User)
                         res.cookie("token", token, {
                             maxAge: 60 * 60 * 24 * 30 * 1000, //30 days
                             httpOnly: true,
                         });
-                        return res.json({message: "Login Successful",
-                        token, id, type:'a'})
+                        return res.send({
+                            message:'Admin logged in successfully!',
+                            accessToken: token,
+                            cycleID,
+                            type: 'admin',
+                            id: found[0][0].id
+                    })
                     }
                 }
                 else
