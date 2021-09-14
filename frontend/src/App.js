@@ -31,12 +31,14 @@ import ResetPassword from './Components/General/ResetPassword';
 import PrivateRouteAdmin from './Components/Router/PrivateRouteAdmin';
 import PrivateRouteEmployee from './Components/Router/PrivateRouteEmployee';
 import {UserContext} from "./Context";
+import Unauthorized from "./Components/Unauthorized"
+import EmployeeSider from './Components/Navigation/EmployeeSider';
 
 
 
 function App() {
   
-    const {id}=useContext(UserContext)
+    const {id, type}=useContext(UserContext)
 
   return (
     <Router>
@@ -54,8 +56,10 @@ function App() {
         <Layout style={{display: 'flex', flexDirection: 'row', overflow: 'hidden', height: 'calc(100vh - 64px)'}}>
 
           <Layout style={{flex: 0}}>
-            {id &&  <SiderAdmin/>}
-           
+
+            {type ==='admin' &&  <SiderAdmin/>}
+            {type ==='employee' &&  <EmployeeSider/>}
+
           </Layout>
           
           <Layout style={{flex: 1, paddingLeft: 50, paddingTop: 50, paddingRight: 20, paddingBottom: 50, overflowY: 'scroll'}}>
@@ -78,17 +82,18 @@ function App() {
               <PrivateRouteAdmin path='/admin/cycles' component={AdminCycleHistory}/>
               <PrivateRouteAdmin path='/badges' component={Badges}/>
 
-              <PrivateRouteEmployee path ='/home' component ={EmployeeHome} />
+              <PrivateRouteEmployee path ='/employee/home' component ={EmployeeHome} />
               <PrivateRouteEmployee path ='/myStatus' component ={MyStatus} />
               <PrivateRouteEmployee path ='employee/leaderboard' component ={Leaderboard} />          
               <PrivateRouteEmployee path='/employee/myCycles' component={EmployeeCycleHistory}/> 
               <PrivateRouteEmployee path='/employee-profile' component={EmployeeProfile}/>
             
               <Route exact path='/' component={LoginForm}/>
+              <Route path='/unauthorized' component={Unauthorized}/>
               <Route path ='/changePassword' component ={ChangePassword} />
-              <Route component={NotFound404}/>
               <Route path='/resetPassword/:token' component={ResetPassword}/>
               <Route path='/forgotPassword' component={ForgotPassword}/>
+              <Route component={NotFound404}/>
               
 
     

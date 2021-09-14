@@ -6,6 +6,8 @@ import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import Axios from 'axios';
 import {UserContext} from "../../Context";
+import { ConsoleSqlOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -18,7 +20,9 @@ const btnStyle = { margin: '8px 0' }
 
 const LoginForm = () => {
 
-  const { setId, setToken, setCycleId, setType } = useContext(UserContext);
+  const history = useHistory ()
+
+  const {targetPath, setId, setToken, setCycleId, setType} = useContext(UserContext);
 
   const {register, handleSubmit, formState: {errors}} = useForm({
     resolver: yupResolver(schema),
@@ -29,13 +33,20 @@ const LoginForm = () => {
     Axios.post('http://localhost:3001/login',{
         username: data.email,
         password: data.password,
-    }).then((response) => {
-       console.log(response)
-        const {accessToken, cycleID, id , message,type}=response
+    }).then((response) => { 
+
+        const {accessToken, cycleID, id , message,type}=response.data
         setId(id)
         setToken(accessToken)
         setCycleId(cycleID)
         setType(type)
+        let user = { id, accessToken, cycleID, type}
+        localStorage.setItem("user", JSON.stringify(user));
+
+
+         (targetPath === "") ? history.replace(type == 'employee' ? '/employee/home' : '/home') : history.replace(targetPath)
+        
+  
       
     }).catch((e)=>{
 
