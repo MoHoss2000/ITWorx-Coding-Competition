@@ -5,7 +5,6 @@ import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import Axios from 'axios';
-import Cookies from 'js-cookie'
 import {UserContext} from "../../Context";
 
 const schema = yup.object().shape({
@@ -18,7 +17,8 @@ const avatarStyle = { backgroundColor: '#000090' }
 const btnStyle = { margin: '8px 0' }
 
 const LoginForm = () => {
-  const {id, setId} = useContext(UserContext);
+
+  const { setId, setToken, setCycleId, setType } = useContext(UserContext);
 
   const {register, handleSubmit, formState: {errors}} = useForm({
     resolver: yupResolver(schema),
@@ -30,9 +30,15 @@ const LoginForm = () => {
         username: data.email,
         password: data.password,
     }).then((response) => {
-        console.log(response)
-        setId({id:1})
+       console.log(response)
+        const {accessToken, cycleID, id , message,type}=response
+        setId(id)
+        setToken(accessToken)
+        setCycleId(cycleID)
+        setType(type)
       
+    }).catch((e)=>{
+
     })
   } 
 

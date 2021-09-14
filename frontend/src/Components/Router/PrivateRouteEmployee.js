@@ -6,7 +6,7 @@ import {UserContext} from "../../Context";
 
 const PrivateRouteEmployee = ({path, component: Component, ...rest}) => {
 
-    const {id} = useContext(UserContext);
+    const {id,type,token} = useContext(UserContext);
    
    
   return (
