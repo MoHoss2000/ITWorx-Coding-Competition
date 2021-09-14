@@ -163,7 +163,7 @@ BEGIN
 END //
 
 DELIMITER //
-CREATE PROCEDURE findAdmin ( IN username VARCHAR(25))
+CREATE PROCEDURE findAdmin ( IN username VARCHAR(50))
 BEGIN
     SELECT *
     From admin
@@ -181,7 +181,7 @@ END //
 DELIMITER //
 CREATE PROCEDURE addEmployee (IN first_name VARCHAR(20),  
                                 IN last_name VARCHAR(20), IN username VARCHAR(50), 
-                                IN password VARCHAR(100), IN is_developer BOOLEAN)
+                                IN password VARCHAR(100), IN is_developer tinyint(1))
 BEGIN
     INSERT INTO employee
                 (
@@ -193,33 +193,32 @@ BEGIN
                 )
 
     VALUES     ( 
-                 @first_name,
-                 @last_name,
-                 @username,
-                 @password,
-                 @is_developer
+                 first_name,
+                 last_name,
+                 username,
+                 password,
+                 is_developer);
 END //
 
 DELIMITER //
-CREATE PROCEDURE addAdmin ( IN id INT,  IN first_name VARCHAR(20),  
-                            IN last_name VARCHAR(20) IN username VARCHAR(50), 
+CREATE PROCEDURE "addAdmin"( IN first_name VARCHAR(20),  
+                            IN last_name VARCHAR(20), IN username VARCHAR(50), 
                             IN password VARCHAR(100))
 BEGIN
-    INSERT INTO employee
-                (id,
+    INSERT INTO admin 
+                (
                 first_name,
                 last_name,
                 username,
                 password
                 )
 
-    VALUES     ( @id,
-                 @first_name,
-                 @last_name,
-                 @username,
-                 @password
-END //
-
+    VALUES     ( 
+                 first_name,
+                 last_name,
+                 username,
+                 password);
+END//
 
 -- DELIMITER //
 -- CREATE PROCEDURE getEmployeeRankings(IN cycleID INT)

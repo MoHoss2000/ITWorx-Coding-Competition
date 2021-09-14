@@ -5,7 +5,7 @@ import axios from 'axios'
 import '../components.css';
 import ActivitiesDone from '../Admin/viewEmployeeCycleStatus/ActivitiesDone'
 import Clock from './Clock'
-import Leaderboard from '../Admin/leaderboard';
+import Leaderboard from '../Admin/Leaderboard';
 
 const { Title } = Typography;
 

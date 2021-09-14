@@ -1,9 +1,7 @@
-import React , {useState, useEffect} from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import 'antd/dist/antd.css';
 import '../components.css';
 import { Card, Typography, Divider } from 'antd';
-import axios from 'axios';
 const { Title } = Typography;
 
 const CycleInfo = (props) =>{

@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React , {useContext} from 'react';
 import 'antd/dist/antd.css';
 import {Layout} from 'antd';
 
@@ -8,25 +8,36 @@ import CreateActivity from './Components/Admin/CreateActivity';
 import {BrowserRouter as Router, Route, Switch,} from 'react-router-dom'
 import HeaderAdmin from './Components/Navigation/HeaderAdmin';
 import SiderAdmin  from './Components/Navigation/SiderAdmin';
-import ActivityList from './Components/General/ActivityList'
 import EmployeeProfile from './Components/EmployeeProfile/EmployeeProfile';
 import Activity from "./Components/Admin/Activity";
 import Badges from "./Components/Admin/Badges";
 import Participants from './Components/Admin/CycleParticipants';
-import PendingList from './Components/Admin/PendingOverview';
 import NotFound404 from "./Components/NotFound404";
 import CreateCycle from './Components/Admin/CreateCycle';
 import EditActivity from './Components/Admin/EditActivity';
 import CycleOverview from './Components/General/CycleOverview';
-import Leaderboard from './Components/Admin/leaderboard';
+import Leaderboard from './Components/Admin/Leaderboard';
 import EmployeeCycleStatus from './Components/Admin/viewEmployeeCycleStatus/EmployeeCycleStatus';
 import MyStatus from './Components/Employee/MyStatus';
 import EmployeeHome from './Components/HomePages/EmployeeHome';
 import AdminHome from './Components/HomePages/AdminHome';
 import EmployeeCycleHistory from './Components/Employee/Cycles'
 import Activities from './Components/Admin/Activities'
+import ChangePassword from './Components/General/ChangePassword';
+import AdminProfile from './Components/Admin/AdminProfile/AdminProfile'
+import LoginForm from './Components/General/LoginForm';
+import ForgotPassword from './Components/General/ForgotPassword';
+import ResetPassword from './Components/General/ResetPassword';
+import PrivateRouteAdmin from './Components/Router/PrivateRouteAdmin';
+import PrivateRouteEmployee from './Components/Router/PrivateRouteEmployee';
+import {UserContext} from "./Context";
+
+
 
 function App() {
+  
+    const {id}=useContext(UserContext)
+
   return (
     <Router>
       <Layout>
@@ -37,45 +48,53 @@ function App() {
             textAlign: 'right',
             width: "100%"
           }}>
-            <HeaderAdmin/>
+           {id && <HeaderAdmin/>} 
           </Layout>
         </Layout>
         <Layout style={{display: 'flex', flexDirection: 'row', overflow: 'hidden', height: 'calc(100vh - 64px)'}}>
 
           <Layout style={{flex: 0}}>
-            <SiderAdmin/>
-    
+            {id &&  <SiderAdmin/>}
+           
           </Layout>
           
           <Layout style={{flex: 1, paddingLeft: 50, paddingTop: 50, paddingRight: 20, paddingBottom: 50, overflowY: 'scroll'}}>
            
             <Switch>
-              <Route path ='/employeeStatus' component ={EmployeeCycleStatus} />
-              <Route path ='/participants' component ={Participants} />
-              <Route path ='/leaderboard' component ={Leaderboard} />
-              <Route path ='/home' component ={EmployeeHome} />
-              <Route path ='/admin/home' component ={AdminHome} />
-              <Route path ='/cycleOverview' component ={CycleOverview} />
-              <Route path ='/myStatus' component ={MyStatus} />
-              <Route exact path='/' component={AdminHome}/>
-              <Route path='/newActivity' component={CreateActivity}/>
-              <Route path={'/activities/:id'} component={Activity} />
-              <Route path='/activities' component={Activities}/> 
-              <Route path='/createCycle' component={CreateCycle}/>
-              <Route path='/editActivity/:id' component={EditActivity}/>
-              <Route path={'/activities/:activityId'} component={Activity} />
-              <Route path='/admin/cycles' component={AdminCycleHistory}/> 
-              <Route path='/employee/myCycles' component={EmployeeCycleHistory}/> 
-              <Route path='/badges' component={Badges}/>
-              <Route path='/employee-profile' component={EmployeeProfile}/>
-              <Route component={NotFound404}/>
               
 
+              <PrivateRouteAdmin path ='/employeeStatus' component ={EmployeeCycleStatus} />
+              <PrivateRouteAdmin path ='/adminProfile' component ={AdminProfile} />
+              <PrivateRouteAdmin path ='/participants' component ={Participants} />
+              <PrivateRouteAdmin path ='admin/leaderboard' component ={Leaderboard} />
+              <PrivateRouteAdmin path='/newActivity' component={CreateActivity}/>
+              <PrivateRouteAdmin path ='/admin/home' component ={AdminHome} />
+              <PrivateRouteAdmin path ='/cycleOverview' component ={CycleOverview} />   
+              <PrivateRouteAdmin path={'/activities/:id'} component={Activity} /> 
+              <PrivateRouteAdmin path='/activities' component={Activities}/> 
+              <PrivateRouteAdmin path={'/createCycle'} component={CreateCycle}/>
+              <PrivateRouteAdmin path='/editActivity/:id' component={EditActivity}/>
+              <PrivateRouteAdmin path={'/activities/:activityId'} component={Activity} />
+              <PrivateRouteAdmin path='/admin/cycles' component={AdminCycleHistory}/>
+              <PrivateRouteAdmin path='/badges' component={Badges}/>
+
+              <PrivateRouteEmployee path ='/home' component ={EmployeeHome} />
+              <PrivateRouteEmployee path ='/myStatus' component ={MyStatus} />
+              <PrivateRouteEmployee path ='employee/leaderboard' component ={Leaderboard} />          
+              <PrivateRouteEmployee path='/employee/myCycles' component={EmployeeCycleHistory}/> 
+              <PrivateRouteEmployee path='/employee-profile' component={EmployeeProfile}/>
+            
+              <Route exact path='/' component={LoginForm}/>
+              <Route path ='/changePassword' component ={ChangePassword} />
+              <Route component={NotFound404}/>
+              <Route path='/resetPassword/:token' component={ResetPassword}/>
+              <Route path='/forgotPassword' component={ForgotPassword}/>
+              
+
+    
             </Switch>
           </Layout>
-          
         </Layout>
-        
       </Layout>
     </Router>
 

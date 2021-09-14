@@ -1,13 +1,12 @@
 import React , {useState, useEffect} from 'react';
 import 'antd/dist/antd.css';
 import { List, Card , Button, Avatar, Typography, Divider, Row, Col} from 'antd';
-import Spinner from './loadingSpinner'
 import axios from 'axios'
 import '../components.css';
 import CycleInfo from '../General/CycleInfo'
 import ActivityList from '../General/ActivityList'
 import DisableSwitch from '../Admin/DisableSwitch'
-import Leaderboard from '../Admin/leaderboard';
+import Leaderboard from '../Admin/Leaderboard';
 const { Title } = Typography;
 
 

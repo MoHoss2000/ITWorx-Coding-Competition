@@ -51,9 +51,10 @@ router.get('/employeeStatus/:employeeId/:cycleID', controllers.viewEmployeeStatu
 
 router.get('/cycle/view/:cycleID', controllers.cycleInfo)
 
+router.get('/leaderboard/excelfile/:cycleID', controllers.exportToExcelLeaderboard)
 
-
-
-//router.get('/leaderboard/excelfile', exportToExcelLeaderboard)
+router.get('/', (req, res) => {
+    //res.redirect('http://localhost:3001/admin/leaderboard/excelfile/1')
+})
 
 module.exports = router

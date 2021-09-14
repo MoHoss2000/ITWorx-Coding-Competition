@@ -22,7 +22,6 @@ const Badges = () => {
                 setData(null);
             }
             setLoading(false)
-
         }
         getBadges();
     }, [])
