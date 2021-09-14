@@ -9,6 +9,7 @@ export const UserProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [cycleId, setCycleId] = useState(1);
   const [type, setType] = useState(null);
+  const [targetPath, setTargetPath] = useState("")
  
 
   return (
@@ -21,7 +22,9 @@ export const UserProvider = ({ children }) => {
       cycleId,
       setCycleId,
        type,
-       setType
+       setType,
+       targetPath,
+       setTargetPath
       }}
     >
       {children}

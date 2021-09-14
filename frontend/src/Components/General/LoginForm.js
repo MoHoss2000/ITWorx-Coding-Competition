@@ -7,6 +7,8 @@ import * as yup from 'yup'
 import Axios from 'axios';
 import Cookies from 'js-cookie'
 import {UserContext} from "../../Context";
+import { ConsoleSqlOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -18,7 +20,10 @@ const avatarStyle = { backgroundColor: '#000090' }
 const btnStyle = { margin: '8px 0' }
 
 const LoginForm = () => {
-  const {id, setId} = useContext(UserContext);
+
+  const history = useHistory ()
+
+  const {id, targetPath, setId} = useContext(UserContext);
 
   const {register, handleSubmit, formState: {errors}} = useForm({
     resolver: yupResolver(schema),
@@ -30,8 +35,10 @@ const LoginForm = () => {
         username: data.email,
         password: data.password,
     }).then((response) => {
-        console.log(response)
-        setId({id:1})
+        setId(1) 
+        history.replace(targetPath)
+        
+  
       
     })
   } 

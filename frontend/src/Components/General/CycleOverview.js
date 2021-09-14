@@ -1,20 +1,22 @@
-import React , {useState, useEffect} from 'react';
+import React , {useState, useEffect, useContext} from 'react';
 import 'antd/dist/antd.css';
-import { List, Card , Button, Avatar, Typography, Divider, Row, Col} from 'antd';
+import {Divider, Row, Col} from 'antd';
 import axios from 'axios'
 import '../components.css';
 import CycleInfo from '../General/CycleInfo'
 import ActivityList from '../General/ActivityList'
 import DisableSwitch from '../Admin/DisableSwitch'
 import Leaderboard from '../Admin/Leaderboard';
-const { Title } = Typography;
+import {UserContext} from '../../Context'
+
 
 
 function CycleOverview (){
 
     const [data, setData] = useState([])
     const [current, setCurrent] = useState(false)
-  
+    const {id, targetPath, setTargetPath , setId} = useContext(UserContext);
+    console.log(id)
     useEffect(() => {
         const getCycle = async () => {
             const cycleID = 1
