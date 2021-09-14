@@ -1,10 +1,12 @@
 import { Button, Grid, Paper, Avatar, TextField, Typography, Link } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
-import React from 'react';
+import React , {useContext}from 'react';
 import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import Axios from 'axios';
+import Cookies from 'js-cookie'
+import {UserContext} from "../../Context";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -16,6 +18,8 @@ const avatarStyle = { backgroundColor: '#000090' }
 const btnStyle = { margin: '8px 0' }
 
 const LoginForm = () => {
+  const {id, setId} = useContext(UserContext);
+
   const {register, handleSubmit, formState: {errors}} = useForm({
     resolver: yupResolver(schema),
   })
@@ -27,8 +31,10 @@ const LoginForm = () => {
         password: data.password,
     }).then((response) => {
         console.log(response)
+        setId({id:1})
+      
     })
-  }
+  } 
 
   return (
     <Grid>

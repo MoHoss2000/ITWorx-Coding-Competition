@@ -34,7 +34,7 @@ function SiderAdmin() {
         <Menu id="menu" theme='dark' defaultSelectedKeys={['1']} mode="inline">
 
           <Menu.Item key="1" icon={<HomeOutlined style={{color:'white'}}/>}>
-            <Link to={"/"} style={{color: 'white'}}>Home</Link>
+            <Link to={"/admin/home"} style={{color: 'white'}}>Home</Link>
           </Menu.Item>
 
           <SubMenu key="sub1" icon={<SyncOutlined style={{color:'white'}}/>} title="Cycle">
@@ -66,7 +66,7 @@ function SiderAdmin() {
             </Menu.Item>
           </SubMenu>
           <Menu.Item key="7" icon={<TrophyOutlined style={{color:'white'}}/>}>
-            <Link to={'/leaderboard'}>
+            <Link to={'/admin/leaderboard'}>
             Leaderboard
             </Link>
           </Menu.Item>

@@ -181,7 +181,8 @@ exports.login = async (req, res) => {
                     maxAge: 60 * 60 * 24 * 30 * 1000, //30 days
                     httpOnly: true,
                 });
-                return res.json('Employee logged in successfully!')
+                return res.json({message: "Login Successful",
+                token, id, type:'e'})
             }
         }
         else {
@@ -197,7 +198,8 @@ exports.login = async (req, res) => {
                             maxAge: 60 * 60 * 24 * 30 * 1000, //30 days
                             httpOnly: true,
                         });
-                        return res.json('Admin logged in successfully!')
+                        return res.json({message: "Login Successful",
+                        token, id, type:'a'})
                     }
                 }
                 else
