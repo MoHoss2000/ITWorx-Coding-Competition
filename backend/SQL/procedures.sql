@@ -163,7 +163,7 @@ BEGIN
 END //
 
 DELIMITER //
-CREATE PROCEDURE findAdmin ( IN username VARCHAR(25))
+CREATE PROCEDURE findAdmin ( IN username VARCHAR(50))
 BEGIN
     SELECT *
     From admin
