@@ -1,6 +1,7 @@
 import React from 'react';
-import {Result} from "antd";
+import {Result, Button} from "antd";
 import {Link} from "react-router-dom";
+
 const Unauthorized = () => {
   return (
     <Result

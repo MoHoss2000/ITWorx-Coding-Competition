@@ -23,7 +23,7 @@ const LoginForm = () => {
 
   const history = useHistory ()
 
-  const {id, targetPath, setId} = useContext(UserContext);
+  const {targetPath, setId, setToken, setCycleId, setType} = useContext(UserContext);
 
   const {register, handleSubmit, formState: {errors}} = useForm({
     resolver: yupResolver(schema),
@@ -34,9 +34,18 @@ const LoginForm = () => {
     Axios.post('http://localhost:3001/login',{
         username: data.email,
         password: data.password,
-    }).then((response) => {
-        setId(1) 
-        history.replace(targetPath)
+    }).then((response) => { 
+
+        const {accessToken, cycleID, id , message,type}=response.data
+        setId(id)
+        setToken(accessToken)
+        setCycleId(cycleID)
+        setType(type)
+        let user = { id, accessToken, cycleID, type}
+        localStorage.setItem("user", JSON.stringify(user));
+
+
+         (targetPath === "") ? history.replace(type == 'employee' ? '/employee/home' : '/home') : history.replace(targetPath)
         
   
       

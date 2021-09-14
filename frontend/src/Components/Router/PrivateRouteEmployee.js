@@ -6,26 +6,38 @@ import {UserContext} from "../../Context";
 
 const PrivateRouteEmployee = ({path, component: Component, ...rest}) => {
 
-    const {id, setId, setToken, setCycleId, setType, setTargetPath} = useContext(UserContext)
+    const {id, type, setId, setToken, setCycleId, setType, setTargetPath, targetPath} = useContext(UserContext)
     const [login, setLogin] = useState(true)
-    let user
+    const [authorized, setAuthorized] = useState(true)
+
     useEffect(() =>{
-       user = localStorage.getItem("user")
+       let user = localStorage.getItem("user")
         if(!(user))
           setLogin(false)
+
         else if(!id ){
-          setLogin(false)
-          
+          const {accessToken, cycleID, id , message,type}= JSON.parse(user)
+          setId(id)
+          setToken(accessToken)
+          setCycleId(cycleID)
+          setType(type)
         }
 
       }, [])
+
+      useEffect (() =>{
+        if (type)
+            if(type === 'admin')
+               setAuthorized(false)
+      }, [type])
+
   return (
          <Route {...rest} path={path} render={() => {   
-           console.log(path)
            setTargetPath(path)
-           return login?
-            <Component />
-           :<Redirect to={'/'} />
+          if( login )
+           return authorized? <Component /> :<Redirect to= {'/unauthorized'} />
+          else 
+          return <Redirect to={'/'} />
          }}/>
   )
 }
