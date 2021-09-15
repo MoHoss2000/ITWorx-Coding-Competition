@@ -10,9 +10,8 @@ export const UserProvider = ({children}) => {
   const [cycleId, setCycleId] = useState(1);
   const [type, setType] = useState(null);
   const [targetPath, setTargetPath] = useState("")
-  
+  const user = localStorage.getItem("user")
   useEffect(() => {
-    let user = localStorage.getItem("user")
     if ((user)) {
       const {accessToken, cycleID, id, type} = JSON.parse(user)
       setId(id)
@@ -20,22 +19,7 @@ export const UserProvider = ({children}) => {
       setCycleId(cycleID)
       setType(type)
     }
-  }, [])
-
-  useEffect(() =>{
-      
-    let user = localStorage.getItem("user")
-     if(user){
-      const {accessToken, cycleID, id , message,type}= JSON.parse(user)
-      
-      setId(id)
-      setToken(accessToken)
-      setCycleId(cycleID)
-      setType(type)
-
-     }
-   }, [])
-
+  }, [user])
 
   return (
     <UserContext.Provider

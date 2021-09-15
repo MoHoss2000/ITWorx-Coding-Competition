@@ -21,7 +21,7 @@ const LoginForm = () => {
 
   const history = useHistory()
 
-  const {id, type, cycleId, token, targetPath, setId, setToken, setCycleId, setType} = useContext(UserContext);
+  const {targetPath, setId, setToken, setCycleId, setType} = useContext(UserContext);
 
   const {register, handleSubmit, formState: {errors}} = useForm({
     resolver: yupResolver(schema),
@@ -58,10 +58,10 @@ const LoginForm = () => {
           <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
           <h2>Sign in</h2>
         </Grid>
-        <TextField label="Email" placeholder="Enter email" {...register("email")} fullWidth required></TextField>
+        <TextField label="Email" placeholder="Enter email" {...register("email")} fullWidth required/>
         <p>{errors.username?.message}</p>
         <TextField label="Password" type="password" placeholder="Enter password"  {...register("password")} fullWidth
-                   required></TextField>
+                   required/>
         <p>{errors.password?.message}</p>
         <br></br>
         <br></br>

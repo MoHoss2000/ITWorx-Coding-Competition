@@ -25,7 +25,7 @@ const tabList = [
 ];
 const MyActivities = () => {
 
-  const {id, cycleId} = useContext(UserContext)
+  const context = useContext(UserContext)
   const [tab, setTab] = useState('Assigned')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -35,9 +35,11 @@ const MyActivities = () => {
     setTab(key)
 
   }
-
   useEffect(() => {
-    console.log("id is: " + id)
+    const {id, cycleId} = context;
+    if (!id) {
+      return;
+    }
     setError(null)
     axios(
       {
@@ -60,7 +62,7 @@ const MyActivities = () => {
 
       })
 
-  }, []);
+  }, [context]);
 
   return (
     <Card
