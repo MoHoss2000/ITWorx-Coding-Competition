@@ -220,3 +220,24 @@ exports.getCurrentActivities = async (req, res) => {
                 return res.send([])    
         })     
 }
+
+exports.getActvivitiesEmployee = async (req, res) => {
+    const {employeeId, cycleId}= req.query
+       if(!(employeeId && cycleId)){
+        res.status(400).send({
+          message: "Please provide all input fields!"
+        });
+        return;
+       }
+   
+      db.query(`CALL getActivitiesEmployee(?,?)`,[employeeId, cycleId],(err, result) => {
+        if(result){
+          res.status(200).send(result);
+        }
+        else{
+          res.status(400).send(err);
+        }
+             
+      })
+    
+  }

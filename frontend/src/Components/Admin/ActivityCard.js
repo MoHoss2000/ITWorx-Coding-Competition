@@ -56,7 +56,7 @@ function ActivityCard({id}) {
   if(activity===null){
     return(
     <Card
-      style={{width: '800px'}}
+    style={{marginLeft: '10%', marginRight: '10%'}}   
       loading={true}
     > 
     </Card>)

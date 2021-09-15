@@ -15,7 +15,7 @@ const { Title, Text } = Typography;
 
 function EmployeeListItem({employee , activityId}) {
     console.log(employee);
-    const [id]= useState(employee.id);
+    //const [id]= useState(employee.id);
     const [loading, setLoading]=useState(false)
 
     const buttonRender =(status)=>{
@@ -36,12 +36,13 @@ function EmployeeListItem({employee , activityId}) {
      
        try{
         console.log("employee list item")
+       // console.log(id)
         setLoading(true)
          const assign= await axios({
             method: 'post',
             url: 'http://localhost:3001/admin/assignActivity',
             data: {
-                EmployeeId : id, 
+                EmployeeId : employee.id, 
                 ActivityId : activityId, 
                 CycleId : 1
             }
@@ -60,13 +61,16 @@ function EmployeeListItem({employee , activityId}) {
 
      
     try{
+        console.log("employee list item")
+       // console.log(id)
      setLoading(true)
+
       const assign= await axios({
          method: 'post',
          url: 'http://localhost:3001/admin/markActivityAsComplete',
          data: {
-             EmployeeId : id, 
-             ActivityId : 1, 
+             EmployeeId : employee.id, 
+             ActivityId : activityId, 
              CycleId : 1
          }
        });
@@ -84,13 +88,15 @@ const removeCompletion= async ()=>{
 
      
     try{
+        console.log("employee list item")
+        //console.log(id)
      setLoading(true)
       const assign= await axios({
          method: 'post',
          url: 'http://localhost:3001/admin/removeActivityCompletion',
          data: {
-             EmployeeId : id, 
-             ActivityId : 1, 
+             EmployeeId : employee.id, 
+             ActivityId : activityId, 
              CycleId : 1
          }
        });

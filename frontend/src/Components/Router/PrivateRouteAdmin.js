@@ -9,9 +9,8 @@ const PrivateRouteAdmin = ({path, component: Component, ...rest}) => {
   const {id, type, setId, setToken, setCycleId, setType, setTargetPath} = useContext(UserContext)
   const [login, setLogin] = useState(true)
   const [authorized, setAuthorized] = useState(true)
-  let user
-  useEffect(() =>{
-     user = localStorage.getItem("user")
+  
+  let user = localStorage.getItem("user")
       if(!(user))
         setLogin(false)
 
@@ -23,8 +22,6 @@ const PrivateRouteAdmin = ({path, component: Component, ...rest}) => {
         setType(type)
     
       }
-
-    }, [])
 
     useEffect (() =>{
       if (type)

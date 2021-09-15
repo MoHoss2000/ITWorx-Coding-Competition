@@ -31,4 +31,5 @@ router.get('/assignedActivities', controllers.getAssignedActivities)
 
 router.get('/currentActivities/:employeeID', controllers.getCurrentActivities)
 
+router.get('/myActivities',controllers.getActvivitiesEmployee)
 module.exports = router

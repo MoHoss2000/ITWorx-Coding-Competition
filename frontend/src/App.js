@@ -33,6 +33,8 @@ import PrivateRouteEmployee from './Components/Router/PrivateRouteEmployee';
 import {UserContext} from "./Context";
 import Unauthorized from "./Components/Unauthorized"
 import EmployeeSider from './Components/Navigation/EmployeeSider';
+import MyActivities from './Components/Employee/MyActivities';
+
 
 
 
@@ -87,6 +89,7 @@ function App() {
               <PrivateRouteEmployee path ='employee/leaderboard' component ={Leaderboard} />          
               <PrivateRouteEmployee path='/employee/myCycles' component={EmployeeCycleHistory}/> 
               <PrivateRouteEmployee path='/employee-profile' component={EmployeeProfile}/>
+              <PrivateRouteEmployee path='/myActivities' component={MyActivities}/>
             
               <Route exact path='/' component={LoginForm}/>
               <Route path='/unauthorized' component={Unauthorized}/>

@@ -11,6 +11,7 @@ const PrivateRouteEmployee = ({path, component: Component, ...rest}) => {
     const [authorized, setAuthorized] = useState(true)
 
     useEffect(() =>{
+      
        let user = localStorage.getItem("user")
         if(!(user))
           setLogin(false)

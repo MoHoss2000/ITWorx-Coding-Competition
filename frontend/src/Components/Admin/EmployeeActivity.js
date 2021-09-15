@@ -105,7 +105,14 @@ function EmployeeActivity({id}) {
 
   }, []);
   if(loading){
-      return (<h1>Loading</h1>)
+      return(
+      <Card
+       style={{marginLeft: '10%', marginRight: '10%'}}   
+        loading={true}
+      > 
+      </Card>)
+    
+  
   }
 
   return (
