@@ -36,10 +36,10 @@ const MyActivities = () => {
 
   }
   useEffect(() => {
-    const {id, cycleId} = context;
-    if (!id) {
-      return;
-    }
+     const {id, cycleId} = context;
+      if (!id) {
+        return;
+      }
     setError(null)
     axios(
       {
@@ -62,7 +62,7 @@ const MyActivities = () => {
 
       })
 
-  }, [context]);
+  }, []);
 
   return (
     <Card
