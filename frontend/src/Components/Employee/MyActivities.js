@@ -1,23 +1,12 @@
 import 'antd/dist/antd.css';
-import { Tabs } from 'antd';
-import React, {useEffect, useState,useContext} from 'react';
-import  {UserContext} from "../../Context";
+import {Card, Typography} from 'antd';
+import React, {useContext, useEffect, useState} from 'react';
+import {UserContext} from "../../Context";
 import axios from 'axios';
-import {useParams} from "react-router-dom";
-import { 
-  Typography,
-  List,
-  Card,
-  Select, 
-  Input,
-  Button,  
-} from 'antd';
 
-import { UserOutlined } from '@ant-design/icons';
-const { Option } = Select;
-const { Title, Text } = Typography;
-const { Search } = Input;
-const { TabPane } = Tabs;
+import {UserOutlined} from '@ant-design/icons';
+
+const {Title} = Typography;
 
 
 const tabList = [
@@ -36,19 +25,19 @@ const tabList = [
 ];
 const MyActivities = () => {
 
-  const {id,cycleId} = useContext(UserContext)
-  const [tab, setTab]=useState('Assigned')
-  const [ loading, setLoading ] = useState(true)
+  const {id, cycleId} = useContext(UserContext)
+  const [tab, setTab] = useState('Assigned')
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  const onTabChange= async (key) =>{
+  const onTabChange = async (key) => {
 
     setTab(key)
-    
-}
+
+  }
 
   useEffect(() => {
-    console.log("id is: "+id)
+    console.log("id is: " + id)
     setError(null)
     axios(
       {
@@ -62,7 +51,7 @@ const MyActivities = () => {
       }).then((res) => {
       console.log(res.data[0])
       setLoading(false)
-      
+
     })
       .catch((e) => {
         setError("Oops there seems to be a problem connecting to the network")
@@ -73,20 +62,20 @@ const MyActivities = () => {
 
   }, []);
 
-  return (   
+  return (
     <Card
-    style={{marginLeft: '10%', marginRight: '10%'}}       
+      style={{marginLeft: '10%', marginRight: '10%'}}
       tabList={tabList}
       activeTabKey={tab}
-      onTabChange={ key => {
+      onTabChange={key => {
         onTabChange(key)
       }}
-  
-     title={
-        <div style={{ display: "flex", flexDirection :'row'}}>
-        <UserOutlined  style={{ fontSize: '140%' }} />
-        <Title level={3} style={{ marginLeft:'20px'}}>My Activities</Title>
-      </div>}>    
+
+      title={
+        <div style={{display: "flex", flexDirection: 'row'}}>
+          <UserOutlined style={{fontSize: '140%'}}/>
+          <Title level={3} style={{marginLeft: '20px'}}>My Activities</Title>
+        </div>}>
     </Card>
   )
 };
