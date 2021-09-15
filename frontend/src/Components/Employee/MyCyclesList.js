@@ -1,38 +1,34 @@
-import react ,{useEffect, useState} from 'react';
+import react ,{ useContext} from 'react';
 import 'antd/dist/antd.css';
 import { Card, Button, Layout,Divider, Typography} from 'antd';
 import {SyncOutlined, CarryOutOutlined} from '@ant-design/icons';
 import '../components.css';
-import CycleOverview from '../General/CycleOverview';
+import {UserContext} from '../../Context'
 import {
     BrowserRouter as Router,
-    Route,
     Link,
-    useRouteMatch,
-    useParams,
-    Redirect
   } from 'react-router-dom'
-const { Title } = Typography; 
-  
-    
-const CycleList = (props) =>{    
-   console.log(props)
+
+
+const CycleList = (props) =>{  
+    const {id} =useContext(UserContext)
+  console.log(props)
   return( 
    <div>
       
-      <h1 className= "title"> <b> Cycles History </b></h1>
+      <h1 className= "title"> <b> My Cycles History </b></h1>
       <Divider className="title-divider"/>
        
       {
       
-       props.cycles.map ( ({id, start_date,end_date}) => (
-       <Card key={id} className='cycle-list' title={id} type="inner" 
+       props.cycles.map ( ({cycle_id, start_date, end_date}) => (
+       <Card key={cycle_id} className='cycle-list' title={cycle_id} type="inner" 
                 extra={
                         <Button type="primary" style={{'backgroundColor': '#0099cc', 'color': 'white'}}>   
                             <SyncOutlined/>
-                            {/* <Link to={{ pathname: `${url}/${id}`, state: { id } }}> */}
-                            View Cycle
-                            {/* </Link>  */}
+                             <Link to={`employee/cycles/${cycle_id}/${id}`}> 
+                               View My Status
+                             </Link>  
                         </Button>
                     }
                 style={{ width: '70%', marginTop: 20 }}

@@ -6,14 +6,14 @@ import axios from 'axios'
 import '../components.css';
 const { Title } = Typography;
 
-function ActivityList() {
+function ActivityList({id}) {
     const [loading, setLoading] = useState(true) 
     const [data, setData] = useState([])
     const [error, setError] = useState(null)
-
+    
     useEffect(() => {
-        const cycleID = 1
-        axios.get( `http://localhost:3001/admin/getActivities/${cycleID}`
+        
+        axios.get( `http://localhost:3001/admin/getActivities/${id}`
         ).then((res) =>{         
                 setData(res.data.slice(0,3))
                 setLoading(false)  

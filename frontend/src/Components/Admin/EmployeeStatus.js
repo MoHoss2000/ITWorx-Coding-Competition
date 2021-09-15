@@ -3,15 +3,17 @@ import EmployeeProfile from '../EmployeeProfile/EmployeeProfile'
 import { List, Card , Button, Avatar} from 'antd';
 import Spinner from '../General/loadingSpinner'
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 const EmployeeStatus = () =>{
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
+    const {id, empId} = useParams()
 
     useEffect(() => {
         const getCompletedActivities = async() => {
-            const employeeID = 1
-            const cycleID = 1
-            const res = await axios.get(`http://localhost:3001/employee/activities/completed/${employeeID}/${cycleID}`)
+            console.log("ID" + id)
+            console.log("EmpID" + empId)
+            const res = await axios.get(`http://localhost:3001/employee/activities/completed/${empId}/${id}`)
             setData(res.data)
             setLoading(false)
         }

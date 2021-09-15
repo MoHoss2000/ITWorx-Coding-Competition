@@ -1,4 +1,4 @@
-import React , {useState, useEffect} from 'react';
+import React , {useState, useEffect, useContext} from 'react';
 import 'antd/dist/antd.css';
 import { Button, Typography, Tabs} from 'antd';
 import axios from 'axios'
@@ -11,19 +11,17 @@ import EmployeeLeaderboard from './EmployeeLeaderboard';
 import DepartmentLeaderboard from './DepartmentLeaderboard';
 import PracticeLeaderboard from './PracticeLeaderboard';
 import { Redirect } from 'react-router';
+import { UserContext } from '../../Context';
 const { Title } = Typography;
 const { TabPane } = Tabs;
 
 function Leaderboard (){
-
+    const {cycleId} = useContext(UserContext)
     const passDataToParent = async(data) => {
          const cycleID = 1
          axios.get(`http://localhost:3001/admin`)
         
     }
-
-     
-
     return(
         <div>
             <Tabs defaultActiveKey="1" centered='true' size='large' tabBarGutter={50} >
@@ -31,7 +29,7 @@ function Leaderboard (){
                     tab={<span > <UserOutlined /> Employee  </span> }
                     key="1"
                 >
-                <EmployeeLeaderboard pass={passDataToParent}/>
+                <EmployeeLeaderboard pass={passDataToParent} id={cycleId}/>
                 </TabPane>
 
                 
@@ -39,14 +37,14 @@ function Leaderboard (){
                     tab={<span > <UsergroupAddOutlined /> Department </span> }
                     key="2"
                 >
-                <DepartmentLeaderboard />
+                <DepartmentLeaderboard id={cycleId}/>
                 </TabPane>
 
                 <TabPane
                     tab={<span> <UsergroupAddOutlined /> Practice </span> }
                     key="3"
                 >
-                <PracticeLeaderboard />
+                <PracticeLeaderboard id={cycleId}/>
                 </TabPane>
                
                 </Tabs>

@@ -39,7 +39,7 @@ function EmployeeSider() {
 
           <SubMenu key="sub1" icon={<SyncOutlined style={{color:'white'}}/>} title="Cycle">
           <Menu.Item key="9">
-               <Link to={'/employee/myCycles'}>
+               <Link to={'/employee/cycles'}>
               Cycle History
               </Link>
             </Menu.Item>

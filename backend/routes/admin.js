@@ -23,6 +23,7 @@ router.get('/viewActivity', controllers.activityInfo)
 router.get('/viewEmployeeActivity', controllers.getEmployeesActivity)
 
 router.get('/pending', controllers.pendingActivities)
+
 router.get('/pending/:cycleID', controllers.pendingActivities)
 
 router.post('/newActivity', controllers.createNewActivity)
@@ -49,7 +50,7 @@ router.patch('/cycle/disable/:cycleID', controllers.disableCycle)
 
 router.get('/employeeStatus/:employeeId/:cycleID', controllers.viewEmployeeStatus)
 
-router.get('/cycle/view/:cycleID', controllers.cycleInfo)
+router.get('/cycle/view/:id', controllers.cycleInfo)
 
 router.get('/leaderboard/excelfile/:cycleID', controllers.exportToExcelLeaderboard)
 

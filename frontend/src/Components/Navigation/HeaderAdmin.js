@@ -3,7 +3,8 @@ import 'antd/dist/antd.css';
 
 import {Avatar, Layout, Menu} from 'antd';
 
-import {CrownOutlined, SketchOutlined, UserOutlined} from '@ant-design/icons';
+import {CrownOutlined, LogoutOutlined, SketchOutlined, UserOutlined} from '@ant-design/icons';
+import { Redirect , Link} from 'react-router-dom';
 
 const {Header} = Layout;
 
@@ -16,7 +17,16 @@ function HeaderAdmin() {
               zIndex: '1000',
               left: 0,
             }}>
+       
       <Menu theme="light" mode="horizontal" id="m" defaultSelectedKeys={['1']}>
+      <Menu.Item key="9"  onClick ={()=>{
+         localStorage.clear()
+         window.location.reload()
+      }} >
+        <Link to='/'>
+          <LogoutOutlined/>
+        </Link>
+         </Menu.Item>       
         <Menu.Item key="10">
           <Avatar
             style={{backgroundColor: '#87d068',}}
@@ -24,6 +34,7 @@ function HeaderAdmin() {
         </Menu.Item>
         <Menu.Item key="11" icon={<SketchOutlined/>}>Points</Menu.Item>
         <Menu.Item key="12" icon={<CrownOutlined/>}>Badges</Menu.Item>
+
         <Menu.Item key="13" >
           <img id="logo" src="full.png"/>
         </Menu.Item>
