@@ -10,6 +10,7 @@ export const UserProvider = ({children}) => {
   const [cycleId, setCycleId] = useState(1);
   const [type, setType] = useState(null);
   const [targetPath, setTargetPath] = useState("")
+  
   useEffect(() => {
     let user = localStorage.getItem("user")
     if ((user)) {
