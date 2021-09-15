@@ -1,50 +1,37 @@
-import   React, { useState, useContext, useEffect} from "react";
-import {Route, Redirect} from "react-router-dom";
+import React, {useContext, useEffect, useState} from "react";
+import {Redirect, Route} from "react-router-dom";
 import {UserContext} from "../../Context";
-
 
 
 const PrivateRouteEmployee = ({path, component: Component, ...rest}) => {
 
-    const {id, type, setId, setToken, setCycleId, setType, setTargetPath, targetPath} = useContext(UserContext)
-    const [login, setLogin] = useState(true)
-    const [authorized, setAuthorized] = useState(true)
+  const {id,type, setTargetPath, targetPath} = useContext(UserContext)
+  const [login, setLogin] = useState(false)
+  const [authorized, setAuthorized] = useState(true)
+  useEffect(() => {
+    if(id){
+      setLogin(true)
+    }
+   
+    setTargetPath(path)
+  }, [id])
 
-    useEffect(() =>{
-      
-       let user = localStorage.getItem("user")
-       console.log(user)
-        if(!(user))
-          setLogin(false)
-
-        else if(!id ){
-          const {accessToken, cycleID, id ,type}= JSON.parse(user)
-          console.log(JSON.parse(user))
-          setId(id)
-          setToken(accessToken)
-          setCycleId(cycleID)
-          setType(type)
-        }
+  useEffect(() => {
+    if (type) {
+      if (type === 'admin') {
+        setAuthorized(false)
       }
-       test();
-    //  }, [])
-
-        
-
-      useEffect (() =>{
-        if (type)
-            if(type === 'admin')
-               setAuthorized(false)
-      }, [type])
+    }
+  }, [type])
 
   return (
-         <Route {...rest} path={path} render={() => {   
-           setTargetPath(path)
-          if( login )
-           return authorized? <Component /> :<Redirect to= {'/unauthorized'} />
-          else 
-          return <Redirect to={'/'} />
-         }}/>
+    <Route {...rest} path={path} render={() => {
+      // setTargetPath(path)
+      if (login)
+        return authorized ? <Component/> : <Redirect to={'/unauthorized'}/>
+      else
+        return <Redirect to={'/'}/>
+    }}/>
   )
 }
 
