@@ -15,13 +15,13 @@ import Participants from './Components/Admin/CycleParticipants';
 import NotFound404 from "./Components/NotFound404";
 import CreateCycle from './Components/Admin/CreateCycle';
 import EditActivity from './Components/Admin/EditActivity';
-import CycleOverview from './Components/General/CycleOverview';
+import CycleOverview from './Components/Admin/CycleOverview';
 import Leaderboard from './Components/Admin/Leaderboard';
 import EmployeeCycleStatus from './Components/Admin/viewEmployeeCycleStatus/EmployeeCycleStatus';
 import MyStatus from './Components/Employee/MyStatus';
 import EmployeeHome from './Components/HomePages/EmployeeHome';
 import AdminHome from './Components/HomePages/AdminHome';
-import EmployeeCycleHistory from './Components/Employee/Cycles'
+import EmployeeCyclesHistory from './Components/Employee/EmployeeCyclesHistory'
 import Activities from './Components/Admin/Activities'
 import ChangePassword from './Components/General/ChangePassword';
 import AdminProfile from './Components/Admin/AdminProfile/AdminProfile'
@@ -73,19 +73,20 @@ function App() {
               <PrivateRouteAdmin path ='admin/leaderboard' component ={Leaderboard} />
               <PrivateRouteAdmin path='/newActivity' component={CreateActivity}/>
               <PrivateRouteAdmin path ='/admin/home' component ={AdminHome} />
-              <PrivateRouteAdmin path ='/admin/cycles/:id' component ={CycleOverview} />   
               <PrivateRouteAdmin path={'/activities/:id'} component={Activity} /> 
               <PrivateRouteAdmin path='/activities' component={Activities}/> 
               <PrivateRouteAdmin path={'/createCycle'} component={CreateCycle}/>
               <PrivateRouteAdmin path='/editActivity/:id' component={EditActivity}/>
               <PrivateRouteAdmin path={'/activities/:activityId'} component={Activity} />
               <PrivateRouteAdmin path='/admin/cycles' component={AdminCycleHistory}/>
+              <PrivateRouteAdmin path ='/admin/cycles/:id' component ={CycleOverview} />   
               <PrivateRouteAdmin path='/badges' component={Badges}/>
 
               <PrivateRouteEmployee path ='/employee/home' component ={EmployeeHome} />
               <PrivateRouteEmployee path ='/myStatus' component ={MyStatus} />
               <PrivateRouteEmployee path ='employee/leaderboard' component ={Leaderboard} />          
-              <PrivateRouteEmployee path='/employee/myCycles' component={EmployeeCycleHistory}/> 
+              <PrivateRouteEmployee path='/employee/cycles' component={EmployeeCyclesHistory}/> 
+              <PrivateRouteEmployee path='/employee/cycles/:id/:empId' component={MyStatus}/>
               <PrivateRouteEmployee path='/employee-profile' component={EmployeeProfile}/>
             
               <Route exact path='/' component={LoginForm}/>

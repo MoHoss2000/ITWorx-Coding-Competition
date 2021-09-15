@@ -7,18 +7,21 @@ import CycleInfo from '../General/CycleInfo'
 import ActivitiesDone from '../Admin/viewEmployeeCycleStatus/ActivitiesDone'
 import VirtualRecognitions from '../EmployeeProfile/VirtualRecognitions'
 import BadgesDisplay from '../BadgesDisplay'
+import {
+    BrowserRouter as Router,
+    Link, useParams
+  } from 'react-router-dom'
 const { TabPane } = Tabs;
 const { Title } = Typography;
 
 const MyStatus= () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
+    const {id, cycle_id} = useParams()
 
     useEffect(() => {
-        const employeeId = 1
-        const cycleID = 1
         const getStatus = async () => {
-            const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${employeeId}/${cycleID}`))
+            const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${id}/${cycle_id}`))
             console.log(data)
             setData(data)
             setLoading(false)

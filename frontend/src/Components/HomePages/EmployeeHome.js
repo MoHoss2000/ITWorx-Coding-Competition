@@ -1,4 +1,4 @@
-import React , {useState, useEffect} from 'react';
+import React , {useState, useEffect, useContext} from 'react';
 import 'antd/dist/antd.css';
 import { List, Card , Button, Avatar, Typography, Divider, Row, Col} from 'antd';
 import axios from 'axios'
@@ -6,6 +6,7 @@ import '../components.css';
 import ActivitiesDone from '../Admin/viewEmployeeCycleStatus/ActivitiesDone'
 import Clock from './Clock'
 import Leaderboard from '../Admin/Leaderboard';
+import { UserContext } from '../../Context';
 
 const { Title } = Typography;
 
@@ -15,15 +16,15 @@ function EmployeeHome (){
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
     const [profile, setProfile] = useState([])
-
+    const {id, cycleId} = useContext(UserContext)
     useEffect(() => {
-        const employeeID = 1
-        const cycleID = 1
+  
         const getStatus = async () => {
-            const {data} = await (axios.get(`http://localhost:3001/employee/currentActivities/${employeeID}`))
-            const profile = (await (axios.get(`http://localhost:3001/employee/profile/${employeeID}/${cycleID}`))).data
-            console.log(data)
-            console.log('hi')
+            
+            console.log(cycleId)
+            console.log(id)
+            const {data} = await (axios.get(`http://localhost:3001/employee/currentActivities/${id}`))
+            const profile = (await (axios.get(`http://localhost:3001/employee/profile/${id}/${cycleId}`))).data
             console.log(profile)
             setData(data)
             setProfile(profile)

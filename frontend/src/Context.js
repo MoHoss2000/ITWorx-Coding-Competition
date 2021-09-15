@@ -7,7 +7,7 @@ export const UserProvider = ({ children }) => {
 
   const [id, setId] = useState(null);
   const [token, setToken] = useState(null);
-  const [cycleId, setCycleId] = useState(1);
+  const [cycleId, setCycleId] = useState(null);
   const [type, setType] = useState(null);
   const [targetPath, setTargetPath] = useState("")
  

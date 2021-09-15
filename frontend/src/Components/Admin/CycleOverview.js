@@ -5,8 +5,8 @@ import axios from 'axios'
 import '../components.css';
 import CycleInfo from '../General/CycleInfo'
 import ActivityList from '../General/ActivityList'
-import DisableSwitch from '../Admin/DisableSwitch'
-import Leaderboard from '../Admin/Leaderboard';
+import DisableSwitch from './DisableSwitch'
+import Leaderboard from './Leaderboard';
 import {UserContext} from '../../Context'
 import { useParams, Link } from 'react-router-dom';
 

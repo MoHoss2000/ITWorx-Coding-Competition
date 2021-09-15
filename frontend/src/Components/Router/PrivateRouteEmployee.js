@@ -10,20 +10,27 @@ const PrivateRouteEmployee = ({path, component: Component, ...rest}) => {
     const [login, setLogin] = useState(true)
     const [authorized, setAuthorized] = useState(true)
 
-    useEffect(() =>{
+    //  useEffect (() =>{
+
+    async function test(){
        let user = localStorage.getItem("user")
+       console.log(user)
         if(!(user))
           setLogin(false)
 
         else if(!id ){
-          const {accessToken, cycleID, id , message,type}= JSON.parse(user)
+          const {accessToken, cycleID, id ,type}= JSON.parse(user)
+          console.log(JSON.parse(user))
           setId(id)
           setToken(accessToken)
           setCycleId(cycleID)
           setType(type)
         }
+      }
+       test();
+    //  }, [])
 
-      }, [])
+        
 
       useEffect (() =>{
         if (type)

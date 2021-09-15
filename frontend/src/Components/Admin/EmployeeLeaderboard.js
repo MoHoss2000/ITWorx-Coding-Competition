@@ -17,10 +17,12 @@ const EmployeeLeaderboard = ({pass, id}) => {
                 console.log(res.data)
                 res.data[i].key = i
                 res.data[i].rank = i + 1
-                if(res.data[i].developer)
+                
+                if(res.data[i].is_developer)
                     res.data[i].developer = 'Developer'
                 else
                     res.data[i].developer = 'Non-developer'
+                console.log(res.data[i].developer)
             }
             setData(res.data)
             pass(res.data)

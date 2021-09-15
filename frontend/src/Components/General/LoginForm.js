@@ -30,6 +30,7 @@ const LoginForm = () => {
   })
 
   const submitForm = (data) => {
+    console.log("hi")
     console.log(data)
     Axios.post('http://localhost:3001/login',{
         username: data.email,
@@ -42,6 +43,7 @@ const LoginForm = () => {
         setCycleId(cycleID)
         setType(type)
         let user = { id, accessToken, cycleID, type}
+        console.log(user)
         localStorage.setItem("user", JSON.stringify(user));
 
 
