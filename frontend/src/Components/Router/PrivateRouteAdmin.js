@@ -13,6 +13,7 @@ const PrivateRouteAdmin = ({path, component: Component, ...rest}) => {
   useEffect(() => {
     setTargetPath(path)
   }, [])
+  
   useEffect(() => {
     if (type) {
       if (type === 'employee') {

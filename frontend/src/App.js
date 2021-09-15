@@ -72,7 +72,7 @@ function App() {
 
             <Switch>
 
-              {id && <>
+             
                 <PrivateRouteAdmin path='/employeeStatus' component={EmployeeCycleStatus}/>
                 <PrivateRouteAdmin path='/adminProfile' component={AdminProfile}/>
                 <PrivateRouteAdmin path='/participants' component={Participants}/>
@@ -94,7 +94,7 @@ function App() {
                 <PrivateRouteEmployee path='/employee/myCycles' component={EmployeeCycleHistory}/>
                 <PrivateRouteEmployee path='/employee-profile' component={EmployeeProfile}/>
                 <PrivateRouteEmployee path='/myActivities' component={MyActivities}/>
-              </>}
+             
               <Route path='/unauthorized' component={Unauthorized}/>
               <Route path='/changePassword' component={ChangePassword}/>
               <Route path='/resetPassword/:token' component={ResetPassword}/>
