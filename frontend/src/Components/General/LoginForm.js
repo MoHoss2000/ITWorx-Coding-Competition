@@ -1,6 +1,6 @@
 import { Button, Grid, Paper, Avatar, TextField, Typography, Link } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
-import React , {useContext}from 'react';
+import React , {useContext, useEffect}from 'react';
 import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -8,6 +8,7 @@ import Axios from 'axios';
 import {UserContext} from "../../Context";
 import { ConsoleSqlOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import {Route, Redirect} from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -22,7 +23,7 @@ const LoginForm = () => {
 
   const history = useHistory ()
 
-  const {targetPath, setId, setToken, setCycleId, setType} = useContext(UserContext);
+  const {id, type, cycleId, token, targetPath, setId, setToken, setCycleId, setType} = useContext(UserContext);
 
   const {register, handleSubmit, formState: {errors}} = useForm({
     resolver: yupResolver(schema),
@@ -35,16 +36,18 @@ const LoginForm = () => {
         password: data.password,
     }).then((response) => { 
 
-        const {accessToken, cycleID, id , message,type}=response.data
-        setId(id)
+        const {accessToken, cycleID , message }=response.data
+        console.log(response.data)
+        setId(response.data.id)
         setToken(accessToken)
         setCycleId(cycleID)
-        setType(type)
-        let user = { id, accessToken, cycleID, type}
+        setType(response.data.type)
+        console.log(id,cycleId,type,token)
+        let user = { id: response.data.id , accessToken, cycleID, type: response.data.type}
         localStorage.setItem("user", JSON.stringify(user));
 
 
-         (targetPath === "") ? history.replace(type == 'employee' ? '/employee/home' : '/home') : history.replace(targetPath)
+         (targetPath === "") ? history.replace(type == 'employee' ? '/employee/home' : '/admin/home') : history.replace(targetPath)
         
   
       
@@ -52,7 +55,12 @@ const LoginForm = () => {
 
     })
   } 
-
+  if (type==='employee') {
+    return <Redirect to="/employee/home" />
+    }
+    if (type==='admin') {
+      return <Redirect to="/admin/home" />
+   }
   return (
     <Grid>
       <Paper elevation={10} style={paperStyle} onSubmit={handleSubmit(submitForm)}>

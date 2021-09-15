@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 export const UserContext = createContext();
 
@@ -10,6 +10,20 @@ export const UserProvider = ({ children }) => {
   const [cycleId, setCycleId] = useState(1);
   const [type, setType] = useState(null);
   const [targetPath, setTargetPath] = useState("")
+
+  useEffect(() =>{
+      
+    let user = localStorage.getItem("user")
+     if(user){
+      const {accessToken, cycleID, id , message,type}= JSON.parse(user)
+      
+      setId(id)
+      setToken(accessToken)
+      setCycleId(cycleID)
+      setType(type)
+
+     }
+   }, [])
 
 
   return (
