@@ -7,10 +7,12 @@ import CycleInfo from '../General/CycleInfo'
 import ActivitiesDone from '../Admin/viewEmployeeCycleStatus/ActivitiesDone'
 import VirtualRecognitions from '../EmployeeProfile/VirtualRecognitions'
 import BadgesDisplay from '../BadgesDisplay'
+import InfoCard from './InfoCard'
 import {
     BrowserRouter as Router,
     Link, useParams
   } from 'react-router-dom'
+import MyPoints from './MyPoints'
 const { TabPane } = Tabs;
 const { Title } = Typography;
 
@@ -18,10 +20,8 @@ const MyStatus= () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
     const {id, empId} = useParams()
-    console.log("HII")
     useEffect(() => {
         const getStatus = async () => {
-            console.log("HII")
             const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${empId}/${id}`))
             console.log(data)
             setData(data)
@@ -35,12 +35,13 @@ const MyStatus= () => {
 
     return(
         <div >
+
             <h1 className= "title"> <b>My Status </b></h1>
             <Divider className="title-divider"/> 
-                    <div className='info-tab'>
-                          <CycleInfo data={data.cycleInfo[0]} className='status-tab' />
-                     </div>
-                
+         <div style={{display:'flex', flexDirection:'row'}}>
+            <InfoCard  data={data.cycleInfo[0]}/>
+            
+            </div>
             <Tabs defaultActiveKey="1" centered>
 
                 <TabPane tab={<span style={{fontSize:'23px'}}> Activities  </span>} key="2" >
@@ -96,8 +97,8 @@ const MyStatus= () => {
        
 
      </Tabs>
-
-
+   
+           
            
 
 

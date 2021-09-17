@@ -40,7 +40,9 @@ function EmployeeHome (){
         <div >  
            
             <Row>
-                <Card className='welcome-bar'>
+                <Card className='welcome-bar ocean'>
+                <div className='wave'> </div>
+                <div className='wave'> </div>
                     <Row>
                         <Col>
                         <div className='avatar-block'> 
@@ -50,8 +52,10 @@ function EmployeeHome (){
                         <Col>
                         <h1 className='welcome-statement'> {'Welcome Back, ' + profile.personalInfo[0].first_name + ' '+ profile.personalInfo[0].last_name +'!'} </h1>
                         <h3 className='welcome-line'> Glad to see you again!</h3>
+                        
                         </Col>
                     </Row>
+                    <div className='wave'> </div>
                 </Card>
             </Row>
             
