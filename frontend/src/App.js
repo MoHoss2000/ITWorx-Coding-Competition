@@ -90,10 +90,12 @@ function App() {
 
                 <PrivateRouteEmployee path='/employee/home' component={EmployeeHome}/>
                 <PrivateRouteEmployee path='/myStatus' component={MyStatus}/>
-                <PrivateRouteEmployee path='employee/leaderboard' component={Leaderboard}/>
-                <PrivateRouteEmployee path='/employee/myCycles' component={EmployeeCycleHistory}/>
-                <PrivateRouteEmployee path='/employee-profile' component={EmployeeProfile}/>
+                <PrivateRouteEmployee path ='employee/leaderboard' component ={Leaderboard} /> 
+                <PrivateRouteEmployee path='/employee/cycles/:id/:empId' component={MyStatus}/>         
+                <PrivateRouteEmployee path='/employee/cycles' component={EmployeeCyclesHistory}/> 
                 <PrivateRouteEmployee path='/myActivities' component={MyActivities}/>
+                <PrivateRouteEmployee path='/employee/profile' component={EmployeeProfile}/>
+
              
               <Route path='/unauthorized' component={Unauthorized}/>
               <Route path='/changePassword' component={ChangePassword}/>

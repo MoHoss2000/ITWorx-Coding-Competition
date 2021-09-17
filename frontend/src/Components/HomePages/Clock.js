@@ -36,9 +36,8 @@ export default function Clock() {
         const getTime= async () => {
             const {data} = await(axios.get('http://localhost:3001/time'))
             console.log(data)
-            let start = data[0].start_date.slice(0,10) 
             let end = data[0].end_date.slice(0,10) 
-            start = Date.parse(start) / 1000
+            let start = Date.now() / 1000
             setStartTime(start)
             end = Date.parse(end) /1000
             setEndTime(end)

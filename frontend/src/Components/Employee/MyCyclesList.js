@@ -11,7 +11,7 @@ import {
 
 
 const CycleList = (props) =>{  
-    const {id} =useContext(UserContext)
+  const {id, cycleId} =useContext(UserContext)
   console.log(props)
   return( 
    <div>
@@ -21,31 +21,59 @@ const CycleList = (props) =>{
        
       {
       
-       props.cycles.map ( ({cycle_id, start_date, end_date}) => (
-       <Card key={cycle_id} className='cycle-list' title={cycle_id} type="inner" 
+       props.cycles.map ( ({cycle_id, start_date, end_date}) => {
+        if (cycle_id ==cycleId){
+           return <Card key={cycle_id} className='cycle-list-current' title={`Current Cycle - Cycle ID:  ${cycle_id}`}  type="inner" 
+           extra={
+             
+                    <Button type="primary" style={{'backgroundColor': '#0099cc'}}>   
+                        <Link to={`/employee/cycles/${cycle_id}/${id}`} style={{ 'color': 'white'}}> 
+                            View My Status
+                        </Link>  
+                    </Button>
+                }
+                style={{ width: '70%', marginTop: 20 }}
+                hoverable='true'
+                >
+             
+                
+                <div style={{display:'flex' , flexDirection :'row' }}>
+                <SyncOutlined style={{ fontSize: '250%'}} />
+                <Divider type="vertical" style={{ height: '50px', marginLeft:'20px'}} />
+                <div style={{ marginLeft:'20px'}} >
+                    
+                  <p> <b> Start Date: </b>{start_date.slice(0,10)} </p>
+                    <p> <b> End Date:</b> {end_date.slice(0,10)} </p>
+                    </div> 
+                </div>
+          </Card> 
+          
+          
+        }
+        else {
+           return <Card key={cycle_id} className='cycle-list' title={`Cycle ID: ${cycle_id}`} type="inner" 
                 extra={
-                        <Button type="primary" style={{'backgroundColor': '#0099cc', 'color': 'white'}}>   
-                            <SyncOutlined/>
-                             <Link to={`employee/cycles/${cycle_id}/${id}`}> 
-                               View My Status
+                        <Button type="primary" style={{'backgroundColor': '#0099cc'}}>   
+                             <Link to={`/employee/cycles/${cycle_id}/${id}`} style={{ 'color': 'white'}}> 
+                                View My Status
                              </Link>  
                         </Button>
                     }
                 style={{ width: '70%', marginTop: 20 }}
                 hoverable='true'
                 >
-      <div style={{display:'flex' , flexDirection :'row' }}>
-        <CarryOutOutlined style={{ fontSize: '250%'}} />
-        <Divider type="vertical" style={{ height: '50px', marginLeft:'20px'}} />
-        <div style={{ marginLeft:'20px'}} >
-            
-           <p> <b> Start Date: </b>{start_date} </p>
-            <p> <b> End Date:</b> {end_date} </p>
-            </div> 
-        </div>
-      </Card>
-      
-      )) }
+              <div style={{display:'flex' , flexDirection :'row' }}>
+                <CarryOutOutlined style={{ fontSize: '250%'}} />
+                <Divider type="vertical" style={{ height: '50px', marginLeft:'20px'}} />
+                <div style={{ marginLeft:'20px'}} >
+                    
+                  <p> <b> Start Date: </b>{start_date.slice(0,10)} </p>
+                  <p> <b> End Date:</b> {end_date.slice(0,10)} </p>
+                </div> 
+                </div>
+       </Card>
+        }           
+      }) }
       {/* <Router>
       <Route path={`${path}/:id`} ><CycleOverview/> </Route>
      </Router> */}

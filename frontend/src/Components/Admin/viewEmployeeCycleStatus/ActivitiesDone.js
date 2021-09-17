@@ -9,10 +9,11 @@ const { Title } = Typography;
 const ActivitiesDone = (props) =>{
     console.log(props.data)
 
+
     
     return(
         <div className="site-card-border-less-wrapper">
-        <Card className ="activities-view" bordered={false} >
+        <Card className ={props.className} bordered={false} >
             <List
                 size="small" 
                 itemLayout="horizontal"
@@ -23,7 +24,7 @@ const ActivitiesDone = (props) =>{
                 >
                     <List.Item.Meta
                     avatar={
-                        <Avatar src="./activity.png" />
+                        <Avatar src="/activity.png" />
                       }
                     title={<a href="https://ant.design">{item.name}</a>}
                     description= {item.description}

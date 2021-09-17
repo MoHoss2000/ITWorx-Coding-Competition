@@ -106,15 +106,6 @@ body {
   flex-direction: row;
 }
 
-.cycle-list {
-  background-color: #0099cc1f;
-  border-bottom-right-radius: 1cm;
-  margin-left: 20px;
-}
-
-.side-menu {
-  background-color: #0099cc;
-}
 
 [data-theme="dark"] .site-card-border-less-wrapper {
   background: #303030;
@@ -130,6 +121,9 @@ body {
 .activities-view {
   width: 800px;
 }
+/* .activities-home {
+  width: 100%;
+} */
 
 .info-display {
   top: 20%;
@@ -142,7 +136,7 @@ body {
   /* margin: 0 auto;
   width: 80%; */
   top: 20%;
-  width: 800px;
+  width: 60%;
   margin: 0 auto;
   margin-bottom: 30px;
   box-shadow: 10px 8px 20px 0 #b72025;
@@ -189,7 +183,7 @@ body {
 #logo {
   width: 100px;
   position: relative;
-  left: -1270px;
+  
 }
 
 .gridStyle {
@@ -202,11 +196,24 @@ body {
 
 .cycle-list {
   background-color: #ffffffc7;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  box-shadow: 10px 8px 20px 0 #b720259d;
+  transition: 0.3s;
+}
+
+.cycle-list-current{
+  background: #b72025; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #00009073, #b72025); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #00009073, #b72025);
+  color:white;
+  border: transparent;
   border-bottom-right-radius: 1cm;
   margin: 0 auto;
   margin-bottom: 30px;
-  box-shadow: 10px 8px 20px 0 #b72025;
+  box-shadow: 10px 8px 20px 0 #2a29299d;
   transition: 0.3s;
+  height: 180px;
 }
 
 .side-menu {
@@ -312,10 +319,12 @@ body {
   color: #b72025;
   margin-left: 5%;
 }
-.activities-home {
+.activities-home-container {
   box-shadow: 10px 8px 20px 0 #b72025;
   transition: 0.3s;
   margin-left: 5%;
+  width: 70%;
+  background-color: white;
 }
 
 .clock-header {
@@ -325,8 +334,8 @@ body {
   margin-left: 20%;
 }
 .welcome-bar {
-  width: 1350px;
-  height: 300px;
+  width: 85%;
+  height: 350px;
   margin: 0 auto;
   margin-top: 40px;
   margin-bottom: 5%;
@@ -334,7 +343,7 @@ body {
   background: #b72025; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to left,
-    #000090,
+    #00009073,
     #b72025
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
@@ -351,7 +360,7 @@ body {
 .welcome-statement {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin-top: 15%;
-  font-size: 35px;
+  font-size: 2.5em;
   color: white;
 }
 .avatar {
@@ -368,6 +377,7 @@ body {
   flex-direction: row;
   justify-content: space-around;
   margin-bottom: 3%;
+  width: 75%;
 }
 
 .welcome-line {

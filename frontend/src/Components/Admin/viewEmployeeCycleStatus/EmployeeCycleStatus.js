@@ -60,7 +60,7 @@ const EmployeeCycleStatus= () => {
                                             key="1"
                                         >
                                             <div className='profile-components'>
-                                                <ActivitiesDone data={data.completed_activities} /> 
+                                                <ActivitiesDone data={data.completed_activities} className='activities-view'/> 
                                             </div>
                                         </TabPane>
                                         <TabPane
@@ -70,7 +70,7 @@ const EmployeeCycleStatus= () => {
                                         key="2"
                                         >
                                             <div className='profile-components'>
-                                            <ActivitiesDone data={data.pending_activities}  /> 
+                                            <ActivitiesDone data={data.pending_activities} className='activities-view' /> 
                                             </div>
                                         </TabPane>
                                         <TabPane
@@ -80,7 +80,7 @@ const EmployeeCycleStatus= () => {
                                         key="3"
                                         >
                                             <div className='profile-components'>
-                                            <ActivitiesDone data={data.inprogress_activities}  /> 
+                                            <ActivitiesDone data={data.inprogress_activities} className='activities-view' /> 
                                             </div>
                                         </TabPane>
                                 

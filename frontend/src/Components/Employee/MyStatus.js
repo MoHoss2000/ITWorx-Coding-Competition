@@ -17,11 +17,12 @@ const { Title } = Typography;
 const MyStatus= () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
-    const {id, cycle_id} = useParams()
-
+    const {id, empId} = useParams()
+    console.log("HII")
     useEffect(() => {
         const getStatus = async () => {
-            const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${id}/${cycle_id}`))
+            console.log("HII")
+            const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${empId}/${id}`))
             console.log(data)
             setData(data)
             setLoading(false)
@@ -51,7 +52,7 @@ const MyStatus= () => {
                                 key="1"
                             >
                                 <div className='profile-components'>
-                                    <ActivitiesDone data={data.completed_activities} /> 
+                                    <ActivitiesDone data={data.completed_activities} className='activities-view'/> 
                                 </div>
                             </TabPane>
                             <TabPane
@@ -61,7 +62,7 @@ const MyStatus= () => {
                             key="2"
                             >
                                 <div className='profile-components'>
-                                <ActivitiesDone data={data.pending_activities}  /> 
+                                <ActivitiesDone data={data.pending_activities} className='activities-view' /> 
                                 </div>
                             </TabPane>
                             <TabPane
@@ -71,7 +72,7 @@ const MyStatus= () => {
                             key="3"
                             >
                                 <div className='profile-components'>
-                                <ActivitiesDone data={data.inprogress_activities}  /> 
+                                <ActivitiesDone data={data.inprogress_activities} className='activities-view' /> 
                                 </div>
                             </TabPane>
                     

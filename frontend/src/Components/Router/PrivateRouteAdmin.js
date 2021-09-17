@@ -6,7 +6,7 @@ import {UserContext} from "../../Context";
 const PrivateRouteAdmin = ({path, component: Component, ...rest}) => {
 
   const {id , type, setTargetPath} = useContext(UserContext)
-  const [login, setLogin] = useState(false)
+  const [login, setLogin] = useState(true)
   const [authorized, setAuthorized] = useState(true)
 
 

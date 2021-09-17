@@ -6,7 +6,7 @@ import {UserContext} from "../../Context";
 const PrivateRouteEmployee = ({path, component: Component, ...rest}) => {
 
   const {id,type, setTargetPath, targetPath} = useContext(UserContext)
-  const [login, setLogin] = useState(false)
+  const [login, setLogin] = useState(true)
   const [authorized, setAuthorized] = useState(true)
   useEffect(() => {
     if(id){

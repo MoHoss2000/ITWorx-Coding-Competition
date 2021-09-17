@@ -44,7 +44,7 @@ function EmployeeHome (){
                     <Row>
                         <Col>
                         <div className='avatar-block'> 
-                         <img className='avatar' src='avatar.png'/> 
+                         <img className='avatar' src='/avatar.png'/> 
                          </div>
                         </Col>
                         <Col>
@@ -63,9 +63,9 @@ function EmployeeHome (){
                     </div>
                     
                 
-                      <div className='activities-home'>
+                      <div className='activities-home-container'>
                       <h1 className= "components-header"> <b> Activities waiting for you</b></h1>
-                     <ActivitiesDone data={data} /> 
+                     <ActivitiesDone data={data} className='activities-home' /> 
                      </div>
                 </div>
             </Row>

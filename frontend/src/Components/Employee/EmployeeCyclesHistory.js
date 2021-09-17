@@ -1,7 +1,7 @@
 import react ,{useEffect, useState, useContext} from 'react';
 import axios from 'axios';
 import 'antd/dist/antd.css';
-import {Layout} from 'antd';
+import {Layout, Alert, message, Result, Button} from 'antd';
 import '../components.css';
 import MyCyclesList from './MyCyclesList';
 import {UserContext} from '../../Context'
@@ -10,19 +10,18 @@ import {UserContext} from '../../Context'
 
 const { Content} = Layout;
 function EmployeeCyclesHistory() {
-  const {cycleId} =useContext(UserContext)
-  console.log(cycleId)
-    const [cycles, setCycles] = useState([])
-    const [error, setError] = useState("")
+  const {id} =useContext(UserContext)
+  const [cycles, setCycles] = useState([])
+  const [error, setError] = useState("")
     
 
     useEffect(() => {
-      console.log(cycleId)
-        axios.get(`http://localhost:3001/employee/cycles/${cycleId}`)
+        axios.get(`http://localhost:3001/employee/cycles/${id}`)
             .then((res) => {  
                 setCycles(res.data)
             })
               .catch((e) => {
+                message.error("network error")
                 setError(e.message)
                 
               })
@@ -31,23 +30,33 @@ function EmployeeCyclesHistory() {
 
   if(error != ""){
    return ( 
-     <div>
-        {error}
-    </div>
+
+    <Result
+    status="500"
+    title="Network Error"
+    subTitle="Check your connection and try again in a few moments"
+    extra={<Button type="primary">Back Home</Button>}
+  />
      )}
 
-  else if (cycles===[]) {
+  else if (cycles.length == 0) {
     console.log("hi")
-    return <div> You didn't participate in any cycles yet</div>  }
+    return (
+        <Alert
+          message="No Cycles Available"
+          description="You didn't participate in any cycles yet"
+          type="info"
+          showIcon
+        />
+    )
+  }
 
   else{
-  return (
-    <div>
-      
-      <MyCyclesList cycles={cycles}/>
-
-    </div>
-  );
+    return (
+      <div>
+        <MyCyclesList cycles={cycles}/>
+      </div>
+    );
        }
     }
 

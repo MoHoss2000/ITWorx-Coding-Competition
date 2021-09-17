@@ -43,7 +43,7 @@ function AdminHome (){
                     <Row>
                         <Col>
                         <div className='avatar-block'> 
-                         <img className='avatar' src='avatar.png'/> 
+                         <img className='avatar' src='/avatar.png'/> 
                          </div>
                         </Col>
                         <Col>
@@ -64,7 +64,7 @@ function AdminHome (){
                 
                       <div className='activities-home'>
                       <h4 className= "components-header"> <b> Activities waiting for you to evaluate</b></h4>
-                     <ActivitiesDone data={data} /> 
+                     <ActivitiesDone data={data} className='activities-home' /> 
                      </div>
                 </div>
             </Row>
