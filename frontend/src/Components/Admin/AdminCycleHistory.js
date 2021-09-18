@@ -14,7 +14,7 @@ function AdminCycleHistory() {
     const [current, setCurrent] = useState([])
     const [cycles, setCycles] = useState([])
     const [error, setError] = useState(false)
-    const [loading,setLoading]=useState(true)
+    const [loading,setLoading] = useState(true)
     useEffect(() => {
         axios.get('http://localhost:3001/admin/cycles')
             .then((res) => {  

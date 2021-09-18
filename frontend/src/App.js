@@ -34,6 +34,7 @@ import {UserContext} from "./Context";
 import Unauthorized from "./Components/Unauthorized"
 import EmployeeSider from './Components/Navigation/EmployeeSider';
 import MyActivities from './Components/Employee/MyActivities';
+import PreviousActivities from './Components/Admin/PreviousActivities';
 
 
 function App() {
@@ -87,11 +88,14 @@ function App() {
                 <PrivateRouteAdmin path={'/activities/:activityId'} component={Activity}/>
                 <PrivateRouteAdmin path='/admin/cycles' component={AdminCycleHistory}/>
                 <PrivateRouteAdmin path='/badges' component={Badges}/>
+                <PrivateRouteAdmin path='/previousActivities' component={PreviousActivities}/>
+                {/* <PrivateRouteAdmin path='/PreviousActivityMessage/:id' component={PreviousActivityMessage}/> */}
+                
+                
 
-                <PrivateRouteEmployee path='/employee/home' component={EmployeeHome}/>
-                <PrivateRouteEmployee path='/myStatus' component={MyStatus}/>
+                <PrivateRouteEmployee path='/employee/home' component={EmployeeHome}/>               
                 <PrivateRouteEmployee path ='employee/leaderboard' component ={Leaderboard} /> 
-                <PrivateRouteEmployee path='/employee/cycles/:id/:empId' component={MyStatus}/>         
+                <PrivateRouteEmployee path='/employee/status' component={MyStatus}/>         
                 <PrivateRouteEmployee path='/employee/cycles' component={EmployeeCyclesHistory}/> 
                 <PrivateRouteEmployee path='/myActivities' component={MyActivities}/>
                 <PrivateRouteEmployee path='/employee/profile' component={EmployeeProfile}/>

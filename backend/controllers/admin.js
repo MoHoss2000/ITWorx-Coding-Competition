@@ -2,6 +2,21 @@ const path = require('path')
 const excel = require('exceljs');
 const db = require('../db/mysql')
 
+
+exports.getPreviousActivities = async (req, res) => {
+  const cycleID = parseInt(req.params.cycleID)
+  db.query('CALL viewActivitiesNotInCycle(?)', cycleID, (err, result) => {
+    if(result && result[0])
+      return res.send(result[0])
+    else if(err)
+      return res.status(400).send(err)
+    else 
+      return res.send([])
+  })
+
+}
+
+
 exports.createNewCycle= async (req,res)=>{
 
   
@@ -33,15 +48,23 @@ exports.createNewCycle= async (req,res)=>{
 
 exports.viewParticipants = async (req, res) => {
     const cycleID = parseInt(req.params.cycleID)
-    try{
+   
       db.query('CALL viewEmployeesInCycle(?)', cycleID ,(err, result) => {
-          console.log(result)
-          res.send(result[0]);
+        if(result && result[0])
+          return res.send(result[0]);
+        else if (err){
+          console.log(err)
+          return res.status(400).send(err)
+        }
+         
+
+        else return res.send([])
+        
+        
       })
-    } catch(e){
-      console.log(e)
-      res.status(400).send(e);
-    }
+
+      
+    
 }
 
 exports.exportToExcelParticipants = async(req, res) => {

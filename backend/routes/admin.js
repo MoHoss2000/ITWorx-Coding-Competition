@@ -18,6 +18,8 @@ router.get('/getActivities/:cycleID', controllers.getActivities)
 
 router.get('/Activities', controllers.getAllActivities)
 
+router.get('/PreviousActivities/:cycleID', controllers.getPreviousActivities)
+
 router.get('/viewActivity', controllers.activityInfo)
 
 router.get('/viewEmployeeActivity', controllers.getEmployeesActivity)

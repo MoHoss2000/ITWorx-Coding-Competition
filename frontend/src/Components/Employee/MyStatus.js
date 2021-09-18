@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {Badge, Descriptions, Row, Col, Tabs, Typography, Divider, Card, Avatar} from 'antd'
 import axios from 'axios'
 import Spinner from '../General/loadingSpinner'
@@ -13,16 +13,17 @@ import {
     Link, useParams
   } from 'react-router-dom'
 import MyPoints from './MyPoints'
+import { UserContext } from '../../Context'
 const { TabPane } = Tabs;
 const { Title } = Typography;
 
 const MyStatus= () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
-    const {id, empId} = useParams()
-    useEffect(() => {
+    const {id, cycleId} = useContext(UserContext)
+        useEffect(() => {
         const getStatus = async () => {
-            const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${empId}/${id}`))
+            const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${id}/${cycleId}`))
             console.log(data)
             setData(data)
             setLoading(false)
