@@ -10,7 +10,7 @@ import {UserContext} from '../../Context'
 
 const { Content} = Layout;
 function EmployeeCyclesHistory() {
-  const {id} =useContext(UserContext)
+  const {id} = useContext(UserContext)
   const [cycles, setCycles] = useState([])
   const [error, setError] = useState("")
     

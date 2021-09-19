@@ -26,6 +26,7 @@ class Participants extends React.Component {
 
   componentWillMount(){
       const getParticipants = async () => {
+        console.log(this.props)
           const res = (await axios.get(`http://localhost:3001/admin/cycle/participants/${this.props.match.params.id}`))
           console.log(res.data)
           for(let i = 0 ; i < res.data.length ; i++){

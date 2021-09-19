@@ -63,7 +63,7 @@ function EmployeeSider() {
             </Link>
           </Menu.Item>
           <Menu.Item key="12" icon={<TrophyOutlined  style={{color:'white'}}/>}>
-          <Link to={'/myStatus'}>
+          <Link to={'/employee/status'}>
             My Status
             </Link>
           </Menu.Item>

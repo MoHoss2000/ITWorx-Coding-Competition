@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import 'antd/dist/antd.css';
 import { List, Typography, Divider } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import ActivityListItem from './ActivityListItem';
+import PreviousActivityItem from './PreviousActivityItem';
+import { UserContext } from '../../Context';
+import { useParams } from 'react-router';
 const {Title}=Typography
 
 
-function Activities() {
-  const [activities, setActivities] = useState(null)
-  const [error, setError] = useState(false)
+function PreviousActivityMessage() {
+  const [success, setSuccess] = useState(null)
   const [loading, setLoading] = useState(true)
+  const {id} = useParams()
   
 
   useEffect(() => {
-    console.log('GETTING ACTIVITIES');
-    axios.get('http://localhost:3001/admin/Activities')
+    axios.get(`http://localhost:3001/admin/PreviousActivities/${cycleId}`)
       .then((res) => {
         setActivities(res.data)
         setLoading(false)
@@ -42,7 +43,7 @@ function Activities() {
   return (
 <div>
     
-  <h1 className="title">Activities</h1>
+  <h1 className="title">Previous Activities</h1>
     <Divider className="title-divider"/>
  { !activities ? <LoadingOutlined style={{ fontSize: 50 }} spin /> :
  <List
@@ -53,7 +54,7 @@ function Activities() {
     }}
     dataSource={activities}
     renderItem={activity => (
-      <ActivityListItem activity={activity}/>
+      <PreviousActivityItem activity={activity}/>
     )}
    /> }
 
@@ -64,4 +65,4 @@ function Activities() {
 }
 
 
-export default Activities;
+export default PreviousActivityMessage;
