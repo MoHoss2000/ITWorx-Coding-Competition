@@ -1,24 +1,20 @@
-import react ,{useEffect, useState, useContext} from 'react';
+import {useEffect, useState} from 'react';
 import axios from 'axios';
 import 'antd/dist/antd.css';
-import { UserContext } from '../../Context';
-import {Layout} from 'antd';
+import { Spin } from 'antd';
 import '../components.css';
-import Spinner from '../General/loadingSpinner';
 import CycleList from './CyclesList';
 
-
-const { Content} = Layout;
 function AdminCycleHistory() {
 
-    const [current, setCurrent] = useState([])
     const [cycles, setCycles] = useState([])
     const [error, setError] = useState(false)
-    const [loading,setLoading]=useState(true)
+    const [loading,setLoading] = useState(true)
     useEffect(() => {
         axios.get('http://localhost:3001/admin/cycles')
             .then((res) => {  
-                setCycles(res.data)         
+                setCycles(res.data)        
+                setLoading(false) 
                 })
               .catch((e) => {
                 setError(true)
@@ -27,6 +23,9 @@ function AdminCycleHistory() {
               })
     }, []);
 
+
+  if(loading)
+    return <Spin large/>
 
   if(error){
    return ( 
@@ -43,9 +42,7 @@ function AdminCycleHistory() {
   return (
     
     <div>
-      
       <CycleList cycles={cycles}/>
-
     </div>
   );
        }

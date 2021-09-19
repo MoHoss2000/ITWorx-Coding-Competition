@@ -1,28 +1,27 @@
-import React, {useState, useEffect} from 'react'
-import {Badge, Descriptions, Row, Col, Tabs, Typography, Divider, Card, Avatar} from 'antd'
+import React, {useState, useEffect, useContext} from 'react'
+import {Row, Col, Tabs, Divider, Card, Spin} from 'antd'
 import axios from 'axios'
-import Spinner from '../General/loadingSpinner'
 import '../components.css'
-import CycleInfo from '../General/CycleInfo'
 import ActivitiesDone from '../Admin/viewEmployeeCycleStatus/ActivitiesDone'
 import VirtualRecognitions from '../EmployeeProfile/VirtualRecognitions'
 import BadgesDisplay from '../BadgesDisplay'
-import {
-    BrowserRouter as Router,
-    Link, useParams
-  } from 'react-router-dom'
+import InfoCard from './InfoCard'
+import {  useParams } from 'react-router-dom'
+import EmployeePoints from '../General/EmployeePoints'
+import { UserContext } from '../../Context'
 const { TabPane } = Tabs;
-const { Title } = Typography;
 
 const MyStatus= () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
-    const {id, cycle_id} = useParams()
-
-    useEffect(() => {
+    const {id} = useContext(UserContext)
+    const cycleId = useParams().id
+    console.log(cycleId, id)
+        useEffect(() => {
         const getStatus = async () => {
-            const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${id}/${cycle_id}`))
+            const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${id}/${cycleId}`))
             console.log(data)
+           
             setData(data)
             setLoading(false)
         } 
@@ -30,18 +29,24 @@ const MyStatus= () => {
     }, [])
 
     if(loading)
-        return <Spinner/>
+        return <Spin large/>
 
     return(
         <div >
+
             <h1 className= "title"> <b>My Status </b></h1>
             <Divider className="title-divider"/> 
-                    <div className='info-tab'>
-                          <CycleInfo data={data.cycleInfo[0]} className='status-tab' />
-                     </div>
-                
-            <Tabs defaultActiveKey="1" centered>
-
+            
+         {/* <div style={{display:'flex', flexDirection:'row'}}> */}
+         <Row gutter={0,0}>
+             <Col flex="300px">
+             <EmployeePoints data={data.total_points[0]}/>
+             <InfoCard  data={data.cycleInfo[0]}/>
+            
+            </Col>
+            {/* </div> */}
+            <Col flex="auto">
+            <Tabs defaultActiveKey="1" centered style={{marginTop:'7%'}}>
                 <TabPane tab={<span style={{fontSize:'23px'}}> Activities  </span>} key="2" >
                     <div className='info-display info-tab'>
                      <Card className='activities-container'>
@@ -51,7 +56,7 @@ const MyStatus= () => {
                                 key="1"
                             >
                                 <div className='profile-components'>
-                                    <ActivitiesDone data={data.completed_activities} /> 
+                                    <ActivitiesDone data={data.completed_activities} className='activities-view'/> 
                                 </div>
                             </TabPane>
                             <TabPane
@@ -61,7 +66,7 @@ const MyStatus= () => {
                             key="2"
                             >
                                 <div className='profile-components'>
-                                <ActivitiesDone data={data.pending_activities}  /> 
+                                <ActivitiesDone data={data.pending_activities} className='activities-view' /> 
                                 </div>
                             </TabPane>
                             <TabPane
@@ -71,7 +76,7 @@ const MyStatus= () => {
                             key="3"
                             >
                                 <div className='profile-components'>
-                                <ActivitiesDone data={data.inprogress_activities}  /> 
+                                <ActivitiesDone data={data.inprogress_activities} className='activities-view' /> 
                                 </div>
                             </TabPane>
                     
@@ -95,8 +100,8 @@ const MyStatus= () => {
        
 
      </Tabs>
-
-
+             </Col>
+     </Row>  
            
 
 

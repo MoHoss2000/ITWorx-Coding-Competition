@@ -1,19 +1,15 @@
 import 'antd/dist/antd.css';
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import {useParams} from "react-router-dom";
 import EmployeeListItem from './EmployeeListItem'
 import { 
   Typography,
   List,
   Card,
-  Select, 
   Input,
-  Button,  
 } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-const { Option } = Select;
-const { Title, Text } = Typography;
+const { Title } = Typography;
 const { Search } = Input;
 
 const tabList = [

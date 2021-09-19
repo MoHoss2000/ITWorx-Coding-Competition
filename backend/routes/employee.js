@@ -12,6 +12,9 @@ router.use(express.json())
 //router.use(isEmployee)
 router.get('/badges', controllers.viewBadges)
 
+router.get('/badges', controllers.viewBadges)
+
+
 router.post('/activities/submitActivity', controllers.submitActivity)
 
 router.get('/activities/completed/:employeeID/:cycleID', controllers.viewCompletedTasks)

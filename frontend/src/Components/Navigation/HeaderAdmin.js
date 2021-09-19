@@ -17,8 +17,9 @@ function HeaderAdmin() {
               zIndex: '1000',
               left: 0,
             }}>
-       
+      
       <Menu theme="light" mode="horizontal" id="m" defaultSelectedKeys={['1']}>
+      
       <Menu.Item key="9"  onClick ={()=>{
          localStorage.clear()
          window.location.reload()
@@ -36,10 +37,11 @@ function HeaderAdmin() {
         <Menu.Item key="12" icon={<CrownOutlined/>}>Badges</Menu.Item>
 
         <Menu.Item key="13" >
-          <img id="logo" src="full.png"/>
+          
         </Menu.Item>
 
       </Menu>
+      
     </Header>
   );
 }

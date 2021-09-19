@@ -1,18 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import '../components.css';
-import { Table, Input, Button, Space, Typography, Divider } from 'antd';
+import { Table, Input, Button, Space, Divider } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined} from '@ant-design/icons';
 import axios from 'axios'
 import {
   BrowserRouter as Router,
   Link,
-  useParams
 } from 'react-router-dom'
 import { withRouter } from "react-router";
-const { Title } = Typography;
+
 
 
 class Participants extends React.Component {
@@ -22,10 +20,9 @@ class Participants extends React.Component {
     searchedColumn: '',
     loading: true,
   };
-   
-
   componentWillMount(){
       const getParticipants = async () => {
+        console.log(this.props)
           const res = (await axios.get(`http://localhost:3001/admin/cycle/participants/${this.props.match.params.id}`))
           console.log(res.data)
           for(let i = 0 ; i < res.data.length ; i++){
@@ -163,14 +160,13 @@ class Participants extends React.Component {
         key: 'status',
         render: (text, record) => (
           <Space size="middle">
-            <Link to={`/employeeStatus/${this.props.match.params.id}/${record.id}`}> 
+            <Link to={`/admin/employeeStatus/${this.props.match.params.id}/${record.id}`}> 
               View Status 
             </Link>
           </Space>
           )
       },
     ];
-     
     return(
       <div>
         <h1 className= "title"> <b> Cycle Participants </b></h1>

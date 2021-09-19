@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Card, Col, Button, Spin , Divider} from 'antd';
+import { Button, Spin , Divider} from 'antd';
 import axios from 'axios'
-// import Spinner from '../General/loadingSpinner'
 import FloatingBox from './floatingbox/FloatingBox';
 import BadgesDisplay from '../BadgesDisplay';
 

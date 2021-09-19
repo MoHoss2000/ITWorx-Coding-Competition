@@ -1,20 +1,15 @@
 import 'antd/dist/antd.css';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import {useParams} from "react-router-dom";
 import { 
   Typography,
   List,
-  Card,
-  Select, 
   Button,  
 } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-const { Option } = Select;
 const { Title, Text } = Typography;
 
 function EmployeeListItem({employee , activityId}) {
-    console.log(employee);
     //const [id]= useState(employee.id);
     const [loading, setLoading]=useState(false)
 

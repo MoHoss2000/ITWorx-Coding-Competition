@@ -39,6 +39,7 @@ import Profile from './Components/EmployeeProfile/Profile';
 import ProgressBar from './Components/HomePages/ProgressBar';
 
 
+
 function App() {
 
   const {id, type} = useContext(UserContext)
@@ -74,11 +75,10 @@ function App() {
           }}>
 
             <Switch>
-
-             
-                <PrivateRouteAdmin path='/employeeStatus' component={EmployeeCycleStatus}/>
+                <PrivateRouteAdmin path='/admin/cycles/participants/:id' component={Participants}/>
+                <PrivateRouteAdmin path='/admin/cycles' component={AdminCycleHistory}/>
+                <PrivateRouteAdmin path='/admin/employeeStatus/:id/:empId' component={EmployeeCycleStatus}/>
                 <PrivateRouteAdmin path='/adminProfile' component={AdminProfile}/>
-                <PrivateRouteAdmin path='/participants' component={Participants}/>
                 <PrivateRouteAdmin path='admin/leaderboard' component={Leaderboard}/>
                 <PrivateRouteAdmin path='/newActivity' component={CreateActivity}/>
                 <PrivateRouteAdmin path='/admin/home' component={AdminHome}/>
@@ -88,17 +88,22 @@ function App() {
                 <PrivateRouteAdmin path={'/createCycle'} component={CreateCycle}/>
                 <PrivateRouteAdmin path='/editActivity/:id' component={EditActivity}/>
                 <PrivateRouteAdmin path={'/activities/:activityId'} component={Activity}/>
-                <PrivateRouteAdmin path='/admin/cycles' component={AdminCycleHistory}/>
+                
                 <PrivateRouteAdmin path='/badges' component={Badges}/>
+                              
+                
 
                 <PrivateRouteEmployee path='/employee/home' component={EmployeeHome}/>
-                <PrivateRouteEmployee path='/myStatus' component={MyStatus}/>
                 <PrivateRouteEmployee path='/employee/leaderboard' component={Leaderboard}/>
-                <PrivateRouteEmployee path='/employee/myCycles' component={EmployeeCyclesHistory}/>
                 <PrivateRouteEmployee path='/employee-profile' component={Profile}/>
                 <PrivateRouteEmployee path='/myActivities' component={MyActivities}/>
                 <PrivateRouteEmployee path='/allActivities' component={AllActivities}/>
-                <PrivateRouteEmployee path='/progress' component={ProgressBar}/>
+                <PrivateRouteEmployee path='/progress' component={ProgressBar}/> 
+                <PrivateRouteEmployee path='/employee/cycles/:id/:empId' component={MyStatus}/>        
+                <PrivateRouteEmployee path='/employee/cycles' component={EmployeeCyclesHistory}/> 
+                <PrivateRouteEmployee path='/myActivities' component={MyActivities}/>
+              
+
              
               <Route path='/unauthorized' component={Unauthorized}/>
               <Route path='/networkError' component={NetworkError}/>

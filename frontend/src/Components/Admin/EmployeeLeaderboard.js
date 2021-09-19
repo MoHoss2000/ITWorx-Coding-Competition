@@ -1,58 +1,14 @@
-import React, {useState, useEffect} from 'react'
-import { Table, Button, Space } from 'antd';
-import axios from 'axios'
-import Spinner from '../General/loadingSpinner'
+import React, {useState} from 'react'
+import { Table } from 'antd';
 
-const EmployeeLeaderboard = ({pass, id}) => {
-    const [loading, setLoading] = useState(true)
-    const [data, setData] = useState([])
+const EmployeeLeaderboard = ({data}) => {
     const [sort, setSort] = useState({})
     const [filter, setFilter] = useState({})
 
-
-    useEffect(() => {
-        const getLeaderboard = async () => {
-            const res = (await axios.get(`http://localhost:3001/leaderboard/employee/${id}`))
-            for(let i = 0 ; i < res.data.length ; i++){
-                console.log(res.data)
-                res.data[i].key = i
-                res.data[i].rank = i + 1
-                
-                if(res.data[i].is_developer)
-                    res.data[i].developer = 'Developer'
-                else
-                    res.data[i].developer = 'Non-developer'
-                console.log(res.data[i].developer)
-            }
-            setData(res.data)
-            pass(res.data)
-            setLoading(false)
-        }
-        getLeaderboard()
-    }, [])
-    
     const handleChange = (pagination, filters, sorter) => {
         console.log('Various parameters', pagination, filters, sorter);
         setFilter(filters)
         setSort(sorter)
-    }
-
-    const clearFilters = () => {
-        setFilter({})
-    }
-
-    const clearAll = () => {
-        setFilter({})
-        setSort({})
-    }
-
-    const setPointsSort = () => {
-       setSort({
-          sort: {
-            order: 'descend',
-            columnKey: 'points',
-          },
-        })
     }
 
     const columns = [
@@ -91,11 +47,7 @@ const EmployeeLeaderboard = ({pass, id}) => {
             ellipsis: true,
 
         },
-
     ]
-
-    if(loading)
-        return <Spinner/>
         
     return (
         <>

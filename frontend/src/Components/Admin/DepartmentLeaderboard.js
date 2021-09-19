@@ -1,41 +1,14 @@
-import React, {useState, useEffect} from 'react'
-import { Table, Button, Space } from 'antd';
-import axios from 'axios'
-import Spinner from '../General/loadingSpinner'
+import React, {useState} from 'react'
+import { Table } from 'antd';
 
-const DepartmentLeaderboard = ({id}) => {
-    const [loading, setLoading] = useState(true)
-    const [data, setData] = useState([])
+
+const DepartmentLeaderboard = ({data}) => {
+
     const [sort, setSort] = useState({})
-    const [filter, setFilter] = useState({})
-
-    useEffect(() => {
-        const getLeaderboard = async () => {
-            const res = (await axios.get(`http://localhost:3001/leaderboard/department/${id}`))
-            for(let i = 0 ; i < res.data.length ; i++){
-                res.data[i].rank = i+1
-                res.data[i].key = i
-            } 
-            setData(res.data)
-            setLoading(false)
-        }
-        getLeaderboard()
-    }, [])
-    
-    const handleChange = (pagination, filters, sorter) => {
-        console.log('Various parameters', pagination, filters, sorter);
-        setFilter(filters)
+    const handleChange = (_pagination, _filters, sorter) => {
         setSort(sorter)
     }
 
-    const setPointsSort = () => {
-        setSort({
-           sort: {
-             order: 'descend',
-             columnKey: 'points',
-           },
-         })
-     }
      const columns = [
         {
             title: 'Rank',
@@ -62,9 +35,6 @@ const DepartmentLeaderboard = ({id}) => {
             ellipsis: true,
         },
     ]
-
-    if(loading)
-        return <Spinner/>
 
     return (
         <>

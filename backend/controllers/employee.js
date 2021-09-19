@@ -49,10 +49,10 @@ exports.viewBadges = async (req, res) => {
 
 exports.viewAchievements = async (req, res) => {
     const employeeId = req.id
-    const {cycleID}  = req.body
+    const { cycleID } = req.body
     let result = {}
     db.query(
-        'CALL viewEmployeeCycleVirtualRecognition(?,?)', 
+        'CALL viewEmployeeCycleVirtualRecognition(?,?)',
         [employeeId, cycleID],
         (err, queryRes) => {
             result.virtual_recognitions = queryRes[0]
@@ -66,19 +66,19 @@ exports.viewAchievements = async (req, res) => {
             )
         }
     )
-}   
-    
+}
+
 exports.viewCompletedTasks = async (req, res) => {
-    const employeeID  = parseInt(req.params.employeeID)
+    const employeeID = parseInt(req.params.employeeID)
     const cycleID = parseInt(req.params.cycleID)
-    let result 
+    let result
     db.query(
-        'CALL getCompletedActivities(?,?)', 
+        'CALL getCompletedActivities(?,?)',
         [employeeID, cycleID],
         (err, result) => {
-            if(result && result[0])
+            if (result && result[0])
                 res.send(result[0])
-            else if(err)
+            else if (err)
                 res.status(400).send(err)
             else
                 res.send([])
@@ -89,13 +89,13 @@ exports.viewCompletedTasks = async (req, res) => {
 exports.viewPendingTasks = async (req, res) => {
     const employeeID = req.id
     db.query(
-        'CALL viewPendingTasks(?)', 
+        'CALL viewPendingTasks(?)',
         [employeeID],
         (err, queryRes) => {
-            if(!err)
+            if (!err)
                 return res.json(queryRes[0])
             else
-                return res.status(400).json({err}) 
+                return res.status(400).json({ err })
         }
     )
 }
@@ -103,13 +103,13 @@ exports.viewPendingTasks = async (req, res) => {
 exports.viewToBeSubmittedTasks = async (req, res) => {
     const employeeId = req.id
     db.query(
-        'CALL viewToBeSubmittedTasks(?)', 
+        'CALL viewToBeSubmittedTasks(?)',
         [employeeId],
         (err, queryRes) => {
-            if(!err)
+            if (!err)
                 return res.json(queryRes[0])
             else
-                return res.status(400).json({err}) 
+                return res.status(400).json({ err })
         }
     )
 }
@@ -118,28 +118,28 @@ exports.viewEmployeeCycles = async (req, res) => {
     const employeeId = parseInt(req.params.employeeID)
     console.log("hi" + employeeId)
     db.query(
-        'CALL viewEmployeeCycles(?)', 
+        'CALL viewEmployeeCycles(?)',
         [employeeId],
         (err, result) => {
-            if(result && result[0])
+            if (result && result[0])
                 return res.send(result[0])
             else if (err)
-                return res.send({err}) 
-            else 
-                return res.send([])    
-        })  
+                return res.send({ err })
+            else
+                return res.send([])
+        })
 }
-           
+
 exports.viewEmployeeProfile = async (req, res) => {
     const employeeId = parseInt(req.params.id)
-    const cycleID  = parseInt(req.params.cycleID)
+    const cycleID = parseInt(req.params.cycleID)
     console.log(employeeId)
     console.log(cycleID)
     let result = {}
 
     const personalInfo = new Promise((resolve, reject) => {
         db.query('CALL getemployeeInfo(?)', employeeId, (err, result) => {
-            if(err)
+            if (err)
                 reject(err)
             else
                 resolve(result)
@@ -148,7 +148,7 @@ exports.viewEmployeeProfile = async (req, res) => {
 
     const departments = new Promise((resolve, reject) => {
         db.query('CALL viewEmployeeDepartments(?)', employeeId, (err, result) => {
-            if(err)
+            if (err)
                 reject(err)
             else
                 resolve(result)
@@ -157,16 +157,16 @@ exports.viewEmployeeProfile = async (req, res) => {
 
     const badges = new Promise((resolve, reject) => {
         db.query('CALL viewEmployeeBadges(?)', employeeId, (err, result) => {
-            if(err)
+            if (err)
                 reject(err)
             else
                 resolve(result)
         })
     })
-    
+
     const practice = new Promise((resolve, reject) => {
         db.query('CALL viewEmployeePractice(?)', employeeId, (err, result) => {
-            if(err)
+            if (err)
                 reject(err)
             else
                 resolve(result)
@@ -175,36 +175,36 @@ exports.viewEmployeeProfile = async (req, res) => {
 
     const virtual_recognitions = new Promise((resolve, reject) => {
         db.query('CALL viewEmployeeCycleVirtualRecognition(?,?)', [employeeId, cycleID], (err, result) => {
-            if(err)
+            if (err)
                 reject(err)
             else
                 resolve(result)
         })
     })
 
-    try{
+    try {
         result.personalInfo = (await personalInfo)[0]
-    }catch(e){
+    } catch (e) {
         result.personalInfo = []
     }
-    try{
+    try {
         result.badges = (await badges)[0]
-    }catch(e){
+    } catch (e) {
         result.badges = []
     }
-    try{
+    try {
         result.practice = (await practice)[0]
-    }catch(e){
+    } catch (e) {
         result.practice = []
     }
-    try{
+    try {
         result.virtual_recognitions = (await virtual_recognitions)[0]
-    }catch(e){
+    } catch (e) {
         result.virtual_recognitions = []
     }
-    try{
+    try {
         result.departments = (await departments)[0]
-    }catch(e){
+    } catch (e) {
         departments = []
     }
 
@@ -216,28 +216,28 @@ exports.viewCycleDetails = async (req, res) => {
     const cycleID = req.body.cycleID
     const employeeID = req.id
     db.query(
-        'CALL viewCycleDetailsForEmployee(?,?)', 
-        [employeeID,cycleID ],
+        'CALL viewCycleDetailsForEmployee(?,?)',
+        [employeeID, cycleID],
         (err, queryRes) => {
-            if(!err)
+            if (!err)
                 return res.json(queryRes[0])
             else
-                return res.status(400).json({err}) 
-        })   
+                return res.status(400).json({ err })
+        })
 }
 
 exports.getAssignedActivities = async (req, res) => {
-    const cycleID= req.params.cycleID
+    const cycleID = req.params.cycleID
     const employeeID = req.params.employeeID
     db.query(
-        'CALL viewEmployeeActivitiesInCycle(?,?)', 
-        [employeeID,cycleID ],
+        'CALL viewEmployeeActivitiesInCycle(?,?)',
+        [employeeID, cycleID],
         (err, queryRes) => {
-            if(!err)
+            if (!err)
                 return res.json(queryRes[0])
             else
-                return res.status(400).json({err}) 
-        })     
+                return res.status(400).json({ err })
+        })
 }
 
 exports.submitActivity = async (req, res) => {
@@ -252,40 +252,40 @@ exports.submitActivity = async (req, res) => {
                 console.log(queryRes)
                 return res.json(queryRes)}
             else
-                return res.status(400).json({err}) 
+                return res.status(400).json({ err })
         })
 }
 
 exports.getCurrentActivities = async (req, res) => {
     const employeeID = parseInt(req.params.employeeID)
     db.query(
-        'CALL viewCurrentTasks(?)', 
+        'CALL viewCurrentTasks(?)',
         [employeeID],
         (err, result) => {
-            if(result && result[0])
+            if (result && result[0])
                 return res.send(result[0])
             else if (err)
-                return res.send({err}) 
-            else 
-                return res.send([])    
-        })     
+                return res.send({ err })
+            else
+                return res.send([])
+        })
 }
 
 exports.getActvivitiesEmployee = async (req, res) => {
-    const {employeeId, cycleId}= req.query
-       if(!(employeeId && cycleId)){
+    const { employeeId, cycleId } = req.query
+    if (!(employeeId && cycleId)) {
         res.status(400).send({
-          message: "Please provide all input fields!"
+            message: "Please provide all input fields!"
         });
         return;
-       }
-   
-      db.query(`CALL getActivitiesEmployee(?,?)`,[employeeId, cycleId],(err, result) => {
-        if(result){
-          res.status(200).send(result);
+    }
+
+    db.query(`CALL getActivitiesEmployee(?,?)`, [employeeId, cycleId], (err, result) => {
+        if (result) {
+            res.status(200).send(result);
         }
-        else{
-          res.status(400).send(err);
+        else {
+            res.status(400).send(err);
         }
              
       })

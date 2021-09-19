@@ -1,13 +1,12 @@
-import React , {useState, useEffect, useContext} from 'react';
+import React , {useState, useEffect} from 'react';
 import 'antd/dist/antd.css';
-import {Divider, Row, Col, Button} from 'antd';
+import {Divider, Row, Col} from 'antd';
 import axios from 'axios'
 import '../components.css';
 import CycleInfo from '../General/CycleInfo'
 import ActivityList from '../General/ActivityList'
 import DisableSwitch from './DisableSwitch'
 import Leaderboard from './Leaderboard';
-import {UserContext} from '../../Context'
 import { useParams, Link } from 'react-router-dom';
 
 
