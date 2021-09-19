@@ -3,8 +3,6 @@ import { Button } from 'antd';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 
-
-
 export const ExportExcel = ({csvData, fileName, buttonText}) => {
     const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     const fileExtension = '.xlsx';
@@ -23,20 +21,11 @@ export const ExportExcel = ({csvData, fileName, buttonText}) => {
             SheetNames: ['Employees Leaderboard','Departments Leaderboard', 'Practice Leaderboard'] };
 
         const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-
         const data = new Blob([excelBuffer], {type: fileType});
-
         FileSaver.saveAs(data, fileName + fileExtension);
-
     }
-
-
-
     return (
-
         <Button type="primary" style={{margin: '10px'}}  onClick={(e) => exportToExcel(csvData,fileName)}>{buttonText}</Button>
-
     )
-
 }
 

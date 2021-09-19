@@ -41,7 +41,6 @@ const MyStatus= () => {
             <Divider className="title-divider"/> 
          <div style={{display:'flex', flexDirection:'row'}}>
             <InfoCard  data={data.cycleInfo[0]}/>
-            
             </div>
             <Tabs defaultActiveKey="1" centered>
 

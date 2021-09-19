@@ -5,8 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-	justify-content: center;
-	align-items:center;
+  justify-content: center;
+  align-items: center;
 }
 
 .code {
@@ -108,7 +108,6 @@ body {
   flex-direction: row;
 }
 
-
 [data-theme="dark"] .site-card-border-less-wrapper {
   background: #303030;
 }
@@ -185,7 +184,6 @@ body {
 #logo {
   width: 100px;
   position: relative;
-  
 }
 
 .gridStyle {
@@ -204,11 +202,15 @@ body {
   transition: 0.3s;
 }
 
-.cycle-list-current{
+.cycle-list-current {
   background: #b72025; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #00009073, #b72025); /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(
+    to left,
+    #00009073,
+    #b72025
+  ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #00009073, #b72025);
-  color:white;
+  color: white;
   border: transparent;
   border-bottom-right-radius: 1cm;
   margin: 0 auto;
@@ -393,80 +395,80 @@ body {
   margin: 0 auto;
 }
 
-
 /* WAVE */
 
 .ocean {
   overflow: hidden;
-    width: 100%;
-    position: relative;
-    bottom: 0;
-    left: 0;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  left: 0;
 }
 .wave {
-    background: url('https://aquaworldcruises.com/wp-content/themes/aqua-world-theme/images/wave.svg') repeat-x;
-    position: absolute;
-    bottom: 0px;
-    width: 6680px;
-    height: 128px;
-    -webkit-animation: wave 7s cubic-bezier(.36,.45,.63,.53) infinite;
-    animation: wave 7s cubic-bezier(.36,.45,.63,.53) infinite;
-    -webkit-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0)
+  background: url("https://aquaworldcruises.com/wp-content/themes/aqua-world-theme/images/wave.svg")
+    repeat-x;
+  position: absolute;
+  bottom: 0px;
+  width: 6680px;
+  height: 128px;
+  -webkit-animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
-
 @media screen and (max-width: 600px) {
-    .wave {
-        top:-75px;
-        height: 75px
-    }
+  .wave {
+    top: -75px;
+    height: 75px;
+  }
 }
 
 @-webkit-keyframes wave {
-    0% {
-        margin-left: 0
-    }
+  0% {
+    margin-left: 0;
+  }
 
-    100% {
-        margin-left: -1920px
-    }
+  100% {
+    margin-left: -1920px;
+  }
 }
 
 @keyframes wave {
-    0% {
-        margin-left: 0
-    }
+  0% {
+    margin-left: 0;
+  }
 
-    100% {
-        margin-left: -1920px
-    }
+  100% {
+    margin-left: -1920px;
+  }
 }
 
 @-webkit-keyframes swell {
-    0%,100% {
-        -webkit-transform: translate3d(0,-25px,0);
-        transform: translate3d(0,-25px,0)
-    }
+  0%,
+  100% {
+    -webkit-transform: translate3d(0, -25px, 0);
+    transform: translate3d(0, -25px, 0);
+  }
 
-    50% {
-        -webkit-transform: translate3d(0,5px,0);
-        transform: translate3d(0,5px,0)
-    }
+  50% {
+    -webkit-transform: translate3d(0, 5px, 0);
+    transform: translate3d(0, 5px, 0);
+  }
 }
 
 @keyframes swell {
-    0%,100% {
-        -webkit-transform: translate3d(0,-25px,0);
-        transform: translate3d(0,-25px,0)
-    }
+  0%,
+  100% {
+    -webkit-transform: translate3d(0, -25px, 0);
+    transform: translate3d(0, -25px, 0);
+  }
 
-    50% {
-        -webkit-transform: translate3d(0,5px,0);
-        transform: translate3d(0,5px,0)
-    }
+  50% {
+    -webkit-transform: translate3d(0, 5px, 0);
+    transform: translate3d(0, 5px, 0);
+  }
 }
-
 
 /* INFO CARD */
 
@@ -477,8 +479,6 @@ body {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-
-
 
 body .container {
   display: flex;
@@ -524,11 +524,7 @@ body .container .card .box {
     #00009073,
     #b72025
   ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to left,
-    #00009073,
-    #b72025
-  );
+  background: linear-gradient(to left, #00009073, #b72025);
   border-radius: 15px;
   display: flex;
   justify-content: center;
@@ -561,7 +557,7 @@ body .container .card .box .content h2 {
   top: -10px;
   right: 30px;
   font-size: 8rem;
-  color:rgba(255, 255, 255, 0.445)
+  color: rgba(255, 255, 255, 0.445);
 }
 
 body .container .card .box .content h3 {
@@ -595,18 +591,79 @@ body .container .card .box .content a {
 body .container .card .box .content a:hover {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
   background: #fff;
-  color:white
+  color: white;
 }
 
 .card__details {
-  color:white;
+  color: white;
   font-size: 18px;
   list-style-type: none;
-
 }
 
-
-
-
-
 /*###########################################*/
+
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300);
+
+.svg-container {
+  height: 124px;
+  position: relative;
+  width: 124px;
+}
+.svg-container h1 {
+  color: #aaa;
+  font-family: "Source Sans Pro";
+  font-size: 1.2rem;
+  left: 50%;
+  letter-spacing: 4px;
+  position: absolute;
+  text-align: center;
+  top: -60px;
+  transform: translateX(-50%);
+  width: 100%;
+}
+.circle {
+  height: 124px;
+  width: 124px;
+}
+.circle .background {
+  fill: transparent;
+  stroke: #1abc9c;
+  transition: all 200ms ease;
+}
+.circle .foreground {
+  fill: transparent;
+  stroke-dasharray: 377;
+  stroke-dashoffset: 377;
+  stroke: #ee3769;
+  transform-origin: 50% 50%;
+  transform: rotate(-270deg);
+  transition: all 800ms ease;
+}
+.circle .line {
+  stroke-width: 2;
+  stroke: #1abc9c;
+  transform-origin: 50% 50%;
+  transition: all 500ms ease;
+}
+.circle .line2 {
+  transform: rotate(-90deg);
+}
+.circle:hover {
+  cursor: pointer;
+}
+.circle:hover .background {
+  stroke: transparent;
+}
+.circle:hover .foreground {
+  stroke-dashoffset: 0;
+  transform: rotate(-90deg);
+}
+.circle:hover .line {
+  stroke: #ee3769;
+}
+.circle:hover .line {
+  transform: rotate(180deg);
+}
+.circle:hover .line2 {
+  transform: rotate(0);
+}
