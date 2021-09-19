@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import 'antd/dist/antd.css';
 
 import {Link} from 'react-router-dom'
 import {Layout, Menu} from 'antd';
 import {FileDoneOutlined, HomeOutlined, SettingOutlined, SyncOutlined, TrophyOutlined} from '@ant-design/icons';
+import { UserContext } from '../../Context';
 
 const {Sider} = Layout;
 const {SubMenu} = Menu;
@@ -11,7 +12,7 @@ const {SubMenu} = Menu;
 function EmployeeSider() {
 
   const [collapsed, SetCollapsed] = useState(true)
-
+  const {id, cycleId} = useContext(UserContext)
   const onCollapse = collapsed => {
     console.log(collapsed);
     SetCollapsed(collapsed);
@@ -44,9 +45,9 @@ function EmployeeSider() {
               </Link>
             </Menu.Item>
             <Menu.Item key="10">
-              {/* <Link to={''}> */}
-              Cycle Overview
-              {/* </Link> */}
+               <Link to={`/employee/cycles/${cycleId}/${id}`}>
+              My Status 
+               </Link> 
             </Menu.Item>
         
           </SubMenu>
@@ -60,11 +61,6 @@ function EmployeeSider() {
           <Menu.Item key="7" icon={<TrophyOutlined style={{color:'white'}}/>}>
             <Link to={'/employee/leaderboard'}>
             Leaderboard
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="12" icon={<TrophyOutlined  style={{color:'white'}}/>}>
-          <Link to={'/employee/status'}>
-            My Status
             </Link>
           </Menu.Item>
           <Menu.Item key="8" icon={<SettingOutlined style={{color:'white'}}/>}>
