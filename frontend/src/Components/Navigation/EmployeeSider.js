@@ -52,22 +52,27 @@ function EmployeeSider() {
           </SubMenu>
           <SubMenu key="sub2" icon={<FileDoneOutlined style={{color:'white'}}/>} title="Activities">
             <Menu.Item key="6">
-              {/* <Link to={'/activities'}> */}
+               <Link to={'/myActivities'}> 
                   My Activities
-                  {/* </Link> */}
+                 </Link> 
+            </Menu.Item>
+            <Menu.Item key="7">
+               <Link to={'/allActivities'}> 
+                  All Activities
+                 </Link> 
             </Menu.Item>
           </SubMenu>
-          <Menu.Item key="7" icon={<TrophyOutlined style={{color:'white'}}/>}>
+          <Menu.Item key="8" icon={<TrophyOutlined style={{color:'white'}}/>}>
             <Link to={'/employee/leaderboard'}>
             Leaderboard
             </Link>
           </Menu.Item>
-          <Menu.Item key="12" icon={<TrophyOutlined  style={{color:'white'}}/>}>
+          <Menu.Item key="9" icon={<TrophyOutlined  style={{color:'white'}}/>}>
           <Link to={'/myStatus'}>
             My Status
             </Link>
           </Menu.Item>
-          <Menu.Item key="8" icon={<SettingOutlined style={{color:'white'}}/>}>
+          <Menu.Item key="10" icon={<SettingOutlined style={{color:'white'}}/>}>
             {/*<Link>*/}
             Settings
             {/*</Link>*/}

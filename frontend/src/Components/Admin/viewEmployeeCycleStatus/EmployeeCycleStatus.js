@@ -6,7 +6,7 @@ import '../../components.css'
 import CycleInfo from '../../General/CycleInfo'
 import ActivitiesDone from './ActivitiesDone'
 import EmployeeProfile from './EmployeeProfile'
-import PersonalInfo from '../../EmployeeProfile/PersonalInfo'
+
 import VirtualRecognitions from '../../EmployeeProfile/VirtualRecognitions'
 import BadgesDisplay from '../../BadgesDisplay'
 import { useParams } from 'react-router-dom'

@@ -8,7 +8,6 @@ import CreateActivity from './Components/Admin/CreateActivity';
 import {BrowserRouter as Router, Route, Switch,} from 'react-router-dom'
 import HeaderAdmin from './Components/Navigation/HeaderAdmin';
 import SiderAdmin from './Components/Navigation/SiderAdmin';
-import EmployeeProfile from './Components/EmployeeProfile/EmployeeProfile';
 import Activity from "./Components/Admin/Activity";
 import Badges from "./Components/Admin/Badges";
 import Participants from './Components/Admin/CycleParticipants';
@@ -34,6 +33,10 @@ import {UserContext} from "./Context";
 import Unauthorized from "./Components/Unauthorized"
 import EmployeeSider from './Components/Navigation/EmployeeSider';
 import MyActivities from './Components/Employee/MyActivities';
+import AllActivities from './Components/Employee/AllActivities';
+import NetworkError from './Components/NetworkError';
+import Profile from './Components/EmployeeProfile/Profile';
+import ProgressBar from './Components/HomePages/ProgressBar';
 
 
 function App() {
@@ -90,12 +93,15 @@ function App() {
 
                 <PrivateRouteEmployee path='/employee/home' component={EmployeeHome}/>
                 <PrivateRouteEmployee path='/myStatus' component={MyStatus}/>
-                <PrivateRouteEmployee path='employee/leaderboard' component={Leaderboard}/>
-                <PrivateRouteEmployee path='/employee/myCycles' component={EmployeeCycleHistory}/>
-                <PrivateRouteEmployee path='/employee-profile' component={EmployeeProfile}/>
+                <PrivateRouteEmployee path='/employee/leaderboard' component={Leaderboard}/>
+                <PrivateRouteEmployee path='/employee/myCycles' component={EmployeeCyclesHistory}/>
+                <PrivateRouteEmployee path='/employee-profile' component={Profile}/>
                 <PrivateRouteEmployee path='/myActivities' component={MyActivities}/>
+                <PrivateRouteEmployee path='/allActivities' component={AllActivities}/>
+                <PrivateRouteEmployee path='/progress' component={ProgressBar}/>
              
               <Route path='/unauthorized' component={Unauthorized}/>
+              <Route path='/networkError' component={NetworkError}/>
               <Route path='/changePassword' component={ChangePassword}/>
               <Route path='/resetPassword/:token' component={ResetPassword}/>
               <Route path='/forgotPassword' component={ForgotPassword}/>

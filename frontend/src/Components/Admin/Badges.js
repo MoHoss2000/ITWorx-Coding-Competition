@@ -6,6 +6,7 @@ import FloatingBox from './floatingbox/FloatingBox';
 import BadgesDisplay from '../BadgesDisplay';
 
 const Badges = () => {
+    
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
     const [selectedData, setSelectedData] = useState([])
