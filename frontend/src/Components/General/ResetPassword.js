@@ -16,8 +16,8 @@ const ResetPassword = () => {
   const onFinish = async ({ currentPassword, newPassword, confirmPassword }) => {
     console.log(currentPassword, newPassword, token);
     try{
-      var res = await axios.patch('http://localhost:3001/changepassword', {
-        "oldPassword": currentPassword,
+      var res = await axios.patch('http://localhost:3001/newpassword', {
+        // "oldPassword": currentPassword,
         "newPassword": newPassword,
         "token": token,
       });
@@ -56,7 +56,7 @@ const ResetPassword = () => {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          <Form.Item
+          {/* <Form.Item
             label="Old Password"
             name="currentPassword"
             rules={[
@@ -67,7 +67,7 @@ const ResetPassword = () => {
             ]}
           >
             <Input.Password />
-          </Form.Item>
+          </Form.Item> */}
 
           <Form.Item
             label="New Password"

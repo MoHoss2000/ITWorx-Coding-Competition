@@ -15,23 +15,49 @@ function decodeResetPassToken(token) {
     }
 }
 
-exports.changePassword = async (req, res) => {
+
+exports.newPassword = async (req, res) => {
     // console.log(req);
     var resetPasswordToken = req.body.token;
+
+    var payload = decodeResetPassToken(resetPasswordToken);
+
+    if (payload == null)
+        return res.status(400).send('Invalid or expired token');
+
+    id = payload.id;
+    userType = payload.type;
+
+
+    const { newPassword } = req.body
+    
+    const findUser = userType == 'employee' ? `SELECT * FROM employee WHERE id = ${id}` :
+        `SELECT * FROM admin WHERE id = ${id}`
+
+    db.query(findUser, async (err, user) => {
+
+        const hashedPassword = user[0].password
+        const match = await bcrypt.compare(newPassword, hashedPassword)
+
+        if(match)
+            return res.status(400).send('Old password and new password have to be different')
+
+        const newHashedPassword = await bcrypt.hash(newPassword, 10)
+        const updateUser = userType === 'employee' ? `UPDATE employee SET password = ? WHERE id = ${id};`
+            : `UPDATE admin SET password = ? WHERE id = ${id};`
+
+        db.query(updateUser, newHashedPassword, (err, result) => {
+            if (result)
+                return res.status(200).send('Password changed successully!')
+            res.status(400).send(err)
+        })
+    })
+}
+
+exports.changePassword = async (req, res) => {
+    // console.log(req);
     var id = req.id
     var userType = req.userType
-
-    if (resetPasswordToken) {
-        var payload = decodeResetPassToken(resetPasswordToken);
-
-        if (payload == null)
-            return res.status(400).send('Invalid or expired token');
-
-
-        id = payload.id;
-        userType = payload.type;
-    }
-
 
     const { oldPassword, newPassword } = req.body
     if (oldPassword === newPassword)
@@ -109,24 +135,6 @@ exports.resetPassword = async (req, res) => {
     res.status(200).send({ message: 'Email sent successfully!' })
 }
 
-exports.newPassword = async (req, res) => {
-    const token = req.params.token
-    const newPassword = req.body.password
-    let updateUser
-    jwt.verify(token, process.env.Reset_Password, (err, data) => {
-        if (err)
-            return res.status(400).json({ message: "Token is incorrect or expired. Try requesting a new reset password email" })
-
-        updateUser = data.type === 'employee' ? `UPDATE Employee SET password = ? WHERE id = ${data.id};`
-            : `UPDATE Admin SET password = ? WHERE id = ${data.id};`
-    })
-    const newHashedPassword = await bcrypt.hash(newPassword, 10)
-    db.query(updateUser, newHashedPassword, (err, result) => {
-        if (err)
-            return res.status(400).json(err)
-        res.json({ message: 'Password changed successfully!' })
-    })
-}
 
 exports.register = async (req, res) => {
     // we take the input enetered by the user from the request
@@ -164,7 +172,7 @@ exports.login = async (req, res) => {
     const { username, password } = req.body;
     const getCurrentCycle = new Promise((resolve, reject) => {
         db.query('SELECT id FROM cycle WHERE current = 1', (err, result) => {
-            if(err)
+            if (err)
                 reject(err)
             else
                 resolve(result)
@@ -180,12 +188,12 @@ exports.login = async (req, res) => {
                 let User = { id: found[0][0].id, type: 'employee' }
                 const token = createToken(User)
                 return res.send({
-                    message:'Employee logged in successfully!',
+                    message: 'Employee logged in successfully!',
                     accessToken: token,
                     cycleID,
                     type: 'employee',
                     id: found[0][0].id
-            })
+                })
             }
         }
         else {
@@ -203,12 +211,12 @@ exports.login = async (req, res) => {
                             httpOnly: true,
                         });
                         return res.send({
-                            message:'Admin logged in successfully!',
+                            message: 'Admin logged in successfully!',
                             accessToken: token,
                             cycleID,
                             type: 'admin',
                             id: found[0][0].id
-                    })
+                        })
                     }
                 }
                 else
