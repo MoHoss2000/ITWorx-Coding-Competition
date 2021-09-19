@@ -20,11 +20,14 @@ const { Title } = Typography;
 const MyStatus= () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
-    const {id, cycleId} = useContext(UserContext)
+    const {id} = useContext(UserContext)
+    const cycleId = useParams().id
+    console.log(cycleId, id)
         useEffect(() => {
         const getStatus = async () => {
             const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${id}/${cycleId}`))
             console.log(data)
+           
             setData(data)
             setLoading(false)
         } 
