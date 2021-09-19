@@ -16,6 +16,7 @@ const ActivitiesDone = (props) =>{
         <Card className ={props.className} bordered={false} >
             <List
                 size="small" 
+                scroll
                 itemLayout="horizontal"
                 dataSource={props.data}
                 renderItem={item => (

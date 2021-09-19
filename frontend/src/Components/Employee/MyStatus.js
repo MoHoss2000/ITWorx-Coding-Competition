@@ -38,11 +38,17 @@ const MyStatus= () => {
 
             <h1 className= "title"> <b>My Status </b></h1>
             <Divider className="title-divider"/> 
-         <div style={{display:'flex', flexDirection:'row'}}>
-            <InfoCard  data={data.cycleInfo[0]}/>
             
-            </div>
-            <Tabs defaultActiveKey="1" centered>
+         {/* <div style={{display:'flex', flexDirection:'row'}}> */}
+         <Row gutter={0,0}>
+             <Col flex="300px">
+             <MyPoints data={data.total_points[0]}/>
+             <InfoCard  data={data.cycleInfo[0]}/>
+            
+            </Col>
+            {/* </div> */}
+            <Col flex="auto">
+            <Tabs defaultActiveKey="1" centered style={{marginTop:'7%'}}>
 
                 <TabPane tab={<span style={{fontSize:'23px'}}> Activities  </span>} key="2" >
                     <div className='info-display info-tab'>
@@ -97,8 +103,8 @@ const MyStatus= () => {
        
 
      </Tabs>
-   
-           
+             </Col>
+     </Row>  
            
 
 
