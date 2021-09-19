@@ -1,30 +1,17 @@
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-import react ,{useEffect, useState} from 'react';
+import {useState} from 'react';
 import axios from 'axios';
 import { Divider } from 'antd';
 import { SyncOutlined } from '@ant-design/icons';
 import {
-    
-    Spin, Alert, Switch,
+    Spin,
     Typography,
     DatePicker,
     Form,
     Card,
-    Input,
-    InputNumber,
-    Cascader,
-    Select,
-    Row,
-    Col,
-    Checkbox,
     Button,
-    AutoComplete,
   } from 'antd';
-  const { Option } = Select;
   const { Title } = Typography;
-  const { TextArea } = Input;
-
 
 function CreateCycle() {
 

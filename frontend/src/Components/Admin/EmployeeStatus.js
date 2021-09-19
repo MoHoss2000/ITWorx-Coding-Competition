@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import EmployeeProfile from '../EmployeeProfile/EmployeeProfile'
-import { List, Card , Button, Avatar} from 'antd';
-import Spinner from '../General/loadingSpinner'
+import { List, Card , Avatar, Spin} from 'antd';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-const EmployeeStatus = () =>{
+const EmployeeStatus = () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
     const {id, empId} = useParams()
@@ -19,6 +18,11 @@ const EmployeeStatus = () =>{
         }
         getCompletedActivities()
     }, [])
+
+  
+    if(loading)
+        return <Spin large />
+
     return(
         <div>
             <EmployeeProfile/>
@@ -44,7 +48,6 @@ const EmployeeStatus = () =>{
             )}
            
         />
-       
         </Card>
         </div>
     </div>

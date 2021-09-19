@@ -179,10 +179,6 @@ exports.login = async (req, res) => {
                 const cycleID = (await getCurrentCycle)[0].id
                 let User = { id: found[0][0].id, type: 'employee' }
                 const token = createToken(User)
-                res.cookie("token", token, {
-                    maxAge: 60 * 60 * 24 * 30 * 1000, //30 days
-                    httpOnly: true,
-                });
                 return res.send({
                     message:'Employee logged in successfully!',
                     accessToken: token,

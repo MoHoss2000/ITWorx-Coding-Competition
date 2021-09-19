@@ -1,7 +1,5 @@
-import React, {useState, useEffect} from 'react'
-import { Table, Button, Space } from 'antd';
-import axios from 'axios'
-import Spinner from '../General/loadingSpinner'
+import React, {useState} from 'react'
+import { Table } from 'antd';
 
 const EmployeeLeaderboard = ({data}) => {
     const [sort, setSort] = useState({})
@@ -49,11 +47,7 @@ const EmployeeLeaderboard = ({data}) => {
             ellipsis: true,
 
         },
-
     ]
-
-    // if(loading)
-    //     return <Spinner/>
         
     return (
         <>

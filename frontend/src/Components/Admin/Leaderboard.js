@@ -1,6 +1,6 @@
 import React , {useState, useEffect, useContext} from 'react';
 import 'antd/dist/antd.css';
-import {Tabs} from 'antd';
+import {Tabs, Spin} from 'antd';
 import axios from 'axios'
 import '../components.css';
 import { UserOutlined, UsergroupAddOutlined } from '@ant-design/icons';
@@ -74,6 +74,9 @@ function Leaderboard (){
 
         getPracticeLeaderboard()
     }, [])
+
+    if(loading)
+        return <Spin large/>
 
     return(
         <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>

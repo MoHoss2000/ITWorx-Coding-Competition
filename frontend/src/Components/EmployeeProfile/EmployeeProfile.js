@@ -1,11 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import {Badge, Descriptions, Tabs, Typography, Divider, Card, Avatar} from 'antd'
+import {Tabs, Typography, Card, Avatar, Spin} from 'antd'
 import axios from 'axios'
 import PersonalInfo from './PersonalInfo'
-import Spinner from '../General/loadingSpinner'
 import VirtualRecognitions from './VirtualRecognitions'
 import Badges from './Badges'
-import {SketchOutlined, UserOutlined} from '@ant-design/icons';
 import '../components.css'
 const { TabPane } = Tabs;
 const { Title } = Typography;
@@ -25,7 +23,7 @@ const EmployeeProfile = () => {
     }, [])
 
     if(loading)
-        return <Spinner/>
+        return <Spin large/>
 
     return(
         <div>

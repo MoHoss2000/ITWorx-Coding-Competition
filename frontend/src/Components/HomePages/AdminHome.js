@@ -1,11 +1,12 @@
-import React , {useState, useEffect} from 'react';
+import React , {useState, useEffect, useContext} from 'react';
 import 'antd/dist/antd.css';
-import { List, Card , Button, Avatar, Typography, Divider, Row, Col} from 'antd';
+import { List, Card , Button, Avatar, Typography, Divider, Row, Col, Spin} from 'antd';
 import axios from 'axios'
 import '../components.css';
 import ActivitiesDone from '../Admin/viewEmployeeCycleStatus/ActivitiesDone'
 import Clock from './Clock'
 import Leaderboard from '../Admin/Leaderboard';
+import { UserContext } from '../../Context';
 
 const { Title } = Typography;
 
@@ -15,17 +16,13 @@ function AdminHome (){
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
     const [profile, setProfile] = useState([])
+    const {id, cycleId} = useContext(UserContext)
 
     useEffect(() => {
-        const id = 1
-        const cycleID=1
         const getStatus = async () => {
-            const {data} = await (axios.get(`http://localhost:3001/admin/pending/${cycleID}`))
+            const {data} = await (axios.get(`http://localhost:3001/admin/pending/${cycleId}`))
             const profile = (await (axios.get(`http://localhost:3001/admin/profile/${id}`))).data
-            console.log(data)
-            console.log('hi')
-            console.log(profile)
-            setData(data)
+            setData(data.slice(0,3))
             setProfile(profile)
             setLoading(false)
         } 
@@ -33,13 +30,14 @@ function AdminHome (){
     }, [])
 
     if(loading)
-        return <div></div>
+        return <Spin size='large' />
     else{
     return(
         <div >  
-           
             <Row>
-                <Card className='welcome-bar'>
+                <Card className='welcome-bar ocean'>
+                    <div className='wave'> </div>
+                    <div className='wave'> </div>
                     <Row>
                         <Col>
                         <div className='avatar-block'> 
@@ -62,7 +60,7 @@ function AdminHome (){
                     </div>
                     
                 
-                      <div className='activities-home'>
+                      <div className='activities-home-container'>
                       <h4 className= "components-header"> <b> Activities waiting for you to evaluate</b></h4>
                      <ActivitiesDone data={data} className='activities-home' /> 
                      </div>

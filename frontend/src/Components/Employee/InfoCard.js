@@ -15,8 +15,8 @@ return(
     <div class="card">
       <div class="box">
         <div class="content">
-          <h2>{props.data.id}</h2>
-          <h3>Cycle </h3>
+          <h2 style={{fontSize:'100px'}}>{props.data.id}</h2>
+          <h3 style={{fontSize:'40px'}}>Cycle </h3>
            <div class="card__details">
         
            <li><b>Start Date: </b> {props.data.start_date.slice(0,10)}</li>
@@ -25,7 +25,7 @@ return(
         
         
        </div>
-          <a href="#">Read More</a>
+          
         </div>
       </div>
     </div>

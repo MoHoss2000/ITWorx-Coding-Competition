@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import {Tabs, Card, Avatar} from 'antd'
+import {Tabs, Card, Avatar, Spin} from 'antd'
 import AdminPersonalInfo from './AdminPersonalInfo';
-import Spinner from '../../General/loadingSpinner';
 const { TabPane } = Tabs;
 const AdminProfile = () => {
     const [loading, setLoading] = useState(true)
@@ -18,7 +17,7 @@ const AdminProfile = () => {
     }, [])
 
     if(loading)
-        return <Spinner/>
+        return <Spin large/>
 
     return(
         <div>

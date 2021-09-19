@@ -1,7 +1,6 @@
 import React , {useState, useEffect} from 'react';
 import 'antd/dist/antd.css';
-import { List, Card , Button, Avatar} from 'antd';
-import Spinner from '../General/loadingSpinner'
+import { List, Card , Button, Avatar, Spin } from 'antd';
 import axios from 'axios'
 import '../components.css';
 
@@ -25,7 +24,7 @@ const PendingList = () => {
     }, []);
 
     if(loading)
-        return <Spinner />
+        return <Spin large />
         
     return(
     <div className="site-card-border-less-wrapper">

@@ -1,9 +1,8 @@
-import React , {useState, useEffect} from 'react';
+import React from 'react';
 import 'antd/dist/antd.css';
-import { List, Card , Button, Avatar, Typography, Divider} from 'antd';
-import axios from 'axios'
+import { List, Card, Avatar} from 'antd';
 import '../../components.css';
-const { Title } = Typography;
+
 
 
 const ActivitiesDone = (props) =>{
@@ -16,6 +15,7 @@ const ActivitiesDone = (props) =>{
         <Card className ={props.className} bordered={false} >
             <List
                 size="small" 
+                scroll
                 itemLayout="horizontal"
                 dataSource={props.data}
                 renderItem={item => (

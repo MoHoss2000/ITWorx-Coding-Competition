@@ -55,7 +55,6 @@ function EmployeeHome (){
                         
                         </Col>
                     </Row>
-                    <div className='wave'> </div>
                 </Card>
             </Row>
             

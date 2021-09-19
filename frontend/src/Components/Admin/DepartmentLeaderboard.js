@@ -5,8 +5,6 @@ import { Table } from 'antd';
 const DepartmentLeaderboard = ({data}) => {
 
     const [sort, setSort] = useState({})
-    
-
     const handleChange = (_pagination, _filters, sorter) => {
         setSort(sorter)
     }
@@ -37,9 +35,6 @@ const DepartmentLeaderboard = ({data}) => {
             ellipsis: true,
         },
     ]
-
-    // if(loading)
-    //     return <Spinner/>
 
     return (
         <>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'antd/dist/antd.css';
-import { List, Typography, Divider } from 'antd';
+import { List, Divider } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import ActivityListItem from './ActivityListItem';
-const {Title}=Typography
+
 
 
 function Activities() {

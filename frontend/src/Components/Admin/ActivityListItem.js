@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import 'antd/dist/antd.css';
 import { Button, Card, Divider, List } from 'antd';
 import { CarryOutOutlined, SketchOutlined } from '@ant-design/icons';

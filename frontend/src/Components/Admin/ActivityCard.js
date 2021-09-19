@@ -4,7 +4,6 @@ import axios from 'axios';
 import {
   Typography,
   Card,
-  Select,
   Button,
 } from 'antd';
 import { FileDoneOutlined, SketchOutlined  } from '@ant-design/icons';
