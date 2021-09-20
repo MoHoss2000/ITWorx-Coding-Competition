@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 
 import {Link} from 'react-router-dom'
 import {Layout, Menu} from 'antd';
-import {FileDoneOutlined, HomeOutlined, SettingOutlined, SyncOutlined, TrophyOutlined} from '@ant-design/icons';
+import {FileDoneOutlined, HomeOutlined, SettingOutlined, SyncOutlined, TrophyOutlined, BoldOutlined} from '@ant-design/icons';
 import { UserContext } from '../../Context';
 
 const {Sider} = Layout;
@@ -72,7 +72,7 @@ function SiderAdmin() {
             Leaderboard
             </Link>
           </Menu.Item>
-          <Menu.Item key="12" icon={<TrophyOutlined  style={{color:'white'}}/>}>
+          <Menu.Item key="12" icon={<BoldOutlined  style={{color:'white'}}/>}>
           <Link to={'/badges'}>
             Badges
             </Link>

@@ -78,7 +78,7 @@ function App() {
               <PrivateRouteAdmin path='/admin/cycles' component={AdminCycleHistory}/>
               <PrivateRouteAdmin path='/admin/employeeStatus/:id/:empId' component={EmployeeCycleStatus}/>
               <PrivateRouteAdmin path='/adminProfile' component={AdminProfile}/>
-              <PrivateRouteAdmin path='admin/leaderboard' component={Leaderboard}/>
+              <PrivateRouteAdmin path='/admin/leaderboard' component={Leaderboard}/>
               <PrivateRouteAdmin path='/newActivity' component={CreateActivity}/>
               <PrivateRouteAdmin path='/admin/home' component={AdminHome}/>
               <PrivateRouteAdmin path={'/activities/:id'} component={Activity}/>
