@@ -1,8 +1,9 @@
 import 'antd/dist/antd.css';
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import axios from 'axios';
 import { Divider } from 'antd';
 import { SyncOutlined } from '@ant-design/icons';
+import {UserContext} from "../../Context";
 import {
     Spin,
     Typography,
@@ -10,39 +11,43 @@ import {
     Form,
     Card,
     Button,
+    Alert
   } from 'antd';
   const { Title } = Typography;
+  const { RangePicker } = DatePicker;
 
 function CreateCycle() {
 
+  const {id,cycleId}=useContext(UserContext)
     const [form] = Form.useForm();
     const [loading, setLoading]= useState(false);
-    const [message, setMessage]= useState(null);
-    const [error, setError]= useState(null);
+    const [response, setResponse]= useState({});
+    const [error, setError]= useState(false);
 
     const onSubmit  = async () => {
         
         try {
           const values = await form.validateFields();
-          const {start_date, end_date} = values;
-          setMessage(null)
-          setError(null)
+          console.log(values.dates[0].format("YYYY-MM-DD"))
+          console.log(values.dates[1].format("YYYY-MM-DD"))
+          setResponse({})
+          setError(false)
           setLoading(true);
           console.log('Success:', values);
           const post = await axios({
             method: 'post',
             url: 'http://localhost:3001/admin/newCycle',
             data: {
-                 adminID:1, 
-                 start_date:start_date.format("YYYY-MM-DD"),
-                 end_date: end_date.format("YYYY-MM-DD")
+                 adminID:id, 
+                 start_date:values.dates[0].format("YYYY-MM-DD"),
+                 end_date:values.dates[1].format("YYYY-MM-DD")
                 }
           });
-        
-          setMessage(post.data)
+         console.log(post)
+          setResponse(post.data)
           setLoading(false)
         } catch (e) {
-          setMessage(null)
+          setResponse({})
           setLoading(false)
           if(e.errorFields){
           setError("Please fill all input fields")
@@ -68,30 +73,23 @@ function CreateCycle() {
                 style={{  marginTop:'50px',marginBottom:'50px'}}>
                     
             <Form form={form} name="New Activity">
+            
+            
             <Form.Item 
-            name="start_date"
-            label="Start Date"
+            name="dates"
+            label="Cycle dates"
             rules={[
                 {
                   required: true,
-                  message: 'Please Specify start date ',
+                  message: 'Please Specify cycle dates ',
                 },
               ]}>
-                  <DatePicker />
+              <RangePicker />
             </Form.Item>
-            <Form.Item 
-            name="end_date"
-            label="End Date"
-            rules={[
-                {
-                  required: true,
-                  message: 'Please Specify end date ',
-                },
-              ]}>
-                  <DatePicker />
-            </Form.Item>
-            { message && <Title level={5} style={{ marginLeft:'120px', marginTop:'20px', color:'green'}}>{message}</Title> }
-            { error && <Title level={5} style={{  marginLeft:'120px', marginTop:'20px', color:'red'}}>{error}</Title> }
+            { response.status===0 && <Alert message={response.message} type="warning"/>}
+            { response.status===1 && <Alert message={response.message} type="success" /> }
+            {error && <Alert message={error} type="error" /> }
+
             <Button type="primary" onClick={onSubmit} style={{ marginLeft:'300px',  marginTop:'40px', width:'150px'}} >
                   Create Cycle 
             </Button>

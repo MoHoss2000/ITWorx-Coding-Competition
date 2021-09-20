@@ -8,11 +8,12 @@ import ActivityListItem from './ActivityListItem';
 function DisplayActivities ({activities}){
     console.log(activities)
 return(
-            <div>
+        <div>
             
         <h1 className="title">Activities</h1>
             <Divider className="title-divider"/>
         { !activities ? <LoadingOutlined style={{ fontSize: 50 }} spin /> :
+        <div className='activities-list'>
         <List
             itemLayout="vertical"
             size="large"
@@ -23,7 +24,9 @@ return(
             renderItem={activity => (
             <ActivityListItem activity={activity}/>
             )}
-        /> }
+           
+        /> 
+         </div>}
 
         </div>  
         )

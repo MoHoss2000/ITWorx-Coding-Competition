@@ -22,7 +22,10 @@ function EmployeeListItem({employee , activityId}) {
             return (<Button type="primary" onClick={markAsComplete} > Mark As Complete</Button>)
         }
         else {
-            return (<Button type="primary" onClick={removeCompletion} danger ghost> Remove completion</Button>)
+            return (<div style={{display:'flex', flexDirection:'column'}}>
+                      <Button type="primary" onClick={removeCompletion} danger ghost> Remove completion</Button>
+                      <Button style={{marginTop:'5px'}} type="primary"  onClick={assignEmployee} ghost> reassign</Button>
+                  </div>)
         }
     }
 
@@ -42,7 +45,7 @@ function EmployeeListItem({employee , activityId}) {
                 CycleId : 1
             }
           });
-        employee.status='A';
+        employee.status='A';      
         setLoading(false)
         console.log(assign)
        }

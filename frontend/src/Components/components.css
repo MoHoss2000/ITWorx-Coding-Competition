@@ -994,3 +994,7 @@ body {
   width: calc((100% - 2 * 6rem) / 3);
 }
 /*  */
+
+.activities-list{
+  margin: 0 auto;
+}
