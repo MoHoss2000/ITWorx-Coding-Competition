@@ -5,9 +5,6 @@ import React, { useState, useEffect } from 'react'
 //Style
 import './style.css';
 
-//Assets
-import Badge1 from '../../../assets/imgaes/badges/1.jpeg';
-
 
 const FloatingBox = ({ visible, setVisible, data, setData, newBadge }) => {
     const [newData, setNewData] = useState({})
@@ -51,31 +48,15 @@ const FloatingBox = ({ visible, setVisible, data, setData, newBadge }) => {
                                 value={newData.description} onChange={(e) => setNewData({ ...newData, description: e.target.value })}
                             ></textarea>
                         </div>
-                        <div class="dropdown">
-                            <button class="dropbtn">
-                                Country Flags
-                            </button>
+                        {/* <div className='input-container'>
+                            <label>Badge Icon: </label>
+                            <input type="radio" id="html" name="fav_language" value="HTML"/>
+                            <img src= ''/> 
+                            <input type="radio" id="html" name="fav_language" value="HTML"/>
+                            <input type="radio" id="html" name="fav_language" value="HTML"/>
+                            <input type="radio" id="html" name="fav_language" value="HTML"/>
 
-                            <div class="dropdown-content">
-                                <a href="#">
-                                    <img src=
-                                        "https://media.geeksforgeeks.org/wp-content/uploads/20200630132503/iflag.jpg"
-                                        width="20" height="15" /> India</a>
-
-                                <a href="#">
-                                    <img src=
-                                        "https://media.geeksforgeeks.org/wp-content/uploads/20200630132504/uflag.jpg"
-                                        width="20" height="15" /> USA</a>
-                                <a href="#">
-                                    <img src=
-                                        "https://media.geeksforgeeks.org/wp-content/uploads/20200630132502/eflag.jpg"
-                                        width="20" height="15" /> England</a>
-                                <a href="#">
-                                    <img src=
-                                        "https://media.geeksforgeeks.org/wp-content/uploads/20200630132500/bflag.jpg"
-                                        width="20" height="15" /> Brazil</a>
-                            </div>
-                        </div>
+                            </div> */}
                         <div className="wrapper">
                             <div className="select-container">
                                 <label >Type: </label>
