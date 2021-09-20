@@ -24,7 +24,6 @@ import EmployeeCyclesHistory from './Components/Employee/EmployeeCyclesHistory'
 import Activities from './Components/Admin/Activities'
 import ChangePassword from './Components/General/ChangePassword';
 import AdminProfile from './Components/Admin/AdminProfile/AdminProfile'
-import LoginForm from './Components/General/LoginForm';
 import ForgotPassword from './Components/General/ForgotPassword';
 import ResetPassword from './Components/General/ResetPassword';
 import PrivateRouteAdmin from './Components/Router/PrivateRouteAdmin';

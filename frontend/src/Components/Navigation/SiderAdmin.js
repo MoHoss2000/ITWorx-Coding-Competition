@@ -13,6 +13,7 @@ const {SubMenu} = Menu;
 function SiderAdmin() {
 
   const [collapsed, SetCollapsed] = useState(true)
+  const {cycleId} = useContext(UserContext)
   
   const onCollapse = collapsed => {
     console.log(collapsed);
@@ -46,12 +47,12 @@ function SiderAdmin() {
               </Link>
             </Menu.Item>
             <Menu.Item key="10">
-              <Link to={`/cycleOverview`}>
+              <Link to={`/admin/cycles/overview/${cycleId}`}>
               Cycle Overview
               </Link>
             </Menu.Item>
             <Menu.Item key="3">
-            <Link to={'/participants'}>
+            <Link to={`/admin/cycles/participants/${cycleId}`}>
               Cycle Participants
               </Link>
             </Menu.Item>
