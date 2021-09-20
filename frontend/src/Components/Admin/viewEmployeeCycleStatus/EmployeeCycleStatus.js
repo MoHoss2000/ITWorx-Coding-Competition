@@ -3,6 +3,7 @@ import {Row, Col, Tabs, Divider, Card, Spin} from 'antd'
 import axios from 'axios'
 import '../../components.css'
 import ActivitiesDone from './ActivitiesDone'
+
 import VirtualRecognitions from '../../EmployeeProfile/VirtualRecognitions'
 import BadgesDisplay from '../../BadgesDisplay'
 import { useParams } from 'react-router-dom'

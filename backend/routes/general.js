@@ -31,19 +31,14 @@ router.get('/cycle/activities/:cycleID', authenticateToken,async (req, res) => {
         }
 });
 
-// // only checks if the token is valid on page load
-// router.get('/forgetPassword', controllers.forgotPassword);
 
 router.patch('/changepassword', controllers.changePassword)
+router.patch('/newpassword', controllers.newPassword)
 
-// sends reset password to email
+
+// sends reset password link to email
 router.post('/resetPassword', controllers.resetPassword);
 
-
-// router.get('/newPassword/:token', (req, res) => {
-//     //Form to enter new Password 
-// });
-// router.post('/newPassword/:token', controllers.newPassword);
 
 
 

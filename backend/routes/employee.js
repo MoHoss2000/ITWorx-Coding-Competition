@@ -10,6 +10,7 @@ router.use(express.json())
 
 //router.use(authenticateToken)
 //router.use(isEmployee)
+router.get('/badges', controllers.viewBadges)
 
 router.get('/badges', controllers.viewBadges)
 
@@ -35,4 +36,9 @@ router.get('/assignedActivities', controllers.getAssignedActivities)
 router.get('/currentActivities/:employeeID', controllers.getCurrentActivities)
 
 router.get('/myActivities',controllers.getActvivitiesEmployee)
+
+router.get('/allActivities',controllers.getAllActivities)
+
+router.post('/assignActivity', controllers.assignEmployeeToActivity)
+
 module.exports = router

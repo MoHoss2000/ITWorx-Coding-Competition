@@ -2,8 +2,8 @@ const db = require('../db/mysql')
 
 
 exports.viewBadges = async (req, res) => {
-    var cycleID = req.body.cycleID;
-    var employeeID = 7// req.id; 
+    const {employeeId, cycleId}= req.query
+    
 
     const badges = new Promise((resolve, reject) => {
         db.query('SELECT * FROM Badge', (err, result) => {
@@ -16,11 +16,11 @@ exports.viewBadges = async (req, res) => {
     })
 
     const employeePointsInCycle = new Promise((resolve, reject) => {
-        db.query('CALL totalGainedPointsInCycle (?, ?)', [employeeID, cycleID], (err, result) => {
+        db.query('CALL totalGainedPointsInCycle (?, ?)', [employeeId, cycleId], (err, result) => {
             if (err)
                 reject(err)
             else
-                resolve(result)
+               resolve(result)
         })
     })
 
@@ -241,15 +241,16 @@ exports.getAssignedActivities = async (req, res) => {
 }
 
 exports.submitActivity = async (req, res) => {
-
-    const { activityId, cycleID, employeeId } = req.body
-
+    
+    const {activityId,  employeeId, cycleID } = req.body
+   
     db.query(
-        'CALL submitActivity(?,?,?)',
-        [activityId, employeeId, cycleID],
+        'CALL submitActivity(?,?,?)', 
+        [activityId,employeeId,cycleID],
         (err, queryRes) => {
-            if (!err)
-                return res.json(queryRes[0])
+            if(!err){
+                console.log(queryRes)
+                return res.json(queryRes)}
             else
                 return res.status(400).json({ err })
         })
@@ -286,8 +287,50 @@ exports.getActvivitiesEmployee = async (req, res) => {
         else {
             res.status(400).send(err);
         }
+             
+      })
+    
+  }
+  exports.getAllActivities = async (req, res) => {
+    const {employeeId, cycleId}= req.query
+       if(!(employeeId && cycleId)){
+        res.status(400).send({
+          message: "Please provide all input fields!"
+        });
+        return;
+       }
+   
+      db.query(`CALL getAllActivities(?,?)`,[employeeId, cycleId],(err, result) => {
+        if(result){
+          res.status(200).send(result);
+        }
+        else{
+          res.status(400).send(err);
+        }
+             
+      })
+    
+  }
+  exports.assignEmployeeToActivity= async (req, res) => {
 
-    })
+    const { EmployeeId , ActivityId , CycleId } = req.body
 
+    if(!(EmployeeId && ActivityId && CycleId)){
+
+      res.status(400).send({
+          message: "Please provide all input fields!"
+        })
+        return
 }
+  const employeeActivity=[EmployeeId, ActivityId, CycleId]
 
+   db.query('CALL enrollInActivity(?,?,?);', employeeActivity ,(err, result) => {
+    if(result){
+        res.status(200).json('You have Successfully enrolled in this activity');    
+    }
+    else{
+      res.status(400).send(err)
+    }
+  })
+  
+}

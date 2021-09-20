@@ -7,6 +7,7 @@ import * as yup from 'yup'
 import Axios from 'axios';
 import {UserContext} from "../../Context";
 import {useHistory} from 'react-router-dom';
+import {Redirect, Route} from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -21,7 +22,7 @@ const LoginForm = () => {
 
   const history = useHistory()
 
-  const {targetPath, setId, setToken, setCycleId, setType} = useContext(UserContext);
+  const {type, targetPath, setId, setToken, setCycleId, setType} = useContext(UserContext);
 
   const {register, handleSubmit, formState: {errors}} = useForm({
     resolver: yupResolver(schema),
@@ -48,10 +49,16 @@ const LoginForm = () => {
 
 
     }).catch((e) => {
-
+        console.log(e)
     })
   }
 
+  if(type==='employee'){
+    <Redirect to={'/employee/home'}/>
+  }
+  else if(type==='admin'){
+    <Redirect to={'/admin/home'}/>
+  }
   return (
     <Grid>
       <Paper elevation={10} style={paperStyle} onSubmit={handleSubmit(submitForm)}>
@@ -70,7 +77,7 @@ const LoginForm = () => {
                 fullWidth>Sign in</Button>
 
         <Typography>
-          <Link href="#">Forgot password ? </Link>
+          <Link href="/forgotpassword">Forgot password ? </Link>
         </Typography>
 
         <Typography>Do you have an account ?
