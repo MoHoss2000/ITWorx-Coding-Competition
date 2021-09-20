@@ -77,7 +77,7 @@ const LoginForm = () => {
                 fullWidth>Sign in</Button>
 
         <Typography>
-          <Link href="#">Forgot password ? </Link>
+          <Link to='/forgotPassword'> Forgot password ? </Link>
         </Typography>
 
         <Typography>Do you have an account ?

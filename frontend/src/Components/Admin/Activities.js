@@ -1,24 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'antd/dist/antd.css';
-import { List, Divider } from 'antd';
+import { List, Divider, Card ,Spin, Input} from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import ActivityListItem from './ActivityListItem';
+import NetworkError from '../NetworkError';
+import Activity from './Activity';
+const { Search } = Input;
 
 
 
 function Activities() {
   const [activities, setActivities] = useState(null)
+  const [displayed, setDisplayed] = useState(null)
   const [error, setError] = useState(false)
-  const [loading, setLoading] = useState(true)
+  
+  
+  const onSearch = (value) => {
+
+    
+    const filteredActivities  = activities.filter((activity) => {
+      console.log(activity)
+      
+        const searchValue= value.toLowerCase();
+        if(activity.name.toLowerCase().includes(searchValue)){
+          return activity
+        }   
+        })
+    setDisplayed(filteredActivities)
+
+  };
   
 
   useEffect(() => {
-    console.log('GETTING ACTIVITIES');
+   
     axios.get('http://localhost:3001/admin/Activities')
       .then((res) => {
         setActivities(res.data)
-        setLoading(false)
+        setDisplayed(res.data)
+        
       })
       .catch((e) => {
         setError(true)
@@ -28,15 +48,10 @@ function Activities() {
 
   }, []);
   if (error) {
-    return (
-      <div>
-        <h1> ACTIVITIES</h1>
-        <h3>Error fetching data</h3>
-      </div>
-    )
+    return (<NetworkError/>)
   }
-  if (activities === []) {
-    return <p>Loading</p>
+  if (displayed ===null) {
+    return <Spin size='large'/>
   }
 
   return (
@@ -44,24 +59,20 @@ function Activities() {
     
   <h1 className="title">Activities</h1>
     <Divider className="title-divider"/>
- { !activities ? <LoadingOutlined style={{ fontSize: 50 }} spin /> :
+  <Card  extra={<Search placeholder="search Activities" onSearch={onSearch} style={{ width: 200 }} /> }>
  <List
     itemLayout="vertical"
     size="large"
     pagination={{
-      pageSize: 5,
+      pageSize: 10,
     }}
-    dataSource={activities}
+    dataSource={displayed}
     renderItem={activity => (
       <ActivityListItem activity={activity}/>
     )}
-   /> }
-
-</div>  
-    
-    
+   /> 
+   </Card>
+</div>      
   );
 }
-
-
 export default Activities;

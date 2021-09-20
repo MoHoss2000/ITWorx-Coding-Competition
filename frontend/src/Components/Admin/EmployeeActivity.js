@@ -12,32 +12,33 @@ import { UserOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 const { Search } = Input;
 
-const tabList = [
+const tabList = [  
     {
-      key: 'All Employees',
-      tab: 'All Employees',
+      key: 'Assigned',
+      tab: 'Assigned',
     },
     {
       key: 'Pending',
       tab: 'Pending',
     },
     {
-      key: 'Assigned',
-      tab: 'Assigned',
-    },
-    {
       key: 'Completed',
       tab: 'Completed',
     },
+    {
+      key: 'All Employees',
+      tab: 'All Employees',
+    }
   ];
 
-function EmployeeActivity({id}) {
+function EmployeeActivity({id, setError }) {
+  
   
   const [employees, setEmployees] = useState(null)
   const[displayed , setDisplayed ]=useState(null)
-  const [tab, setTab]=useState('All Employees')
+  const [tab, setTab]=useState('Assigned')
   const [ loading, setLoading ] = useState(true)
-  const [error, setError] = useState(null)
+ 
   
   const onTabChange= async (key) =>{
 
@@ -88,15 +89,12 @@ function EmployeeActivity({id}) {
       }).then((res) => {
       console.log(res.data[0])
       setEmployees(res.data[0])
-      setDisplayed(res.data[0])
+      setDisplayed(res.data[0].filter((employee)=> employee.status==='A'))
       setLoading(false)
       
     })
       .catch((e) => {
-        setError("Oops there seems to be a problem connecting to the network")
-        console.log(e)
-
-
+        setError(false)
       })
 
   }, []);
@@ -131,11 +129,11 @@ function EmployeeActivity({id}) {
     itemLayout="vertical"
     size="large"
     pagination={{
-      pageSize: 3,
+      pageSize: 5,
     }}
     dataSource={displayed}
     renderItem={employee => (
-      <EmployeeListItem employee={employee} activityId={id}/>
+      <EmployeeListItem employee={employee} activityId={id} />
     )}
   />
     </Card>
