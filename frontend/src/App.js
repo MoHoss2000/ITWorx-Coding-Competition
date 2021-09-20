@@ -46,15 +46,13 @@ function App() {
   return (
     <Router>
       <Layout>
-        <Layout>
-          <Layout style={{
+        <Layout style={{
             // height: '50px',
-            display: 'flex',
-            textAlign: 'right',
-            width: "100%"
-          }}>
+            padding: "0px",
+            width: "100%"}}>
+          
             {id && <HeaderAdmin/>}
-          </Layout>
+          
         </Layout>
         <Layout style={{display: 'flex', flexDirection: 'row', overflow: 'hidden', height: 'calc(100vh - 64px)'}}>
 

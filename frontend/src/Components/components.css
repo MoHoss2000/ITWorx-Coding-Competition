@@ -1,6 +1,4 @@
-#my {
-  zoom: 75%;
-}
+
 
 body {
   margin: 0;
@@ -52,22 +50,25 @@ body {
   background: #fff;
 }
 #menu {
-  margin-top: 60px;
+  margin-top: 50px;
   background-color: transparent;
 }
 
 #header {
   background-color: white;
   justify-content: flex-end;
+  display: flex;
 }
 
 #m {
   right: 10%;
   display: flex;
   flex-direction: row-reverse;
-  background-color: transparent;
+  background-color:transparent;
   border-color: transparent;
   height: 100%;
+  width:97%
+  
 }
 
 .code-box-demo p {
@@ -191,7 +192,11 @@ body {
   width: 100px;
   position: relative;
 }
-
+.logo {
+  width:140px;
+  height:40px;
+  position: relative;
+}
 .gridStyle {
   width: "600px";
 }

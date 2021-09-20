@@ -17,7 +17,12 @@ function HeaderAdmin() {
               zIndex: '1000',
               left: 0,
             }}>
+      <div style={{display: 'flex', flexDirection:'row-reverse'}}>
       
+      <img src='full.png' className='logo'/>
+ 
+  </div>
+     
       <Menu theme="light" mode="horizontal" id="m" defaultSelectedKeys={['1']}>
       
       <Menu.Item key="9"  onClick ={()=>{
@@ -25,7 +30,7 @@ function HeaderAdmin() {
          window.location.reload()
       }} >
         <Link to='/'>
-          <LogoutOutlined/>
+          <LogoutOutlined />
         </Link>
          </Menu.Item>       
         <Menu.Item key="10">
@@ -33,14 +38,10 @@ function HeaderAdmin() {
             style={{backgroundColor: '#87d068',}}
             icon={<UserOutlined/>}/>
         </Menu.Item>
-        <Menu.Item key="11" icon={<SketchOutlined/>}>Points</Menu.Item>
-        <Menu.Item key="12" icon={<CrownOutlined/>}>Badges</Menu.Item>
-
-        <Menu.Item key="13" >
-          
-        </Menu.Item>
+       
 
       </Menu>
+      
       
     </Header>
   );
