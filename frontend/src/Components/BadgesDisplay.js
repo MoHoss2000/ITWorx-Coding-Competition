@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Card, Col, Button, Spin } from 'antd';
 import axios from 'axios'
+import badge_icons, { getBadgeIcon } from '../Helpers/badge_icons';
 
 // span determines no of badges in each row of the grid:
 // span value | no of columns
@@ -51,7 +52,7 @@ const BadgesDisplay = ({data, setVisible, setSelectedData,
                         <Card style={{ borderRadius: 40 ,backgroundColor: badge.enabled ? '#ffffff' : '#E7E7E7' }} hoverable='true' actions={
                             adminMode ? [<EditBadgeButton badge={badge} />, <ToggleBadgeStatus badge={badge} />] : null} headStyle={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }} title={<h2>{badge.name}</h2>}>
                             <div style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
-                                <img width='100' height='100' src='/badge.png'></img>
+                                <img width='100' height='100' src={getBadgeIcon(badge.points_needed)}></img>
                                 <h1>{badge.type == 'developers' ? 'Developers' : 'All Employees'}</h1>
 
                                 <h5>{badge.description}</h5>
