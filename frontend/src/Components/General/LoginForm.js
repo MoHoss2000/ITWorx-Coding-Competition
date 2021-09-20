@@ -53,10 +53,10 @@ const LoginForm = () => {
     })
   }
 
-  if(type==='employee'){
+  if(type === 'employee'){
     <Redirect to={'/employee/home'}/>
   }
-  else if(type==='admin'){
+  else if(type === 'admin'){
     <Redirect to={'/admin/home'}/>
   }
   return (

@@ -587,6 +587,18 @@ body .container .card .box .content p {
   transition: 0.5s;
 }
 
+.login {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+  width: 60%;
+  margin: 0 auto;
+  /* background-image: url("../login.jpeg"); */
+}
+
+.login-form {
+  padding: 100px 50px 100px 100px;
+  width: 70%;
+}
+
 body .container .card .box .content a {
   position: relative;
   display: inline-block;
