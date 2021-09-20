@@ -5,6 +5,9 @@ import React, { useState, useEffect } from 'react'
 //Style
 import './style.css';
 
+//Assets
+import Badge1 from '../../../assets/imgaes/badges/1.jpeg';
+
 
 const FloatingBox = ({ visible, setVisible, data, setData, newBadge }) => {
     const [newData, setNewData] = useState({})
@@ -13,6 +16,7 @@ const FloatingBox = ({ visible, setVisible, data, setData, newBadge }) => {
         setNewData({
             name: data ? data.name : "",
             description: data ? data.description : "",
+            icon: data ? data.icon : 0,
             type: data ? data.type : "all",
             points_needed: data ? data.points_needed : 0,
             enabled: data ? data.enabled : 1
@@ -20,8 +24,8 @@ const FloatingBox = ({ visible, setVisible, data, setData, newBadge }) => {
     }, [data]
     )
 
-    
-     
+
+
     return (
         visible && (
             <form onSubmit={e => { e.preventDefault(); }} name='badge-form'>
@@ -46,6 +50,31 @@ const FloatingBox = ({ visible, setVisible, data, setData, newBadge }) => {
                             <textarea name='description' type="textarea" required
                                 value={newData.description} onChange={(e) => setNewData({ ...newData, description: e.target.value })}
                             ></textarea>
+                        </div>
+                        <div class="dropdown">
+                            <button class="dropbtn">
+                                Country Flags
+                            </button>
+
+                            <div class="dropdown-content">
+                                <a href="#">
+                                    <img src=
+                                        "https://media.geeksforgeeks.org/wp-content/uploads/20200630132503/iflag.jpg"
+                                        width="20" height="15" /> India</a>
+
+                                <a href="#">
+                                    <img src=
+                                        "https://media.geeksforgeeks.org/wp-content/uploads/20200630132504/uflag.jpg"
+                                        width="20" height="15" /> USA</a>
+                                <a href="#">
+                                    <img src=
+                                        "https://media.geeksforgeeks.org/wp-content/uploads/20200630132502/eflag.jpg"
+                                        width="20" height="15" /> England</a>
+                                <a href="#">
+                                    <img src=
+                                        "https://media.geeksforgeeks.org/wp-content/uploads/20200630132500/bflag.jpg"
+                                        width="20" height="15" /> Brazil</a>
+                            </div>
                         </div>
                         <div className="wrapper">
                             <div className="select-container">
@@ -97,7 +126,7 @@ const FloatingBox = ({ visible, setVisible, data, setData, newBadge }) => {
                         </div>
                     </div>
                 </div>
-            </form>
+            </form >
         )
 
     )
