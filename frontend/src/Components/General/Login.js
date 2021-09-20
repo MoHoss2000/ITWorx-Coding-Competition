@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
-import { Form, Input, Button, Alert, Row, Col } from 'antd';
+import { Form, Input, Button, Alert, Row, Col , Avatar} from 'antd';
 import { Link, Redirect, useHistory } from 'react-router-dom';
+import { UserOutlined } from '@ant-design/icons';
 import { UserContext } from '../../Context';
 import Axios from 'axios';
 import { Card } from '@material-ui/core';
@@ -42,12 +43,16 @@ const Login = () => {
      <Redirect to={'/admin/home'}/>
 
   return (
-    <div className="login">
+    <div className='login-background' > 
+    <div className="login" >
+    <div className='avatar-login'>
+         <Avatar size={120} style ={{backgroundColor: 'black'}} icon={<UserOutlined />} />
+    </div>
     <Form
       className="login-form"
       name="basic"
       labelCol={{
-        span: 8,
+        span: 6,
       }}
       wrapperCol={{
         span: 16,
@@ -88,8 +93,8 @@ const Login = () => {
 
       <Form.Item
         wrapperCol={{
-          offset: 8,
-          span: 16,
+          offset: 11,
+          span: 4,
         }}
       >
         <Button type="primary" htmlType="submit">
@@ -99,7 +104,7 @@ const Login = () => {
 
       <Form.Item
         wrapperCol={{
-          offset: 8,
+          offset: 10,
           span: 16,
         }}
       >
@@ -120,6 +125,7 @@ const Login = () => {
         null
     }
     </Form> 
+    </div>
     </div>
   );
 };

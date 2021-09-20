@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import {Card, Typography, List, Spin, Space} from 'antd';
+import {Card, Typography, List, Spin, Space, Divider} from 'antd';
 import React, {useContext, useEffect, useState} from 'react';
 import {UserContext} from "../../Context";
 import axios from 'axios';
@@ -26,8 +26,9 @@ const tabList = [
     tab: 'Completed',
   },
 ];
-const MyActivities = () => {
-
+const MyActivities = ({divider}) => {
+  
+  divider = divider ==undefined
   const context = useContext(UserContext)
   const [activities,setActivities]=useState(null)
   const [activity,setActivity]=useState(null)
@@ -51,7 +52,7 @@ const MyActivities = () => {
   }
 
   }
-  
+
   useEffect(() => {
      const {id, cycleId} = context;
       if (!id) {
@@ -95,12 +96,21 @@ const MyActivities = () => {
 
   return (
     <div>
+      { divider ?
+      <div>
+       <h1 className="title"> My Activities</h1>
+        <Divider className="title-divider"/>
+      </div>
+      : null
+      }
+      
+
     <Card
-      style={{marginLeft: '10%', marginRight: '10%'}}
+      style={{margin: '50px 150px 50px 150px', boxShadow: '10px 8px 20px 0 #b720259d'}}
       tabList={tabList}
       activeTabKey={tab}
       onTabChange={key => { onTabChange(key)}}
-      title={title}>
+      >
       
     <List
     itemLayout="vertical"

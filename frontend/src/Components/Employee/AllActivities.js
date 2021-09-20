@@ -53,7 +53,7 @@ function AllActivities() {
   <h1 className="title">Activities</h1>
     <Divider className="title-divider"/>
 
-  <Card  >
+  <Card style={{margin: '50px', boxShadow: '10px 8px 20px 0 #b720259d'}} >
   <List
     itemLayout="vertical"
     size="large"
