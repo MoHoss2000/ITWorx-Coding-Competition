@@ -3,6 +3,7 @@ import 'antd/dist/antd.css';
 import { List, Card , Button, Avatar, Typography, Divider, Row, Col, Spin} from 'antd';
 import axios from 'axios'
 import '../components.css';
+import PendingOverview from '../Admin/PendingOverview'
 import ActivitiesDone from '../Admin/viewEmployeeCycleStatus/ActivitiesDone'
 import Clock from './Clock'
 import Leaderboard from '../Admin/Leaderboard';
@@ -62,7 +63,7 @@ function AdminHome (){
                 
                       <div className='activities-home-container'>
                       <h4 className= "components-header"> <b> Activities waiting for you to evaluate</b></h4>
-                     <ActivitiesDone data={data} className='activities-home' /> 
+                     <PendingOverview data={data} className='activities-home' /> 
                      </div>
                 </div>
             </Row>

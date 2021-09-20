@@ -24,7 +24,6 @@ import EmployeeCyclesHistory from './Components/Employee/EmployeeCyclesHistory'
 import Activities from './Components/Admin/Activities'
 import ChangePassword from './Components/General/ChangePassword';
 import AdminProfile from './Components/Admin/AdminProfile/AdminProfile'
-import LoginForm from './Components/General/LoginForm';
 import ForgotPassword from './Components/General/ForgotPassword';
 import ResetPassword from './Components/General/ResetPassword';
 import PrivateRouteAdmin from './Components/Router/PrivateRouteAdmin';
@@ -74,13 +73,13 @@ function App() {
 
             <Switch>
               <PrivateRouteAdmin path='/admin/cycles/participants/:id' component={Participants}/>
+              <PrivateRouteAdmin path='/admin/cycles/overview/:id' component={CycleOverview}/>
               <PrivateRouteAdmin path='/admin/cycles' component={AdminCycleHistory}/>
               <PrivateRouteAdmin path='/admin/employeeStatus/:id/:empId' component={EmployeeCycleStatus}/>
               <PrivateRouteAdmin path='/adminProfile' component={AdminProfile}/>
-              <PrivateRouteAdmin path='admin/leaderboard' component={Leaderboard}/>
+              <PrivateRouteAdmin path='/admin/leaderboard' component={Leaderboard}/>
               <PrivateRouteAdmin path='/newActivity' component={CreateActivity}/>
               <PrivateRouteAdmin path='/admin/home' component={AdminHome}/>
-              <PrivateRouteAdmin path='/cycleOverview' component={CycleOverview}/>
               <PrivateRouteAdmin path={'/activities/:id'} component={Activity}/>
               <PrivateRouteAdmin path='/activities' component={Activities}/>
               <PrivateRouteAdmin path={'/createCycle'} component={CreateCycle}/>
@@ -104,7 +103,7 @@ function App() {
               <Route path='/resetPassword/:token' component={ResetPassword}/>
               <Route path='/forgotPassword' component={ForgotPassword}/>
               <Route exact path='/' component={Login}/>
-              <Route exact path='/' component={LoginForm}/>
+              
               <Route component={NotFound404}/>
 
 

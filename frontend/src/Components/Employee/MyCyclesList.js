@@ -23,7 +23,7 @@ const CycleList = (props) =>{
       ) 
     );
   }, [searchTerm]);
-  
+
   return( 
    <div>
       <h1 className= "title"> <b> My Cycles History </b></h1>
@@ -37,8 +37,8 @@ const CycleList = (props) =>{
         placeholder="Search Cycle By Date"
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-    </div>
-     <div style={{display:'flex', flexWrap:'wrap'}}> 
+    </div >
+     <div style={{display:'flex', flexWrap:'wrap', marginLeft:'30px'}}> 
       {
        filteredCycles.map ( ({cycle_id, start_date, end_date}) => {
         if (cycle_id == cycleId){

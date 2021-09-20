@@ -1,6 +1,6 @@
 import React , {useState, useEffect} from 'react';
 import 'antd/dist/antd.css';
-import {Divider, Row, Col} from 'antd';
+import {Divider, Row, Col, Button} from 'antd';
 import axios from 'axios'
 import '../components.css';
 import InfoCard from '../Employee/InfoCard'
@@ -41,7 +41,7 @@ function CycleOverview (){
            <Row align='top'>
                 <Col flex="320px"> 
 
-                <Link to={`/admin/cycles/participants/${id}`}> View Cycle Participants </Link>
+                <Button style={{marginLeft: '15%'}} type="primary"><Link to={`/admin/cycles/participants/${id}`}> View Cycle Participants </Link></Button>
                  <InfoCard data={data}/> 
                  </Col>
                  <Col flex="auto">

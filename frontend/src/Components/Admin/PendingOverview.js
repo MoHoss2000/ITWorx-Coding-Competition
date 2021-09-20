@@ -2,6 +2,7 @@ import React , {useState, useEffect} from 'react';
 import 'antd/dist/antd.css';
 import { List, Card , Button, Avatar, Spin } from 'antd';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 import '../components.css';
 
 const PendingList = () => {
@@ -28,28 +29,28 @@ const PendingList = () => {
         
     return(
     <div className="site-card-border-less-wrapper">
-    <Card className ="activities-card" bordered={false} loading={loading}
-          title={<span style={{"marginLeft": "285px", "fontSize": "20px", "color": "rgb(0, 153, 204)" }}> Pedning Activities</span>} >
+    <Card bordered={false} loading={loading}
+           >
         <List
             size="small"
             itemLayout="horizontal"
             dataSource={data}
             renderItem={item => (
             <List.Item
-                actions={[<a key="list-loadmore-more">View Activity</a>]}
+            actions={[<Link to={`/activities/${item.id}`}> View Activity </Link>]}
             >
                 <List.Item.Meta
                 avatar={
-                    <Avatar src="./activity.png" />
+                    <Avatar src="/activity.png" />
                   }
-                title={<a href="https://ant.design">{item.title}</a>}
+                
                 description= {item.description}
                 />
             </List.Item>
             )}
            
         />
-        <Button type="primary" className="view-all-button"> View All Pending Activities</Button>
+        
     </Card>
     </div>
     )
