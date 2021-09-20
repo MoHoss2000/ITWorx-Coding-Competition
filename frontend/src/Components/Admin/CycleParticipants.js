@@ -10,6 +10,7 @@ import {
   Link,
 } from 'react-router-dom'
 import { withRouter } from "react-router";
+import { ExportParticipants } from './ExportParticipants';
 
 
 
@@ -19,6 +20,7 @@ class Participants extends React.Component {
     searchText: '',
     searchedColumn: '',
     loading: true,
+    filteredData: []
   };
   componentWillMount(){
       const getParticipants = async () => {
@@ -35,8 +37,18 @@ class Participants extends React.Component {
         }
           this.setState({data:res.data})
           this.setState({loading:false})
+          let filteredData = []
+
+          for(let i = 0 ; i < this.state.data.length ; i++){
+            const {id, first_name, last_name, developer} = this.state.data[i]
+            filteredData[i] = {id, name: first_name + " " + last_name, Job_type: developer}
+            
+          }
+          this.setState({filteredData})
       }
       getParticipants()
+      
+
 
   }
   getColumnSearchProps = dataIndex => ({
@@ -133,21 +145,6 @@ class Participants extends React.Component {
         key: 'name',
         width: '25%',
         ...this.getColumnSearchProps('name'),
-       
-      },
-      {
-        title: 'Points',
-        dataIndex: 'points',
-        key: 'points',
-        sorter: (a, b) => a.points - b.points,
-        sortDirections: ['descend', 'ascend'],
-        ...this.getColumnSearchProps('points'),
-      },
-      {
-        title: 'Job Type',
-        dataIndex: 'developer',
-        key: 'developer',
-        ...this.getColumnSearchProps('developer'),
       },
       {
         title: 'Job Type',
@@ -172,6 +169,9 @@ class Participants extends React.Component {
         <h1 className= "title"> <b> Cycle Participants </b></h1>
         <Divider className="title-divider"/>
         <Table loading ={this.state.loading} columns={columns}  dataSource={this.state.data} />
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+        <ExportParticipants csvData={this.state.filteredData} fileName="Cycle Participants" buttonText="Download Cycle Participants"/>
+        </div>
       </div>);
   }
 }

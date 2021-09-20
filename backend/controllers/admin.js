@@ -583,7 +583,6 @@ exports.editActivity= async (req, res) => {
     if (!cycleID ) 
       return res.status(400).send({message: "Please specify activity name or ID"})
   
-    
     db.query('CALL getPendingActivities(?)', [cycleID],(err, result) => {
       if(result && result[0])
           res.status(200).send(result[0]);    

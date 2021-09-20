@@ -24,8 +24,6 @@ router.get('/viewActivity', controllers.activityInfo)
 
 router.get('/viewEmployeeActivity', controllers.getEmployeesActivity)
 
-router.get('/pending', controllers.pendingActivities)
-
 router.get('/pending/:cycleID', controllers.pendingActivities)
 
 router.post('/newActivity', controllers.createNewActivity)

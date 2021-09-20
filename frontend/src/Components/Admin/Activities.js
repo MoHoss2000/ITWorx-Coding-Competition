@@ -6,6 +6,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import ActivityListItem from './ActivityListItem';
 import NetworkError from '../NetworkError';
 import Activity from './Activity';
+import DisplayActivities from './DisplayActivities';
 const { Search } = Input;
 
 
@@ -55,24 +56,9 @@ function Activities() {
   }
 
   return (
-<div>
+
+    <DisplayActivities activities={activities} />
     
-  <h1 className="title">Activities</h1>
-    <Divider className="title-divider"/>
-  <Card  extra={<Search placeholder="search Activities" onSearch={onSearch} style={{ width: 200 }} /> }>
- <List
-    itemLayout="vertical"
-    size="large"
-    pagination={{
-      pageSize: 10,
-    }}
-    dataSource={displayed}
-    renderItem={activity => (
-      <ActivityListItem activity={activity}/>
-    )}
-   /> 
-   </Card>
-</div>      
   );
 }
 export default Activities;

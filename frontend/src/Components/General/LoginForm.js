@@ -53,10 +53,10 @@ const LoginForm = () => {
     })
   }
 
-  if(type==='employee'){
+  if(type === 'employee'){
     <Redirect to={'/employee/home'}/>
   }
-  else if(type==='admin'){
+  else if(type === 'admin'){
     <Redirect to={'/admin/home'}/>
   }
   return (
@@ -77,7 +77,7 @@ const LoginForm = () => {
                 fullWidth>Sign in</Button>
 
         <Typography>
-          <Link to='/forgotPassword'> Forgot password ? </Link>
+          <Link href="/forgotpassword">Forgot password ? </Link>
         </Typography>
 
         <Typography>Do you have an account ?

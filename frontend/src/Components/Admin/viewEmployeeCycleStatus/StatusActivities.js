@@ -1,11 +1,15 @@
-import React from 'react';
+import React , {useState} from 'react';
 import 'antd/dist/antd.css';
 import { List, Card, Avatar} from 'antd';
 import '../../components.css';
-
+import { Link } from 'react-router-dom';
+import ActivityListItem from '../../Employee/ActivityListItem'
+import ActivityCard from '../../Employee/ActivityCard'
 
 
 const ActivitiesDone = (props) =>{
+    const [activity,setActivity]=useState(null)
+    const [isModalVisible, setIsModalVisible] = useState(false);
     console.log(props.data)
 
 
@@ -19,8 +23,9 @@ const ActivitiesDone = (props) =>{
                 itemLayout="horizontal"
                 dataSource={props.data}
                 renderItem={item => (
+                    
                 <List.Item
-                    actions={[<a key="list-loadmore-more">View Activity</a>]}
+                    actions={[<Link to={`/activities/${item.id}`}> View Activity </Link>]}
                 >
                     <List.Item.Meta
                     avatar={
@@ -34,6 +39,7 @@ const ActivitiesDone = (props) =>{
                
             />
         </Card>
+        <ActivityCard activity={activity} isModalVisible={isModalVisible}  setIsModalVisible={setIsModalVisible}/>
         </div>
         )
 }

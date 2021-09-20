@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 
 import {Link} from 'react-router-dom'
 import {Layout, Menu} from 'antd';
-import {FileDoneOutlined, HomeOutlined, SettingOutlined, SyncOutlined, TrophyOutlined} from '@ant-design/icons';
+import {FileDoneOutlined, HomeOutlined, SettingOutlined, SyncOutlined, TrophyOutlined, BoldOutlined} from '@ant-design/icons';
 import { UserContext } from '../../Context';
 
 const {Sider} = Layout;
@@ -13,6 +13,7 @@ const {SubMenu} = Menu;
 function SiderAdmin() {
 
   const [collapsed, SetCollapsed] = useState(true)
+  const {cycleId} = useContext(UserContext)
   
   const onCollapse = collapsed => {
     console.log(collapsed);
@@ -28,7 +29,7 @@ function SiderAdmin() {
              style={{
                overflow: 'auto',
                height: '100vh',
-               zIndex: '1000',
+               zIndex: '10000',
                left: 0,
               
              }}>
@@ -46,12 +47,12 @@ function SiderAdmin() {
               </Link>
             </Menu.Item>
             <Menu.Item key="10">
-              <Link to={`/cycleOverview`}>
+              <Link to={`/admin/cycles/overview/${cycleId}`}>
               Cycle Overview
               </Link>
             </Menu.Item>
             <Menu.Item key="3">
-            <Link to={'/participants'}>
+            <Link to={`/admin/cycles/participants/${cycleId}`}>
               Cycle Participants
               </Link>
             </Menu.Item>
@@ -64,20 +65,23 @@ function SiderAdmin() {
               <Link to={'/newActivity'}>Create New Activity</Link>
             </Menu.Item>
             <Menu.Item key="6">
+              <Link to={'/pending'}>Pending Activities</Link>
+            </Menu.Item>
+            <Menu.Item key="7">
               <Link to={'/activities'}>All Activities</Link>
             </Menu.Item>
           </SubMenu>
-          <Menu.Item key="7" icon={<TrophyOutlined style={{color:'white'}}/>}>
+          <Menu.Item key="8" icon={<TrophyOutlined style={{color:'white'}}/>}>
             <Link to={'/admin/leaderboard'}>
             Leaderboard
             </Link>
           </Menu.Item>
-          <Menu.Item key="12" icon={<TrophyOutlined  style={{color:'white'}}/>}>
+          <Menu.Item key="12" icon={<BoldOutlined  style={{color:'white'}}/>}>
           <Link to={'/badges'}>
             Badges
             </Link>
           </Menu.Item>
-          <Menu.Item key="8" icon={<SettingOutlined style={{color:'white'}}/>}>
+          <Menu.Item key="9" icon={<SettingOutlined style={{color:'white'}}/>}>
             {/*<Link>*/}
             Settings
             {/*</Link>*/}

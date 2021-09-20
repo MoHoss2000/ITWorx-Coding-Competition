@@ -73,7 +73,9 @@ function AllActivities() {
     <Divider className="title-divider"/>
 
   <Card 
-   extra={<Search placeholder="search Activities" onSearch={onSearch} style={{ width: 200 }} /> } >
+   extra={<Search placeholder="search Activities" onSearch={onSearch} style={{ width: 200 }} 
+   style={{margin: '50px', boxShadow: '10px 8px 20px 0 #b720259d'}}/> } >
+ 
   <List
     itemLayout="vertical"
     size="large"

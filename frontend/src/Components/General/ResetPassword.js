@@ -1,45 +1,35 @@
 import { Form, Input, Button, Card } from 'antd';
 import axios from 'axios';
-import React, { useEffect } from 'react';
-
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import ResetPasswordResult from './ResetPasswordResult';
 
 const ResetPassword = () => {
 
   const { token } = useParams();
+  const [success, setSuccess] = useState(null)
 
   useEffect(() => {
     
   }, [])
 
 
-  const onFinish = async ({ currentPassword, newPassword, confirmPassword }) => {
+  const onFinish = async ({ currentPassword, newPassword }) => {
     console.log(currentPassword, newPassword, token);
     try{
-      var res = await axios.patch('http://localhost:3001/changepassword', {
-        "oldPassword": currentPassword,
+      var res = await axios.patch('http://localhost:3001/newpassword', {
         "newPassword": newPassword,
         "token": token,
       });
-
-      window.alert(res.data);
-    } catch(e){
-      // window.alert(e.response);
-      window.alert(e.response.data.message)
-
+    } catch{
+      setSuccess(false)
     }
-
-
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
-
-
-  return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <Card id="change-password">
+  const form = <Card id="change-password">
         <Form
           style={{ width: '90%' }}
           name="basic"
@@ -56,19 +46,6 @@ const ResetPassword = () => {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          <Form.Item
-            label="Old Password"
-            name="currentPassword"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your old password!',
-              },
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
-
           <Form.Item
             label="New Password"
             name="newPassword"
@@ -119,6 +96,13 @@ const ResetPassword = () => {
           </Form.Item>
         </Form>
       </Card>
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      {
+        (success === true || success === false) ? <ResetPasswordResult success={success}/> : form
+      }
+      
     </div>
   );
 };

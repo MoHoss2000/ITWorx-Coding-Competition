@@ -13,6 +13,7 @@ const FloatingBox = ({ visible, setVisible, data, setData, newBadge }) => {
         setNewData({
             name: data ? data.name : "",
             description: data ? data.description : "",
+            icon: data ? data.icon : 0,
             type: data ? data.type : "all",
             points_needed: data ? data.points_needed : 0,
             enabled: data ? data.enabled : 1
@@ -20,8 +21,8 @@ const FloatingBox = ({ visible, setVisible, data, setData, newBadge }) => {
     }, [data]
     )
 
-    
-     
+
+
     return (
         visible && (
             <form onSubmit={e => { e.preventDefault(); }} name='badge-form'>
@@ -47,6 +48,15 @@ const FloatingBox = ({ visible, setVisible, data, setData, newBadge }) => {
                                 value={newData.description} onChange={(e) => setNewData({ ...newData, description: e.target.value })}
                             ></textarea>
                         </div>
+                        {/* <div className='input-container'>
+                            <label>Badge Icon: </label>
+                            <input type="radio" id="html" name="fav_language" value="HTML"/>
+                            <img src= ''/> 
+                            <input type="radio" id="html" name="fav_language" value="HTML"/>
+                            <input type="radio" id="html" name="fav_language" value="HTML"/>
+                            <input type="radio" id="html" name="fav_language" value="HTML"/>
+
+                            </div> */}
                         <div className="wrapper">
                             <div className="select-container">
                                 <label >Type: </label>
@@ -97,7 +107,7 @@ const FloatingBox = ({ visible, setVisible, data, setData, newBadge }) => {
                         </div>
                     </div>
                 </div>
-            </form>
+            </form >
         )
 
     )

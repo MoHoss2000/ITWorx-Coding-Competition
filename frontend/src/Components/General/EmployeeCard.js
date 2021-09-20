@@ -13,8 +13,8 @@ const EmployeeCard = (props) =>{
         <div class="card">
         <div class="box">
             <div class="content">
-            <h2 style={{fontSize:'100px'}}>{props.data.id}</h2>
-            <h3 style={{fontSize:'40px', marginTop: '15%'}}> Employee </h3>
+            <h2 style={{fontSize:'95px'}}>{props.data.id}</h2>
+            <h3 style={{fontSize:'35px', marginTop: '35%'}}> Employee </h3>
             <div class="card__details">
             <li><b>Name: </b> {props.data.first_name + ' ' + props.data.last_name}</li>
             <li> <b>Email: </b> {props.data.username}</li>

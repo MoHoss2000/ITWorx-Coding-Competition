@@ -3,10 +3,11 @@ import 'antd/dist/antd.css';
 import { List, Card , Button, Avatar, Typography, Divider, Row, Col} from 'antd';
 import axios from 'axios'
 import '../components.css';
-import ActivitiesDone from '../Admin/viewEmployeeCycleStatus/ActivitiesDone'
+import ActivitiesDone from '../Employee/ActivitiesDone'
 import Clock from './Clock'
 import Leaderboard from '../Admin/Leaderboard';
 import { UserContext } from '../../Context';
+import ProgressBar from './ProgressBar';
 
 const { Title } = Typography;
 
@@ -25,8 +26,8 @@ function EmployeeHome (){
             console.log(id)
             const {data} = await (axios.get(`http://localhost:3001/employee/currentActivities/${id}`))
             const profile = (await (axios.get(`http://localhost:3001/employee/profile/${id}/${cycleId}`))).data
-            console.log(profile)
-            setData(data)
+            console.log(data)
+            setData(data.slice(0,2))
             setProfile(profile)
             setLoading(false)
         } 
@@ -38,7 +39,7 @@ function EmployeeHome (){
     else{
     return(
         <div >  
-           
+            <ProgressBar/>
             <Row>
                 <Card className='welcome-bar ocean'>
                 <div className='wave'> </div>
