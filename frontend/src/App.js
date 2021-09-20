@@ -85,7 +85,6 @@ function App() {
                 <PrivateRouteAdmin path={'/createCycle'} component={CreateCycle}/>
                 <PrivateRouteAdmin path='/editActivity/:id' component={EditActivity}/>
                 <PrivateRouteAdmin path={'/activities/:activityId'} component={Activity}/>
-                
                 <PrivateRouteAdmin path='/badges' component={Badges}/>
                               
                 
