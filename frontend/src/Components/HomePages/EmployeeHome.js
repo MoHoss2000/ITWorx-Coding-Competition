@@ -7,6 +7,7 @@ import ActivitiesDone from '../Admin/viewEmployeeCycleStatus/ActivitiesDone'
 import Clock from './Clock'
 import Leaderboard from '../Admin/Leaderboard';
 import { UserContext } from '../../Context';
+import ProgressBar from './ProgressBar';
 
 const { Title } = Typography;
 
@@ -38,7 +39,7 @@ function EmployeeHome (){
     else{
     return(
         <div >  
-           
+            <ProgressBar/>
             <Row>
                 <Card className='welcome-bar ocean'>
                 <div className='wave'> </div>
