@@ -2,7 +2,7 @@ import './App.css';
 import React, {useContext} from 'react';
 import 'antd/dist/antd.css';
 import {Layout} from 'antd';
-
+import Login from './Components/General/Login';
 import AdminCycleHistory from './Components/Admin/AdminCycleHistory';
 import CreateActivity from './Components/Admin/CreateActivity';
 import {BrowserRouter as Router, Route, Switch,} from 'react-router-dom'
@@ -75,40 +75,37 @@ function App() {
           }}>
 
             <Switch>
-                <PrivateRouteAdmin path='/admin/cycles/participants/:id' component={Participants}/>
-                <PrivateRouteAdmin path='/admin/cycles' component={AdminCycleHistory}/>
-                <PrivateRouteAdmin path='/admin/employeeStatus/:id/:empId' component={EmployeeCycleStatus}/>
-                <PrivateRouteAdmin path='/adminProfile' component={AdminProfile}/>
-                <PrivateRouteAdmin path='admin/leaderboard' component={Leaderboard}/>
-                <PrivateRouteAdmin path='/newActivity' component={CreateActivity}/>
-                <PrivateRouteAdmin path='/admin/home' component={AdminHome}/>
-                <PrivateRouteAdmin path='/cycleOverview' component={CycleOverview}/>
-                <PrivateRouteAdmin path={'/activities/:id'} component={Activity}/>
-                <PrivateRouteAdmin path='/activities' component={Activities}/>
-                <PrivateRouteAdmin path={'/createCycle'} component={CreateCycle}/>
-                <PrivateRouteAdmin path='/editActivity/:id' component={EditActivity}/>
-                <PrivateRouteAdmin path={'/activities/:activityId'} component={Activity}/>
-                <PrivateRouteAdmin path='/badges' component={Badges}/>
+              <PrivateRouteAdmin path='/admin/cycles/participants/:id' component={Participants}/>
+              <PrivateRouteAdmin path='/admin/cycles' component={AdminCycleHistory}/>
+              <PrivateRouteAdmin path='/admin/employeeStatus/:id/:empId' component={EmployeeCycleStatus}/>
+              <PrivateRouteAdmin path='/adminProfile' component={AdminProfile}/>
+              <PrivateRouteAdmin path='admin/leaderboard' component={Leaderboard}/>
+              <PrivateRouteAdmin path='/newActivity' component={CreateActivity}/>
+              <PrivateRouteAdmin path='/admin/home' component={AdminHome}/>
+              <PrivateRouteAdmin path='/cycleOverview' component={CycleOverview}/>
+              <PrivateRouteAdmin path={'/activities/:id'} component={Activity}/>
+              <PrivateRouteAdmin path='/activities' component={Activities}/>
+              <PrivateRouteAdmin path={'/createCycle'} component={CreateCycle}/>
+              <PrivateRouteAdmin path='/editActivity/:id' component={EditActivity}/>
+              <PrivateRouteAdmin path={'/activities/:activityId'} component={Activity}/>
+              <PrivateRouteAdmin path='/badges' component={Badges}/>
                               
-                
-
-                <PrivateRouteEmployee path='/employee/home' component={EmployeeHome}/>
-                <PrivateRouteEmployee path='/employee/leaderboard' component={Leaderboard}/>
-                <PrivateRouteEmployee path='/employee-profile' component={Profile}/>
-                <PrivateRouteEmployee path='/myActivities' component={MyActivities}/>
-                <PrivateRouteEmployee path='/allActivities' component={AllActivities}/>
-                <PrivateRouteEmployee path='/progress' component={ProgressBar}/> 
-                <PrivateRouteEmployee path='/employee/cycles/:id/:empId' component={MyStatus}/>        
-                <PrivateRouteEmployee path='/employee/cycles' component={EmployeeCyclesHistory}/> 
-                <PrivateRouteEmployee path='/myActivities' component={MyActivities}/>
-              
-
-             
+              <PrivateRouteEmployee path='/employee/home' component={EmployeeHome}/>
+              <PrivateRouteEmployee path='/employee/leaderboard' component={Leaderboard}/>
+              <PrivateRouteEmployee path='/employee-profile' component={Profile}/>
+              <PrivateRouteEmployee path='/myActivities' component={MyActivities}/>
+              <PrivateRouteEmployee path='/allActivities' component={AllActivities}/>
+              <PrivateRouteEmployee path='/progress' component={ProgressBar}/> 
+              <PrivateRouteEmployee path='/employee/cycles/:id/:empId' component={MyStatus}/>        
+              <PrivateRouteEmployee path='/employee/cycles' component={EmployeeCyclesHistory}/> 
+              <PrivateRouteEmployee path='/myActivities' component={MyActivities}/>
+            
               <Route path='/unauthorized' component={Unauthorized}/>
               <Route path='/networkError' component={NetworkError}/>
               <Route path='/changePassword' component={ChangePassword}/>
               <Route path='/resetPassword/:token' component={ResetPassword}/>
               <Route path='/forgotPassword' component={ForgotPassword}/>
+              <Route exact path='/' component={Login}/>
               <Route exact path='/' component={LoginForm}/>
               <Route component={NotFound404}/>
 
