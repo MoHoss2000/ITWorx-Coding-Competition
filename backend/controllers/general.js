@@ -6,7 +6,6 @@ const { createToken } = require('../utils/tokens');
 
 
 function decodeResetPassToken(token) {
-    // console.log("HEY");
     try {
         return jwt.verify(token, process.env.Reset_Password)
     }
@@ -19,16 +18,16 @@ function decodeResetPassToken(token) {
 exports.newPassword = async (req, res) => {
     // console.log(req);
     var resetPasswordToken = req.body.token;
-
     var payload = decodeResetPassToken(resetPasswordToken);
 
-    if (payload == null)
+    if (!payload){
         return res.status(400).send('Invalid or expired token');
+    }
+       
 
+    
     id = payload.id;
     userType = payload.type;
-
-
     const { newPassword } = req.body
     
     const findUser = userType == 'employee' ? `SELECT * FROM employee WHERE id = ${id}` :

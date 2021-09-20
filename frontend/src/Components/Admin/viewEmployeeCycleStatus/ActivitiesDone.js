@@ -2,7 +2,7 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { List, Card, Avatar} from 'antd';
 import '../../components.css';
-
+import { Link } from 'react-router-dom';
 
 
 const ActivitiesDone = (props) =>{
@@ -20,7 +20,7 @@ const ActivitiesDone = (props) =>{
                 dataSource={props.data}
                 renderItem={item => (
                 <List.Item
-                    actions={[<a key="list-loadmore-more">View Activity</a>]}
+                    actions={[<Link to={`/activities/${item.id}`}> View Activity </Link>]}
                 >
                     <List.Item.Meta
                     avatar={

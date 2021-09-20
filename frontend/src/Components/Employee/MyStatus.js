@@ -5,21 +5,24 @@ import '../components.css'
 import ActivitiesDone from '../Admin/viewEmployeeCycleStatus/ActivitiesDone'
 import VirtualRecognitions from '../EmployeeProfile/VirtualRecognitions'
 import BadgesDisplay from '../BadgesDisplay'
+import CompletedActivities from './CompletedActivities'
 import InfoCard from './InfoCard'
 import {  useParams } from 'react-router-dom'
 import EmployeePoints from '../General/EmployeePoints'
 import { UserContext } from '../../Context'
+import MyActivities from './MyActivities'
 const { TabPane } = Tabs;
 
 const MyStatus= () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
-    const {id} = useContext(UserContext)
-    const cycleId = useParams().id
+    const {id, cycleId} = useContext(UserContext)
+    const cycleID = useParams().id
+
     console.log(cycleId, id)
         useEffect(() => {
         const getStatus = async () => {
-            const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${id}/${cycleId}`))
+            const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${id}/${cycleID}`))
             console.log(data)
            
             setData(data)
@@ -48,42 +51,10 @@ const MyStatus= () => {
             <Col flex="auto">
             <Tabs defaultActiveKey="1" centered style={{marginTop:'7%'}}>
                 <TabPane tab={<span style={{fontSize:'23px'}}> Activities  </span>} key="2" >
-                    <div className='info-display info-tab'>
-                     <Card className='activities-container'>
-                        <Tabs defaultActiveKey="1" centered='true' size='large' tabBarGutter={30}>
-                            <TabPane
-                                tab={<span style={{fontSize:'16px'}}> Completed Activities  </span>}
-                                key="1"
-                            >
-                                <div className='profile-components'>
-                                    <ActivitiesDone data={data.completed_activities} className='activities-view'/> 
-                                </div>
-                            </TabPane>
-                            <TabPane
-            
-                            tab={<span style={{fontSize:'16px'}}> Pending Activities </span>
-                            }
-                            key="2"
-                            >
-                                <div className='profile-components'>
-                                <ActivitiesDone data={data.pending_activities} className='activities-view' /> 
-                                </div>
-                            </TabPane>
-                            <TabPane
-            
-                            tab={
-                                <span style={{fontSize:'16px'}}> In Progress Activities  </span> }
-                            key="3"
-                            >
-                                <div className='profile-components'>
-                                <ActivitiesDone data={data.inprogress_activities} className='activities-view' /> 
-                                </div>
-                            </TabPane>
-                    
-                        </Tabs>
-                    </Card>
-                </div>
-        </TabPane>
+                   {cycleId == cycleID ? <MyActivities/> : <CompletedActivities activities={data.completed_activities} /> }
+
+                     
+                  </TabPane>
 
                <TabPane tab={<span style={{fontSize:'23px'}}> Badges  </span>} key="3">
                      <div className='status-tabs'>

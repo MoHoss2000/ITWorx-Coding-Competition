@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 import {Divider, Row, Col} from 'antd';
 import axios from 'axios'
 import '../components.css';
-import CycleInfo from '../General/CycleInfo'
+import InfoCard from '../Employee/InfoCard'
 import ActivityList from '../General/ActivityList'
 import DisableSwitch from './DisableSwitch'
 import Leaderboard from './Leaderboard';
@@ -15,7 +15,9 @@ function CycleOverview (){
 
     const [data, setData] = useState([])
     const [current, setCurrent] = useState(false)
+    console.log(useParams())
     const {id} = useParams()
+    console.log(id)
     
     useEffect(() => {
         const getCycle = async () => {
@@ -23,7 +25,6 @@ function CycleOverview (){
             console.log(data)
             setData(data)
             setCurrent(data.current)
-            console.log(data.current == true)
         }
         getCycle()
     }, [])
@@ -38,14 +39,18 @@ function CycleOverview (){
             </div>
             <Divider className="title-divider"/>
            <Row align='top'>
-                <Col flex="620px"> 
+                <Col flex="320px"> 
 
-                <Link to={`/participants/${id}`}> View Cycle Participants </Link>
-                 <CycleInfo data={data} className={'info-display'}/> 
-                  <ActivityList id={id} />
-
-                </Col> 
-                    <Col span={14}>
+                <Link to={`/admin/cycles/participants/${id}`}> View Cycle Participants </Link>
+                 <InfoCard data={data}/> 
+                 </Col>
+                 <Col flex="auto">
+                <ActivityList id={id} className="activities-overview"/> 
+                </Col >
+            </Row>
+<Row>
+                
+                    <Col flex="auto">
                          <Leaderboard id={id} />
                     </Col>
                  </Row>

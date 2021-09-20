@@ -1,20 +1,31 @@
 import React , {useState, useEffect} from 'react';
 import 'antd/dist/antd.css';
-import { List, Card , Button, Avatar, Typography, Divider, Spin } from 'antd';
+import { List, Card , Button, Avatar, Typography, Divider, Spin , Modal} from 'antd';
 import axios from 'axios'
+import ActivityCard from '../Employee/ActivityCard'
 import '../components.css';
+import { PropertySafetyFilled, SketchOutlined } from '@ant-design/icons';
+import DisplayActivities from '../Admin/DisplayActivities';
+import ActivityListItem from '../Admin/ActivityListItem';
+import { useParams, Link } from 'react-router-dom';
 const { Title } = Typography;
 
-function ActivityList({id}) {
+function ActivityList({id, className}) {
     const [loading, setLoading] = useState(true) 
+    const [overview, setOverview] = useState([])
     const [data, setData] = useState([])
     const [error, setError] = useState(null)
-    
+    const [activity, setActivity] = useState(null)
+    const [visible, setVisible] = useState(false);
+   const [isModalVisible, setIsModalVisible] = useState(false);
+
+
     useEffect(() => {
         
         axios.get( `http://localhost:3001/admin/getActivities/${id}`
         ).then((res) =>{         
-                setData(res.data.slice(0,3))
+                setData(res.data)
+                setOverview(res.data.slice(0,3))
                 setLoading(false)  
                 console.log(res)             
               })
@@ -30,20 +41,31 @@ function ActivityList({id}) {
         
     return(
     <div className="site-card-border-less-wrapper">
-    <Card className ="activities-card" bordered={false} loading={loading}>
+    <Card className ={className} bordered={false} loading={loading}>
     <Title level={4}> Cycle Activities </Title>
         <Divider className="small-divider"/>
         <List
             size="small"
             itemLayout="horizontal"
-            dataSource={data}
+            dataSource={overview}
             renderItem={item => (
-            <List.Item
-                actions={[<a key="list-loadmore-more">View Activity</a>]}
-            >
+            <List.Item          
+                extra={<Button type="link" style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between'
+                  }}
+                  >
+                    <SketchOutlined />
+                    <Link to={`/activities/${item.id}`} style={{  marginLeft: 5 }}>
+                      View Activity
+                    </Link>
+                  </Button>}
+                 >
+            
                 <List.Item.Meta
                 avatar={
-                    <Avatar src="./activity.png" />
+                    <Avatar src="/activity.png" />
                   }
                 title={<a href="https://ant.design">{item.title}</a>}
                 description= {item.description}
@@ -52,8 +74,23 @@ function ActivityList({id}) {
             )}
            
         />
-        <Button type="primary" className="view-all-button"> View All Activities</Button>
+        <>
+            <Button style={{left: '7%', top:"10px"}}type='primary' onClick={() => setVisible(true)}>
+                View All Cycle Activities
+            </Button>
+            <Modal
+                title="Cycle Activities"
+                centered
+                visible={visible}
+                onOk={() => setVisible(false)}
+                onCancel={() => setVisible(false)}
+                width={1000}
+            >
+                <DisplayActivities activities={data}/>
+            </Modal>
+         </>
     </Card>
+    <ActivityCard activity={activity} isModalVisible={isModalVisible}  setIsModalVisible={setIsModalVisible}/>
     </div>
     )
 }

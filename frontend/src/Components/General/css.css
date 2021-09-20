@@ -5,7 +5,7 @@
 	position: relative;
 	width: 38px;
 	height: 38px;
-    left: -20px;
+  left: -20px;
 	transform: rotate(45deg);
 	background: #C0FFE4;
 	box-shadow: 1px 1px 0 #1D8758, 0 0 20px 5px #C0FFE4, inset 2px 2px 0 #D3FFEC;
@@ -80,8 +80,8 @@
   .btn {
     position: relative;
     color:white;
-    left: 18%;
-    width: 230px;
+    left: 20%;
+    width: 180px;
     height: 75px;
     font-family: 'Cinzel', serif;
     font-size: 30px;

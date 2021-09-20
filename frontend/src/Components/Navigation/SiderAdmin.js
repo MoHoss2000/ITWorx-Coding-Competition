@@ -28,7 +28,7 @@ function SiderAdmin() {
              style={{
                overflow: 'auto',
                height: '100vh',
-               zIndex: '1000',
+               zIndex: '10000',
                left: 0,
               
              }}>
