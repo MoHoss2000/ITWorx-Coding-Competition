@@ -181,10 +181,13 @@ body {
 }
 .title {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin-left: 20px;
+  margin-left: 3%;
+  margin-right: 3%;
   color: #b72025;
 }
 .title-divider {
+  margin-left: 3%;
+  margin-right: 3%;
   width: 400px;
   background-color: rgb(0, 0, 0);
 }
@@ -358,7 +361,9 @@ body {
 .welcome-bar {
   width: 75%;
   height: 250px;
-  margin: 0 auto;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 3%;
   margin-bottom: 5%;
   border-radius: 2cm;
   background: #b72025; /* fallback for old browsers */
@@ -588,17 +593,43 @@ body .container .card .box .content p {
 }
 
 .login {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
-  width: 60%;
+  background-color: rgba(243, 235, 235, 0.787);
+  box-shadow: 1px 0px 10px 20px rgba(243, 235, 235, 0.787);
+  width: 40%;
+  color: white;
+  height: 60%;
   margin: 0 auto;
   /* background-image: url("../login.jpeg"); */
 }
+.login-background{
 
-.login-form {
-  padding: 100px 50px 100px 100px;
-  width: 70%;
+    /* The image used */
+    background-image: url("../login.png");
+    padding: 0cm;
+    /* Full height */
+    height: 100%;
+    width: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
 }
 
+.login-form {
+  padding: 30px;
+  margin-top: 10%;
+  color: white;
+ 
+}
+.avatar-login{
+  margin-left: 40%;
+  margin-top: 20%;
+  color: white;
+}
+.ant-layout{
+  padding: 0cm !important;
+}
 body .container .card .box .content a {
   position: relative;
   display: inline-block;

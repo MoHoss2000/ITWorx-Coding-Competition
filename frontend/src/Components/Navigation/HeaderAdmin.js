@@ -19,7 +19,7 @@ function HeaderAdmin() {
             }}>
       <div style={{display: 'flex', flexDirection:'row-reverse'}}>
       
-      <img src='full.png' className='logo'/>
+      <img src='/full.png' className='logo'/>
  
   </div>
      

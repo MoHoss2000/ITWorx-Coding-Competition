@@ -37,32 +37,32 @@ const MyStatus= () => {
     return(
         <div >
 
-            <h1 className= "title"> <b>My Status </b></h1>
+            <h1 className= "title"> My Status </h1>
             <Divider className="title-divider"/> 
             
-         {/* <div style={{display:'flex', flexDirection:'row'}}> */}
+          <div style={{marginLeft: '30px'}}> 
          <Row gutter={0,0}>
              <Col flex="300px">
              <EmployeePoints data={data.total_points[0]}/>
              <InfoCard  data={data.cycleInfo[0]}/>
             
             </Col>
-            {/* </div> */}
+          
             <Col flex="auto">
-            <Tabs defaultActiveKey="1" centered style={{marginTop:'7%'}}>
-                <TabPane tab={<span style={{fontSize:'23px'}}> Activities  </span>} key="2" >
-                   {cycleId == cycleID ? <MyActivities/> : <CompletedActivities activities={data.completed_activities} /> }
+            <Tabs defaultActiveKey="1" centered style={{marginTop:'1%'}}>
+                <TabPane tab={<span style={{fontSize:'20px'}}> Activities  </span>} key="2" >
+                   {cycleId == cycleID ? <MyActivities divider={true}/> : <CompletedActivities activities={data.completed_activities} /> }
 
                      
                   </TabPane>
 
-               <TabPane tab={<span style={{fontSize:'23px'}}> Badges  </span>} key="3">
+               <TabPane tab={<span style={{fontSize:'20px'}}> Badges  </span>} key="3">
                      <div className='status-tabs'>
                     <BadgesDisplay  adminMode={false} data={data.badges} />
                     </div>
                 </TabPane>
 
-                <TabPane tab={<span style={{fontSize:'23px'}}> Virtual Recognitions  </span>} key="4" >
+                <TabPane tab={<span style={{fontSize:'20px'}}> Virtual Recognitions  </span>} key="4" >
                   <div className='info-display status-tabs'  >
                    <VirtualRecognitions data={data.virtual_recognitions}/>
                 </div>
@@ -75,7 +75,7 @@ const MyStatus= () => {
      </Row>  
            
 
-
+        </div>
         </div>
     )
 }
