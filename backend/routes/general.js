@@ -32,7 +32,7 @@ router.get('/cycle/activities/:cycleID', authenticateToken,async (req, res) => {
 });
 
 
-router.patch('/changepassword', controllers.changePassword)
+router.patch('/changepassword/:id', controllers.changePassword)
 router.patch('/newpassword', controllers.newPassword)
 
 

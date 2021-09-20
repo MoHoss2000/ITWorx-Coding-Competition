@@ -54,20 +54,20 @@ exports.newPassword = async (req, res) => {
 }
 
 exports.changePassword = async (req, res) => {
-    // console.log(req);
-    var id = req.id
-    var userType = req.userType
+    const id = parseInt(req.params.id)
+    const userType = req.body.type
+    console.log(req.body)
 
-    const { oldPassword, newPassword } = req.body
-    if (oldPassword === newPassword)
+    const { currentPassword, newPassword } = req.body
+    if (currentPassword === newPassword)
         return res.status(400).send('Old password and new password have to be different')
     const findUser = userType == 'employee' ? `SELECT * FROM employee WHERE id = ${id}` :
-        `SELECT * FROM admin WHERE id = ${id}`
+                                              `SELECT * FROM admin WHERE id = ${id}`
 
     db.query(findUser, async (err, user) => {
 
         const hashedPassword = user[0].password
-        const match = await bcrypt.compare(oldPassword, hashedPassword)
+        const match = await bcrypt.compare(currentPassword, hashedPassword)
         if (!match) return res.status(400).json({ message: 'Old password is incorrect' })
         const newHashedPassword = await bcrypt.hash(newPassword, 10)
         const updateUser = userType === 'employee' ? `UPDATE employee SET password = ? WHERE id = ${id};`
