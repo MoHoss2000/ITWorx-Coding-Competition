@@ -51,9 +51,9 @@ function DisableSwitch (props){
   return (
     <div style={{display:'flex', flexDirection: 'row',  marginTop: '30px'}}>
       {
-        props.current== 0 ?  <h3> Cycle is Disabled </h3> : <h3> Disable Cycle</h3>
+        props.current== 0 ?  <h3> This Cycle has Ended </h3> : <h3> This Cycle is Currently Running</h3>
       }
-      <Switch disabled={!(props.current)} onChange={Confirm} defaultChecked checked={enabled} style={{marginLeft: '10px'}}>  </Switch> 
+     
     </div>
   )
 }

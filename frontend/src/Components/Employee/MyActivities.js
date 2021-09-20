@@ -51,6 +51,7 @@ const MyActivities = () => {
   }
 
   }
+  
   useEffect(() => {
      const {id, cycleId} = context;
       if (!id) {

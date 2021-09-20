@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import { List, Divider } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import ActivityListItem from './ActivityListItem';
+import DisplayActivities from './DisplayActivities';
 
 
 
@@ -40,25 +41,8 @@ function Activities() {
   }
 
   return (
-<div>
-    
-  <h1 className="title">Activities</h1>
-    <Divider className="title-divider"/>
- { !activities ? <LoadingOutlined style={{ fontSize: 50 }} spin /> :
- <List
-    itemLayout="vertical"
-    size="large"
-    pagination={{
-      pageSize: 5,
-    }}
-    dataSource={activities}
-    renderItem={activity => (
-      <ActivityListItem activity={activity}/>
-    )}
-   /> }
 
-</div>  
-    
+    <DisplayActivities activities={activities} />
     
   );
 }
