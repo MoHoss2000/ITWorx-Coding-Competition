@@ -2,14 +2,13 @@ import React, {useState, useEffect} from 'react'
 import {Row, Col, Tabs, Divider, Card, Spin} from 'antd'
 import axios from 'axios'
 import '../../components.css'
-import ActivitiesDone from './ActivitiesDone'
-
 import VirtualRecognitions from '../../EmployeeProfile/VirtualRecognitions'
 import BadgesDisplay from '../../BadgesDisplay'
 import { useParams } from 'react-router-dom'
 import InfoCard from '../../Employee/InfoCard'
 import EmployeeCard from '../../General/EmployeeCard'
 import EmployeePoints from '../../General/EmployeePoints'
+import StatusActivities from './StatusActivities'
 const { TabPane } = Tabs;
 
 const EmployeeCycleStatus= () => {
@@ -52,7 +51,7 @@ const EmployeeCycleStatus= () => {
                                             key="1"
                                         >
                                             <div className='profile-components'>
-                                                <ActivitiesDone data={data.completed_activities} className='activities-view'/> 
+                                                <StatusActivities data={data.completed_activities} className='activities-view'/> 
                                             </div>
                                         </TabPane>
                                         <TabPane
@@ -62,7 +61,7 @@ const EmployeeCycleStatus= () => {
                                         key="2"
                                         >
                                             <div className='profile-components'>
-                                            <ActivitiesDone data={data.pending_activities} className='activities-view' /> 
+                                            <StatusActivities data={data.pending_activities} className='activities-view' /> 
                                             </div>
                                         </TabPane>
                                         <TabPane
@@ -72,7 +71,7 @@ const EmployeeCycleStatus= () => {
                                         key="3"
                                         >
                                             <div className='profile-components'>
-                                            <ActivitiesDone data={data.inprogress_activities} className='activities-view' /> 
+                                            <StatusActivities data={data.inprogress_activities} className='activities-view' /> 
                                             </div>
                                         </TabPane>
                                 

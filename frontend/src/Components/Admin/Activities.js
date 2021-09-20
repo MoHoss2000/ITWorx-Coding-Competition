@@ -15,7 +15,6 @@ function Activities() {
   
 
   useEffect(() => {
-    console.log('GETTING ACTIVITIES');
     axios.get('http://localhost:3001/admin/Activities')
       .then((res) => {
         setActivities(res.data)

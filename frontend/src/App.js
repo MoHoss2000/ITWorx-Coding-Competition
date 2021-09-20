@@ -37,6 +37,7 @@ import AllActivities from './Components/Employee/AllActivities';
 import NetworkError from './Components/NetworkError';
 import Profile from './Components/EmployeeProfile/Profile';
 import ProgressBar from './Components/HomePages/ProgressBar';
+import PendingActivities from './Components/Admin/PendingActivities'
 
 
 
@@ -87,6 +88,7 @@ function App() {
               <PrivateRouteAdmin path='/editActivity/:id' component={EditActivity}/>
               <PrivateRouteAdmin path={'/activities/:activityId'} component={Activity}/>
               <PrivateRouteAdmin path='/badges' component={Badges}/>
+              <PrivateRouteAdmin path='/pending' component={PendingActivities}/>
                               
               <PrivateRouteEmployee path='/employee/home' component={EmployeeHome}/>
               <PrivateRouteEmployee path='/employee/leaderboard' component={Leaderboard}/>

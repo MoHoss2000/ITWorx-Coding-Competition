@@ -4,7 +4,7 @@ import { List, Card , Button, Avatar, Typography, Divider, Row, Col, Spin} from 
 import axios from 'axios'
 import '../components.css';
 import PendingOverview from '../Admin/PendingOverview'
-import ActivitiesDone from '../Admin/viewEmployeeCycleStatus/ActivitiesDone'
+import ActivitiesDone from '../Employee/ActivitiesDone'
 import Clock from './Clock'
 import Leaderboard from '../Admin/Leaderboard';
 import { UserContext } from '../../Context';
@@ -22,6 +22,7 @@ function AdminHome (){
     useEffect(() => {
         const getStatus = async () => {
             const {data} = await (axios.get(`http://localhost:3001/admin/pending/${cycleId}`))
+            console.log(data)
             const profile = (await (axios.get(`http://localhost:3001/admin/profile/${id}`))).data
             setData(data.slice(0,3))
             setProfile(profile)

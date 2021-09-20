@@ -11,7 +11,7 @@ function ActivityListItem({activity}) {
   
   return (
 
-    <List.Item
+    <List.Item 
     key={activity.id} 
     >
    
@@ -37,7 +37,7 @@ function ActivityListItem({activity}) {
           </Card>
    
   </List.Item>
-          
+    
 
 
   );

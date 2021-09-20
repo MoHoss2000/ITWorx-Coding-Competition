@@ -64,10 +64,13 @@ function SiderAdmin() {
               <Link to={'/newActivity'}>Create New Activity</Link>
             </Menu.Item>
             <Menu.Item key="6">
+              <Link to={'/pending'}>Pending Activities</Link>
+            </Menu.Item>
+            <Menu.Item key="7">
               <Link to={'/activities'}>All Activities</Link>
             </Menu.Item>
           </SubMenu>
-          <Menu.Item key="7" icon={<TrophyOutlined style={{color:'white'}}/>}>
+          <Menu.Item key="8" icon={<TrophyOutlined style={{color:'white'}}/>}>
             <Link to={'/admin/leaderboard'}>
             Leaderboard
             </Link>
@@ -77,7 +80,7 @@ function SiderAdmin() {
             Badges
             </Link>
           </Menu.Item>
-          <Menu.Item key="8" icon={<SettingOutlined style={{color:'white'}}/>}>
+          <Menu.Item key="9" icon={<SettingOutlined style={{color:'white'}}/>}>
             {/*<Link>*/}
             Settings
             {/*</Link>*/}
