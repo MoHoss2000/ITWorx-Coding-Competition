@@ -104,7 +104,7 @@ function App() {
               <Route path='/resetPassword/:token' component={ResetPassword}/>
               <Route path='/forgotPassword' component={ForgotPassword}/>
               <Route exact path='/' component={Login}/>
-              <Route exact path='/' component={LoginForm}/>
+              
               <Route component={NotFound404}/>
 
 
