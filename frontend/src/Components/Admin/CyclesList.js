@@ -27,8 +27,8 @@ const CycleList = (props) =>{
              cycle_id={id}
              start_date={start_date}
              end_date={end_date}
-             text="View Participants"
-             url={`/admin/cycles/participants/${id}`}
+             text="Cycle Overview"
+             url={`/admin/cycles/overview/${id}`}
              icon={<SyncOutlined spin/>}
              id={id}
             />
@@ -40,8 +40,8 @@ const CycleList = (props) =>{
              cycle_id={id}
              start_date={start_date}
              end_date={end_date}
-             text="View Participants"
-             url={`/admin/cycles/participants/${id}`}
+             text="Cycle Overview"
+             url={`/admin/cycles/overview/${id}`}
              icon={<CarryOutOutlined/>}
              
             />

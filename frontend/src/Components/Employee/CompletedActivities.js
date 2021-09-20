@@ -1,5 +1,5 @@
 import 'antd/dist/antd.css';
-import {Card, Typography, List, Spin, Space} from 'antd';
+import {Card, Typography, List, Spin, Space, Alert} from 'antd';
 import React, {useContext, useEffect, useState} from 'react';
 import {UserContext} from "../../Context";
 import axios from 'axios';
@@ -26,68 +26,39 @@ const tabList = [
     tab: 'Completed',
   },
 ];
-const MyActivities = () => {
+const CompletedActivities = ({activities}) => {
 
-  const context = useContext(UserContext)
-  const [activities,setActivities]=useState(null)
+  
   const [activity,setActivity]=useState(null)
   const[displayed , setDisplayed ]=useState([])
-  const [tab, setTab] = useState('Assigned')
   const [error, setError] = useState(false)
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const onTabChange = async (key) => {
 
-  setTab(key)
-   if (key==="Pending"){
-     setDisplayed( activities.filter((employee)=> employee.status==='P'))
-   }
-   else if (key==="Assigned"){
-     setDisplayed( activities.filter((employee)=> employee.status==='A'))
-  }
-  else{
-     setDisplayed( activities.filter((employee)=> employee.status==='C'))
+//   useEffect(() => {
+     
+//     setError(null)
+//     const getCompleted = async () => {
+//         const {data} = await (axios.get(`'http://localhost:3001/employee/activities/completed/${id}/${cycleID}`))
+//         console.log(data)
+//         setActivities(data)
+//     } 
+//     getCompleted()
 
-  }
+//   }, []);
 
-  }
-  
-  useEffect(() => {
-     const {id, cycleId} = context;
-      if (!id) {
-        return;
-      }
-    setError(null)
-    axios(
-      {
-        method: 'get',
-        url: 'http://localhost:3001/employee/myActivities',
-        headers: {},
-        params: {
-          employeeId: id,
-          cycleId
-        }
-      }).then((res) => {
-      setActivities(res.data[0])
-      setDisplayed((res.data[0]).filter((activity)=> activity.status==='A'))
-    
-
-    })
-      .catch((e) => {
-        setError(true)
-      })
-
-  }, []);
-
-  if(error){
-    return(<NetworkError/>)
-  }
-  
   if(!activities){
-    return(  <Spin size="large" />)
+    return( 
+        <Alert
+        message="No Activitites Available"
+        description="You didn't complete any activities in this cycle"
+        type="info"
+        showIcon
+      />
+    )
   }
 
-
+else{
   const title=(<div style={{display: "flex", flexDirection: 'row'}}>
     <UserOutlined style={{fontSize: '150%',color:"#b72025"}}/>
     <Title level={2} style={{marginLeft: '20px',color:"#b72025"}}>My Activities</Title>
@@ -97,9 +68,6 @@ const MyActivities = () => {
     <div>
     <Card
       style={{marginLeft: '10%', marginRight: '10%'}}
-      tabList={tabList}
-      activeTabKey={tab}
-      onTabChange={key => { onTabChange(key)}}
       title={title}>
       
     <List
@@ -108,7 +76,7 @@ const MyActivities = () => {
     pagination={{
       pageSize: 5,
     }}
-    dataSource={displayed}
+    dataSource={activities}
     renderItem={activity => (
       <ActivityListItem activity={activity} setActivity={setActivity} setIsModalVisible={setIsModalVisible}/>
     )}
@@ -118,6 +86,8 @@ const MyActivities = () => {
     <ActivityCard activity={activity} isModalVisible={isModalVisible}  setIsModalVisible={setIsModalVisible}/>
     </div>
   )
+    }
 };
 
-export default MyActivities;
+
+export default CompletedActivities;

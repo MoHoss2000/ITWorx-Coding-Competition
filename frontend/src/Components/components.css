@@ -112,13 +112,21 @@ body {
   flex-direction: row;
 }
 
-<<<<<<< HEAD [data-theme="dark"] .site-card-border-less-wrapper {
+[data-theme="dark"] .site-card-border-less-wrapper {
   background: #303030;
 }
-=======>>>>>>>c7bf01c649bfddb7458098365104cd117306708e .activities-card {
+.activities-card {
   top: 20%;
   width: 600px;
   margin-bottom: 30px;
+  box-shadow: 10px 8px 20px 0 #b72025;
+  transition: 0.3s;
+}
+
+.activities-overview{
+  top: 20%;
+  width: auto;
+  margin:50px;
   box-shadow: 10px 8px 20px 0 #b72025;
   transition: 0.3s;
 }
@@ -494,8 +502,8 @@ body .container {
 
 body .container .card {
   position: relative;
-  min-width: 320px;
-  height: 380px;
+  min-width: 260px;
+  height: 340px;
   box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
     inset -5px -5px 15px rgba(255, 255, 255, 0.1),
     5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
@@ -606,7 +614,7 @@ body .container .card .box .content a:hover {
 
 .card__details {
   color: white;
-  font-size: 18px;
+  font-size: 15px;
   list-style-type: none;
 }
 
@@ -757,7 +765,7 @@ body {
 
 html {
   font-size: 42.5%;
-}
+} 
 
 body {
   -webkit-box-sizing: border-box;
