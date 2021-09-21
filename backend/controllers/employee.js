@@ -116,7 +116,6 @@ exports.viewToBeSubmittedTasks = async (req, res) => {
 
 exports.viewEmployeeCycles = async (req, res) => {
     const employeeId = parseInt(req.params.employeeID)
-    console.log("hi" + employeeId)
     db.query(
         'CALL viewEmployeeCycles(?)',
         [employeeId],
@@ -133,8 +132,6 @@ exports.viewEmployeeCycles = async (req, res) => {
 exports.viewEmployeeProfile = async (req, res) => {
     const employeeId = parseInt(req.params.id)
     const cycleID = parseInt(req.params.cycleID)
-    console.log(employeeId)
-    console.log(cycleID)
     let result = {}
 
     const personalInfo = new Promise((resolve, reject) => {

@@ -24,7 +24,7 @@ const MyStatus= () => {
         const getStatus = async () => {
             const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${id}/${cycleID}`))
             console.log(data)
-           
+            console.log(data.badges)
             setData(data)
             setLoading(false)
         } 
@@ -54,9 +54,9 @@ const MyStatus= () => {
          <Row gutter={0,0}>
              <Col flex="300px">
                  <div style={{display:'flex', flexDirection:'row'}}>
-             <EmployeePoints data={data.total_points[0]}/>
-             <Button className='butn' onClick={showDrawer}>  Badges <img height='80' src={'/badges/2.png'} />  </Button>
-             </div>
+                <EmployeePoints data={data.total_points[0]}/>
+                <Button className='butn' onClick={showDrawer}>  Badges <img height='80' src={'/badges/2.png'} />  </Button>
+                </div>
              <InfoCard  data={data.cycleInfo[0]}/>
             
             </Col>
@@ -88,12 +88,12 @@ const MyStatus= () => {
           placement="right"
           onClose={onClose}
           visible={visible}
+          title="My Badges"
         >
           <p className="site-description-item-profile-p" style={{ marginBottom: 24 }}>
             Badges
-
-            <BadgesDisplay  adminMode={false} data={data.badges} span = {12} />
           </p>
+          <BadgesDisplay  adminMode={false} data={data.badges} span = {12} />
         </Drawer>
         </div>
     )
