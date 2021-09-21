@@ -5,7 +5,6 @@ import axios from 'axios'
 import '../components.css';
 import InfoCard from '../Employee/InfoCard'
 import ActivityList from '../General/ActivityList'
-import DisableSwitch from './DisableSwitch'
 import Leaderboard from './Leaderboard';
 import { useParams, Link } from 'react-router-dom';
 
@@ -29,9 +28,6 @@ function CycleOverview (){
         <div>
              <div className='header-group'>
                 <h1 className= "title"> <b>Cycle Overview </b></h1>
-                <div className="switch">
-                    <DisableSwitch current={current} />
-                </div>
             </div>
             <Divider className="title-divider"/>
            <Row align='top'>

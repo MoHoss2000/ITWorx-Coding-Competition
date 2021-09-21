@@ -40,7 +40,7 @@ const ProgressBar = () => {
       .catch((e) => {
         setError(true)
       })
-  })
+  },[])
 
   if (error) {
     return (

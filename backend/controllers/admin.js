@@ -30,7 +30,7 @@ exports.createNewCycle= async (req,res)=>{
     const cycle = [adminID,start_date,end_date]
     db.query('CALL createNewCycle(?,?,?, @stat); select @stat AS status;', cycle ,(err, result) => {
       if(result){
-        console.log(result)
+
         const status = result[1][0].status
         if(status===0)
           res.status(200).json({message: 'A Cycle would be running within the dates you specified',status:0});
@@ -86,7 +86,6 @@ exports.exportToExcelParticipants = async(req, res) => {
 
     workbook.xlsx.writeFile("participants.xlsx")
 		.then(function() {
-			console.log("file saved!")
             const excelPath = __dirname.split('controllers')[0] + 'participants.xlsx'
             res.download(excelPath)
             res.status(200).send()
@@ -124,8 +123,6 @@ exports.viewProfile = async (req, res) => {
 exports.viewEmployeeStatus = async (req, res) => {
     id = parseInt(req.params.employeeId)
     cycleID = parseInt(req.params.cycleID)
-    //activities completed by this employee
-
     let result = {}
 
     const employeeInfo = new Promise ((resolve, reject) => {
@@ -245,47 +242,6 @@ exports.viewEmployeeStatus = async (req, res) => {
   return res.send(result)
 }
 
-exports.exportToExcelLeaderboard = async(req, res) => {
-  //const list = []
-  let list = []
-  const cycleID = parseInt(req.params.cycleID)
-  const rank = new Promise((resolve, reject) => {
-    db.query('CALL getEmployeeRankings(?)', cycleID, (err, result) => {
-      if(result && result[0])
-          resolve(result[0])    
-      else  
-        reject(err)
-      })
-  })
-  list = await rank
-  
-  for(let i = 1 ; i < list.length ; i++){
-    list[i].rank = i
-    if(list[i].is_developer)
-      list[i].is_developer = 'Yes'
-    else  
-    list[i].is_developer = 'No'
-  }
-  
-  let workbook = new excel.Workbook()
-	let worksheet = workbook.addWorksheet('Sheet1')
-    worksheet.columns = [
-        { header: 'Rank', key: 'rank', width: 30 },
-        { header: 'Name', key: 'name', width: 30 },
-        { header: 'Total points', key: 'points', width: 30},
-        { header: 'Developer', key: 'is_developer', width: 10, outlineLevel: 1}
-    ];
-  worksheet.addRows(list);
-
-    workbook.xlsx.writeFile("participants.xlsx")
-		.then(function() {
-			console.log("file saved!")
-            const excelPath = __dirname.split('controllers')[0] + 'participants.xlsx'
-            res.sendFile(excelPath, (err) => {console.log(err, 'tmm')})
-
-            
-	}).catch((e) => res.status(400).json(e));
-}
 
 exports.createBadge= async (req, res) => {
   var name = req.body.name;
@@ -300,7 +256,6 @@ exports.createBadge= async (req, res) => {
       res.status(200).send(result);
     })
   } catch(e){
-    console.log(e)
     res.status(400).send(e);
   }
 }
@@ -309,7 +264,6 @@ exports.updateBadge = async(req, res) => {
   var {name, description, type, points_needed, enabled} = req.body;
   var id = req.params.badgeID;
 
-  console.log(req.body);
   try{
     db.query(`CALL updateBadge(?,?,?,?,?,?)`, 
     [name, description, type, points_needed, enabled, id], (err, result) => {
@@ -326,7 +280,6 @@ exports.createCycle= async (req, res) => {
   try{
     db.query(`INSERT INTO cycle (start_date, end_date, admin_id) 
     VALUES (?,?,?)`, [start_date, end_date, admin_id], (err, result) => {
-      console.log(result);
       res.status(200).send('Cycle added successfully');
     })
   } catch(e){
@@ -437,8 +390,6 @@ exports.createNewActivity = async (req, res) => {
 exports.editActivity= async (req, res) => {
 
   const { ActivityId ,name, description, enabled, virtual_recognition, points, cycleId } = req.body
-  console.log(req.body)
-  console.log(points)
   // Validate request
   if ( !( ActivityId && name && description  && points && cycleId) && virtual_recognition!==undefined && enabled!==undefined) {
     res.status(400).send({
@@ -448,7 +399,6 @@ exports.editActivity= async (req, res) => {
   } 
     
     const activity = [ ActivityId, name, description, enabled, virtual_recognition, points, cycleId ];
-    console.log(activity)
 
     db.query('CALL editActivity(?,?,?,?,?,?,?, @stat); select @stat AS status;', activity ,(err, result) => {
       if(result){
@@ -459,7 +409,6 @@ exports.editActivity= async (req, res) => {
           res.status(200).json({message:'Activity updated succesfully', status:1});
       }
       else{
-        console.log(err)
         res.status(400).send(err)
       }
     })
@@ -541,7 +490,6 @@ exports.editActivity= async (req, res) => {
 
   exports.cycleInfo = async (req,res) => {
     const cycleID = parseInt(req.params.id)
-    console.log(cycleID)
     db.query('CALL viewCycleDetailsForAdmin(?)', cycleID, (err, result) => {
       if(result && result[0]){
         return res.send(result[0][0])
@@ -551,7 +499,6 @@ exports.editActivity= async (req, res) => {
   }
 
   exports.activityInfo = async (req, res) => {
-    console.log(req.query);
     const {id, CycleId} = req.query
   
     if (!(id && CycleId)) {

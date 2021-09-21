@@ -142,7 +142,6 @@ exports.register = async (req, res) => {
         const arrayOfData = is_admin ?
             [first_name, last_name, username, hashedPassword] :
             [first_name, last_name, username, hashedPassword, is_developer]
-        console.log(arrayOfData, addUser)
         db.query(addUser, arrayOfData, (err, queryRes) => {
             if (queryRes) {
                 db.query(findUser, username, (err, result) => {

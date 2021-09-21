@@ -21,8 +21,6 @@ function EmployeeHome (){
   
         const getStatus = async () => {
             
-            console.log(cycleId)
-            console.log(id)
             const {data} = await (axios.get(`http://localhost:3001/employee/currentActivities/${id}`))
             const profile = (await (axios.get(`http://localhost:3001/employee/profile/${id}/${cycleId}`))).data
             console.log(data)

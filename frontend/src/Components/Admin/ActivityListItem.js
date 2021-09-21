@@ -29,8 +29,9 @@ function ActivityListItem({activity}) {
         <List.Item.Meta
           avatar={<CarryOutOutlined style={{fontSize: '200%'}} />}  
           title={
-          <Title level={5} >{activity.name}</Title> 
+          <Title level={5} >{activity.name || activity.title}</Title> 
         }
+
           
         />
         

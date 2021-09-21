@@ -21,7 +21,6 @@ exports.viewEmployeeRanking = async (req, res) => {
         if(result && result[0]){
             return res.send(result[0])
         }else if(err){
-            console.log(err)
             return res.status(400).send()
         } 
         else{
