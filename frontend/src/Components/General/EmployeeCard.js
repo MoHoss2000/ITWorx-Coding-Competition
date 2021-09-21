@@ -12,11 +12,13 @@ const EmployeeCard = (props) =>{
         <div class="box">
             <div class="content">
             <h2 style={{fontSize:'95px'}}>{props.data.id}</h2>
-            <h3 style={{fontSize:'35px', marginTop: '35%'}}> Employee </h3>
+            <h3 style={{fontSize:'35px', marginTop: '20%'}}> Employee </h3>
             <div class="card__details">
-            <li><b>Name: </b> {props.data.first_name + ' ' + props.data.last_name}</li>
-            <li> <b>Email: </b> {props.data.username}</li>
-            <li> <b>Developer: </b> {developer}</li>
+            <ul>
+            <li><b>Name: </b> <br/> {props.data.first_name + ' ' + props.data.last_name}</li>
+            <li style={{fontSize:'15px'}}> <b>Email:  <br/> </b> {props.data.username}</li>
+            <li> <b>Developer:  </b> {developer}</li>
+            </ul>
         </div>   
         </div>
         </div>

@@ -67,7 +67,7 @@ function AllActivities() {
   <h1 className="title">Activities</h1>
     <Divider className="title-divider"/>
 
-  <Card style={{margin: '50px', boxShadow: '10px 8px 20px 0 #b720259d'}}
+  <Card style={{margin: '50px 150px', boxShadow: '10px 8px 20px 0 #b720259d'}}
    extra={
    <Search placeholder="search Activities" onChange={(e) => setSearchTerm(e.target.value)} style={{ width: 300 }} 
     /> } >

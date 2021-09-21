@@ -111,18 +111,17 @@ const MyActivities = ({divider}) => {
       activeTabKey={tab}
       onTabChange={key => { onTabChange(key)}}
       >
-      
-    <List
-    itemLayout="vertical"
-    size="large"
-    pagination={{
-      pageSize: 5,
-    }}
-    dataSource={displayed}
-    renderItem={activity => (
-      <ActivityListItem activity={activity} setActivity={setActivity} setIsModalVisible={setIsModalVisible}/>
-    )}
-  />
+        <List
+        itemLayout="vertical"
+        size="large"
+        pagination={{
+          pageSize: 5,
+        }}
+        dataSource={displayed}
+        renderItem={activity => (
+          <ActivityListItem activity={activity} setActivity={setActivity} setIsModalVisible={setIsModalVisible}/>
+        )}
+      />
 
     </Card>
     <ActivityCard activity={activity} isModalVisible={isModalVisible}  setIsModalVisible={setIsModalVisible}/>

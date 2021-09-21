@@ -43,7 +43,7 @@ function AdminHome (){
                         </Col>
                         <Col>
                         <h1 className='welcome-statement'> {'Welcome Back, ' + profile.first_name + ' '+ profile.last_name +'!'} </h1>
-                        <h2 className='welcome-line'> Glad to see you again!</h2>
+                        <h2 className='welcome-line'> Glad to see you again! Here's how you can start your day...</h2>
                         </Col>
                     </Row>
                 </Card>
@@ -57,8 +57,8 @@ function AdminHome (){
                     </div>
                     
                 
-                      <div className='activities-home-container'>
-                      <h4 className= "components-header"> <b> Activities waiting for you to evaluate</b></h4>
+                      <div className='activities-admin-home-container'>
+                      <h4 className= "components-header"> <b> Some of the activities waiting for you to evaluate</b></h4>
                      <PendingOverview data={data} className='activities-home' /> 
                      </div>
                 </div>

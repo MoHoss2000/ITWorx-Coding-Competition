@@ -68,7 +68,7 @@ const EmployeeCycleStatus= () => {
                     <InfoCard data={data.cycleInfo[0]}/>
                 </Col>
             <Col flex="auto">
-                <Tabs defaultActiveKey="1" centered>
+                <Tabs defaultActiveKey="1" centered style={{margin:'50px 40px'}}>
                     <TabPane tab={<span style={{fontSize:'23px'}}> Activities  </span>} key="2" >
                          <div className='info-display info-tab'>
                                 <Card className='activities-container'>
@@ -106,17 +106,12 @@ const EmployeeCycleStatus= () => {
                                 </Card>
                             </div>
                     </TabPane>
-                    {/* <TabPane tab={<span style={{fontSize:'23px'}}> Badges  </span>} key="3">
-     <div className='status-tabs'>
-    <BadgesDisplay  adminMode={false} data={data.badges} />
-    </div>
-</TabPane> */}
 
-<                   TabPane tab={<span style={{fontSize:'23px'}}> Virtual Recognitions  </span>} key="4" >
-  <div className='info-display status-tabs'  >
-   <VirtualRecognitions data={data.virtual_recognitions}/>
-</div>
-</TabPane>
+                    <TabPane tab={<span style={{fontSize:'23px'}}> Virtual Recognitions  </span>} key="4" >
+                        <div className='info-display status-tabs'  >
+                        <VirtualRecognitions data={data.virtual_recognitions}/>
+                        </div>
+                     </TabPane>
 
 </Tabs>
 </Col>

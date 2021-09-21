@@ -46,7 +46,7 @@ const ProgressBar = () => {
     return (
       <div>
         <Progress percent={50} showInfo={false} status="active"/>
-        <Text type="secondary">Error loading data</Text>
+        <Text type="secondary">Error loading data. Try refreshing the page</Text>
       </div>
     )
   }
@@ -65,6 +65,7 @@ const ProgressBar = () => {
         <img alt="" height='140' src={getBadgeIcon(latestBadge.points_needed)} />
         </Col>
         <Col>
+
       <div style={{marginTop: '30px'}}>
           <Progress percent={parseInt(percentage)} status="active"/>
           <Text type="secondary">{points} points left for next badge!</Text>
