@@ -13,7 +13,6 @@ const { Search } = Input;
 
 function Activities() {
   const [activities, setActivities] = useState(null)
-  const [displayed, setDisplayed] = useState(null)
   const [error, setError] = useState(false)
   
   
@@ -24,7 +23,7 @@ function Activities() {
     axios.get('http://localhost:3001/admin/Activities')
       .then((res) => {
         setActivities(res.data)
-        setDisplayed(res.data)
+
         
       })
       .catch((e) => {
@@ -37,7 +36,7 @@ function Activities() {
   if (error) {
     return (<NetworkError/>)
   }
-  if (displayed ===null) {
+  if (activities ===null) {
     return <Spin size='large'/>
   }
 
