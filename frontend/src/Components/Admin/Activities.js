@@ -14,16 +14,13 @@ const { Search } = Input;
 function Activities() {
   const [activities, setActivities] = useState(null)
   const [error, setError] = useState(false)
-  
-  
- 
+
 
   useEffect(() => {
    
     axios.get('http://localhost:3001/admin/Activities')
       .then((res) => {
         setActivities(res.data)
-
         
       })
       .catch((e) => {

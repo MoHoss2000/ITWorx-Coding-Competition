@@ -46,7 +46,6 @@ exports.createNewCycle= async (req,res)=>{
 
 }
 
-
 exports.viewParticipants = async (req, res) => {
     const cycleID = parseInt(req.params.cycleID)
    
@@ -287,10 +286,6 @@ exports.exportToExcelLeaderboard = async(req, res) => {
 	}).catch((e) => res.status(400).json(e));
 }
 
-
-
-
-
 exports.createBadge= async (req, res) => {
   var name = req.body.name;
   var description = req.body.description;
@@ -327,7 +322,6 @@ exports.updateBadge = async(req, res) => {
   }
 }
 
-
 exports.createCycle= async (req, res) => {
   var {start_date, end_date, admin_id} = req.body;
   try{
@@ -354,6 +348,7 @@ exports.getActivities = async (req, res) => {
     })
   
 }
+
 exports.getAllActivities = async (req, res) => {
  
     db.query(`SELECT * FROM Activity`, (err, result) => {
@@ -391,6 +386,7 @@ exports.getCycles= async (req, res) => {
     res.status(400).send(e);
   }
 }
+
 exports.getEmployeesActivity = async (req, res) => {
   const {activityId, cycleId}= req.query
      if(!activityId){
@@ -438,6 +434,7 @@ exports.createNewActivity = async (req, res) => {
       }
     })
 }
+
 exports.editActivity= async (req, res) => {
 
   const { ActivityId ,name, description, enabled, virtual_recognition, points, cycleId } = req.body

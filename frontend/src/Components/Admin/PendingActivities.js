@@ -22,8 +22,6 @@ function PendingActivities() {
       })
       .catch((e) => {
         setError(e.message)
-        
-
       })
 
   }, []);
