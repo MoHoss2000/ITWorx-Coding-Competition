@@ -67,7 +67,7 @@ function ActivityList({id, className}) {
                 avatar={
                     <Avatar src="/activity.png" />
                   }
-                title={<a href="https://ant.design">{item.title}</a>}
+                
                 description= {item.description}
                 />
             </List.Item>

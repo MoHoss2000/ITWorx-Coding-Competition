@@ -17,21 +17,7 @@ function Activities() {
   const [error, setError] = useState(false)
   
   
-  const onSearch = (value) => {
-
-    
-    const filteredActivities  = activities.filter((activity) => {
-      console.log(activity)
-      
-        const searchValue= value.toLowerCase();
-        if(activity.name.toLowerCase().includes(searchValue)){
-          return activity
-        }   
-        })
-    setDisplayed(filteredActivities)
-
-  };
-  
+ 
 
   useEffect(() => {
    

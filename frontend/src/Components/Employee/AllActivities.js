@@ -72,9 +72,10 @@ function AllActivities() {
   <h1 className="title">Activities</h1>
     <Divider className="title-divider"/>
 
-  <Card 
-   extra={<Search placeholder="search Activities" onSearch={onSearch} style={{ width: 200 }} 
-   style={{margin: '50px', boxShadow: '10px 8px 20px 0 #b720259d'}}/> } >
+  <Card style={{margin: '60px', boxShadow: '10px 8px 20px 0 #b720259d'}}
+   extra={
+   <Search placeholder="search Activities" onSearch={onSearch} style={{ width: 300 }} 
+    /> } >
  
   <List
     itemLayout="vertical"

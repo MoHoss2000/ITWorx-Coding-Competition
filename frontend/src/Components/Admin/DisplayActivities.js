@@ -1,12 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'antd/dist/antd.css';
-import { List, Divider } from 'antd';
+import { List, Divider , Card, Input} from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import ActivityListItem from './ActivityListItem';
+const { Search } = Input;
 
 function DisplayActivities ({activities}){
+    const [displayed, setDisplayed] = useState(activities)
     console.log(activities)
+
+    const onSearch = (value) => {
+        const filteredActivities  = activities.filter((activity) => {
+          console.log(activity)
+          
+            const searchValue= value.toLowerCase();
+            if(activity.name.toLowerCase().includes(searchValue)){
+              return activity
+            }   
+            })
+            console.log(displayed)    
+        setDisplayed(filteredActivities)
+    
+      };
+      
 return(
         <div>
             
@@ -14,19 +31,26 @@ return(
             <Divider className="title-divider"/>
         { !activities ? <LoadingOutlined style={{ fontSize: 50 }} spin /> :
         <div className='activities-list'>
+
+  <Card style={{margin: '60px', boxShadow: '10px 8px 20px 0 #b720259d'}}
+        extra={
+        <Search placeholder="search Activities" onSearch={onSearch} style={{ width: 300 }} 
+            /> }>
         <List
             itemLayout="vertical"
             size="large"
             pagination={{
             pageSize: 5,
             }}
-            dataSource={activities}
+            dataSource={displayed}
             renderItem={activity => (
             <ActivityListItem activity={activity}
             />
+           
             )}
            
         /> 
+         </Card>
          </div>}
 
         </div>  

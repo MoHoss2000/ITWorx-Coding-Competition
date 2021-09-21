@@ -48,8 +48,7 @@ function CycleOverview (){
                 <ActivityList id={id} className="activities-overview"/> 
                 </Col >
             </Row>
-<Row>
-                
+<Row>      
                     <Col flex="auto">
                          <Leaderboard id={id} />
                     </Col>
