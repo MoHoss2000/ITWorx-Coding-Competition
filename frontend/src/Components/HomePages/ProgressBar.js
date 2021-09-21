@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { UserContext } from "../../Context";
 import axios from 'axios';
-import { Progress, Typography, Spin, Space } from 'antd';
+import { Progress, Typography, Spin, Space, Row, Col } from 'antd';
 import { getBadgeIcon } from '../../Helpers/badge_icons';
 import { SketchOutlined } from '@ant-design/icons';
 
@@ -51,7 +51,7 @@ const ProgressBar = () => {
   if (error) {
     return (
       <div>
-        <Progress percent={50} showInfo={false} />
+        <Progress percent={50} showInfo={false} status="active"/>
         <Text type="secondary">Error loading data</Text>
       </div>
     )
@@ -65,30 +65,44 @@ const ProgressBar = () => {
 
   return (
     <div style={{ width: 400 }}>
-
       <Title level={3} strong={true}>My Points: {employeePoints}  <SketchOutlined style={{ fontSize: '100%', color: "#87CEFA" }} /></Title>
-      
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems:'center' }}>
-        <img height='50' src={getBadgeIcon(latestBadge.points_needed)} />
 
+      <Row>
+        <Col>
+        <img height='140' src={getBadgeIcon(latestBadge.points_needed)} />
+        
+        </Col>
+        <Col>
+      <div style={{marginTop: '30px'}}>
+          <Progress percent={percentage} status="active"/>
+          <Text type="secondary">{points} points left for next badge!</Text>
+          
+          
+      </div>
+      
+      </Col>
+      <br />
+      </Row>
+         <Row>  
+           <Col>
+      {/* <div style={{ display: 'flex', flexDirection: 'row', alignItems:'center', marginLeft:'100px' }}>
+        
+     
         <Text style={{marginBottom: '5px'}} strong={true} type='secondary'>{latestBadge.name} [ Points Needed: {latestBadge.points_needed}</Text>
         <SketchOutlined style={{ fontSize: '100%', color: "#87CEFA", marginLeft:'4px', marginBottom: '5px' }} />
         <Text strong={true} type='secondary'>]</Text>
-      </div>
-      
-      <Progress percent={percentage} />
-      <Text type="secondary">{points} points left for next badge!</Text>
-      <br />
+      </div>  */}
+      </Col>
+      </Row> 
 
-
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems:'center' }}>
-        <img height='50' src={getBadgeIcon(nextBadge.points_needed)} />
+      {/* <div style={{ display: 'flex', flexDirection: 'row', alignItems:'center' }}>
+        <img height='80' src={getBadgeIcon(nextBadge.points_needed)} />
 
         <Text style={{marginBottom: '5px'}} strong={true} type='secondary'>{nextBadge.name} [ Points Needed: {nextBadge.points_needed}</Text>
         <SketchOutlined style={{ fontSize: '100%', color: "#87CEFA", marginLeft:'4px', marginBottom: '5px' }} />
         <Text strong={true} type='secondary'>]</Text>
 
-      </div>
+      </div> */}
 
     </div>
   );

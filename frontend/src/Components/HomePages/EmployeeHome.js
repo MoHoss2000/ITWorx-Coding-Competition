@@ -39,7 +39,7 @@ function EmployeeHome (){
     else{
     return(
         <div >  
-            <ProgressBar/>
+            
             <Row>
                 <Card className='welcome-bar ocean'>
                 <div className='wave'> </div>
@@ -61,12 +61,15 @@ function EmployeeHome (){
             
             <Row gutter={[80, 0]} >
                 <div  className='rowsss' >
+                    <Col>
                     <div>
                     <h1 className= "clock-header"> <b>Cycle Remaining Time </b></h1>
                         <Clock />
                     </div>
-                    
-                
+                    <Card style={{marginTop:'40px', marginLeft:'20px',backgroundColor:'rgb(255,255,255,0.5)', boxShadow: '1px 8px 30px 0 grey'}}>
+                    <ProgressBar/>
+                    </Card>
+                </Col>
                       <div className='activities-home-container'>
                       <h1 className= "components-header"> <b> Activities waiting for you</b></h1>
                      <ActivitiesDone data={data} className='activities-home' /> 

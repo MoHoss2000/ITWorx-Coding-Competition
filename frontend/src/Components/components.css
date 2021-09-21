@@ -153,7 +153,8 @@ body {
 }
 
 .status-tabs {
-  margin: 0 auto;
+  display: 'flex';
+  flex-wrap: wrap;
 }
 
 .side-bar {

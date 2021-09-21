@@ -58,7 +58,7 @@ const MyStatus= () => {
 
                <TabPane tab={<span style={{fontSize:'20px'}}> Badges  </span>} key="3">
                      <div className='status-tabs'>
-                    <BadgesDisplay  adminMode={false} data={data.badges} />
+                    <BadgesDisplay  adminMode={false} data={data.badges} span = {12} />
                     </div>
                 </TabPane>
 

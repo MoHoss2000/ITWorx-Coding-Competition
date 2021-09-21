@@ -15,11 +15,12 @@ function ActivityListItem({activity}) {
     key={activity.id} 
     >
    
-   <Card key={activity.id} title={activity.name} type="inner" 
+   <Card key={activity.id} title={activity.title || activity.name} type="inner" 
             extra={<Button type="primary" style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between'
+              
             }}
             >
               <SketchOutlined />
