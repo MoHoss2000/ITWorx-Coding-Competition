@@ -6,15 +6,13 @@ import ActivityListItem from './ActivityListItem';
 const { Search } = Input;
 
 function DisplayActivities ({activities}){
-    // const [displayed, setDisplayed] = useState(activities)
     const [searchTerm, setSearchTerm] = useState("")
     const [filtered, setFiltered] = useState([]);
-
   
     useEffect(() => {
         setFiltered(
           activities.filter((activity) =>
-            activity.name.toLowerCase().includes(searchTerm.toLowerCase()) 
+            (activity.name || activity.title).toLowerCase().includes(searchTerm.toLowerCase()) 
           ) 
         );
       }, [searchTerm]);
