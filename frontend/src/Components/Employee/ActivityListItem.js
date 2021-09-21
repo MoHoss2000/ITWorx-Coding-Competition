@@ -27,9 +27,8 @@ function ActivityListItem({activity, setActivity, setIsModalVisible}) {
         key={activity.id} 
         
         extra= {<div>
-            <Text strong >Points: </Text>
-            <Text >{activity.points}</Text>
-            <SketchOutlined style={{fontSize: '120%',marginLeft:'5px', color:"#87CEFA" }}/>
+            
+            
             <Button style={{ marginLeft:'10px' }} onClick={updateActivity} type="block" > View Activity </Button>
             </div>} >
        
@@ -42,17 +41,14 @@ function ActivityListItem({activity, setActivity, setIsModalVisible}) {
         />
         
        <div style={{ display: "flex", direction: "row", marginTop:'10px' }} >
-
-      
         <Text style={{ marginRight:'10px' }} mark>Status:</Text>
         <Text > 
         {activity.status===null && "Unassigned"}
         {activity.status==='A' && "Assigned"}
         {activity.status==='P' && "Pending"}
         {activity.status==='C' && "Complete"}</Text> 
-       
-
-
+        <Text style={{marginLeft: '20px'}}><b> Points: </b> {activity.points}</Text>
+        <SketchOutlined style={{fontSize: '120%',marginLeft:'5px', color:"#87CEFA" }}/>
         </div>
       </List.Item>
     )

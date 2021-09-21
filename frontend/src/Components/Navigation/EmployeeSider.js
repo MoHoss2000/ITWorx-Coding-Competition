@@ -68,8 +68,6 @@ function EmployeeSider() {
             Leaderboard
             </Link>
           </Menu.Item>
-        
-         
         </Menu>
       </Sider>
 
