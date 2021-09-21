@@ -1,8 +1,4 @@
 const express = require('express')
-const bcrypt = require("bcrypt");
-const db = require('../db/mysql')
-const {createToken} = require ('../utils/tokens')
-const authenticateToken = require('../middleware/authenticate')
 const controllers = require ('../controllers/general')
 const cookieParser = require("cookie-parser");
 
@@ -23,8 +19,5 @@ router.patch('/newpassword', controllers.newPassword)
 
 // sends reset password link to email
 router.post('/resetPassword', controllers.resetPassword);
-
-
-
 
 module.exports = router

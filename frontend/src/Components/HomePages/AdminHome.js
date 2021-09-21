@@ -18,7 +18,6 @@ function AdminHome (){
     useEffect(() => {
         const getStatus = async () => {
             const {data} = await (axios.get(`http://localhost:3001/admin/pending/${cycleId}`))
-            console.log(data)
             const profile = (await (axios.get(`http://localhost:3001/admin/profile/${id}`))).data
             setData(data.slice(0,3))
             setProfile(profile)

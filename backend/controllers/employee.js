@@ -2,9 +2,7 @@ const db = require('../db/mysql')
 
 
 exports.viewBadges = async (req, res) => {
-    const {employeeId, cycleId}= req.query
-    
-
+    const {employeeId, cycleId} = req.query
     const badges = new Promise((resolve, reject) => {
         db.query('SELECT * FROM Badge', (err, result) => {
             // console.log(result);
@@ -30,7 +28,7 @@ exports.viewBadges = async (req, res) => {
 
         // get employee points in the cycle
         var employeePoints = (await employeePointsInCycle)[0][0].points;
-
+        console.log(employeePoints)
 
         // badges employee gained in the cycle (points needed <= his points in the same cycle)
         var gainedBadges = allBadges.filter((badge) => (badge.points_needed <= employeePoints) && badge.enabled);

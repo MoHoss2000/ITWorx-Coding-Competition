@@ -73,9 +73,6 @@ function EmployeeActivity({id, setError }) {
 
   };
   useEffect(() => {
-
-    console.log('GETTING EMPLOYEES');
-    console.log("id"+ id)
     setError(null)
     axios(
       {
@@ -87,7 +84,6 @@ function EmployeeActivity({id, setError }) {
           cycleId: 1
         }
       }).then((res) => {
-      console.log(res.data[0])
       setEmployees(res.data[0])
       setDisplayed(res.data[0].filter((employee)=> employee.status==='A'))
       setLoading(false)

@@ -1,18 +1,19 @@
-import React , {useState, useEffect} from 'react';
+import React , {useState, useEffect, useContext} from 'react';
 import 'antd/dist/antd.css';
-import { List, Card , Button, Avatar, Spin } from 'antd';
+import { List, Card , Avatar, Spin } from 'antd';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import '../components.css';
+import { UserContext } from '../../Context';
 
 const PendingList = () => {
     const [loading, setLoading] = useState(true) 
     const [data, setData] = useState([])
     const [error, setError] = useState(null)
+    const {cycleId} = useContext(UserContext)
 
     useEffect(() => {
-        const cycleID = 1
-        axios.get( `http://localhost:3001/admin/pending/${cycleID}`
+        axios.get( `http://localhost:3001/admin/pending/${cycleId}`
         ).then((res) =>{         
                 setData(res.data.slice(0,3))
                 setLoading(false)  
@@ -40,11 +41,12 @@ const PendingList = () => {
             actions={[<Link to={`/activities/${item.id}`}> View Activity </Link>]}
             >
                 <List.Item.Meta
+                
                 avatar={
                     <Avatar src="/activity.png" />
                   }
-                
-                description= {item.description}
+                title={item.name || item.title}
+                description = {item.description}
                 />
             </List.Item>
             )}

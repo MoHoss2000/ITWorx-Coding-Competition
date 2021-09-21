@@ -7,8 +7,6 @@ const { Title } = Typography;
 const EmployeeCard = (props) =>{
     const developer = props.data.is_developer ? 'Yes' : 'No'
     return(
-    
-    
         <div class="container">
         <div class="card">
         <div class="box">

@@ -67,7 +67,7 @@ function ActivityList({id, className}) {
                 avatar={
                     <Avatar src="/activity.png" />
                   }
-                
+                title={item.name || item.title}
                 description= {item.description}
                 />
             </List.Item>

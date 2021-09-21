@@ -1,13 +1,11 @@
 const express = require('express')
 const db = require('../db/mysql')
-const authenticateToken = require('../middleware/authenticate')
 const controllers = require('../controllers/admin')
-const { isAdmin } = require('../middleware/authorization')
+
 
 const router = express.Router()
 router.use(express.json())
-//router.use(authenticateToken)
-//router.use(isAdmin)
+
 router.get('/profile/:id', controllers.viewProfile)
 
 router.post('/newCycle',controllers.createNewCycle)
@@ -51,11 +49,5 @@ router.patch('/cycle/disable/:cycleID', controllers.disableCycle)
 router.get('/employeeStatus/:employeeId/:cycleID', controllers.viewEmployeeStatus)
 
 router.get('/cycle/view/:id', controllers.cycleInfo)
-
-router.get('/leaderboard/excelfile/:cycleID', controllers.exportToExcelLeaderboard)
-
-router.get('/', (req, res) => {
-    //res.redirect('http://localhost:3001/admin/leaderboard/excelfile/1')
-})
 
 module.exports = router

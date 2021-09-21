@@ -24,7 +24,7 @@ function EmployeeListItem({employee , activityId}) {
         else {
             return (<div style={{display:'flex', flexDirection:'column'}}>
                       <Button type="primary" onClick={removeCompletion} danger ghost> Remove completion</Button>
-                      <Button style={{marginTop:'5px'}} type="primary"  onClick={assignEmployee} ghost> reassign</Button>
+                      <Button style={{marginTop:'5px'}} type="primary"  onClick={assignEmployee} ghost> Reassign</Button>
                   </div>)
         }
     }
@@ -33,8 +33,6 @@ function EmployeeListItem({employee , activityId}) {
 
      
        try{
-        console.log("employee list item")
-       // console.log(id)
         setLoading(true)
          const assign= await axios({
             method: 'post',
@@ -47,21 +45,18 @@ function EmployeeListItem({employee , activityId}) {
           });
         employee.status='A';      
         setLoading(false)
-        console.log(assign)
        }
        catch(e){
            console.log(e)
-            
        }
 
    }
-   const markAsComplete= async ()=>{
+   const markAsComplete= async () => {
 
      
     try{
         console.log("employee list item")
-       // console.log(id)
-     setLoading(true)
+        setLoading(true)
 
       const assign= await axios({
          method: 'post',

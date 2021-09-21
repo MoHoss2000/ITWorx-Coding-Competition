@@ -8,12 +8,7 @@ const router = new express.Router()
 
 router.use(express.json())
 
-//router.use(authenticateToken)
-//router.use(isEmployee)
 router.get('/badges', controllers.viewBadges)
-
-router.get('/badges', controllers.viewBadges)
-
 
 router.post('/activities/submitActivity', controllers.submitActivity)
 

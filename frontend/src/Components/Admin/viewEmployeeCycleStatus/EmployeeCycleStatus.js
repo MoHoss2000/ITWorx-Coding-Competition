@@ -15,14 +15,28 @@ const EmployeeCycleStatus= () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
     const [visible, setVisible] = useState(false)
+    const [gainedBadges, setGainedBadges] = useState([])
     const {id, empId} = useParams()
     useEffect(() => {
   
         const getStatus = async () => {
             const { data } = await (axios.get(`http://localhost:3001/admin/employeeStatus/${empId}/${id}`))
-            console.log(data)
+            axios(
+                {
+                  method: 'get',
+                  url: 'http://localhost:3001/employee/badges',
+                  headers: {},
+                  params: {
+                    employeeId: empId,
+                    cycleId: id
+                  }
+                }).then((res) => {
+                  setGainedBadges(res.data.gainedBadges)
+                })
+                .catch((e) => {
+                  
+                })
             setData(data)
-            console.log(data.badges)
             setLoading(false)
         } 
         getStatus()
@@ -113,7 +127,7 @@ const EmployeeCycleStatus= () => {
             Badges   
           </p>
 
-            <BadgesDisplay  adminMode={false} data={data.badges} span = {12} />
+            <BadgesDisplay  adminMode={false} data={gainedBadges} span = {12} />
 
         </Drawer>
         </div>
