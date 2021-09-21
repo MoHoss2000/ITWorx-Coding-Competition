@@ -77,7 +77,7 @@ const Profile= ()=> {
         <Descriptions.Item label="Practices: ">{employeePractice}</Descriptions.Item>   
      </Descriptions> 
      <div style={{textAlign:'center', marginTop:'20px'}}>
-     <Button style={{}} type='primary'><Link to="/changePassword" className="btn btn-primary">Change Password</Link></Button>
+     <Button style={{}} type='primary'><Link to="/changePassword">Change Password</Link></Button>
      </div>
      
             

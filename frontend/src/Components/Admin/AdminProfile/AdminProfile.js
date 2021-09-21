@@ -1,41 +1,51 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect,useContext} from 'react'
 import axios from 'axios'
-import {Tabs, Card, Avatar, Spin} from 'antd'
-import AdminPersonalInfo from './AdminPersonalInfo';
+import { UserContext } from '../../../Context';
+import {Tabs, Card, Avatar, Spin, Descriptions,Button} from 'antd'
+import NetworkError from '../../NetworkError';
+import { Link } from 'react-router-dom';
+import { UserOutlined } from '@ant-design/icons';
 const { TabPane } = Tabs;
 const AdminProfile = () => {
-    const [loading, setLoading] = useState(true)
+
+    const {id, cycleId } = useContext(UserContext)
     const [data, setData] = useState([])
+    const [error, setError] = useState(false)
+   
+
     useEffect(() => {
-        const id = 1
-        const getData = async () => {
-            const res = await axios.get(`http://localhost:3001/admin/profile/${id}`)
-            setData(res.data)
-            setLoading(false)
-        }
-        getData()
+             axios.get(`http://localhost:3001/admin/profile/${id}`)
+             .then((res)=>{
+                console.log(res.data)
+                setData(res.data)
+             }).catch((err)=>{
+                 setError(true)
+
+             })
     }, [])
 
-    if(loading)
-        return <Spin large/>
-
+    if(error){
+        return <NetworkError/>
+    }
+    if(data===null){
+        return(<Spin size='large'/>)
+    }
+    
     return(
-        <div>
-            <Card className='semi-back'></Card>
-            <Card className='semi-lower'>
-                <Avatar size={260} style={{backgroundColor: '#000090', marginLeft:'37%', marginRight:'35%', top:'-140px', fontSize:'110px'}} > {data.first_name.slice(0,1) + data.last_name.slice(0,1) } </Avatar>
-                <Card style={{ borderColor: 'white', top:'-110px'}}>
-                    <Tabs defaultActiveKey="1" centered='true' size='large' tabBarGutter={50}>
-                        <TabPane tab={<span style={{fontSize:'25px'}}>Personal Info</span>}key="1">
-                            <div className='profile-components'>
-                                <AdminPersonalInfo data={data}/> 
-                            </div>
-                        </TabPane>
-                    </Tabs>
-                </Card>
-            </Card>
-        </div>
+       <Card
+        style={{marginTop:'100px',marginLeft:'10%', marginRight:'10%', textAlign:'center'}}
+        cover={<Avatar size={260} style={{marginLeft:'40%', marginRight:'50%'}}>  </Avatar>}
+        alt={<UserOutlined/>}>
+           <Descriptions column={1} bordered>
+            <Descriptions.Item label="Name: ">{data.first_name + " " + data.last_name}</Descriptions.Item>
+            <Descriptions.Item label="Email: ">{data.username}</Descriptions.Item>
+         </Descriptions> 
+         <div style={{textAlign:'center', marginTop:'20px'}}>
+         <Button style={{}} type='primary'><Link to="/changePassword" >Change Password</Link></Button>
+         </div>
+         </Card>
+      
     )
 }
 
-export default AdminProfile
+export default AdminProfile;
