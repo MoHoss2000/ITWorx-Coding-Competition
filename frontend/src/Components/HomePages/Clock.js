@@ -37,7 +37,7 @@ export default function Clock() {
         const getTime= async () => {
             const {data} = await(axios.get('http://localhost:3001/time'))
             console.log(data)
-            if (data.length == 0){
+            if (data.length === 0){
                 setCurrent(false)
                 setLoading(false)
                 return

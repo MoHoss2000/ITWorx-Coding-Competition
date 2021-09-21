@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from "react";
+import React, {createContext, useState} from "react";
 
 export const UserContext = createContext();
 
@@ -12,17 +12,6 @@ export const UserProvider = ({children}) => {
   const [cycleId, setCycleId] = useState(parsedUser.cycleID || null);
   const [type, setType] = useState(parsedUser.type || null);
   const [targetPath, setTargetPath] = useState("")
- 
-
-  // useEffect(() => {
-  //   if ((user)) {
-  //     const {accessToken, cycleID, id, type} = JSON.parse(user)
-  //     setId(id)
-  //     setToken(accessToken)
-  //     setCycleId(cycleID)
-  //     setType(type)
-  //   }
-  // }, [user])
 
   return (
     <UserContext.Provider

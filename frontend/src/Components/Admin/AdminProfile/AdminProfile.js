@@ -1,14 +1,13 @@
 import React, {useState, useEffect,useContext} from 'react'
 import axios from 'axios'
 import { UserContext } from '../../../Context';
-import {Tabs, Card, Avatar, Spin, Descriptions,Button} from 'antd'
+import { Card, Avatar, Spin, Descriptions,Button} from 'antd'
 import NetworkError from '../../NetworkError';
 import { Link } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
-const { TabPane } = Tabs;
 const AdminProfile = () => {
 
-    const {id, cycleId } = useContext(UserContext)
+    const {id} = useContext(UserContext)
     const [data, setData] = useState([])
     const [error, setError] = useState(false)
    

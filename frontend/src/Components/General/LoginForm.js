@@ -7,7 +7,7 @@ import * as yup from 'yup'
 import Axios from 'axios';
 import {UserContext} from "../../Context";
 import {useHistory} from 'react-router-dom';
-import {Redirect, Route} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),

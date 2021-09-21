@@ -1,9 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './css.css';
-import { Card, Typography, Divider } from 'antd';
-const { Title } = Typography;
-
 const MyPoints = (props) =>{
 
    const points = props.data.points ? props.data.points : 0

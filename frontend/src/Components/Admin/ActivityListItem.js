@@ -1,15 +1,12 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Button, Card, Divider, List, Typography } from 'antd';
+import { Button, List, Typography } from 'antd';
 import { CarryOutOutlined, SketchOutlined } from '@ant-design/icons';
 import { Link, } from 'react-router-dom'
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 
 function ActivityListItem({activity}) {
-
-
-  
   return (
   <div>
 

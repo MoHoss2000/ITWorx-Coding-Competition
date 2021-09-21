@@ -1,16 +1,12 @@
 import React , {useState, useEffect, useContext} from 'react';
 import 'antd/dist/antd.css';
-import { List, Card , Button, Avatar, Typography, Divider, Row, Col, Spin} from 'antd';
+import { Card , Row, Col, Spin} from 'antd';
 import axios from 'axios'
 import '../components.css';
 import PendingOverview from '../Admin/PendingOverview'
-import ActivitiesDone from '../Employee/ActivitiesDone'
 import Clock from './Clock'
 import Leaderboard from '../Admin/Leaderboard';
 import { UserContext } from '../../Context';
-
-const { Title } = Typography;
-
 
 function AdminHome (){
 
@@ -43,7 +39,7 @@ function AdminHome (){
                     <Row>
                         <Col>
                         <div className='avatar-block'> 
-                         <img className='avatar' src='/avatar.png'/> 
+                         <img alt="" className='avatar' src='/avatar.png'/> 
                          </div>
                         </Col>
                         <Col>

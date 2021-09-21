@@ -2,7 +2,6 @@ import 'antd/dist/antd.css';
 import {useState, useContext} from 'react';
 import axios from 'axios';
 import {Alert,Button, Card, Form, Input,Divider, InputNumber, Select, Space, Spin, Switch, Typography,} from 'antd';
-import { Link } from 'react-router-dom';
 import {UserContext} from "../../Context";
 
 const {Option} = Select;

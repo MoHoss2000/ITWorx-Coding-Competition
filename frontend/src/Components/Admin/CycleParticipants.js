@@ -5,10 +5,7 @@ import { Table, Input, Button, Space, Divider } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined} from '@ant-design/icons';
 import axios from 'axios'
-import {
-  BrowserRouter as Router,
-  Link,
-} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import { withRouter } from "react-router";
 import { ExportParticipants } from './ExportParticipants';
 

@@ -1,10 +1,9 @@
 import { useContext, useState } from 'react';
-import { Form, Input, Button, Alert, Row, Col , Avatar} from 'antd';
+import { Form, Input, Button, Alert, Avatar} from 'antd';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import { UserContext } from '../../Context';
 import Axios from 'axios';
-import { Card } from '@material-ui/core';
 import '../components.css'
 const Login = () => {
     const history = useHistory()
@@ -24,7 +23,7 @@ const Login = () => {
       username,
       password
     }).then((response) => {
-      if(response.data == 'Wrong username!') throw new Error()
+      if(response.data === 'Wrong username!') throw new Error()
       const {accessToken, cycleID, id, type} = response.data
       setId(id)
       setToken(accessToken)

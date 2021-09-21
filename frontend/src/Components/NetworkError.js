@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-import { Result, Button } from 'antd';
+import { Result } from 'antd';
 
 const NetworkError = () => {
     return (<Result

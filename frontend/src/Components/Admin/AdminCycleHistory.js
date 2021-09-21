@@ -35,7 +35,7 @@ function AdminCycleHistory() {
      )
   }
 
-  if (cycles==[]) {
+  if (cycles === []) {
     return <div> No Cycles Available</div>
   }
   
