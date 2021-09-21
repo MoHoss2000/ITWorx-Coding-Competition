@@ -4,7 +4,7 @@ import '../../components.css';
 import { Card, Typography, Divider } from 'antd';
 const { Title } = Typography;
 
-const EmployeeProfile = (props) =>{
+const EmployeeProfile = (props) => {
     const isDeveloper = props.data.is_developer == 1 ? 'Yes' : 'No'
   
 return(

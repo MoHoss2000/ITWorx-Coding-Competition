@@ -68,12 +68,6 @@ function EmployeeSider() {
             Leaderboard
             </Link>
           </Menu.Item>
-        
-          <Menu.Item key="3" icon={<SettingOutlined style={{color:'white'}}/>}>
-            {/*<Link>*/}
-            Settings
-            {/*</Link>*/}
-          </Menu.Item>
         </Menu>
       </Sider>
 
