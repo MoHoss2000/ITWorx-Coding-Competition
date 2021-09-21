@@ -1,6 +1,6 @@
 import React , {useState, useEffect, useContext} from 'react';
 import 'antd/dist/antd.css';
-import { List, Card , Button, Avatar, Typography, Divider, Row, Col} from 'antd';
+import { Card , Row, Col} from 'antd';
 import axios from 'axios'
 import '../components.css';
 import ActivitiesDone from '../Employee/ActivitiesDone'
@@ -9,7 +9,6 @@ import Leaderboard from '../Admin/Leaderboard';
 import { UserContext } from '../../Context';
 import ProgressBar from './ProgressBar';
 
-const { Title } = Typography;
 
 
 function EmployeeHome (){
@@ -47,7 +46,7 @@ function EmployeeHome (){
                     <Row>
                         <Col>
                         <div className='avatar-block'> 
-                         <img className='avatar' src='/avatar.png'/> 
+                         <img alt="" className='avatar' src='/avatar.png'/> 
                          </div>
                         </Col>
                         <Col>

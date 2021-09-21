@@ -12,10 +12,7 @@ function ActivityCard({id,setError}) {
 
   const {cycleId}=useContext(UserContext)
   const [activity, setActivity] = useState(null)
-
-
   useEffect(() => {
-
     axios(
       {
         method: 'get',

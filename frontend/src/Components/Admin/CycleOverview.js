@@ -12,17 +12,13 @@ import { useParams, Link } from 'react-router-dom';
 
 
 function CycleOverview (){
-
     const [data, setData] = useState([])
     const [current, setCurrent] = useState(false)
-    console.log(useParams())
     const {id} = useParams()
-    console.log(id)
     
     useEffect(() => {
         const getCycle = async () => {
             const {data} = (await axios.get(`http://localhost:3001/admin/cycle/view/${id}`))
-            console.log(data)
             setData(data)
             setCurrent(data.current)
         }
@@ -48,18 +44,11 @@ function CycleOverview (){
                 <ActivityList id={id} className="activities-overview"/> 
                 </Col >
             </Row>
-<Row>      
+                <Row>      
                     <Col flex="auto">
                          <Leaderboard id={id} />
                     </Col>
                  </Row>
-                
-          
-
-            
-            
-           
-           
         </div>
     )
 }

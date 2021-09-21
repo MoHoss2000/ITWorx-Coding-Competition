@@ -1,9 +1,8 @@
 import React, {useState, useContext} from 'react';
 import 'antd/dist/antd.css';
-
 import {Link} from 'react-router-dom'
 import {Layout, Menu} from 'antd';
-import {FileDoneOutlined, HomeOutlined, SettingOutlined, SyncOutlined, TrophyOutlined} from '@ant-design/icons';
+import {FileDoneOutlined, HomeOutlined, SyncOutlined, TrophyOutlined} from '@ant-design/icons';
 import { UserContext } from '../../Context';
 
 const {Sider} = Layout;

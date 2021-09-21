@@ -14,7 +14,6 @@ const ProgressBar = () => {
   const [employeePoints, setEmployeePoints] = useState(null)
   const [percentage, setPercentage] = useState(null)
   const [error, setError] = useState(false)
-  const [nextBadge, setNextBadge] = useState(null);
   const [latestBadge, setLatestBadge] = useState(null);
 
   useEffect(() => {
@@ -32,13 +31,9 @@ const ProgressBar = () => {
         // console.log(res)
         const pointsNeeded = res.data.nextBadge.points_needed
         const employeePoints = res.data.pointsInCycle
-
-
-        var l = [];
         
         setLatestBadge(res.data.gainedBadges.slice(-1)[0])
         setEmployeePoints(employeePoints);
-        setNextBadge(res.data.nextBadge);
         setPoints(pointsNeeded - employeePoints)
         setPercentage(100 - ((pointsNeeded - employeePoints) / pointsNeeded) * 100)
 
@@ -66,44 +61,22 @@ const ProgressBar = () => {
   return (
     <div style={{ width: 400 }}>
       <Title level={3} strong={true}>My Points: {employeePoints}  <SketchOutlined style={{ fontSize: '100%', color: "#87CEFA" }} /></Title>
-
       <Row>
         <Col>
-        <img height='140' src={getBadgeIcon(latestBadge.points_needed)} />
-        
+        <img alt="" height='140' src={getBadgeIcon(latestBadge.points_needed)} />
         </Col>
         <Col>
       <div style={{marginTop: '30px'}}>
           <Progress percent={percentage} status="active"/>
           <Text type="secondary">{points} points left for next badge!</Text>
-          
-          
       </div>
-      
       </Col>
       <br />
       </Row>
          <Row>  
            <Col>
-      {/* <div style={{ display: 'flex', flexDirection: 'row', alignItems:'center', marginLeft:'100px' }}>
-        
-     
-        <Text style={{marginBottom: '5px'}} strong={true} type='secondary'>{latestBadge.name} [ Points Needed: {latestBadge.points_needed}</Text>
-        <SketchOutlined style={{ fontSize: '100%', color: "#87CEFA", marginLeft:'4px', marginBottom: '5px' }} />
-        <Text strong={true} type='secondary'>]</Text>
-      </div>  */}
       </Col>
       </Row> 
-
-      {/* <div style={{ display: 'flex', flexDirection: 'row', alignItems:'center' }}>
-        <img height='80' src={getBadgeIcon(nextBadge.points_needed)} />
-
-        <Text style={{marginBottom: '5px'}} strong={true} type='secondary'>{nextBadge.name} [ Points Needed: {nextBadge.points_needed}</Text>
-        <SketchOutlined style={{ fontSize: '100%', color: "#87CEFA", marginLeft:'4px', marginBottom: '5px' }} />
-        <Text strong={true} type='secondary'>]</Text>
-
-      </div> */}
-
     </div>
   );
 

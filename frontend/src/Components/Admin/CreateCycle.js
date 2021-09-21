@@ -18,7 +18,7 @@ import {
 
 function CreateCycle() {
 
-  const {id,cycleId}=useContext(UserContext)
+  const {id} = useContext(UserContext)
     const [form] = Form.useForm();
     const [loading, setLoading]= useState(false);
     const [response, setResponse]= useState({});

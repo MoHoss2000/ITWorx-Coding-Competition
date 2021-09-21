@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import 'antd/dist/antd.css';
 import {Avatar, Layout, Menu} from 'antd';
 import {LogoutOutlined, UserOutlined} from '@ant-design/icons';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { UserContext } from '../../Context';
 
 const {Header} = Layout;
@@ -20,7 +20,7 @@ function HeaderAdmin() {
             }}>
       <div style={{display: 'flex', flexDirection:'row-reverse'}}>
       
-      <img src='/full.png' className='logo'/>
+      <img alt="" src='/full.png' className='logo'/>
  
   </div>
      
