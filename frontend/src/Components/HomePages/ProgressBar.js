@@ -28,7 +28,6 @@ const ProgressBar = () => {
           cycleId
         }
       }).then((res) => {
-        // console.log(res)
         const pointsNeeded = res.data.nextBadge.points_needed
         const employeePoints = res.data.pointsInCycle
         
@@ -67,7 +66,7 @@ const ProgressBar = () => {
         </Col>
         <Col>
       <div style={{marginTop: '30px'}}>
-          <Progress percent={percentage} status="active"/>
+          <Progress percent={parseInt(percentage)} status="active"/>
           <Text type="secondary">{points} points left for next badge!</Text>
       </div>
       </Col>
