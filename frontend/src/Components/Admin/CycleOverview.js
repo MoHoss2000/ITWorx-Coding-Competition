@@ -37,7 +37,7 @@ function CycleOverview (){
            <Row align='top'>
                 <Col flex="320px"> 
 
-                <Button style={{marginLeft: '15%'}} type="primary"><Link to={`/admin/cycles/participants/${id}`}> View Cycle Participants </Link></Button>
+                <Button style={{marginLeft: '45%'}} type="primary"><Link to={`/admin/cycles/participants/${id}`}> View Cycle Participants </Link></Button>
                  <InfoCard data={data}/> 
                  </Col>
                  <Col flex="auto">

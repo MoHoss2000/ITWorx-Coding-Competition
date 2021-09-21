@@ -17,21 +17,6 @@ router.post("/login", controllers.login)
 
 router.get('/time', controllers.getDeadline)
 
-
-router.get('/cycle/activities/:cycleID', authenticateToken, async (req, res) => {
-    const cycleID = req.params.cycleID
-    try{
-        const result = await proc.viewCycleActivities(cycleID)
-        if(result.length === 0)
-           res.status(400).send();
-        res.json({ result })
-    }catch(e){
-            console.log(e)
-            res.status(400).json({ error: err });
-        }
-});
-
-
 router.patch('/changepassword/:id', controllers.changePassword)
 
 router.patch('/newpassword', controllers.newPassword)

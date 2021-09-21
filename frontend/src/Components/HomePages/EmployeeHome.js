@@ -26,7 +26,7 @@ function EmployeeHome (){
             const {data} = await (axios.get(`http://localhost:3001/employee/currentActivities/${id}`))
             const profile = (await (axios.get(`http://localhost:3001/employee/profile/${id}/${cycleId}`))).data
             console.log(data)
-            setData(data.slice(0,2))
+            setData(data.slice(0,3))
             setProfile(profile)
             setLoading(false)
         } 
@@ -51,7 +51,7 @@ function EmployeeHome (){
                         </Col>
                         <Col>
                         <h1 className='welcome-statement'> {'Welcome Back, ' + profile.personalInfo[0].first_name + ' '+ profile.personalInfo[0].last_name +'!'} </h1>
-                        <h3 className='welcome-line'> Glad to see you again!</h3>
+                        <h2 className='welcome-line'> Glad to see you again! Here's how you can start your day...</h2>
                         
                         </Col>
                     </Row>
@@ -65,13 +65,13 @@ function EmployeeHome (){
                     <h1 className= "clock-header"> <b>Cycle Remaining Time </b></h1>
                         <Clock />
                     </div>
-                    <Card style={{marginTop:'40px', marginLeft:'20px',backgroundColor:'rgb(255,255,255,0.5)', boxShadow: '1px 8px 30px 0 grey'}}>
+                    <Card style={{marginTop:'40px', marginLeft:'20px',backgroundColor:'rgb(255,255,255,0.5)', boxShadow: '1px 8px 30px 0 #2196f3'}}>
                     <ProgressBar/>
                     </Card>
                 </Col>
                       <div className='activities-home-container'>
-                      <h1 className= "components-header"> <b> Activities waiting for you</b></h1>
-                     <ActivitiesDone data={data} className='activities-home' /> 
+                      <h4 className= "components-header"> <b> Some of the activities waiting for you</b></h4>
+                     <ActivitiesDone data={data} /> 
                      </div>
                 </div>
             </Row>

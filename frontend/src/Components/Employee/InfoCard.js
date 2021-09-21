@@ -22,10 +22,10 @@ else{
                 <h2 style={{fontSize:'95px'}}>{props.data.id}</h2>
                 <h3 style={{fontSize:'39px'}}>Cycle </h3>
                 <div class="card__details">
-              
-                <li><b>Start Date: </b> {props.data.start_date.slice(0,10)}</li>
+              <ul>
+                <li ><b>Start Date: <br/> </b> {props.data.start_date.slice(0,10)}</li>
                 <li> <b>End Date: </b> {props.data.end_date.slice(0,10)}</li>
-                
+                </ul> 
               
               
             </div>
