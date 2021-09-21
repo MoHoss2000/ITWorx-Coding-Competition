@@ -13,26 +13,22 @@ const { Search } = Input;
 function AllActivities() {
 
   const {id, cycleId }=useContext(UserContext)
-  const [activities, setActivities] = useState(null)
-  const [displayed, setDisplayed] = useState(null)
+  const [activities, setActivities] = useState([])
   const [activity, setActivity] = useState({})
   const [error, setError] = useState(false)
   const [visible, setVisible] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("")
+  const [filtered, setFiltered] = useState([]);
 
-  const onSearch = (value) => {
 
-    
-    const filteredActivities  = activities.filter((activity) => {
-      console.log(activity)
-      
-        const searchValue= value.toLowerCase();
-        if(activity.name.toLowerCase().includes(searchValue)){
-          return activity
-        }   
-        })
-    setDisplayed(filteredActivities)
+  useEffect(() => {
+      setFiltered(
+        activities.filter((activity) =>
+          activity.name.toLowerCase().includes(searchTerm.toLowerCase()) 
+        ) 
+      );
+    }, [searchTerm, activities]);
 
-  };
 
   useEffect(() => {
     axios(
@@ -47,7 +43,6 @@ function AllActivities() {
      }) .then((res) => {
        
         setActivities(res.data[0])
-        setDisplayed(res.data[0])
         
         
       })
@@ -62,7 +57,7 @@ function AllActivities() {
   if (error) {
     return ( <NetworkError/> )
   }
-  if(!displayed){
+  if(!activities){
       return(  <Spin size="large" />) 
   }
 
@@ -72,9 +67,9 @@ function AllActivities() {
   <h1 className="title">Activities</h1>
     <Divider className="title-divider"/>
 
-  <Card style={{margin: '60px', boxShadow: '10px 8px 20px 0 #b720259d'}}
+  <Card style={{margin: '50px', boxShadow: '10px 8px 20px 0 #b720259d'}}
    extra={
-   <Search placeholder="search Activities" onSearch={onSearch} style={{ width: 300 }} 
+   <Search placeholder="search Activities" onChange={(e) => setSearchTerm(e.target.value)} style={{ width: 300 }} 
     /> } >
  
   <List
@@ -83,7 +78,7 @@ function AllActivities() {
     pagination={{
       pageSize: 10,
     }}
-    dataSource={displayed}
+    dataSource={filtered}
     renderItem={activity => (
 
        <ActivityItem activity={activity} setActivity={setActivity}  setVisible={setVisible}/>
