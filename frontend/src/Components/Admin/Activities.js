@@ -17,9 +17,7 @@ function Activities() {
       .catch((e) => {
         setError(true)
         console.warn(e.message)
-
       })
-
   }, []);
   if (error) {
     return (<NetworkError/>)
