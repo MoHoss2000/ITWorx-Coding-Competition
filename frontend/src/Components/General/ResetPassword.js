@@ -17,10 +17,11 @@ const ResetPassword = () => {
   const onFinish = async ({ currentPassword, newPassword }) => {
     console.log(currentPassword, newPassword, token);
     try{
-      var res = await axios.patch('http://localhost:3001/newpassword', {
+      await axios.patch('http://localhost:3001/newpassword', {
         "newPassword": newPassword,
         "token": token,
       });
+      setSuccess(true)
     } catch{
       setSuccess(false)
     }
