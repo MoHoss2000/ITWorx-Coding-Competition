@@ -551,7 +551,6 @@ exports.editActivity= async (req, res) => {
     })
   }
 
-
   exports.activityInfo = async (req, res) => {
     console.log(req.query);
     const {id, CycleId} = req.query
@@ -564,13 +563,10 @@ exports.editActivity= async (req, res) => {
     }
     db.query('CALL viewActivity(?,?);',[id, CycleId],(err, result) => {
       if(result){
-        console.log("tamam");
-          console.log(result)
           res.status(200).send(result)  
       }
       else{
-        console.log("5ara")
-        res.status(400).send(err)
+          res.status(400).send(err)
       }
     })
   }

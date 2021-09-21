@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Row, Col, Tabs, Divider, Card, Spin} from 'antd'
+import {Row, Col, Tabs, Divider, Card, Spin, Drawer, Button} from 'antd'
 import axios from 'axios'
 import '../../components.css'
 import VirtualRecognitions from '../../EmployeeProfile/VirtualRecognitions'
@@ -14,6 +14,7 @@ const { TabPane } = Tabs;
 const EmployeeCycleStatus= () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
+    const [visible, setVisible] = useState(false)
     const {id, empId} = useParams()
     useEffect(() => {
   
@@ -21,10 +22,19 @@ const EmployeeCycleStatus= () => {
             const { data } = await (axios.get(`http://localhost:3001/admin/employeeStatus/${empId}/${id}`))
             console.log(data)
             setData(data)
+            console.log(data.badges)
             setLoading(false)
         } 
         getStatus()
     }, [])
+
+    const showDrawer = () => {
+        setVisible(true)
+      };
+    
+    const onClose = () => {
+          setVisible(false)
+      };
 
     if(loading)
         return <Spin large/>
@@ -36,7 +46,10 @@ const EmployeeCycleStatus= () => {
             
             <Row gutter={0,0}>
                 <Col flex="300px">
-                    <EmployeePoints data={data.total_points[0]}/>
+                <div style={{display:'flex', flexDirection:'row'}}>
+                <EmployeePoints data={data.total_points[0]}/>
+                <Button className='butn' onClick={showDrawer}>  Badges <img height='80' src={'/badges/2.png'} />  </Button>
+                </div>
                     <EmployeeCard data={data.personalInfo[0]} />
                     <InfoCard data={data.cycleInfo[0]}/>
                 </Col>
@@ -79,11 +92,11 @@ const EmployeeCycleStatus= () => {
                                 </Card>
                             </div>
                     </TabPane>
-                    <TabPane tab={<span style={{fontSize:'23px'}}> Badges  </span>} key="3">
+                    {/* <TabPane tab={<span style={{fontSize:'23px'}}> Badges  </span>} key="3">
      <div className='status-tabs'>
     <BadgesDisplay  adminMode={false} data={data.badges} />
     </div>
-</TabPane>
+</TabPane> */}
 
 <                   TabPane tab={<span style={{fontSize:'23px'}}> Virtual Recognitions  </span>} key="4" >
   <div className='info-display status-tabs'  >
@@ -94,6 +107,20 @@ const EmployeeCycleStatus= () => {
 </Tabs>
 </Col>
 </Row>    
+<Drawer
+          width={840}
+          placement="right"
+          onClose={onClose}
+          visible={visible}
+          title="Employee Badges"
+        >
+          <p className="site-description-item-profile-p" style={{ marginBottom: 24 }}>
+            Badges   
+          </p>
+
+            <BadgesDisplay  adminMode={false} data={data.badges} span = {12} />
+
+        </Drawer>
         </div>
     )
 }

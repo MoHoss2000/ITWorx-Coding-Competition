@@ -69,9 +69,9 @@ const MyStatus= () => {
          <Row gutter={0,0}>
              <Col flex="300px">
                  <div style={{display:'flex', flexDirection:'row'}}>
-             <EmployeePoints data={data.total_points[0]}/>
-             <Button className='butn' onClick={showDrawer}>  Badges <img height='80' src={'/badges/2.png'} />  </Button>
-             </div>
+                <EmployeePoints data={data.total_points[0]}/>
+                <Button className='butn' onClick={showDrawer}>  Badges <img height='80' src={'/badges/2.png'} />  </Button>
+                </div>
              <InfoCard  data={data.cycleInfo[0]}/>
             
             </Col>
@@ -103,12 +103,14 @@ const MyStatus= () => {
           placement="right"
           onClose={onClose}
           visible={visible}
+          title="My Badges"
         >
           <p className="site-description-item-profile-p" style={{ marginBottom: 24 }}>
             Badges
 
-            <BadgesDisplay  adminMode={false} data={gainedBadges} span = {12} />
+
           </p>
+          <BadgesDisplay  adminMode={false} data={gainedBadges} span = {12} />
         </Drawer>
         </div>
     )
