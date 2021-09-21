@@ -1,8 +1,9 @@
 import 'antd/dist/antd.css';
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import axios from 'axios';
 import {Alert,Button, Card, Form, Input,Divider, InputNumber, Select, Space, Spin, Switch, Typography,} from 'antd';
 import { Link } from 'react-router-dom';
+import {UserContext} from "../../Context";
 
 const {Option} = Select;
 const {Title} = Typography;
@@ -10,7 +11,7 @@ const {TextArea} = Input;
 
 
 function CreateActivity() {
-
+  const {id}=useContext(UserContext)
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState({});
@@ -28,7 +29,7 @@ function CreateActivity() {
         method: 'post',
         url: 'http://localhost:3001/admin/newActivity',
         data: {
-          adminID: 1,
+          adminID: id,
           ...values
         }
       });
@@ -50,11 +51,9 @@ function CreateActivity() {
   return (
 <div>
   <div style={{display: 'flex', flexWrap: 'wrap'}}>
-  <h1 className="title">Create New Activity or</h1>
+  <h1 className="title">Create New Activity </h1>
 
-  <Button type="primary" onClick={onSubmit} style={{marginLeft: '40px' , marginTop: '23px'}}>
-              <Link to='/previousActivities'>Select previous activities</Link>
-  </Button>
+
   </div>
     <Divider className="title-divider"/>
         <Card title={<Title level={3}></Title>} style={{marginLeft: '10%', marginRight: '10%'}}>
@@ -129,10 +128,11 @@ function CreateActivity() {
             {error && <Alert message={error} type="error" /> }
 
 
-         
-            <Button type="primary" onClick={onSubmit} style={{marginLeft: '300px', marginTop: '40px', width: '150px'}}>
+            <div style={{textAlign:'center'}}>
+            <Button type="primary" onClick={onSubmit} style={{ marginTop: '40px', width: '150px'}}>
               Create Activity
             </Button>
+            </div>
 
           </Form>
       </Spin>

@@ -95,9 +95,9 @@ CREATE TABLE Activity (
 );
 
 CREATE TABLE EmployeeActivityCycle (
-	employee_id INT(11),
-    activity_id INT(11),
-    cycle_id INT(11),
+	employee_id INT,
+    activity_id INT,
+    cycle_id INT,
     PRIMARY KEY(employee_id, activity_id, cycle_id),
     FOREIGN KEY(employee_id) REFERENCES Employee(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY(activity_id) REFERENCES activity(id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -105,7 +105,7 @@ CREATE TABLE EmployeeActivityCycle (
     date_of_completion DATE,
     quantity INT,
     status VARCHAR(100),
-    CHECK(STATUS IN ('completed', 'pending', 'inProgress'))
+    CHECK(STATUS IN ('C', 'P', 'A'))
 );
 
 

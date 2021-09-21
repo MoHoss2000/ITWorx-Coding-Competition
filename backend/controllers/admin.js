@@ -30,11 +30,12 @@ exports.createNewCycle= async (req,res)=>{
     const cycle = [adminID,start_date,end_date]
     db.query('CALL createNewCycle(?,?,?, @stat); select @stat AS status;', cycle ,(err, result) => {
       if(result){
+        console.log(result)
         const status = result[1][0].status
         if(status===0)
-          res.status(200).json('A Cycle would be running within the dates you specified');
+          res.status(200).json({message: 'A Cycle would be running within the dates you specified',status:0});
         else
-          res.status(200).json('Cycle created succesfully!');
+          res.status(200).json({message:'Cycle created succesfully!', status:1});
       }
       else{
         console.log(err)
@@ -439,18 +440,18 @@ exports.createNewActivity = async (req, res) => {
 }
 exports.editActivity= async (req, res) => {
 
-  const { ActivityId ,name, description, type, enabled, virtual_recognition, points } = req.body
+  const { ActivityId ,name, description, enabled, virtual_recognition, points, cycleId } = req.body
   console.log(req.body)
   console.log(points)
   // Validate request
-  if ( !( ActivityId && name && description && type && points) && virtual_recognition!==undefined && enabled!==undefined) {
+  if ( !( ActivityId && name && description  && points && cycleId) && virtual_recognition!==undefined && enabled!==undefined) {
     res.status(400).send({
       message: "Please provide all input fields!"
     });
     return;
   } 
     
-    const activity = [ ActivityId, name, description, type, enabled, virtual_recognition, points ];
+    const activity = [ ActivityId, name, description, enabled, virtual_recognition, points, cycleId ];
     console.log(activity)
 
     db.query('CALL editActivity(?,?,?,?,?,?,?, @stat); select @stat AS status;', activity ,(err, result) => {
