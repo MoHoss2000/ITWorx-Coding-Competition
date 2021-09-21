@@ -1,7 +1,7 @@
 import React, { useEffect, useState , useContext} from 'react';
 import axios from 'axios';
 import 'antd/dist/antd.css';
-import { List, Divider , Alert} from 'antd';
+import { List, Divider , Alert, Spin} from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import ActivityListItem from './ActivityListItem';
 import DisplayActivities from './DisplayActivities';
@@ -9,7 +9,7 @@ import {UserContext} from "../../Context";
 
 
 function PendingActivities() {
-  const [activities, setActivities] = useState(null)
+  const [activities, setActivities] = useState([])
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(true)
   const {cycleId} = useContext(UserContext)
@@ -45,6 +45,10 @@ function PendingActivities() {
     showIcon
   />
   }
+if(loading)
+  return <Spin large></Spin>
+
+
 
   return (
 

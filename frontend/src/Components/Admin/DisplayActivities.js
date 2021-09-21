@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import 'antd/dist/antd.css';
 import { List, Divider , Card, Input} from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -8,20 +7,16 @@ const { Search } = Input;
 
 function DisplayActivities ({activities}){
     const [displayed, setDisplayed] = useState(activities)
-    console.log(activities)
-
     const onSearch = (value) => {
         const filteredActivities  = activities.filter((activity) => {
-          console.log(activity)
-          
-            const searchValue= value.toLowerCase();
-            if(activity.name.toLowerCase().includes(searchValue)){
+            console.log(activity)
+            const title = activity.name || activity.title
+            const searchValue = value.toLowerCase();
+            if(title.toLowerCase().includes(searchValue)){
               return activity
             }   
-            })
-            console.log(displayed)    
+        })    
         setDisplayed(filteredActivities)
-    
       };
       
 return(
