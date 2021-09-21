@@ -129,7 +129,6 @@ exports.resetPassword = async (req, res) => {
     res.status(200).send({ message: 'Email sent successfully!' })
 }
 
-
 exports.register = async (req, res) => {
     // we take the input enetered by the user from the request
     const { first_name, last_name, username, password, is_developer, is_admin } = req.body;
