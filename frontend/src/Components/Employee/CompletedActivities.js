@@ -35,18 +35,6 @@ const CompletedActivities = ({activities}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
 
-//   useEffect(() => {
-     
-//     setError(null)
-//     const getCompleted = async () => {
-//         const {data} = await (axios.get(`'http://localhost:3001/employee/activities/completed/${id}/${cycleID}`))
-//         console.log(data)
-//         setActivities(data)
-//     } 
-//     getCompleted()
-
-//   }, []);
-
   if(!activities){
     return( 
         <Alert

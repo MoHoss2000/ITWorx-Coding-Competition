@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {Row, Col, Tabs, Divider, Card, Spin} from 'antd'
+import {Row, Col, Tabs, Divider, Button, Spin, Drawer} from 'antd'
 import axios from 'axios'
 import '../components.css'
 import ActivitiesDone from './ActivitiesDone'
@@ -7,7 +7,7 @@ import VirtualRecognitions from '../EmployeeProfile/VirtualRecognitions'
 import BadgesDisplay from '../BadgesDisplay'
 import CompletedActivities from './CompletedActivities'
 import InfoCard from './InfoCard'
-import {  useParams } from 'react-router-dom'
+import {  useParams, Link } from 'react-router-dom'
 import EmployeePoints from '../General/EmployeePoints'
 import { UserContext } from '../../Context'
 import MyActivities from './MyActivities'
@@ -15,11 +15,11 @@ const { TabPane } = Tabs;
 
 const MyStatus= () => {
     const [loading, setLoading] = useState(true)
+    const [visible, setVisible] = useState(false)
     const [data, setData] = useState([])
     const {id, cycleId} = useContext(UserContext)
     const cycleID = useParams().id
 
-    console.log(cycleId, id)
         useEffect(() => {
         const getStatus = async () => {
             const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${id}/${cycleID}`))
@@ -31,6 +31,16 @@ const MyStatus= () => {
         getStatus()
     }, [])
 
+
+    const showDrawer = () => {
+        setVisible(true)
+      };
+    
+    const onClose = () => {
+          setVisible(false)
+      };
+
+      
     if(loading)
         return <Spin large/>
 
@@ -43,7 +53,10 @@ const MyStatus= () => {
           <div style={{marginLeft: '30px'}}> 
          <Row gutter={0,0}>
              <Col flex="300px">
+                 <div style={{display:'flex', flexDirection:'row'}}>
              <EmployeePoints data={data.total_points[0]}/>
+             <Button className='butn' onClick={showDrawer}>  Badges <img height='80' src={'/badges/2.png'} />  </Button>
+             </div>
              <InfoCard  data={data.cycleInfo[0]}/>
             
             </Col>
@@ -55,12 +68,6 @@ const MyStatus= () => {
 
                      
                   </TabPane>
-
-               <TabPane tab={<span style={{fontSize:'20px'}}> Badges  </span>} key="3">
-                     <div className='status-tabs'>
-                    <BadgesDisplay  adminMode={false} data={data.badges} span = {12} />
-                    </div>
-                </TabPane>
 
                 <TabPane tab={<span style={{fontSize:'20px'}}> Virtual Recognitions  </span>} key="4" >
                   <div className='info-display status-tabs'  >
@@ -76,6 +83,18 @@ const MyStatus= () => {
            
 
         </div>
+        <Drawer
+          width={840}
+          placement="right"
+          onClose={onClose}
+          visible={visible}
+        >
+          <p className="site-description-item-profile-p" style={{ marginBottom: 24 }}>
+            Badges
+
+            <BadgesDisplay  adminMode={false} data={data.badges} span = {12} />
+          </p>
+        </Drawer>
         </div>
     )
 }
