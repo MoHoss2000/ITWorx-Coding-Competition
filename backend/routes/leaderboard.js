@@ -7,8 +7,6 @@ const controllers = require ('../controllers/leaderboard')
 
 const router = new express.Router()
 router.use(express.json())
-// router.use(authenticateToken)
-// router.use(isAdmin)
 
 router.get('/employee/:cycleID', controllers.viewEmployeeRanking)
 

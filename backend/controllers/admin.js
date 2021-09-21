@@ -309,8 +309,6 @@ exports.updateBadge = async(req, res) => {
   var id = req.params.badgeID;
 
   console.log(req.body);
-  // console.log(id);
-  // console.log(description)
   try{
     db.query(`CALL updateBadge(?,?,?,?,?,?)`, 
     [name, description, type, points_needed, enabled, id], (err, result) => {
