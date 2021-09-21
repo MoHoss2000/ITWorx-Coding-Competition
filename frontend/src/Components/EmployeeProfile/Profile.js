@@ -2,12 +2,13 @@ import React, {useState, useEffect,useContext} from 'react'
 import axios from 'axios'
 import {UserContext} from "../../Context";
 import NetworkError from '../NetworkError';
-import { Redirect , Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { 
     Descriptions,
     Card,
     Button, 
-    Avatar 
+    Avatar, 
+    Spin
   } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
@@ -57,6 +58,10 @@ const Profile= ()=> {
             
          
     }, [])
+
+    if(loading)
+        return <Spin large></Spin>
+
     if(error){
         return <NetworkError/>
     }

@@ -79,11 +79,7 @@ function SiderAdmin() {
             Badges
             </Link>
           </Menu.Item>
-          <Menu.Item key="9" icon={<SettingOutlined style={{color:'white'}}/>}>
-            {/*<Link>*/}
-            Settings
-            {/*</Link>*/}
-          </Menu.Item>
+          
         </Menu>
       </Sider>
 
