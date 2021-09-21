@@ -18,7 +18,7 @@ router.post("/login", controllers.login)
 router.get('/time', controllers.getDeadline)
 
 
-router.get('/cycle/activities/:cycleID', authenticateToken,async (req, res) => {
+router.get('/cycle/activities/:cycleID', authenticateToken, async (req, res) => {
     const cycleID = req.params.cycleID
     try{
         const result = await proc.viewCycleActivities(cycleID)
@@ -33,8 +33,8 @@ router.get('/cycle/activities/:cycleID', authenticateToken,async (req, res) => {
 
 
 router.patch('/changepassword/:id', controllers.changePassword)
-router.patch('/newpassword', controllers.newPassword)
 
+router.patch('/newpassword', controllers.newPassword)
 
 // sends reset password link to email
 router.post('/resetPassword', controllers.resetPassword);

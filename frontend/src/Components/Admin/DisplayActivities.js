@@ -22,7 +22,8 @@ return(
             }}
             dataSource={activities}
             renderItem={activity => (
-            <ActivityListItem activity={activity}/>
+            <ActivityListItem activity={activity}
+            />
             )}
            
         /> 
