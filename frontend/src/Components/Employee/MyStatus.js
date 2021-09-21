@@ -16,6 +16,7 @@ const { TabPane } = Tabs;
 const MyStatus= () => {
     const [loading, setLoading] = useState(true)
     const [visible, setVisible] = useState(false)
+    const [gainedBadges, setGainedBadges] = useState([])
     const [data, setData] = useState([])
     const {id, cycleId} = useContext(UserContext)
     const cycleID = useParams().id
@@ -23,7 +24,21 @@ const MyStatus= () => {
         useEffect(() => {
         const getStatus = async () => {
             const {data} = await (axios.get(`http://localhost:3001/admin/employeeStatus/${id}/${cycleID}`))
-            console.log(data)
+            axios(
+              {
+                method: 'get',
+                url: 'http://localhost:3001/employee/badges',
+                headers: {},
+                params: {
+                  employeeId: id,
+                  cycleId
+                }
+              }).then((res) => {
+                setGainedBadges(res.data.gainedBadges)
+              })
+              .catch((e) => {
+                
+              })
            
             setData(data)
             setLoading(false)
@@ -92,7 +107,7 @@ const MyStatus= () => {
           <p className="site-description-item-profile-p" style={{ marginBottom: 24 }}>
             Badges
 
-            <BadgesDisplay  adminMode={false} data={data.badges} span = {12} />
+            <BadgesDisplay  adminMode={false} data={gainedBadges} span = {12} />
           </p>
         </Drawer>
         </div>
