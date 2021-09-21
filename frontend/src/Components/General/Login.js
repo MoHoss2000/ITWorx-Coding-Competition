@@ -8,9 +8,17 @@ import { Card } from '@material-ui/core';
 import '../components.css'
 const Login = () => {
     const history = useHistory()
-    const {type, targetPath, setId, setToken, setCycleId, setType} = useContext(UserContext);
+    const { token, type, targetPath, setId, setToken, setCycleId, setType} = useContext(UserContext);
     const [failed, setFailed] = useState(false)
 
+    if(token){
+      
+      if(type === 'employee')
+        return <Redirect to={'/employee/home'}/>
+      else 
+        return <Redirect to={'/admin/home'}/>
+
+    }
   const onFinish = ({username, password}) => {
     Axios.post('http://localhost:3001/login', {
       username,
