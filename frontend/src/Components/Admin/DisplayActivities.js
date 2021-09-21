@@ -6,18 +6,19 @@ import ActivityListItem from './ActivityListItem';
 const { Search } = Input;
 
 function DisplayActivities ({activities}){
-    const [displayed, setDisplayed] = useState(activities)
-    const onSearch = (value) => {
-        const filteredActivities  = activities.filter((activity) => {
-            console.log(activity)
-            const title = activity.name || activity.title
-            const searchValue = value.toLowerCase();
-            if(title.toLowerCase().includes(searchValue)){
-              return activity
-            }   
-        })    
-        setDisplayed(filteredActivities)
-      };
+    // const [displayed, setDisplayed] = useState(activities)
+    const [searchTerm, setSearchTerm] = useState("")
+    const [filtered, setFiltered] = useState([]);
+
+  
+    useEffect(() => {
+        setFiltered(
+          activities.filter((activity) =>
+            activity.name.toLowerCase().includes(searchTerm.toLowerCase()) 
+          ) 
+        );
+      }, [searchTerm]);
+
       
 return(
         <div>
@@ -29,7 +30,7 @@ return(
 
   <Card style={{margin: '60px', boxShadow: '10px 8px 20px 0 #b720259d'}}
         extra={
-        <Search placeholder="search Activities" onSearch={onSearch} style={{ width: 300 }} 
+        <Search placeholder="search Activities"  onChange={(e) => setSearchTerm(e.target.value)} style={{ width: 300 }} 
             /> }>
         <List
             itemLayout="vertical"
@@ -37,7 +38,7 @@ return(
             pagination={{
             pageSize: 5,
             }}
-            dataSource={displayed}
+            dataSource={filtered}
             renderItem={activity => (
             <ActivityListItem activity={activity}
             />
