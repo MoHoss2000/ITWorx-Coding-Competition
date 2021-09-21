@@ -16,16 +16,12 @@ function decodeResetPassToken(token) {
 
 
 exports.newPassword = async (req, res) => {
-    // console.log(req);
     var resetPasswordToken = req.body.token;
     var payload = decodeResetPassToken(resetPasswordToken);
 
     if (!payload){
         return res.status(400).send('Invalid or expired token');
-    }
-       
-
-    
+    }    
     id = payload.id;
     userType = payload.type;
     const { newPassword } = req.body
@@ -56,7 +52,6 @@ exports.newPassword = async (req, res) => {
 exports.changePassword = async (req, res) => {
     const id = parseInt(req.params.id)
     const userType = req.body.type
-    console.log(req.body)
 
     const { currentPassword, newPassword } = req.body
     if (currentPassword === newPassword)
